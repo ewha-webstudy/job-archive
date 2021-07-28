@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import NavBar from "../components/NavBar/NavBar";
 import SearchBar from "../components/SearchBar/SearchBar";
 import Label from "../components/Label/Label";
@@ -16,6 +17,7 @@ class Main extends Component {
           <SearchBar />
           <Label />
         </div>
+        <Link to='/category'></Link>
       </div>
     );
   }
