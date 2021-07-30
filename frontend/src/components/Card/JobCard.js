@@ -34,6 +34,7 @@ function JobCard({ name, start, end, position, logo}) {
         <Box
           height="xxsmall"
           width="xxsmall"
+          margin="auto"
         >
           <Image align="center" pad="horizontal" fit="cover" round src={logo} />
         </Box>
