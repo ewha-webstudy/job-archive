@@ -1,30 +1,106 @@
+import React, { useState } from "react";
 import JobCard from "./JobCard";
 import styled from "styled-components";
 
 const Container = styled.div`
+  margin: 2rem auto;
   display: flex;
+  align-items: center;
   flex-direction: column;
   flex-direction: row;
-  align-items: center;
   justify-content: space-around;
   width: 100%;
+  position: relative;
 `;
+const Cards = styled.div`
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 15%;
+  width: 75%;
+  align-items:center;
+  margin: auto;
+`;
+
+const ex = [
+  {
+    name: "네이버",
+    start: "2021.7.1",
+    end: "2021.7.30",
+    position: "Data Intern",
+    logo: "https://image.rocketpunch.com/company/5466/naver_logo.png?s=400x400&t=inside",
+  },
+  {
+    name: "카카오",
+    start: "2021.7.1",
+    end: "2021.7.30",
+    position: "SW Engineering",
+    logo: "https://image.rocketpunch.com/company/5466/naver_logo.png?s=400x400&t=inside",
+  },
+  {
+    name: "우아한형제들",
+    start: "2021.7.1",
+    end: "2021.7.30",
+    position: "FrontEnd Developer",
+    logo: "https://image.rocketpunch.com/company/5466/naver_logo.png?s=400x400&t=inside",
+  },
+  {
+    name: "네이버",
+    start: "2021.7.1",
+    end: "2021.7.30",
+    position: "Data Intern",
+    logo: "https://image.rocketpunch.com/company/5466/naver_logo.png?s=400x400&t=inside",
+  },
+  {
+    name: "카카오",
+    start: "2021.7.1",
+    end: "2021.7.30",
+    position: "SW Engineering",
+    logo: "https://image.rocketpunch.com/company/5466/naver_logo.png?s=400x400&t=inside",
+  },
+  {
+    name: "우아한형제들",
+    start: "2021.7.1",
+    end: "2021.7.30",
+    position: "FrontEnd Developer",
+    logo: "https://image.rocketpunch.com/company/5466/naver_logo.png?s=400x400&t=inside",
+  },
+  {
+    name: "네이버",
+    start: "2021.7.1",
+    end: "2021.7.30",
+    position: "Data Intern",
+    logo: "https://image.rocketpunch.com/company/5466/naver_logo.png?s=400x400&t=inside",
+  },
+  {
+    name: "카카오",
+    start: "2021.7.1",
+    end: "2021.7.30",
+    position: "SW Engineering",
+    logo: "https://image.rocketpunch.com/company/5466/naver_logo.png?s=400x400&t=inside",
+  },
+  {
+    name: "우아한형제들",
+    start: "2021.7.1",
+    end: "2021.7.30",
+    position: "FrontEnd Developer",
+    logo: "https://image.rocketpunch.com/company/5466/naver_logo.png?s=400x400&t=inside",
+  },
+];
 
 const CardBoard = () => {
   return (
-    //일단 하드코딩 함 
     <Container>
-      <JobCard
-        name={"네이버"}
-        body={"백엔드 개발자모집"}
-        liked={true}
-      ></JobCard>
-      <JobCard
-        name={"카카오"}
-        body={"프론트엔드 개발자모집"}
-        likd={false}
-      ></JobCard>
-      <JobCard></JobCard>
+      <Cards>
+        {ex.map((i) => (
+          <JobCard
+            name={i.name}
+            start={i.start}
+            end={i.end}
+            position={i.position}
+            logo={i.logo}
+          />
+        ))}
+      </Cards>
     </Container>
   );
 };

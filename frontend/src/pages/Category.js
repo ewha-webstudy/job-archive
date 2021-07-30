@@ -1,58 +1,68 @@
-import React, { useState } from "react";
+import NavBar from "../components/NavBar/NavBar";
 import CardBoard from "../components/Card/CardBoard";
-import { Grid, Box, Button, Text, Grommet } from "grommet";
-import { grommet } from "grommet/themes";
+import Filter from "../components/Filter/Filter";
+import SearchBar from "../components/SearchBar/SearchBar";
+import { Grommet, Box, Grid } from "grommet";
+import styled from "styled-components";
+import "../style/category.css"
+
+const Title = styled.span`
+  background-color: #ffaf00;
+  height: 45px;
+  width: 70%;
+  margin-top: -20px;
+  border-radius: 12px;
+  color: dark-gray;
+  text-align: center;
+  line-height: 50px;
+  font-size: 1.5rem;
+  opacity: 0.9;
+`;
 
 function CategoryPage() {
-  const [sidebar, setSidebar] = useState(true);
-
   return (
-    <Grommet full theme={grommet}>
-      <Grid
-        fill
-        rows={["auto", "flex"]}
-        columns={["auto", "flex"]}
-        areas={[
-          { name: "header", start: [0, 0], end: [1, 0] },
-          { name: "sidebar", start: [0, 1], end: [0, 1] },
-          { name: "main", start: [1, 1], end: [1, 1] },
-        ]}
-      >
-        <Box
-          gridArea="header"
-          direction="row"
-          align="center"
-          justify="between"
-          pad={{ horizontal: "medium", vertical: "small" }}
-          background="dark-2"
+    <div>
+      <header>
+        <NavBar />
+      </header>
+      <Grommet>
+        <Grid
+          background="light-2"
+          rows={["auto", "flex"]}
+          columns={["auto", "flex"]}
+          height="full-screen"
+          gap="small"
+          pad="medium"
+          responsive
+          areas={[
+            { name: "search", start: [0, 0], end: [1, 0] },
+            { name: "nav", start: [0, 1], end: [0, 1] },
+            { name: "main", start: [1, 1], end: [1, 1] },
+          ]}
         >
-          <Text size="large">Title</Text>
-          <Text>myPage</Text>
-        </Box>
-        {sidebar && (
-          <Box
-            gridArea="sidebar"
-            background="dark-3"
-            width="small"
-            animation={[
-              { type: "fadeIn", duration: 300 },
-              { type: "slideRight", size: "xlarge", duration: 150 },
-            ]}
-          >
-            {["First", "Second", "Third"].map((name) => (
-              <Button key={name} href="#" hoverIndicator>
-                <Box pad={{ horizontal: "medium", vertical: "small" }}>
-                  <Text>{name}</Text>
-                </Box>
-              </Button>
-            ))}
+          <Box gridArea="search" height="xxsmall" direction="row-reverse">
+            <SearchBar />
           </Box>
-        )}
-        <Box gridArea="main" justify="center" align="center">
-          <CardBoard />
-        </Box>
-      </Grid>
-    </Grommet>
+          <Box
+            gridArea="nav"
+            background="light-2"
+            width="medium"
+            align="center"
+          >
+            <Title>카테고리</Title>
+          </Box>
+          <Box
+            overflow="scroll"
+            gridArea="main"
+            height="100%"
+            background="light-2"
+          >
+            <Filter />
+            <CardBoard />
+          </Box>
+        </Grid>
+      </Grommet>
+    </div>
   );
 }
 
