@@ -17,6 +17,7 @@ const Title = styled.span`
   line-height: 50px;
   font-size: 1.5rem;
   opacity: 0.9;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
 `;
 
 function CategoryPage() {
