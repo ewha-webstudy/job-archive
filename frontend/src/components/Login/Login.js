@@ -1,8 +1,10 @@
 import styled from "styled-components";
+import GoogleLogo from "./Google.svg.png";
 
 const Wrapper = styled.div`
   margin: 10px auto;
   display: flex;
+  flex-direction: row;
 `;
 
 const Span = styled.span`
@@ -10,6 +12,9 @@ const Span = styled.span`
   margin: auto;
   margin-top: 40px;
   margin-left: 120px;
+
+  color: grey;
+  font-weight: bold;
 `;
 
 const Input = styled.input`
@@ -31,7 +36,7 @@ const Input = styled.input`
   }
 `;
 
-const Button = styled.button`
+const LoginButton = styled.button`
   &:hover {
     cursor: pointer;
   }
@@ -51,7 +56,39 @@ const Button = styled.button`
   text-align: center;
 `;
 
-const Login = ({ value, onChange, onCreate, onKeyPress }) => {
+const OtherLoginButton = styled.button`
+  &:hover {
+    cursor: pointer;
+  }
+
+  & + & {
+    margin-top: 40px;
+  }
+
+  box-shadow: 0 3px 6px rgba(87, 87, 87, 0.1), 0 3px 6px rgba(83, 83, 83, 0.23);
+  background-color: #fff;
+  display: block;
+
+  width: 40%;
+  height: 50px;
+  border: none;
+  border-radius: 15px;
+
+  margin: auto;
+  margin-top: 140px;
+
+  color: #56555;
+  text-align: center;
+`;
+
+const LogoImg = styled.img`
+  width: 20px;
+  height: 20px;
+  margin: 0 auto;
+  margin-right: 30px;
+`;
+
+const Login = () => {
   return (
     <>
       <Wrapper>
@@ -62,7 +99,14 @@ const Login = ({ value, onChange, onCreate, onKeyPress }) => {
         <Span>PW</Span>
         <Input className="pw" name="pw" type="password" required />
       </Wrapper>
-      <Button type="submit">로그인 하기</Button>
+      <LoginButton type="submit">로그인 하기</LoginButton>
+      <>
+        <OtherLoginButton>
+          <LogoImg src={GoogleLogo} />
+          Google 계정으로 로그인
+        </OtherLoginButton>
+        <OtherLoginButton>회원가입</OtherLoginButton>
+      </>
     </>
   );
 };
