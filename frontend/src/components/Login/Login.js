@@ -62,7 +62,7 @@ const OtherLoginButton = styled.button`
   }
 
   & + & {
-    margin-top: 40px;
+    margin-top: 30px;
   }
 
   box-shadow: 0 3px 6px rgba(87, 87, 87, 0.1), 0 3px 6px rgba(83, 83, 83, 0.23);
