@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const ProfileTemplateBlock = styled.div`
+const MyPageTemplateBlock = styled.div`
   background: rgb(255, 255, 255);
   box-shadow: 0 3px 6px rgba(87, 87, 87, 0.1), 0 3px 6px rgba(83, 83, 83, 0.23);
 
@@ -12,8 +12,8 @@ const ProfileTemplateBlock = styled.div`
   margin-top: 6rem;
 `;
 
-const ProfileTemplate = ({ children }) => {
-  return <ProfileTemplateBlock>{children}</ProfileTemplateBlock>;
+const MyPageTemplate = ({ children }) => {
+  return <MyPageTemplateBlock>{children}</MyPageTemplateBlock>;
 };
 
-export default ProfileTemplate;
+export default MyPageTemplate;
