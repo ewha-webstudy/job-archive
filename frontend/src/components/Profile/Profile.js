@@ -70,7 +70,7 @@ const ModifyButton = styled.button`
   background: white;
   border: 2px solid #ecbd83;
   border-radius: 17px;
-  box-shadow: 0 0px 5px rgba(87, 87, 87, 0.1), 0 3px 6px rgba(83, 83, 83, 0.23);
+  box-shadow: 0 0px 5px rgba(87, 87, 87, 0.1);
 `;
 
 const Profile = () => {
