@@ -4,7 +4,8 @@ import Filter from "../components/Filter/Filter";
 import SearchBar from "../components/SearchBar/SearchBar";
 import { Grommet, Box, Grid } from "grommet";
 import styled from "styled-components";
-import "../style/category.css"
+import "../style/category.css";
+import Category from "../components/Category/Category";
 
 const Title = styled.span`
   background-color: #ffaf00;
@@ -19,6 +20,29 @@ const Title = styled.span`
   opacity: 0.9;
   box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
 `;
+
+const DUMMY_DATA_CATEGORY = [
+	{
+		id: 1,
+		title: '언어',
+		tag: ['react', 'angular', 'vue' ]
+	},
+	{
+		id: 2,
+		title: '경력',
+		tag: ['인턴', '신입', '경력' ]
+	},
+	{
+		id: 3,
+		title: '지역',
+		tag: ['서울', '경기', '부산' ]
+	},
+	{
+		id: 4,
+		title: '학력',
+		tag: ['고등학교 졸업', '무관', '석사 이상' ]
+	}
+]
 
 function CategoryPage() {
   return (
@@ -51,6 +75,7 @@ function CategoryPage() {
             align="center"
           >
             <Title>카테고리</Title>
+            <Category categoryList = {DUMMY_DATA_CATEGORY} />
           </Box>
           <Box
             overflow="scroll"
