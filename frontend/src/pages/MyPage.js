@@ -8,6 +8,7 @@ const MyPage = () => (
     <NavBar />
     <ProfileTemplate>
       <Sidebar />
+      <Profile />
     </ProfileTemplate>
   </>
 );
