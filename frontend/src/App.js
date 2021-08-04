@@ -27,10 +27,6 @@ function App() {
         <DetailInfoPage />
       </Route>
     </Switch>
-<<<<<<< HEAD
-=======
-
->>>>>>> d2be117153c18b64c69d0ccb4b14d95c9c801399
   );
 }
 
