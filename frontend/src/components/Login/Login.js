@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import GoogleLogo from "./Google.svg.png";
 
 const Wrapper = styled.div`
   margin: 10px auto;
@@ -101,10 +100,6 @@ const Login = () => {
       </Wrapper>
       <LoginButton type="submit">로그인 하기</LoginButton>
       <>
-        <OtherLoginButton>
-          <LogoImg src={GoogleLogo} />
-          Google 계정으로 로그인
-        </OtherLoginButton>
         <OtherLoginButton>회원가입</OtherLoginButton>
       </>
     </>
