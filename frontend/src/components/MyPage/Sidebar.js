@@ -12,6 +12,10 @@ const SidebarBlock = styled.div`
   }
 
   .outbutton {
+    &:hover {
+        cursor: pointer;
+      }
+      
     margin-top: 460px;
     margin-left: 110px;
     

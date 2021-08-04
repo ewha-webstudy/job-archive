@@ -85,16 +85,6 @@ const Notification = () => {
           <RadioButtonGroup name="doc" options={["설정", "해제"]} />
         </InputWrapper>
         <InputWrapper>
-          <h4>SMS 알림</h4>
-          <ButtonGroup>
-            <NotificationButton>해제</NotificationButton>
-            <NotificationButton>2주 전</NotificationButton>
-            <NotificationButton>1주 전</NotificationButton>
-            <NotificationButton>3일 전</NotificationButton>
-            <NotificationButton>1일 전</NotificationButton>
-          </ButtonGroup>
-        </InputWrapper>
-        <InputWrapper>
           <h4>이메일 알림</h4>
           <ButtonGroup>
             <NotificationButton>해제</NotificationButton>

@@ -4,6 +4,8 @@ import { Route, Switch } from "react-router-dom";
 import MainPage from "./pages/Main";
 import CategoryPage from "./pages/Category";
 import DetailInfoPage from "./pages/DetailPage";
+import LoginPage from "./pages/Login";
+import MyPage from "./pages/MyPage";
 import { Main } from "grommet";
 
 // function App() {
@@ -27,10 +29,6 @@ function App() {
         <DetailInfoPage />
       </Route>
     </Switch>
-<<<<<<< HEAD
-=======
-
->>>>>>> d2be117153c18b64c69d0ccb4b14d95c9c801399
   );
 }
 
