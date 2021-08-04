@@ -2,6 +2,7 @@
 import { Route, Switch } from "react-router-dom";
 
 import MainPage from "./pages/Main";
+<<<<<<< HEAD
 import CategoryPage from "./pages/Category";
 import DetailInfoPage from "./pages/DetailPage";
 import { Main } from "grommet";
@@ -27,6 +28,19 @@ function App() {
         <DetailInfoPage />
       </Route>
     </Switch>
+=======
+import LoginPage from "./pages/Login";
+import MyPage from "./pages/MyPage";
+
+function App() {
+  return (
+    <Grommet className="App">
+      {/* <MainPage /> */}
+      {/* <CategoryPage /> */}
+      {/* <LoginPage /> */}
+      <MyPage />
+    </Grommet>
+>>>>>>> feature/login-page
   );
 }
 
