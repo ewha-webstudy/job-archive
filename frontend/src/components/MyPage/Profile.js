@@ -59,7 +59,7 @@ const ModifyButton = styled.button`
 
   &:hover {
     cursor: pointer;
-    background: #ecbd83;
+    background: #f3b23e;
   }
 
   width: 100px;
@@ -68,7 +68,7 @@ const ModifyButton = styled.button`
   margin-left: 1200px;
 
   background: white;
-  border: 2px solid #ecbd83;
+  border: 2px solid #f3b23e;
   border-radius: 17px;
   box-shadow: 0 0px 5px rgba(87, 87, 87, 0.1);
 `;
