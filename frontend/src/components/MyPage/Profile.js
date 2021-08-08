@@ -73,41 +73,38 @@ const ModifyButton = styled.button`
   box-shadow: 0 0px 5px rgba(87, 87, 87, 0.1);
 `;
 
+function Inputs({ inputs }) {
+  return (
+    <InputWrapper>
+      <h4>{inputs}</h4>
+      <input />
+    </InputWrapper>
+  );
+}
+
 const Profile = () => {
+  const inputs = [
+    "이름",
+    "생년월일",
+    "휴대폰 번호",
+    "이메일",
+    "아이디",
+    "비밀번호",
+    "비밀번호 확인",
+  ];
   return (
     <>
       <ProfileBlock>
         <ModifyBox>
-          <InputWrapper>
-            <h4>이름</h4>
-            <input />
-          </InputWrapper>
-          <InputWrapper>
-            <h4>생년월일</h4>
-            <input />
-          </InputWrapper>
-          <InputWrapper>
-            <h4>휴대폰 번호</h4>
-            <input />
-          </InputWrapper>
-          <InputWrapper>
-            <h4>이메일</h4>
-            <input />
-          </InputWrapper>
+          <Inputs inputs={inputs[0]} />
+          <Inputs inputs={inputs[1]} />
+          <Inputs inputs={inputs[2]} />
+          <Inputs inputs={inputs[3]} />
         </ModifyBox>
         <ModifyBox>
-          <InputWrapper>
-            <h4>아이디</h4>
-            <input />
-          </InputWrapper>
-          <InputWrapper>
-            <h4>비밀번호</h4>
-            <input />
-          </InputWrapper>
-          <InputWrapper>
-            <h4>비밀번호 확인</h4>
-            <input />
-          </InputWrapper>
+          <Inputs inputs={inputs[4]} />
+          <Inputs inputs={inputs[5]} />
+          <Inputs inputs={inputs[6]} />
         </ModifyBox>
       </ProfileBlock>
       <ModifyButton>수정</ModifyButton>

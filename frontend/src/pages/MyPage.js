@@ -9,8 +9,8 @@ const MyPage = () => (
     <NavBar />
     <MyPageTemplate>
       <Sidebar />
-      {/* <Profile /> */}
-      <Notification />
+      <Profile />
+      {/* <Notification /> */}
     </MyPageTemplate>
   </>
 );

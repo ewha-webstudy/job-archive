@@ -20,7 +20,7 @@ function App() {
   return (
     <Switch>
       <Route path="/" exact>
-        <MainPage />
+        <MyPage />
       </Route>
       <Route path="/category">
         <CategoryPage />

@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import { Route } from "react-router-dom";
+import MyPage from "../../pages/MyPage";
 
 const Wrapper = styled.div`
   margin: 10px auto;
@@ -80,27 +82,20 @@ const OtherLoginButton = styled.button`
   text-align: center;
 `;
 
-const LogoImg = styled.img`
-  width: 20px;
-  height: 20px;
-  margin: 0 auto;
-  margin-right: 30px;
-`;
-
 const Login = () => {
   return (
     <>
       <Wrapper>
         <Span>ID</Span>
-        <Input className="id" name="id" type="text" required />
+        <Input name="id" type="text" required />
       </Wrapper>
       <Wrapper>
         <Span>PW</Span>
-        <Input className="pw" name="pw" type="password" required />
+        <Input name="pw" type="password" required />
       </Wrapper>
       <LoginButton type="submit">로그인 하기</LoginButton>
       <>
-        <OtherLoginButton>회원가입</OtherLoginButton>
+        <OtherLoginButton>회원 가입</OtherLoginButton>
       </>
     </>
   );
