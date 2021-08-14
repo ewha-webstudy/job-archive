@@ -1,9 +1,9 @@
 "use strict";
-//const Member = require("../../models/membership"); 
+const Member = require("../../models/membership");
 const Login = require("./login");
 const Signup = require("./signup");
 
-const output = {
+const show = {
     home: (req, res) => {
         res.render("home/index");
     },    
@@ -25,12 +25,10 @@ const process ={
         const signup = new Signup(req.body);
         const response = await signup.signup();
         return res.json(response);
-
-        
     }
 };
 
 module.exports = {
-    output,
+    show,
     process
 };

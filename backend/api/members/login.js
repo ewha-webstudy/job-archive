@@ -1,37 +1,37 @@
 "use strict";
-const db = require("../../src/config/db");
+const db = require("../../models/db");
 
-//user db 사용하여 login 
+//membership db 사용하여 login 
 class Login{
     constructor(body){
         this.body = body;
     }
-    /* 입력된 id에 맞는 user 테이블 가져오는 함수 */
+    /* 입력된 id에 맞는 membership 테이블 가져오기 */
     getMemberInfo(id) {
         return new Promise((resolve, reject) => {
-            const query = "SELECT * FROM users WHERE id=?;";
+            const query = "SELECT userid, password FROM membership WHERE userid=?;";
             db.query(query, [id], (err, data) => {
                 if (err) reject(`${err}`); //에러
                 resolve(data[0]); //성공
             });
         });
     }
-
-    /* 로그인 함수 */
+    /* 로그인 */
     async login(){
         const client = this.body;
         try{
-            const { id, psword } = await this.getMemberInfo(client.id);
+            const { userid, password } = await this.getMemberInfo( client.id );
+            const id = await this.getMemberInfo(client.id);
+            const psword = await this.getMemberInfo(client.id);
             //에러 처리
-            if(id) { 
-                if(id === client.id && psword === client.psword){
+            if(userid) { 
+                if(userid === client.id && password === client.psword){
                     return {success: true}
                 }
                 return {success: false, msg:"비밀번호가 틀렸습니다."};
             }
-            return { success:false, msg: "존재하지 않는 아이디입니다."};
         } catch(err) {
-            return { success: false, msg: err };
+            return { success:false, msg: "존재하지 않는 아이디입니다."};
         }
     }
 }

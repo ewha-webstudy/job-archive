@@ -1,23 +1,40 @@
 "use strict";
 const express = require("express");
-const app = express();
+const cors = require('cors');
+const cookieParser = require('cookie-parser');
+const session = require('express-session');
 const bodyParser = require("body-parser");
 
-const api = require('./api/members');
-const PORT = 3000;
+const path = require('path');
 
+const app = express();
 
-app.set("views", "./src/views");
-app.set("view engine", "ejs");
-app.use(express.static(`${__dirname}/src/public`));
+const api = require('./api');
+
+app.use(
+    cors({
+      origin: true,
+      credentials: true,
+    })
+  );
+  require('dotenv').config();
+
+app.set('port', 3001);
+  
+app.use(cookieParser(process.env.COOKIE_ID));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+app.set("views", "./src/views"); 
+app.set("view engine", "ejs"); 
+app.use(express.static(`${__dirname}/public`));
+app.use(express.static(path.join(__dirname, '/public')));
+
+app.use('/api',api);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
-app.use("/", api);
-app.use('/api', api);
 
 
-app.listen(PORT, () =>{
-    console.log("서버 가동");
-}); 
-
-module.exports = app;
+app.listen(app.get('port'), () => {
+    console.log(`http://localhost:${app.get('port')}`);
+  });
