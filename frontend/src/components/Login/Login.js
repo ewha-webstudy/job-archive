@@ -1,6 +1,5 @@
 import styled from "styled-components";
-import { Route } from "react-router-dom";
-import MyPage from "../../pages/MyPage";
+import { Link } from "react-router-dom";
 
 const Wrapper = styled.div`
   margin: 10px auto;
@@ -94,9 +93,9 @@ const Login = () => {
         <Input name="pw" type="password" required />
       </Wrapper>
       <LoginButton type="submit">로그인 하기</LoginButton>
-      <>
+      <Link to={"/signup"}>
         <OtherLoginButton>회원 가입</OtherLoginButton>
-      </>
+      </Link>
     </>
   );
 };

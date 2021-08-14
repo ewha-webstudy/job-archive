@@ -1,3 +1,5 @@
+import { Grommet, Select } from "grommet";
+import { useState } from "react";
 import styled from "styled-components";
 
 const ProfileBlock = styled.div`
@@ -37,9 +39,12 @@ const InputWrapper = styled.div`
     margin-left: 10px;
   }
 
-  input {
-    width: 100%;
+  .oneinput {
+    width: 95%;
     height: 50%;
+
+    padding-left: 20px;
+    font-size: 18px;
 
     background: #f5f5f5;
     border: none;
@@ -77,15 +82,26 @@ function Inputs({ inputs }) {
   return (
     <InputWrapper>
       <h4>{inputs}</h4>
-      <input />
+      <input class="oneinput" />
     </InputWrapper>
+  );
+}
+
+function Example() {
+  const [value, setValue] = useState("medium");
+  return (
+    <Select
+      options={["small", "medium", "large"]}
+      value={value}
+      onChange={({ option }) => setValue(option)}
+    />
   );
 }
 
 const Profile = () => {
   const inputs = [
     "이름",
-    "생년월일",
+    "출생 연도",
     "휴대폰 번호",
     "이메일",
     "아이디",
