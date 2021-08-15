@@ -88,7 +88,46 @@ const theme = {
   },
 };
 
-export const Password = () => {
+const NameInput = () => {
+  return (
+    <Grommet theme={theme}>
+      <Box direction="row" justify="start" round="15px" border>
+        <TextInput plain placeholder="이름을 입력하세요" />
+      </Box>
+    </Grommet>
+  );
+};
+
+const PhoneNumberInput = () => {
+  const [value, setValue] = useState("");
+  return (
+    <Grommet theme={theme}>
+      <Box direction="row" justify="start" round="15px" border>
+        <MaskedInput
+          plain
+          mask={[
+            { fixed: "010-" },
+            {
+              length: 4,
+              regexp: /^[0-9]{1,4}$/,
+              placeholder: "xxxx",
+            },
+            { fixed: "-" },
+            {
+              length: 4,
+              regexp: /^[0-9]{1,4}$/,
+              placeholder: "xxxx",
+            },
+          ]}
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
+        />
+      </Box>
+    </Grommet>
+  );
+};
+
+const Password = () => {
   const [password, setPassword] = useState("");
   const [reveal, setReveal] = useState(false);
 
@@ -129,7 +168,7 @@ const YearOption = () => {
   );
 };
 
-export const EmailMaskedInput = () => {
+const EmailMaskedInput = () => {
   const [value, setValue] = useState("");
 
   const emailMask = [
@@ -164,27 +203,24 @@ export const EmailMaskedInput = () => {
   );
 };
 
-function Inputs({ inputs }) {
-  return (
-    <InputWrapper>
-      <h4>{inputs}</h4>
-      <input class="oneinput" />
-    </InputWrapper>
-  );
-}
-
 const Profile = () => {
   const inputs = ["이름", "휴대폰 번호"];
   return (
     <>
       <ProfileBlock>
         <ModifyBox>
-          <Inputs inputs={inputs[0]} />
+          <InputWrapper>
+            <h4>이름</h4>
+            <NameInput />
+          </InputWrapper>
           <InputWrapper>
             <h4>출생 연도</h4>
             <YearOption />
           </InputWrapper>
-          <Inputs inputs={inputs[1]} />
+          <InputWrapper>
+            <h4>휴대폰 번호</h4>
+            <PhoneNumberInput />
+          </InputWrapper>
           <InputWrapper>
             <h4>이메일</h4>
             <EmailMaskedInput />
