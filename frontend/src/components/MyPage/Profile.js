@@ -1,4 +1,5 @@
-import { Grommet, Select } from "grommet";
+import { Box, Button, Grommet, MaskedInput, Select, TextInput } from "grommet";
+import { Hide, MailOption, View } from "grommet-icons";
 import { useState } from "react";
 import styled from "styled-components";
 
@@ -78,6 +79,91 @@ const ModifyButton = styled.button`
   box-shadow: 0 0px 5px rgba(87, 87, 87, 0.1);
 `;
 
+const theme = {
+  global: {
+    colors: {
+      brand: "#f3b23e",
+      focus: "none",
+    },
+  },
+};
+
+export const Password = () => {
+  const [password, setPassword] = useState("");
+  const [reveal, setReveal] = useState(false);
+
+  return (
+    <Grommet theme={theme}>
+      <Box direction="row" justify="start" round="15px" border>
+        <TextInput
+          plain
+          type={reveal ? "text" : "password"}
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <Button
+          icon={reveal ? <View size="medium" /> : <Hide size="medium" />}
+          onClick={() => setReveal(!reveal)}
+        />
+      </Box>
+    </Grommet>
+  );
+};
+
+const YearOption = () => {
+  const yearOptions = [...Array(80)].map((v, i) => i + 1942);
+  const [year, setYear] = useState();
+  return (
+    <Grommet theme={theme}>
+      <Box round="15px" border>
+        <Select
+          plain
+          placeholder="출생 연도를 선택하세요"
+          value={year}
+          options={yearOptions.reverse()}
+          onChange={({ value: nextValue }) => setYear(nextValue)}
+          dropHeight="medium"
+        />
+      </Box>
+    </Grommet>
+  );
+};
+
+export const EmailMaskedInput = () => {
+  const [value, setValue] = useState("");
+
+  const emailMask = [
+    {
+      regexp: /^[\w\-_.]+$/,
+      placeholder: "job",
+    },
+    { fixed: "@" },
+    {
+      regexp: /^[\w]+$/,
+      placeholder: "archive",
+    },
+    { fixed: "." },
+    {
+      regexp: /^[\w]+$/,
+      placeholder: "com",
+    },
+  ];
+
+  return (
+    <Grommet theme={theme}>
+      <Box justify="start" round="15px" border>
+        <MaskedInput
+          plain
+          icon={<MailOption />}
+          mask={emailMask}
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
+        />
+      </Box>
+    </Grommet>
+  );
+};
+
 function Inputs({ inputs }) {
   return (
     <InputWrapper>
@@ -87,40 +173,32 @@ function Inputs({ inputs }) {
   );
 }
 
-function Example() {
-  const [value, setValue] = useState("medium");
-  return (
-    <Select
-      options={["small", "medium", "large"]}
-      value={value}
-      onChange={({ option }) => setValue(option)}
-    />
-  );
-}
-
 const Profile = () => {
-  const inputs = [
-    "이름",
-    "출생 연도",
-    "휴대폰 번호",
-    "이메일",
-    "아이디",
-    "비밀번호",
-    "비밀번호 확인",
-  ];
+  const inputs = ["이름", "휴대폰 번호"];
   return (
     <>
       <ProfileBlock>
         <ModifyBox>
           <Inputs inputs={inputs[0]} />
+          <InputWrapper>
+            <h4>출생 연도</h4>
+            <YearOption />
+          </InputWrapper>
           <Inputs inputs={inputs[1]} />
-          <Inputs inputs={inputs[2]} />
-          <Inputs inputs={inputs[3]} />
+          <InputWrapper>
+            <h4>이메일</h4>
+            <EmailMaskedInput />
+          </InputWrapper>
         </ModifyBox>
         <ModifyBox>
-          <Inputs inputs={inputs[4]} />
-          <Inputs inputs={inputs[5]} />
-          <Inputs inputs={inputs[6]} />
+          <InputWrapper>
+            <h4>비밀번호</h4>
+            <Password />
+          </InputWrapper>
+          <InputWrapper>
+            <h4>비밀번호 확인</h4>
+            <Password />
+          </InputWrapper>
         </ModifyBox>
       </ProfileBlock>
       <ModifyButton>수정</ModifyButton>

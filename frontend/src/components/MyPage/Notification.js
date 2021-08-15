@@ -1,4 +1,4 @@
-import { RadioButtonGroup } from "grommet";
+import { CheckBox, Grommet, RadioButtonGroup } from "grommet";
 import styled from "styled-components";
 
 const NotificationBlock = styled.div`
@@ -82,13 +82,25 @@ const ModifyButton = styled.button`
 //   return <NotificationButton>{item}</NotificationButton>;
 // };
 
+const theme = {
+  global: {
+    colors: {
+      brand: "#f3b23e",
+      focus: "none",
+    },
+  },
+};
+
 const Notification = () => {
   return (
     <>
       <NotificationBlock>
         <InputWrapper>
           <h4>알림</h4>
-          <RadioButtonGroup options={["설정", "해제"]} />
+          {/* <RadioButtonGroup options={["설정", "해제"]} /> */}
+          <Grommet theme={theme}>
+            <CheckBox id="check-box-toggle" name="toggle" toggle />
+          </Grommet>
         </InputWrapper>
         <InputWrapper>
           <h4>이메일 알림</h4>
