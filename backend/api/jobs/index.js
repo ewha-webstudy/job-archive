@@ -42,7 +42,7 @@ module.exports = router;
  *  get:
  *    tags:
  *    - Detail page
- *    description: 채용공고 상세 페이지 (Card component 클릭시)
+ *    description: 채용공고 상세 페이지 (Card component 클릭 시)
  *    parameters:
  *    - name: id
  *      in: path
@@ -78,7 +78,7 @@ module.exports = router;
  *  post:
  *    tags:
  *    - Category page
- *    description: 카테고리 페이지 (tags 서치, searchBar 서치 결과 반영)
+ *    description: 카테고리 페이지 (메인에서 카테고리 선택 시 / tag로 서치 시/ searchBar로 서치 시)
  *    parameters:
  *    - name: category
  *      in: path
@@ -102,7 +102,7 @@ module.exports = router;
  *              searchBar:
  *                type: string
  *          example:
- *            {sortBy: "likeCount", tags: {}, searchBar: "네이버"}
+ *            {sortBy: "likeNo", tags: {}, searchBar: "네이버"}
  *    responses:
  *      200:
  *        description: 서치 결과 반영 & 카테고리별 채용공고 조회 성공
