@@ -6,8 +6,11 @@ const session = require('express-session');
 const bodyParser = require("body-parser");
 const path = require('path');
 const { swaggerUi, specs } = require("./modules/swagger");
+const { sequelize } = require('./models');
 
 const app = express();
+
+sequelize.sync();
 
 const api = require('./api');
 

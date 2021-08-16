@@ -1,30 +1,24 @@
-const Job = require('../../models/job');
-const Member = require('../../models/member');
-
-// *card 목록: jobDetail의 기업명, 기업로고, 디데이, 모집기간, 직무, 좋아요 수, 유저 좋아요 여부, id(pk, 자세히보기에서 연결되는 라우터 주소)
+const { JobBasic } = require('../../models');
+const { JobDetail } = require('../../models');
+// const Member = require('../../models/member');
 
 /* GET / */
 exports.main = async(req, res) => {
-  // main 페이지 (card 9개 최신 공고 (jobBasic 테이블에서 regDt순))
+  // main 페이지 (card 9개 최신 공고)
   // res.data: card 목록
   console.log("this is main")
-  res.send([
-    {
-      id: 1,
-      title: "1번 공고",
-      category: "프론트엔드"
-    },
-    {
-      id: 2,
-      title: "2번 공고",
-      category: "백엔드"
-    },
-    {
-      id: 3,
-      title: "3번 공고",
-      category: "데이터"
-    },
-  ]);
+  try{
+    JobBasic.findAll({ limit: 9, order: [ ['regDt',  'DESC'] ] })
+    .then((result) => {
+      res.send(result);
+    })
+    .catch((err) => {
+      console.log("조회 Error: ", err);
+    })
+  } catch(e){
+    console.error(e);
+    res.status(500).send();
+  }
 }
 
 /* POST /api/category/:category */
@@ -63,13 +57,18 @@ exports.search = async(req, res) => {
   const { category } = req.params;
   console.log("this is category search", category)
   try{
-    // const jobs = await Job.find({ $category: category }) 
     // 마감일이 지난 공고는 보여줄지 말지?
+    JobDetail.findAll({ where: { category: category } })
+    .then((result) => {
+      res.send(result);
+    })
+    .catch((err) => {
+      console.log("조회 Error: ", err);
+    })
   } catch(e) {
     console.error(e);
     res.status(500).send();
   }
-  res.send({ category: category })
 }
 
 /* POST /api/like/:id */
@@ -83,5 +82,10 @@ exports.like = async(req, res) => {
 exports.unlike = async(req, res) => {
   // 사용자의 계정의 like 항목에서 공고를 제거함
   console.log("this is unlike")
+}
+
+
+function jobCard(wantedAuthNo){
+
 }
 
