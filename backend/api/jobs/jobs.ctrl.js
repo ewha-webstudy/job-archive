@@ -2,19 +2,19 @@ const { JobBasic } = require('../../models');
 const { JobDetail } = require('../../models');
 // const Member = require('../../models/member');
 
-/* GET / */
+/* GET /api/main */
 exports.main = async(req, res) => {
   // main 페이지 (card 9개 최신 공고)
   // res.data: card 목록
   console.log("this is main")
+  let jobList = []
+  let cardList = []
   try{
-    JobBasic.findAll({ limit: 9, order: [ ['regDt',  'DESC'] ] })
-    .then((result) => {
-      res.send(result);
-    })
-    .catch((err) => {
-      console.log("조회 Error: ", err);
-    })
+    jobList = await JobBasic.findAll({ attributes: ['wantedAuthNo'], limit: 9, order: [ ['regDt',  'DESC'] ] })
+    for(const job of jobList){
+      cardList.push(await toCard(job.wantedAuthNo));
+    }
+    res.send(cardList)
   } catch(e){
     console.error(e);
     res.status(500).send();
@@ -84,8 +84,22 @@ exports.unlike = async(req, res) => {
   console.log("this is unlike")
 }
 
-
-function jobCard(wantedAuthNo){
-
+const getData = async(wantedAuthNo) => {
+  const basic = await JobBasic.findOne({ where: { wantedAuthNo: wantedAuthNo } })
+  const detail = await JobDetail.findOne({ where: { wantedAuthNo: wantedAuthNo } })
+  return { basic, detail }
 }
 
+const toCard = async(wantedAuthNo) => {
+  const { basic, detail } = await getData(wantedAuthNo);
+  const cardComponent = {
+    wantedAuthNo: basic.wantedAuthNo,
+    wantedTitle: detail.wantedTitle,
+    company: basic.company,
+    logo: detail.logo,
+    receiptCloseDt: detail.receiptCloseDt,
+    jobCont: detail.jobCont,
+    likeNo: detail.likeNo
+  }
+  return cardComponent
+}

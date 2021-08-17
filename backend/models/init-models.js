@@ -6,8 +6,8 @@ function initModels(sequelize) {
   var jobbasic = _jobbasic(sequelize, DataTypes);
   var jobdetail = _jobdetail(sequelize, DataTypes);
 
-  jobdetail.belongsTo(jobbasic, { as: "wantedAuthNo_jobbasic", foreignKey: "wantedAuthNo"});
-  jobbasic.hasOne(jobdetail, { as: "jobdetail", foreignKey: "wantedAuthNo"});
+  jobdetail.belongsTo(jobbasic, { foreignKey: "wantedAuthNo", targetKey: "wantedAuthNo" });
+  jobbasic.hasOne(jobdetail, { foreignKey: "wantedAuthNo", sourceKey: "wantedAuthNo"});
 
   return {
     jobbasic,
