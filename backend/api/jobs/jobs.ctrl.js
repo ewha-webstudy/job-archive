@@ -42,9 +42,9 @@ exports.detail = async(req, res) => {
   const { id } = req.params;
   if (!id) return res.status(404).send();
   try {
-    // const detail = await Job.findone({ id: +id })
+    const detail = await toDetail(id);
     if (!id) return res.status(404).send();
-    
+    res.send(detail);
   } catch (e) {
     console.error(e);
     res.status(500).send();
@@ -102,4 +102,30 @@ const toCard = async(wantedAuthNo) => {
     likeNo: detail.likeNo
   }
   return cardComponent
+}
+
+const toDetail = async(wantedAuthNo) => {
+  const { basic, detail } = await getData(wantedAuthNo);
+  const detailComponent = {
+    wantedAuthNo: basic.wantedAuthNo,
+    wantedTitle: detail.wantedTitle,
+    company: basic.company,
+    logo: detail.logo,
+    reperNm: detail.reperNm,
+    indTpCdNm: detail.indTpCdNm,
+    corpAddr: detail.corpAddr,
+    homePg: detail.homePg,
+    receiptCloseDt: detail.receiptCloseDt,
+    jobCont: detail.jobCont,
+    wantedInfoUrl: basic.wantedInfoUrl,
+    empTpNm: detail.empTpNm,
+    enterTpCd: detail.enterTpCd,
+    minEdubgIcd: detail.minEdubgIcd,
+    pfCond: detail.pfCond,
+    salTpNm: basic.salTpNm,
+    sal: basic.sal,
+    workdayWorkhrCont: detail.workdayWorkhrCont,
+    likeNo: detail.likeNo
+  }
+  return detailComponent
 }
