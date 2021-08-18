@@ -65,13 +65,14 @@ const ModifyButton = styled.button`
 
   &:hover {
     cursor: pointer;
+    color: white;
     background: #f3b23e;
   }
 
   width: 100px;
   height: 40px;
 
-  margin-left: 1200px;
+  margin-left: 1195px;
 
   background: white;
   border: 2px solid #f3b23e;
@@ -204,37 +205,39 @@ const EmailMaskedInput = () => {
 };
 
 const Profile = () => {
-  const inputs = ["이름", "휴대폰 번호"];
+  const profileInputs1 = [
+    { title: "이름", component: <NameInput /> },
+    { title: "출생 연도", component: <YearOption /> },
+    { title: "휴대폰 번호", component: <PhoneNumberInput /> },
+    { title: "이메일", component: <EmailMaskedInput /> },
+  ];
+
+  const profileInputs2 = [
+    { title: "비밀번호", component: <Password /> },
+    { title: "비밀번호 확인", component: <Password /> },
+  ];
+
+  const ProfileItem = ({ input }) => {
+    return (
+      <InputWrapper>
+        <h4>{input.title}</h4>
+        {input.component}
+      </InputWrapper>
+    );
+  };
+
   return (
     <>
       <ProfileBlock>
         <ModifyBox>
-          <InputWrapper>
-            <h4>이름</h4>
-            <NameInput />
-          </InputWrapper>
-          <InputWrapper>
-            <h4>출생 연도</h4>
-            <YearOption />
-          </InputWrapper>
-          <InputWrapper>
-            <h4>휴대폰 번호</h4>
-            <PhoneNumberInput />
-          </InputWrapper>
-          <InputWrapper>
-            <h4>이메일</h4>
-            <EmailMaskedInput />
-          </InputWrapper>
+          {profileInputs1.map((input) => {
+            return <ProfileItem input={input} />;
+          })}
         </ModifyBox>
         <ModifyBox>
-          <InputWrapper>
-            <h4>비밀번호</h4>
-            <Password />
-          </InputWrapper>
-          <InputWrapper>
-            <h4>비밀번호 확인</h4>
-            <Password />
-          </InputWrapper>
+          {profileInputs2.map((input) => {
+            return <ProfileItem input={input} />;
+          })}
         </ModifyBox>
       </ProfileBlock>
       <ModifyButton>수정</ModifyButton>

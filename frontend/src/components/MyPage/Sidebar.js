@@ -12,16 +12,12 @@ const SidebarBlock = styled.div`
   border-right: 2px solid #ef8d21;
   }
 
-  .active {
-    color: #ef8d21;
-  }
-
   .outbutton {
     &:hover {
         cursor: pointer;
       }
       
-    margin-top: 460px;
+    margin-top: 150%;
     margin-left: 110px;
     
     background: white;
@@ -29,9 +25,6 @@ const SidebarBlock = styled.div`
     font-size: 18px;
     border: none;
   }
-
-  
-
 `;
 
 const SidebarButton = styled.button`
@@ -47,26 +40,25 @@ const SidebarButton = styled.button`
   height: 10%;
   width: 100%;
 
-  font-size: 24px;
-  background: white;
-  color: black;
   border: none;
+  font-size: 24px;
+  background: none;
 
   margin-top: 15px;
   margin-left: auto;
 `;
 
+const sidebarMenu = [
+  { id: "1", title: "프로필 관리" },
+  { id: "2", title: "디데이 알림" },
+  { id: "3", title: "저장 목록 관리" },
+];
+
+const SidebarItem = ({ menu }) => {
+  return <SidebarButton>{menu.title}</SidebarButton>;
+};
+
 const Sidebar = () => {
-  const sidebarMenu = [
-    { id: 1, title: "프로필 관리" },
-    { id: 2, title: "디데이 알림" },
-    { id: 3, title: "저장 목록 관리" },
-  ];
-
-  const SidebarItem = ({ menu }) => {
-    return <SidebarButton>{menu.title}</SidebarButton>;
-  };
-
   return (
     <SidebarBlock>
       {sidebarMenu.map((menu) => {

@@ -1,4 +1,4 @@
-import { CheckBox, Grommet, RadioButtonGroup } from "grommet";
+import { CheckBox, Grommet } from "grommet";
 import styled from "styled-components";
 
 const NotificationBlock = styled.div`
@@ -9,7 +9,6 @@ const NotificationBlock = styled.div`
   margin-right: 3%;
 
   float: right;
-  background-color: white;
 `;
 
 const InputWrapper = styled.div`
@@ -17,17 +16,15 @@ const InputWrapper = styled.div`
     margin-top: 80px;
   }
 
-  width: 500px;
+  width: 400px;
   height: 100px;
-
   margin-top: 20px;
   margin-left: 150px;
 
   h4 {
     color: grey;
     font-weight: lighter;
-
-    margin-left: 10px;
+    margin-left: 3px;
   }
 `;
 
@@ -39,30 +36,34 @@ const ButtonGroup = styled.div`
   width: 100%;
   height: 50%;
 
-  background: #f5f5f5;
-  border: 1px solid lightgrey;
+  border: 2px solid lightgrey;
   border-radius: 15px;
-  box-shadow: 0 3px 6px lightgrey;
 `;
 
 const NotificationButton = styled.button`
   &:hover {
     cursor: pointer;
-    color: #ef8d21;
-    font-weight: border;
+    color: #ffa500;
+    font-weight: 600;
   }
 
-  width: 20%;
-  height: 100%;
+  & + & {
+    border-left: 1px solid lightgrey;
+  }
 
-  background: none;
+  width: 25%;
+  height: 50%;
+
+  margin-top: 3%;
   border: none;
+  background: none;
 `;
 
 const ModifyButton = styled.button`
   &:hover {
     cursor: pointer;
-    background: #ecbd83;
+    color: white;
+    background: #f3b23e;
   }
 
   width: 100px;
@@ -71,46 +72,50 @@ const ModifyButton = styled.button`
   margin-left: 1325px;
 
   background: white;
-  border: 2px solid #ecbd83;
+  border: 2px solid #f3b23e;
   border-radius: 17px;
   box-shadow: 0 0px 5px rgba(87, 87, 87, 0.1);
 `;
-
-// const period = ["해제", "2주 전", "1주 전", "3일 전", "1일 전"];
-
-// const PeriodItem = ({ item }) => {
-//   return <NotificationButton>{item}</NotificationButton>;
-// };
 
 const theme = {
   global: {
     colors: {
       brand: "#f3b23e",
-      focus: "none",
+    },
+    focus: {
+      border: {
+        color: "none",
+      },
     },
   },
 };
 
 const Notification = () => {
+  const menu = [
+    { id: "d14", title: "2주 전" },
+    { id: "d7", title: "1주 전" },
+    { id: "d3", title: "3일 전" },
+    { id: "d1", title: "1일 전" },
+  ];
+
   return (
     <>
       <NotificationBlock>
         <InputWrapper>
           <h4>알림</h4>
-          {/* <RadioButtonGroup options={["설정", "해제"]} /> */}
           <Grommet theme={theme}>
-            <CheckBox id="check-box-toggle" name="toggle" toggle />
+            <CheckBox toggle />
           </Grommet>
         </InputWrapper>
+
         <InputWrapper>
           <h4>이메일 알림</h4>
           <ButtonGroup>
-            {/* <PeriodItem item={period} /> */}
-            <NotificationButton>해제</NotificationButton>
-            <NotificationButton>2주 전</NotificationButton>
-            <NotificationButton>1주 전</NotificationButton>
-            <NotificationButton>3일 전</NotificationButton>
-            <NotificationButton>1일 전</NotificationButton>
+            {menu.map((menu) => (
+              <NotificationButton key={menu.id}>
+                {menu.title}
+              </NotificationButton>
+            ))}
           </ButtonGroup>
         </InputWrapper>
       </NotificationBlock>
