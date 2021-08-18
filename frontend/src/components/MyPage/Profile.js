@@ -1,4 +1,5 @@
-import { Grommet, Select } from "grommet";
+import { Box, Button, Grommet, MaskedInput, Select, TextInput } from "grommet";
+import { Hide, MailOption, View } from "grommet-icons";
 import { useState } from "react";
 import styled from "styled-components";
 
@@ -64,13 +65,14 @@ const ModifyButton = styled.button`
 
   &:hover {
     cursor: pointer;
+    color: white;
     background: #f3b23e;
   }
 
   width: 100px;
   height: 40px;
 
-  margin-left: 1200px;
+  margin-left: 1195px;
 
   background: white;
   border: 2px solid #f3b23e;
@@ -78,49 +80,164 @@ const ModifyButton = styled.button`
   box-shadow: 0 0px 5px rgba(87, 87, 87, 0.1);
 `;
 
-function Inputs({ inputs }) {
-  return (
-    <InputWrapper>
-      <h4>{inputs}</h4>
-      <input class="oneinput" />
-    </InputWrapper>
-  );
-}
+const theme = {
+  global: {
+    colors: {
+      brand: "#f3b23e",
+      focus: "none",
+    },
+  },
+};
 
-function Example() {
-  const [value, setValue] = useState("medium");
+const NameInput = () => {
   return (
-    <Select
-      options={["small", "medium", "large"]}
-      value={value}
-      onChange={({ option }) => setValue(option)}
-    />
+    <Grommet theme={theme}>
+      <Box direction="row" justify="start" round="15px" border>
+        <TextInput plain placeholder="이름을 입력하세요" />
+      </Box>
+    </Grommet>
   );
-}
+};
+
+const PhoneNumberInput = () => {
+  const [value, setValue] = useState("");
+  return (
+    <Grommet theme={theme}>
+      <Box direction="row" justify="start" round="15px" border>
+        <MaskedInput
+          plain
+          mask={[
+            { fixed: "010-" },
+            {
+              length: 4,
+              regexp: /^[0-9]{1,4}$/,
+              placeholder: "xxxx",
+            },
+            { fixed: "-" },
+            {
+              length: 4,
+              regexp: /^[0-9]{1,4}$/,
+              placeholder: "xxxx",
+            },
+          ]}
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
+        />
+      </Box>
+    </Grommet>
+  );
+};
+
+const Password = () => {
+  const [password, setPassword] = useState("");
+  const [reveal, setReveal] = useState(false);
+
+  return (
+    <Grommet theme={theme}>
+      <Box direction="row" justify="start" round="15px" border>
+        <TextInput
+          plain
+          type={reveal ? "text" : "password"}
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <Button
+          icon={reveal ? <View size="medium" /> : <Hide size="medium" />}
+          onClick={() => setReveal(!reveal)}
+        />
+      </Box>
+    </Grommet>
+  );
+};
+
+const YearOption = () => {
+  const yearOptions = [...Array(80)].map((v, i) => i + 1942);
+  const [year, setYear] = useState();
+  return (
+    <Grommet theme={theme}>
+      <Box round="15px" border>
+        <Select
+          plain
+          placeholder="출생 연도를 선택하세요"
+          value={year}
+          options={yearOptions.reverse()}
+          onChange={({ value: nextValue }) => setYear(nextValue)}
+          dropHeight="medium"
+        />
+      </Box>
+    </Grommet>
+  );
+};
+
+const EmailMaskedInput = () => {
+  const [value, setValue] = useState("");
+
+  const emailMask = [
+    {
+      regexp: /^[\w\-_.]+$/,
+      placeholder: "job",
+    },
+    { fixed: "@" },
+    {
+      regexp: /^[\w]+$/,
+      placeholder: "archive",
+    },
+    { fixed: "." },
+    {
+      regexp: /^[\w]+$/,
+      placeholder: "com",
+    },
+  ];
+
+  return (
+    <Grommet theme={theme}>
+      <Box justify="start" round="15px" border>
+        <MaskedInput
+          plain
+          icon={<MailOption />}
+          mask={emailMask}
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
+        />
+      </Box>
+    </Grommet>
+  );
+};
 
 const Profile = () => {
-  const inputs = [
-    "이름",
-    "출생 연도",
-    "휴대폰 번호",
-    "이메일",
-    "아이디",
-    "비밀번호",
-    "비밀번호 확인",
+  const profileInputs1 = [
+    { title: "이름", component: <NameInput /> },
+    { title: "출생 연도", component: <YearOption /> },
+    { title: "휴대폰 번호", component: <PhoneNumberInput /> },
+    { title: "이메일", component: <EmailMaskedInput /> },
   ];
+
+  const profileInputs2 = [
+    { title: "비밀번호", component: <Password /> },
+    { title: "비밀번호 확인", component: <Password /> },
+  ];
+
+  const ProfileItem = ({ input }) => {
+    return (
+      <InputWrapper>
+        <h4>{input.title}</h4>
+        {input.component}
+      </InputWrapper>
+    );
+  };
+
   return (
     <>
       <ProfileBlock>
         <ModifyBox>
-          <Inputs inputs={inputs[0]} />
-          <Inputs inputs={inputs[1]} />
-          <Inputs inputs={inputs[2]} />
-          <Inputs inputs={inputs[3]} />
+          {profileInputs1.map((input) => {
+            return <ProfileItem input={input} />;
+          })}
         </ModifyBox>
         <ModifyBox>
-          <Inputs inputs={inputs[4]} />
-          <Inputs inputs={inputs[5]} />
-          <Inputs inputs={inputs[6]} />
+          {profileInputs2.map((input) => {
+            return <ProfileItem input={input} />;
+          })}
         </ModifyBox>
       </ProfileBlock>
       <ModifyButton>수정</ModifyButton>
