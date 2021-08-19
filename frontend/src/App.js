@@ -8,8 +8,6 @@ import LoginPage from "./pages/Login";
 import MyPage from "./pages/MyPage";
 import { Main } from "grommet";
 
-import axios from "axios";
-import { useEffect } from "react";
 // function App() {
 //   return (
 //       <Grommet className="App">
@@ -19,7 +17,10 @@ import { useEffect } from "react";
 // }
 
 function App() {
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/backend/settings
   return (
       <Switch>
         <Route path="/" exact>

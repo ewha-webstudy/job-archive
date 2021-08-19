@@ -4,12 +4,17 @@ const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const bodyParser = require("body-parser");
-
 const path = require('path');
+const { swaggerUi, specs } = require("./modules/swagger");
+const { sequelize } = require('./models');
 
 const app = express();
 
+sequelize.sync();
+
 const api = require('./api');
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
 
 app.use(
     cors({
