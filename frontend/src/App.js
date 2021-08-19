@@ -7,6 +7,7 @@ import CategoryPage from "./pages/Category";
 import DetailInfoPage from "./pages/DetailPage";
 import LoginPage from "./pages/Login";
 import MyPage from "./pages/MyPage";
+import Withdrawal from "./components/MyPage/Withdrawal";
 
 function App() {
   const callApi = async () => {
@@ -29,7 +30,7 @@ function App() {
         <MyPage />
       </Route>
       <Route path="/mypage">
-        <MyPage />
+        <Withdrawal />
       </Route>
       <Route path="/category">
         <CategoryPage />

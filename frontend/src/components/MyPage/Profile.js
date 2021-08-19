@@ -128,7 +128,7 @@ const PhoneNumberInput = () => {
   );
 };
 
-const Password = () => {
+export const Password = () => {
   const [password, setPassword] = useState("");
   const [reveal, setReveal] = useState(false);
 
