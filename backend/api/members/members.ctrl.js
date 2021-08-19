@@ -1,5 +1,6 @@
 "use strict";
 const Member = require("../../models/membership");
+const { Membership } = require('../../models');
 const Login = require("./login");
 const Signup = require("./signup");
 

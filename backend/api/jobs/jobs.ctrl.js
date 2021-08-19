@@ -1,6 +1,5 @@
 const { JobBasic } = require('../../models');
 const { JobDetail } = require('../../models');
-// const Member = require('../../models/member');
 
 /* GET /api/main */
 exports.main = async(req, res) => {
