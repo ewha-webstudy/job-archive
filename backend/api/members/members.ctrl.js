@@ -1,6 +1,6 @@
 "use strict";
 const Member = require("../../models/membership");
-const { Membership } = require('../../models');
+const { Membership } = require('../../models'); // 예시로 쓴 거예요!
 const Login = require("./login");
 const Signup = require("./signup");
 
