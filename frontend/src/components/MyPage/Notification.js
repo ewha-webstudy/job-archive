@@ -36,7 +36,7 @@ const ButtonGroup = styled.div`
   width: 100%;
   height: 50%;
 
-  border: 2px solid lightgrey;
+  border: 1px solid lightgrey;
   border-radius: 15px;
 `;
 

@@ -1,95 +1,52 @@
-import JobCard from "../Card/JobCard";
 import styled from "styled-components";
+import CardBoard from "../Card/CardBoard";
 
 const SaveListBlock = styled.div`
   overflow: auto;
+  &::-webkit-scrollbar {
+    width: 10px;
+    background: none;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: #c8c8c8;
+    border-radius: 10px;
+    background-clip: padding-box;
+    border: 2px solid transparent;
+  }
+  &::-webkit-scrollbar-track {
+    background: #ededed;
+    border-radius: 10px;
+  }
 
   width: 75%;
   height: 80%;
 
-  margin-top: 7%;
-  margin-right: 4%;
-
-  float: right;
-
   display: flex;
   flex-wrap: wrap;
-  flex-direction: row;
+  float: right;
+  margin-top: 6%;
+  margin-right: 4%;
 `;
 
-const CardWrapper = styled.div`
-  & + & {
-    margin-left: 10%;
-    margin-top: 25px;
-  }
+// const CardWrapper = styled.div`
+//   & + & {
+//     margin-left: 10%;
+//     margin-top: 25px;
+//   }
 
-  width: 20%;
-  height: 350px;
+//   width: 20%;
+//   height: 350px;
 
-  margin-top: 25px;
-  margin-left: 10%;
-  display: flex;
-  align-items: center;
-`;
-
-const dummy = [
-  {
-    name: "네이버",
-    end: "2021.7.30",
-    position: "Data Intern",
-    logo: "https://image.rocketpunch.com/company/5466/naver_logo.png?s=400x400&t=inside",
-  },
-  {
-    name: "카카오",
-    end: "2021.7.30",
-    position: "SW Engineering",
-    logo: "https://image.rocketpunch.com/company/5466/naver_logo.png?s=400x400&t=inside",
-  },
-  {
-    name: "우아한형제들",
-    end: "2021.7.30",
-    position: "FrontEnd",
-    logo: "https://image.rocketpunch.com/company/5466/naver_logo.png?s=400x400&t=inside",
-  },
-  {
-    name: "네이버",
-    end: "2021.7.30",
-    position: "Data Intern",
-    logo: "https://image.rocketpunch.com/company/5466/naver_logo.png?s=400x400&t=inside",
-  },
-  {
-    name: "카카오",
-    end: "2021.7.30",
-    position: "SW Engineering",
-    logo: "https://image.rocketpunch.com/company/5466/naver_logo.png?s=400x400&t=inside",
-  },
-  {
-    name: "우아한형제들",
-    end: "2021.7.30",
-    position: "FrontEnd",
-    logo: "https://image.rocketpunch.com/company/5466/naver_logo.png?s=400x400&t=inside",
-  },
-  {
-    name: "네이버",
-    end: "2021.7.30",
-    position: "Data Intern",
-    logo: "https://image.rocketpunch.com/company/5466/naver_logo.png?s=400x400&t=inside",
-  },
-];
+//   margin-top: 25px;
+//   margin-left: 10%;
+//   display: flex;
+//   align-items: center;
+// `;
 
 const SaveList = () => {
   return (
     <SaveListBlock>
-      {dummy.map((i) => (
-        <CardWrapper>
-          <JobCard
-            name={i.name}
-            end={i.end}
-            position={i.position}
-            logo={i.logo}
-          />
-        </CardWrapper>
-      ))}
+      <CardBoard />
     </SaveListBlock>
   );
 };

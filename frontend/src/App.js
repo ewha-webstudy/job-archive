@@ -1,4 +1,6 @@
 import { Route, Switch } from "react-router-dom";
+import { useEffect } from "react";
+import axios from "axios";
 
 import MainPage from "./pages/Main";
 import CategoryPage from "./pages/Category";
@@ -7,6 +9,14 @@ import LoginPage from "./pages/Login";
 import MyPage from "./pages/MyPage";
 
 function App() {
+  const callApi = async () => {
+    axios.get("/api/jobs").then((res) => console.log(res.data.test));
+  };
+
+  useEffect(() => {
+    callApi();
+  }, []);
+
   return (
     <Switch>
       <Route path="/" exact>
