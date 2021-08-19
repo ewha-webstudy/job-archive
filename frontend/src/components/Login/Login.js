@@ -84,18 +84,18 @@ const OtherLoginButton = styled.button`
 const Login = () => {
   return (
     <>
-            <Wrapper>
-              <Span>ID</Span>
-              <Input id="id" name="id" type="text" required />
-            </Wrapper>
-            <Wrapper>
-              <Span>PW</Span>
-              <Input id="pw" name="pw" type="password" required />
-            </Wrapper>
-            <LoginButton id="button" type="submit">로그인 하기</LoginButton>
-            <Link to={"/api/signup"}>
-              <OtherLoginButton>회원 가입</OtherLoginButton>
-            </Link>
+      <Wrapper>
+        <Span>ID</Span>
+        <Input id="id" name="id" type="text" required />
+      </Wrapper>
+      <Wrapper>
+        <Span>PW</Span>
+        <Input id="pw" name="pw" type="password" required />
+      </Wrapper>
+      <LoginButton id="button" type="submit">로그인 하기</LoginButton>
+      <Link to={"/api/signup"}>
+        <OtherLoginButton>회원 가입</OtherLoginButton>
+      </Link>
     </>
   );
 };

@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { Favorite } from "grommet-icons";
 import "../../style/card.css";
 
-function JobCard({ name, start, end, position, logo}) {
+function JobCard({ name, start, end, position, logo }) {
   const [liked, setLiked] = useState(true);
   const [numLikes, setnumLikes] = useState(0);
 
@@ -22,8 +22,8 @@ function JobCard({ name, start, end, position, logo}) {
             />
           ) : (
             <Button
-              icon={<Favorite color="black"/>}
-              style={{ padding: 0}}
+              icon={<Favorite color="black" />}
+              style={{ padding: 0 }}
               onClick={() => setLiked(!liked)}
               hoverIndicator
             />
@@ -31,11 +31,7 @@ function JobCard({ name, start, end, position, logo}) {
         </div>
       </CardHeader>
       <div className="card_body">
-        <Box
-          height="xxsmall"
-          width="xxsmall"
-          margin="auto"
-        >
+        <Box height="xxsmall" width="xxsmall" margin="auto">
           <Image align="center" pad="horizontal" fit="cover" round src={logo} />
         </Box>
         <div className="card_duedate">D-{end.substring(end.length - 2)}</div>

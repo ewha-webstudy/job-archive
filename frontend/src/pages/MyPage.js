@@ -4,6 +4,7 @@ import NavBar from "../components/NavBar/NavBar";
 import Sidebar from "../components/MyPage/Sidebar";
 import Profile from "../components/MyPage/Profile";
 import Notification from "../components/MyPage/Notification";
+import SaveList from "../components/MyPage/SaveList";
 
 const MyPage = () => {
   return (
@@ -20,7 +21,13 @@ const MyPage = () => {
         <Route path="/mypage/2">
           <Notification />
         </Route>
+<<<<<<< HEAD
         <Route path="/mypage/3"></Route>
+=======
+        <Route path="/mypage/3">
+          <SaveList />
+        </Route>
+>>>>>>> origin/feature/my-page
       </MyPageTemplate>
     </>
   );
