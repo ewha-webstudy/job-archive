@@ -1,3 +1,5 @@
+import { Grommet, Select } from "grommet";
+import { useState } from "react";
 import styled from "styled-components";
 
 const ProfileBlock = styled.div`
@@ -37,9 +39,12 @@ const InputWrapper = styled.div`
     margin-left: 10px;
   }
 
-  input {
-    width: 100%;
+  .oneinput {
+    width: 95%;
     height: 50%;
+
+    padding-left: 20px;
+    font-size: 18px;
 
     background: #f5f5f5;
     border: none;
@@ -59,7 +64,7 @@ const ModifyButton = styled.button`
 
   &:hover {
     cursor: pointer;
-    background: #ecbd83;
+    background: #f3b23e;
   }
 
   width: 100px;
@@ -68,46 +73,54 @@ const ModifyButton = styled.button`
   margin-left: 1200px;
 
   background: white;
-  border: 2px solid #ecbd83;
+  border: 2px solid #f3b23e;
   border-radius: 17px;
   box-shadow: 0 0px 5px rgba(87, 87, 87, 0.1);
 `;
 
+function Inputs({ inputs }) {
+  return (
+    <InputWrapper>
+      <h4>{inputs}</h4>
+      <input class="oneinput" />
+    </InputWrapper>
+  );
+}
+
+function Example() {
+  const [value, setValue] = useState("medium");
+  return (
+    <Select
+      options={["small", "medium", "large"]}
+      value={value}
+      onChange={({ option }) => setValue(option)}
+    />
+  );
+}
+
 const Profile = () => {
+  const inputs = [
+    "이름",
+    "출생 연도",
+    "휴대폰 번호",
+    "이메일",
+    "아이디",
+    "비밀번호",
+    "비밀번호 확인",
+  ];
   return (
     <>
       <ProfileBlock>
         <ModifyBox>
-          <InputWrapper>
-            <h4>이름</h4>
-            <input />
-          </InputWrapper>
-          <InputWrapper>
-            <h4>생년월일</h4>
-            <input />
-          </InputWrapper>
-          <InputWrapper>
-            <h4>휴대폰 번호</h4>
-            <input />
-          </InputWrapper>
-          <InputWrapper>
-            <h4>이메일</h4>
-            <input />
-          </InputWrapper>
+          <Inputs inputs={inputs[0]} />
+          <Inputs inputs={inputs[1]} />
+          <Inputs inputs={inputs[2]} />
+          <Inputs inputs={inputs[3]} />
         </ModifyBox>
         <ModifyBox>
-          <InputWrapper>
-            <h4>아이디</h4>
-            <input />
-          </InputWrapper>
-          <InputWrapper>
-            <h4>비밀번호</h4>
-            <input />
-          </InputWrapper>
-          <InputWrapper>
-            <h4>비밀번호 확인</h4>
-            <input />
-          </InputWrapper>
+          <Inputs inputs={inputs[4]} />
+          <Inputs inputs={inputs[5]} />
+          <Inputs inputs={inputs[6]} />
         </ModifyBox>
       </ProfileBlock>
       <ModifyButton>수정</ModifyButton>

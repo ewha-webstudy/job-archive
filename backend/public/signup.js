@@ -2,7 +2,7 @@
 
 const id = document.querySelector("#id"),
     name = document.querySelector("#name"),
-    psword =document.querySelector("#psword"),
+    psword =document.querySelector("#pw"),
     confirmPsword =document.querySelector("#confirm-psword"),
     email = document.querySelector("#email"),
     age = document.querySelector("#age"),

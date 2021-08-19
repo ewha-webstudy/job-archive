@@ -1,6 +1,6 @@
 "use strict";
 const id = document.querySelector("#id"),
-psword =document.querySelector("#psword"),
+psword =document.querySelector("#pw"),
 loginBtn = document.querySelector("#button");
 
 loginBtn.addEventListener("click", login);
@@ -8,7 +8,7 @@ loginBtn.addEventListener("click", login);
 function login(){
     const req = {
         id: id.value,
-        psword: psword.value,
+        psword: psword.value
     };
 
     fetch("/api/login", {
@@ -21,7 +21,7 @@ function login(){
     .then((res) => res.json())
     .then((res) => {
         if(res.success){
-            location.href = "/api/";
+            location.href = "/signup";
         }else{
             alert(res.msg);
         }

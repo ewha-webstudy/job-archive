@@ -19,25 +19,31 @@ import { useEffect } from "react";
 // }
 
 function App() {
-  const callApi = async() => {
-    axios.get("/api/jobs").then((res) => console.log(res.data.test));
-  };
-  useEffect(() => {
-    callApi();
-  }, []);
+
   return (
-    <Switch>
-      <Route path="/" exact>
-        <MainPage />
-      </Route>
-      <Route path="/category">
-        <CategoryPage />
-      </Route>
-      <Route path="/detail">
-        <DetailInfoPage />
-      </Route>
-    </Switch>
+      <Switch>
+        <Route path="/" exact>
+          <MainPage />
+        </Route>
+        <Route path="/api/login">
+          <LoginPage />
+        </Route>
+        <Route path="/api/signup">
+          <MyPage />
+        </Route>
+        <Route path="/mypage">
+          <MyPage />
+        </Route>
+        <Route path="/category">
+          <CategoryPage />
+        </Route>
+        <Route path="/detail">
+          <DetailInfoPage />
+        </Route>
+      </Switch>
   );
 }
+
+
 
 export default App;

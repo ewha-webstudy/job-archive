@@ -1,4 +1,4 @@
-import { Button, RadioButtonGroup } from "grommet";
+import { RadioButtonGroup } from "grommet";
 import styled from "styled-components";
 
 const NotificationBlock = styled.div`
@@ -76,17 +76,24 @@ const ModifyButton = styled.button`
   box-shadow: 0 0px 5px rgba(87, 87, 87, 0.1);
 `;
 
+// const period = ["해제", "2주 전", "1주 전", "3일 전", "1일 전"];
+
+// const PeriodItem = ({ item }) => {
+//   return <NotificationButton>{item}</NotificationButton>;
+// };
+
 const Notification = () => {
   return (
     <>
       <NotificationBlock>
         <InputWrapper>
           <h4>알림</h4>
-          <RadioButtonGroup name="doc" options={["설정", "해제"]} />
+          <RadioButtonGroup options={["설정", "해제"]} />
         </InputWrapper>
         <InputWrapper>
           <h4>이메일 알림</h4>
           <ButtonGroup>
+            {/* <PeriodItem item={period} /> */}
             <NotificationButton>해제</NotificationButton>
             <NotificationButton>2주 전</NotificationButton>
             <NotificationButton>1주 전</NotificationButton>
