@@ -17,7 +17,7 @@ const Cards = styled.div`
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 15%;
   width: 75%;
-  align-items:center;
+  align-items: center;
   margin: auto;
 `;
 
@@ -40,7 +40,7 @@ const ex = [
     name: "우아한형제들",
     start: "2021.7.1",
     end: "2021.7.30",
-    position: "FrontEnd Developer",
+    position: "FrontEnd",
     logo: "https://image.rocketpunch.com/company/5466/naver_logo.png?s=400x400&t=inside",
   },
   {
@@ -61,7 +61,7 @@ const ex = [
     name: "우아한형제들",
     start: "2021.7.1",
     end: "2021.7.30",
-    position: "FrontEnd Developer",
+    position: "FrontEnd",
     logo: "https://image.rocketpunch.com/company/5466/naver_logo.png?s=400x400&t=inside",
   },
   {
@@ -82,7 +82,7 @@ const ex = [
     name: "우아한형제들",
     start: "2021.7.1",
     end: "2021.7.30",
-    position: "FrontEnd Developer",
+    position: "FrontEnd",
     logo: "https://image.rocketpunch.com/company/5466/naver_logo.png?s=400x400&t=inside",
   },
 ];
@@ -94,7 +94,6 @@ const CardBoard = () => {
         {ex.map((i) => (
           <JobCard
             name={i.name}
-            start={i.start}
             end={i.end}
             position={i.position}
             logo={i.logo}
