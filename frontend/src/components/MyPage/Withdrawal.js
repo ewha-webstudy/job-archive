@@ -1,13 +1,29 @@
 import styled from "styled-components";
-
+import { MdClose } from "react-icons/md";
 import { Password } from "./Profile";
+
+const Background = styled.div`
+  width: 100%;
+  height: 100%;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: rgba(0, 0, 0, 0.8);
+`;
 
 const Modal = styled.div`
   width: 500px;
   height: 500px;
 
-  border: 2px solid pink;
+  background: white;
+  border: 1px solid white;
   border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 `;
 
 const BodyWrapper = styled.div`
@@ -25,6 +41,9 @@ const InputWrapper = styled.div`
 `;
 
 const ConfirmButton = styled.button`
+  &:hover {
+    cursor: pointer;
+  }
   height: 30px;
   width: 260px;
 
@@ -35,15 +54,21 @@ const ConfirmButton = styled.button`
   margin-top: 20px;
 `;
 
-const Withdrawal = () => {
+const Withdrawal = ({ showModal }) => {
   return (
-    <Modal>
-      <BodyWrapper>정말 탈퇴하시겠습니까?</BodyWrapper>
-      <InputWrapper>
-        <Password />
-        <ConfirmButton>탈퇴하기</ConfirmButton>
-      </InputWrapper>
-    </Modal>
+    <>
+      {showModal ? (
+        <Background>
+          <Modal showModal={showModal}>
+            <BodyWrapper>정말 탈퇴하시겠습니까?</BodyWrapper>
+            <InputWrapper>
+              <Password />
+              <ConfirmButton>탈퇴하기</ConfirmButton>
+            </InputWrapper>
+          </Modal>
+        </Background>
+      ) : null}
+    </>
   );
 };
 

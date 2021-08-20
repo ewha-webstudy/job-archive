@@ -1,5 +1,9 @@
 import { NavLink } from "react-router-dom";
+import { useState } from "react";
 import styled from "styled-components";
+import Withdrawal from "./Withdrawal";
+import { Box, Button, Grommet, Heading, Layer } from "grommet";
+import { MdClose } from "react-icons/md";
 
 const SidebarBlock = styled.div`
   width: 20%;
@@ -8,7 +12,6 @@ const SidebarBlock = styled.div`
   margin-top: 7%;
 
   float: left;
-  background-color: white;
   border-right: 2px solid #ef8d21;
   }
 
@@ -48,6 +51,15 @@ const SidebarButton = styled.button`
   margin-left: auto;
 `;
 
+const CloseModalButton = styled(MdClose)`
+  cursor: pointer;
+
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  z-index: 10;
+`;
+
 const sidebarMenu = [
   { id: "1", title: "프로필 관리" },
   { id: "2", title: "디데이 알림" },
@@ -58,18 +70,56 @@ const SidebarItem = ({ menu }) => {
   return <SidebarButton>{menu.title}</SidebarButton>;
 };
 
+const theme = {
+  global: {
+    colors: {
+      brand: "white",
+      focus: "none",
+    },
+  },
+};
+
+export const CornerLayer = () => {
+  const [open, setOpen] = useState();
+  const onOpen = () => setOpen(true);
+  const onClose = () => setOpen(undefined);
+  const [showModal, setShowModal] = useState(true);
+  return (
+    <>
+      <button class="outbutton" onClick={onOpen}>
+        회원 탈퇴
+      </button>
+      <Grommet theme={theme}>
+        {open && (
+          <Layer position="center" onClickOutside={onClose}>
+            <CloseModalButton onClick={onClose} />
+            <Withdrawal showModal={showModal} setShowModal={setShowModal} />
+          </Layer>
+        )}
+      </Grommet>
+    </>
+  );
+};
+
 const Sidebar = () => {
   return (
-    <SidebarBlock>
-      {sidebarMenu.map((menu) => {
-        return (
-          <NavLink to={"/mypage/" + menu.id}>
-            <SidebarItem menu={menu} />
-          </NavLink>
-        );
-      })}
-      <button class="outbutton">회원 탈퇴</button>
-    </SidebarBlock>
+    <>
+      {/* <Withdrawal showModal={showModal} setShowModal={setShowModal} /> */}
+      <SidebarBlock>
+        {sidebarMenu.map((menu) => {
+          return (
+            <NavLink to={"/mypage/" + menu.id}>
+              <SidebarItem menu={menu} />
+            </NavLink>
+          );
+        })}
+
+        {/* <button class="outbutton" onClick={CornerLayer}>
+          회원 탈퇴
+        </button> */}
+        <CornerLayer />
+      </SidebarBlock>
+    </>
   );
 };
 
