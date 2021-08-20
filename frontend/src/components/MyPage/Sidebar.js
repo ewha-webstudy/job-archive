@@ -1,8 +1,8 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { useState } from "react";
 import styled from "styled-components";
 import Withdrawal from "./Withdrawal";
-import { Box, Button, Grommet, Heading, Layer } from "grommet";
+import { Grommet, Layer } from "grommet";
 import { MdClose } from "react-icons/md";
 
 const SidebarBlock = styled.div`
@@ -36,8 +36,8 @@ const SidebarButton = styled.button`
     color: #ef8d21;
   }
 
-  & + & {
-    margin-top: 15px;
+  .active & {
+    color: #ef8d21;
   }
 
   height: 10%;
@@ -45,10 +45,9 @@ const SidebarButton = styled.button`
 
   border: none;
   font-size: 24px;
-  background: none;
 
+  background: none;
   margin-top: 15px;
-  margin-left: auto;
 `;
 
 const CloseModalButton = styled(MdClose)`
@@ -66,8 +65,12 @@ const sidebarMenu = [
   { id: "3", title: "저장 목록 관리" },
 ];
 
-const SidebarItem = ({ menu }) => {
-  return <SidebarButton>{menu.title}</SidebarButton>;
+const SidebarItem = ({ menu, isActive }) => {
+  return isActive === true ? (
+    <SidebarButton className="sidebar-item active">{menu.title}</SidebarButton>
+  ) : (
+    <SidebarButton>{menu.title}</SidebarButton>
+  );
 };
 
 const theme = {
@@ -102,24 +105,23 @@ export const CornerLayer = () => {
 };
 
 const Sidebar = () => {
-  return (
-    <>
-      {/* <Withdrawal showModal={showModal} setShowModal={setShowModal} /> */}
-      <SidebarBlock>
-        {sidebarMenu.map((menu) => {
-          return (
-            <NavLink to={"/mypage/" + menu.id}>
-              <SidebarItem menu={menu} />
-            </NavLink>
-          );
-        })}
+  const pathName = useLocation().pathname;
 
-        {/* <button class="outbutton" onClick={CornerLayer}>
-          회원 탈퇴
-        </button> */}
-        <CornerLayer />
-      </SidebarBlock>
-    </>
+  return (
+    <SidebarBlock>
+      {sidebarMenu.map((menu) => {
+        return (
+          <NavLink to={"/mypage/" + menu.id}>
+            <SidebarItem
+              menu={menu}
+              isActive={pathName === menu.path ? true : false}
+            />
+          </NavLink>
+        );
+      })}
+
+      <CornerLayer />
+    </SidebarBlock>
   );
 };
 
