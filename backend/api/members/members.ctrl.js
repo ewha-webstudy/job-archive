@@ -1,56 +1,71 @@
 "use strict";
+
+require("dotenv").config();
 const { Membership } = require('../../models'); 
-//const { Like } = require('../../models'); 
+const { Like } = require('../../models'); 
+const {UniqueConstraintError} = require('sequelize');
+
 const Member = require("../../models/membership");
 
-/* GET /api/login */
-exports.login = async (req, res) => {
-    console.log("this is Login");
-    const client = req.body;
+const jwt = require("jsonwebtoken");
+const YOUR_SECRET_KEY = process.env.SECRET_KEY;
 
-    if (!client.id) //400: id 미입력
-        return res.status(400).send(); 
+
+/* POST /api/login */
+exports.createToken = async (req, res) => {
+const ID = req.body.id;
+const PW = req.body.psword
+
+console.log("this is createToken");
+try {
+    await Membership.findOne({ where: {userid: ID}
+    })
+    .then((result) => {
+        if(result){
+           if(PW === result.password){
+            const token = jwt.sign({    //토큰
+                userid: result.userid
+                }, YOUR_SECRET_KEY, {
+                    expiresIn: '30m'     //유효시간
+                });
     
-    try {
-        await Membership.findOne({ where: {userid: client.id} 
-        })
-        .then((result) => {
-             if(result){
-                if(client.psword === result.password)
-                    res.send({ message: 'Login Success'});
-                return res.status(408).send(); //408: 비밀번호 불일치
+                res.cookie('user', token);
+                res.status(201).json({
+                result: 'ok',
+                token
+                });
+                console.log({ id: result.userid, token: token});
             }
-            return res.status(404).send(); //404: 미등록 id
-        })
-        .catch((err) => {
-            console.log("Login Error: ", err);
-        });
+            return res.status(407).send(); //407: 비밀번호 불일치
+        }
+        return res.status(400).json({ error: 'invalid user' }); //400: 미등록 id
+    })
     } catch (e) {
-      console.error(e);
-      res.status(500).send(); //500
+        console.error(e);
+        res.status(500).send(); //500
     }
 };
  
 /* POST /api/signup */
 exports.signup = async (req, res) => {
-    console.log("this is signup");
     const client = req.body;
 
+    console.log("this is signup");
     if (!client.id) //400: id 미입력
         return res.status(400).send(); 
-    if(client.psword !== client.confirmPsword) //404: 비밀번호 확인 실패
-        return res.status(404).send(); 
+    if(client.psword !== client.confirmPsword) //407: 비밀번호 확인 실패
+        return res.status(407).send(); 
     
     try {
         await Membership.create({ 
-        realname: client.name,
-        userid: client.id,  
-        email: client.email,  
-        born: client.born,
-        password: client.psword,    
+            realname: client.name,
+            userid: client.id,  
+            email: client.email,  
+            born: client.born,
+            password: client.psword,    
         })
         .then((result) => {
-            res.send({ message: 'Signup Success', client });
+            res.status(201).send({ message: 'Signup Success', client });
         })
         .catch((err) => {
             console.log("Signup Error: ", err);
@@ -60,30 +75,76 @@ exports.signup = async (req, res) => {
         res.status(500).send(); //500
     } 
 }; 
-/*
-exports.like = async (req, res) => {
-    console.log("this is like");
-    const client = req.body;
-    //const { userid, jobid } = req.body;
 
-    if (!client.userid || !client.jobid) //400: 미입력
+/* GET /api//mypage/like */
+exports.like = async (req, res) => {
+
+    const loggedID = res.locals.userid;
+    const jobID = req.body.jobid;
+
+    console.log("this is like");
+    console.log({ loggedID: loggedID }); 
+    console.log({ wantedAuthNo: jobID });
+
+    if (!jobID) //400: jobid 미입력
         return res.status(400).send();
   
     try {
-        await Like.findOne({where:{ userid: client.userid }
+        await Like.create({
+            userid: loggedID,
+            wantedAuthNo: jobID,
         })
         .then((result) => {
             if(result){
-                //if (user.userLikes.includes(client.jobid)) return res.status(404).send();
-                console.log();
-                //user.userLikes.push(client.jobid);
-                //user.save();
-                res.send({ message: 'Like Success', result });
+                res.status(200).send({ message: 'Like Success', result });
             }
-            return res.status(404).send(); //404: 미등록 id
         })
         .catch((err) => {
             console.log("Like Error: ", err);
+            res.status(404).send(); //404
+        });
+        /* 
+        .catch((err) => {
+            /*if(err instanceof UniqueConstraintError){
+                console.log("이미 좋아요한 공고");
+                res.status(408).send(); //408: 이미 좋아요한 공고 --> unlike 함수 사용
+            }
+            else
+                console.log("Like Error: ", err);
+                res.status(408).send();
+        }); */
+    } catch (e) {
+      console.error(e);
+      res.status(500).send(); //500
+    }
+};
+
+/* DELETE /api//mypage/like */
+exports.unlike = async (req, res) => {
+
+    const loggedID = res.locals.userid;
+    const jobID = req.body.jobid;
+
+    console.log("this is unlike");
+    console.log({ loggedID: loggedID }); 
+    console.log({ wantedAuthNo: jobID });
+    //const client = req.body;
+    //console.log(res.locals.userid);
+
+    if (!jobID) //400: wantedAuthNo 미입력
+        return res.status(400).send();
+  
+    try {
+        await Like.destroy({ where: {userid: loggedID, wantedAuthNo: jobID }
+        })
+        .then((result) => {
+            if(result){
+                res.status(200).send({ message: 'Unlike Success', result });
+            }
+            res.status(404).send(); //404
+        })
+        .catch((err) => {
+            console.log("Unlike Error: ", err);
         });
     } catch (e) {
       console.error(e);
@@ -91,36 +152,39 @@ exports.like = async (req, res) => {
     }
 };
 
-  
-exports.unlike = async (req, res) => {
-  
-    const { id, client.jobId } = req.body;
-
-  if (!id || !client.jobId) return res.status(404).send();
-
-  try {
-    const user = await User.findOne({ id });
-
-    if (!user) return res.status(404).send();
-    if (!user.userLikes.includes(client.jobId)) return res.status(404).send();
-
-    user.userLikes.splice(user.userLikes.indexOf(client.jobId), 1);
-    user.save();
-
-    res.send({ message: 'unlike success', likes: user.userLikes });
-  } catch (e) {
-    console.error(e);
-    res.status(500).send();
-  } 
-};
-
-
+/* PATCH /api/mypage/profile */
 exports.editProfile = async (req, res) => {
 
+    const client = req.body;
+    const loggedID = res.locals.userid;
 
+    console.log({ loggedID: loggedID }); 
+    console.log("this is editProfile");
+
+    if(client.psword !== client.confirmPsword) //407: 비밀번호 확인 실패
+        return res.status(407).send(); 
+
+    try {
+        await Membership.update(   
+            {realname: client.name, 
+                email: client.email,
+                born: client.born,
+                password: client.psword
+            },
+            {where: {userid: loggedID} 
+        })
+        .then((result) => {
+            res.status(201).send({ message: 'editProfile Success', client });
+        })
+        .catch((err) => {
+            console.log("editProfile Error: ", err);
+        });
+    }catch (e) {
+        console.error(e);
+        res.status(500).send(); //500
+    } 
 };
 
 exports.notifyDday = async (req, res) => {
 
 };
-*/
