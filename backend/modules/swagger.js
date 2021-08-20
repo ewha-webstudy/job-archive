@@ -4,9 +4,9 @@ const options = {
   swaggerDefinition: { 
     openapi: "3.0.0",
     info: { 
-      title: 'Dev Jobs', 
+      title: 'Members', 
       version: '1.0.0', 
-      description: 'Dev Jobs API with express', 
+      description: 'Members API with express', 
     }, 
     host: 'localhost:3001',
     basePath: '/' 

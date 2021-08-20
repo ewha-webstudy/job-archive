@@ -5,17 +5,107 @@ const membersCtrl = require("./members.ctrl");
 
 const router = express.Router();
 
-//show
-router.get("/", membersCtrl.show.home);
-router.get("/login", membersCtrl.show.login);
-router.get("/signup", membersCtrl.show.signup);
+//API 정의서
+router.get('/login', membersCtrl.login);
+router.post('/signup', membersCtrl.signup);
+//router.put('/mypage/like', membersCtrl.like);
+//router.put('/mypage/unlike', membersCtrl.unlike);
+//router.patch("/mypage/dday", membersCtrl.notifyDday); 
+//router.patch("/mypage/profile", membersCtrl.editProfile); 
 
-//process
-router.post("/login", membersCtrl.process.login); 
-router.post("/signup", membersCtrl.process.signup); 
-
-//router.patch("/mypage/notification"); //디데이 알림
-//router.patch("/mypage/profile"); //프로필 관리
-//router.patch("/mypage/bookmark/list"); //저장 목록
 
 module.exports = router;
+
+/**
+ * @swagger
+ * /api/main:
+ *  get:
+ *    tags:
+ *    - Main page
+ *    description: 최신 등록된 채용 공고 9개 조회 (루트 페이지)
+ * 
+ *    responses:
+ *      200:
+ *        description: 최신 등록 공고 조회 성공
+ *        content:
+ *          application/json:
+ *            schema:
+ *              type: array
+ *              items:
+ *                $ref: '#/components/schemas/jobCard'
+ *
+ * /api/job/{id}:
+ *  get:
+ *    tags:
+ *    - Detail page
+ *    description: 채용공고 상세 페이지 (Card component 클릭 시)
+ *    parameters:
+ *    - name: id
+ *      in: path
+ *      required: true
+ *      schema:
+ *        type: string
+ *      examples:
+ *        Sample:
+ *          value: K120612108130052
+ *          summary: 채용공고 sample id
+ *      style: simple
+ *    responses:
+ *      200:
+ *        description: 채용공고 상세정보 조회 성공
+ *        content:
+ *          application/json:
+ *            schema:
+ *              $ref: '#/components/schemas/jobDetail'
+ *      400:
+ *        description: params 값이 없을 때
+ *        content:
+ *          application/json:
+ *            schema:
+ *              $ref: '#/components/schemas/noParams'
+ *      404:
+ *        description: DB에서 필요한 값을 찾지 못할 때
+ *        content:
+ *          application/json:
+ *            schema:
+ *              $ref: '#/components/schemas/wrongDBIndex'
+ * 
+ * /api/category/{category}/search:
+ *  post:
+ *    tags:
+ *    - Category page
+ *    description: 카테고리 페이지 (메인에서 카테고리 선택 시 / tag로 서치 시/ searchBar로 서치 시)
+ *    parameters:
+ *    - name: category
+ *      in: path
+ *      required: true
+ *      schema:
+ *        type: string
+ *      examples:
+ *        Sample:
+ *          value: frontend
+ *      style: simple
+ *    requestBody:
+ *      content:
+ *        application/json:
+ *          schema:
+ *            type: object
+ *            properties:
+ *              sortBy:
+ *                type: string
+ *              tags:
+ *                type: object
+ *              searchBar:
+ *                type: string
+ *          example:
+ *            {sortBy: "likeNo", tags: {}, searchBar: "네이버"}
+ *    responses:
+ *      200:
+ *        description: 서치 결과 반영 & 카테고리별 채용공고 조회 성공
+ *        content:
+ *          application/json:
+ *            schema:
+ *              type: array
+ *              items:
+ *                $ref: '#/components/schemas/jobCard'
+ */

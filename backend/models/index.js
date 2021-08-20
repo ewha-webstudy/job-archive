@@ -1,5 +1,7 @@
 'use strict';
 
+
+
 const Membership = require('./membership');
 const fs = require('fs');
 const path = require('path');
@@ -35,6 +37,12 @@ Object.keys(db).forEach(modelName => {
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
+
+db.JobBasic = require('./jobbasic')(sequelize, Sequelize);
+db.JobDetail = require('./jobdetail')(sequelize, Sequelize);
+
 db.Membership = require('./membership')(sequelize, Sequelize);
+//db.Like = require('./like')(sequelize, Sequelize);
+
 
 module.exports = db;
