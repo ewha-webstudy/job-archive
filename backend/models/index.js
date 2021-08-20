@@ -42,7 +42,7 @@ db.JobBasic = require('./jobbasic')(sequelize, Sequelize);
 db.JobDetail = require('./jobdetail')(sequelize, Sequelize);
 
 db.Membership = require('./membership')(sequelize, Sequelize);
-//db.Like = require('./like')(sequelize, Sequelize);
+db.Like = require('./like')(sequelize, Sequelize);
 
 
 module.exports = db;
