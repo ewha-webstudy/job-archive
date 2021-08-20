@@ -1,5 +1,6 @@
-const { JobBasic } = require('../../models');
-const { JobDetail } = require('../../models');
+// const { JobBasic } = require('../../models');
+// const { JobDetail } = require('../../models');
+const { Job } = require('../../models');
 
 /* GET /api/main */
 exports.main = async(req, res) => {
@@ -9,7 +10,7 @@ exports.main = async(req, res) => {
   let jobList = []
   let cardList = []
   try{
-    jobList = await JobBasic.findAll({ attributes: ['wantedAuthNo'], limit: 9, order: [ ['regDt',  'DESC'] ] })
+    jobList = await Job.findAll({ attributes: ['wantedAuthNo'], limit: 9, order: [ ['regDt',  'DESC'] ] })
     for(const job of jobList){
       cardList.push(await toCard(job.wantedAuthNo));
     }
@@ -57,7 +58,7 @@ exports.search = async(req, res) => {
   console.log("this is category search", category)
   try{
     // 마감일이 지난 공고는 보여줄지 말지?
-    JobDetail.findAll({ where: { category: category } })
+    Job.findAll({ where: { category: category } })
     .then((result) => {
       res.send(result);
     })
@@ -84,47 +85,46 @@ exports.unlike = async(req, res) => {
 }
 
 const getData = async(wantedAuthNo) => {
-  const basic = await JobBasic.findOne({ where: { wantedAuthNo: wantedAuthNo } })
-  const detail = await JobDetail.findOne({ where: { wantedAuthNo: wantedAuthNo } })
-  return { basic, detail }
+  const job = await Job.findOne({ where: { wantedAuthNo: wantedAuthNo } })
+  return { job }
 }
 
 const toCard = async(wantedAuthNo) => {
-  const { basic, detail } = await getData(wantedAuthNo);
+  const { job } = await getData(wantedAuthNo);
   const cardComponent = {
-    wantedAuthNo: basic.wantedAuthNo,
-    wantedTitle: detail.wantedTitle,
-    company: basic.company,
-    logo: detail.logo,
-    receiptCloseDt: detail.receiptCloseDt,
-    jobCont: detail.jobCont,
-    likeNo: detail.likeNo
+    wantedAuthNo: job.wantedAuthNo,
+    wantedTitle: job.wantedTitle,
+    company: job.company,
+    logo: job.logo,
+    receiptCloseDt: job.receiptCloseDt,
+    jobCont: job.jobCont,
+    likeNo: job.likeNo
   }
   return cardComponent
 }
 
 const toDetail = async(wantedAuthNo) => {
-  const { basic, detail } = await getData(wantedAuthNo);
+  const { job } = await getData(wantedAuthNo);
   const detailComponent = {
-    wantedAuthNo: basic.wantedAuthNo,
-    wantedTitle: detail.wantedTitle,
-    company: basic.company,
-    logo: detail.logo,
-    reperNm: detail.reperNm,
-    indTpCdNm: detail.indTpCdNm,
-    corpAddr: detail.corpAddr,
-    homePg: detail.homePg,
-    receiptCloseDt: detail.receiptCloseDt,
-    jobCont: detail.jobCont,
-    wantedInfoUrl: basic.wantedInfoUrl,
-    empTpNm: detail.empTpNm,
-    enterTpCd: detail.enterTpCd,
-    minEdubgIcd: detail.minEdubgIcd,
-    pfCond: detail.pfCond,
-    salTpNm: basic.salTpNm,
-    sal: basic.sal,
-    workdayWorkhrCont: detail.workdayWorkhrCont,
-    likeNo: detail.likeNo
+    wantedAuthNo: job.wantedAuthNo,
+    wantedTitle: job.wantedTitle,
+    company: job.company,
+    logo: job.logo,
+    reperNm: job.reperNm,
+    indTpCdNm: job.indTpCdNm,
+    corpAddr: job.corpAddr,
+    homePg: job.homePg,
+    receiptCloseDt: job.receiptCloseDt,
+    jobCont: job.jobCont,
+    wantedInfoUrl: job.wantedInfoUrl,
+    empTpNm: job.empTpNm,
+    enterTpCd: job.enterTpCd,
+    minEdubgIcd: job.minEdubgIcd,
+    pfCond: job.pfCond,
+    salTpNm: job.salTpNm,
+    sal: job.sal,
+    workdayWorkhrCont: job.workdayWorkhrCont,
+    likeNo: job.likeNo
   }
   return detailComponent
 }
