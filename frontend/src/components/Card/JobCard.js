@@ -4,7 +4,7 @@ import { Favorite } from "grommet-icons";
 import "../../style/card.css";
 
 function JobCard({ name, start, end, position, logo }) {
-  const [liked, setLiked] = useState(true);
+  const [liked, setLiked] = useState(false);
   const [numLikes, setnumLikes] = useState(0);
 
   return (
