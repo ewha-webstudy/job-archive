@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { HashRouter } from "react-router-dom";
+import { HashRouter, Link } from "react-router-dom";
 import { Header, Button, Nav, Anchor, Grommet } from "grommet";
 import "../../style/main.css";
 
@@ -24,20 +24,32 @@ class NavBar extends Component {
     return (
       <HashRouter>
         <Grommet theme={Theme}>
-          <Header background="#FFFCF9">
-            <h3>JOB-ARCHIVE</h3>
-            <Nav direction="row" background="#FFFCF9">
-              <Anchor color="black" label="프론트엔드" hover />
-              <Anchor color="black" label="백엔드" hoverIndicator />
-              <Anchor color="black" label="AI/데이터분석" hoverIndicator />
-              <Button
-                color="#ffaf00"
-                primary
-                label="Login"
-                alignSelf="center"
-              />
+          <header className="menu">
+            <Nav direction="row">
+              <ul>
+                <Link to="/" className="home">
+                  JOB-ARCHIVE
+                </Link>
+              </ul>
+              <li>
+                <Anchor color="black" label="프론트엔드" hover />
+              </li>
+              <li>
+                <Anchor color="black" label="백엔드" hoverIndicator />
+              </li>
+              <li>
+                <Anchor color="black" label="AI/데이터분석" hoverIndicator />
+              </li>
+              <li>
+                <Button
+                  color="#ffaf00"
+                  primary
+                  label="Login"
+                  alignSelf="center"
+                />
+              </li>
             </Nav>
-          </Header>
+          </header>
         </Grommet>
       </HashRouter>
     );
