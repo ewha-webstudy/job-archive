@@ -118,8 +118,9 @@ async function getDetailIter(arr) {
     for (var i in arr) {
         const res = await getDetail(arr[i])
         detailArray.push(res);
-        console.log(detailArray[i])
     }
+    //console.log()
+    return detailArray;
 }
 
 /*
@@ -133,11 +134,39 @@ function getDetailIter(arr) {
 */
 
 
+async function categorize(detailArray) {  
+    var wantedAuthArray = new Array();
+    const frontKeywords = ['프론트', '프론트엔드', 'front', '웹', 'frontend'];
+    const backKeywords = ['백', '백엔드', '웹', 'web', 'backend', 'back', '서버', 'server'];
+    const dataKeywords = ['빅데이터', '데이터', 'ai', '인공지능', '딥러닝', '머신러닝', 'ml', '데이터베이스', 'database', 'data engineering', '데이터 엔지니어링'];
+    for (let j in detailArray) {
+        //console.log(detailArray[j]['wantedDtl']['wantedInfo']['wantedTitle']);
+        var title = detailArray[j]['wantedDtl']['wantedInfo']['wantedTitle'];
+        var frontFound = false;
+        for (let k in frontKeywords) {
+            if (title.toLowerCase().includes(frontKeywords[k])) {
+                frontFound = true;
+                break;
+            }
+        } // for (j)
+        if (frontFound) {
+            // console.log('front = ' + title);
+            // console.log(wantedObject[i]['wantedAuthNo']);
+            wantedAuthArray.push(detailArray[j]['wantedDtl']['wantedAuthNo']);
+            console.log(detailArray[j]['wantedDtl']['wantedInfo']['wantedTitle'])
+        }
+    }  // for (i)
+    console.log(wantedAuthArray);    
+    return detailArray;
+}
+
+
 getBasic()
     .then(addUrlToArr,
         function(err) {
             console.log(err)
         }
     ).then(getDetailIter)
+    .then(categorize)
 
 
