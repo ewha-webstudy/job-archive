@@ -41,7 +41,7 @@ const LoginButton = styled.button`
     cursor: pointer;
   }
 
-  background-color: #ef8d21;
+  background: #ef8d21;
   display: block;
 
   width: 70%;
@@ -51,12 +51,10 @@ const LoginButton = styled.button`
 
   margin: auto;
   margin-top: 60px;
-
   color: white;
-  text-align: center;
 `;
 
-const OtherLoginButton = styled.button`
+const SignupButton = styled.button`
   &:hover {
     cursor: pointer;
   }
@@ -65,10 +63,6 @@ const OtherLoginButton = styled.button`
     margin-top: 30px;
   }
 
-  box-shadow: 0 3px 6px rgba(87, 87, 87, 0.1), 0 3px 6px rgba(83, 83, 83, 0.23);
-  background-color: #fff;
-  display: block;
-
   width: 40%;
   height: 50px;
   border: none;
@@ -76,9 +70,13 @@ const OtherLoginButton = styled.button`
 
   margin: auto;
   margin-top: 140px;
-
-  color: #56555;
+  display: block;
   text-align: center;
+  text-decoration: none;
+
+  color: #525252;
+  background-color: #fff;
+  box-shadow: 0 3px 6px rgba(87, 87, 87, 0.1), 0 3px 6px rgba(83, 83, 83, 0.23);
 `;
 
 const Login = () => {
@@ -93,8 +91,8 @@ const Login = () => {
         <Input name="pw" type="password" required />
       </Wrapper>
       <LoginButton type="submit">로그인 하기</LoginButton>
-      <Link to={"/signup"}>
-        <OtherLoginButton>회원 가입</OtherLoginButton>
+      <Link to={"/signup"} style={{ textDecoration: "none" }}>
+        <SignupButton>회원 가입</SignupButton>
       </Link>
     </>
   );

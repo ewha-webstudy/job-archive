@@ -24,24 +24,9 @@ const SaveListBlock = styled.div`
   display: flex;
   flex-wrap: wrap;
   float: right;
-  margin-top: 6%;
+  margin-top: 7%;
   margin-right: 4%;
 `;
-
-// const CardWrapper = styled.div`
-//   & + & {
-//     margin-left: 10%;
-//     margin-top: 25px;
-//   }
-
-//   width: 20%;
-//   height: 350px;
-
-//   margin-top: 25px;
-//   margin-left: 10%;
-//   display: flex;
-//   align-items: center;
-// `;
 
 const SaveList = () => {
   return (

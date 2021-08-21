@@ -59,6 +59,28 @@ const CloseModalButton = styled(MdClose)`
   z-index: 10;
 `;
 
+export const Modal = () => {
+  const [open, setOpen] = useState();
+  const onOpen = () => setOpen(true);
+  const onClose = () => setOpen(undefined);
+  const [showModal, setShowModal] = useState(true);
+  return (
+    <>
+      <button class="outbutton" onClick={onOpen}>
+        회원 탈퇴
+      </button>
+      <Grommet theme={theme}>
+        {open && (
+          <Layer position="center" onClickOutside={onClose}>
+            <CloseModalButton onClick={onClose} />
+            <Withdrawal showModal={showModal} setShowModal={setShowModal} />
+          </Layer>
+        )}
+      </Grommet>
+    </>
+  );
+};
+
 const sidebarMenu = [
   { id: "1", title: "프로필 관리" },
   { id: "2", title: "디데이 알림" },
@@ -82,45 +104,35 @@ const theme = {
   },
 };
 
-export const CornerLayer = () => {
-  const [open, setOpen] = useState();
-  const onOpen = () => setOpen(true);
-  const onClose = () => setOpen(undefined);
-  const [showModal, setShowModal] = useState(true);
-  return (
-    <>
-      <button class="outbutton" onClick={onOpen}>
-        회원 탈퇴
-      </button>
-      <Grommet theme={theme}>
-        {open && (
-          <Layer position="center" onClickOutside={onClose}>
-            <CloseModalButton onClick={onClose} />
-            <Withdrawal showModal={showModal} setShowModal={setShowModal} />
-          </Layer>
-        )}
-      </Grommet>
-    </>
-  );
-};
-
 const Sidebar = () => {
   const pathName = useLocation().pathname;
 
+  const SidebarMenu = () => {
+    return (
+      <>
+        {sidebarMenu.map((menu) => {
+          return (
+            <NavLink to={"/mypage/" + menu.id}>
+              <SidebarItem menu={menu} />
+            </NavLink>
+          );
+        })}
+        <Modal />
+      </>
+    );
+  };
+
+  const RegisterMenu = () => {
+    return (
+      <NavLink to={"/signup"}>
+        <SidebarButton>회원 가입</SidebarButton>
+      </NavLink>
+    );
+  };
+
   return (
     <SidebarBlock>
-      {sidebarMenu.map((menu) => {
-        return (
-          <NavLink to={"/mypage/" + menu.id}>
-            <SidebarItem
-              menu={menu}
-              isActive={pathName === menu.path ? true : false}
-            />
-          </NavLink>
-        );
-      })}
-
-      <CornerLayer />
+      {pathName === "/signup" ? <RegisterMenu /> : <SidebarMenu />}
     </SidebarBlock>
   );
 };
