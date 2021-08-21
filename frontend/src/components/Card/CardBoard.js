@@ -97,11 +97,11 @@ const CardBoard = ({ jobs }) => {
     <>
       <Container className="main">
         <Cards>
-          {ex.map(jobs => (
+          {jobs.map(jobs => (
             <JobCard
               key={jobs.wantedAuthNo}
               name={jobs.company}
-              end={jobs.end}
+              end={jobs.receiptCloseDt}
               position={jobs.jobCont}
               logo={jobs.logo}
               likeNo={jobs.likeNo}
