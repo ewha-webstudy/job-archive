@@ -1,34 +1,34 @@
-// import { Grommet } from "grommet";
-import { Route, Switch } from "react-router-dom";
-
-import MainPage from "./pages/Main";
+import { Grommet } from "grommet";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Main from "./pages/Main";
+import ScrollToTop from "./components/ScrollToTop";
+import Footer from "./components/Footer/Footer";
+import NavBar from "./components/NavBar/NavBar";
 import CategoryPage from "./pages/Category";
 import DetailInfoPage from "./pages/DetailPage";
 import LoginPage from "./pages/Login";
 import MyPage from "./pages/MyPage";
-import { Main } from "grommet";
-
-// function App() {
-//   return (
-//       <Grommet className="App">
-//         <CategoryPage />
-//       </Grommet>
-//   );
-// }
 
 function App() {
   return (
-    <Switch>
-      <Route path="/" exact>
-        <MainPage />
-      </Route>
-      <Route path="/category">
-        <CategoryPage />
-      </Route>
-      <Route path="/detail">
-        <DetailInfoPage />
-      </Route>
-    </Switch>
+    <Router>
+      <ScrollToTop />
+      <Switch>
+        <>
+          <Grommet className="App">
+            <NavBar />
+            <Route path="/" exact component={Main} />
+            <Route path="/category" exact component={CategoryPage} />
+            <Route path="/detail" exact component={DetailInfoPage} />
+            <Route path="/login" exact component={LoginPage} />
+            <Route path="/mypage" exact component={MyPage} />
+            <Route path="/detail/:id" exact component={DetailInfoPage} />
+
+            <Footer />
+          </Grommet>
+        </>
+      </Switch>
+    </Router>
   );
 }
 
