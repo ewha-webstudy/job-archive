@@ -11,9 +11,9 @@ router.get('/jobs/:id', jobsCtrl.detail)
 // router.post('/category/:category', jobsCtrl.category)
 // params: category
 // body: sort 기준
-router.post('/category/:category/search', jobsCtrl.search)
+router.post('/category/:category', jobsCtrl.search)
 // params: category
-// body: sortBy, tags, searchBar
+// body: tags, searchBar
 // 추가해야할 body: limit, skip (pagination)
 router.post('/like/:id', jobsCtrl.like)
 router.post('/unlike/:id', jobsCtrl.unlike)
@@ -95,14 +95,21 @@ module.exports = router;
  *          schema:
  *            type: object
  *            properties:
- *              sortBy:
- *                type: string
  *              tags:
  *                type: object
  *              searchBar:
  *                type: string
  *          example:
- *            {sortBy: "likeNo", tags: {}, searchBar: "네이버"}
+ *            {
+ *              tags: {
+ *                techStack: [],
+ *                enterTp: [],
+ *                salary: [],
+ *                region: [],
+ *                edubgIcd: []
+ *              }, 
+ *              searchBar: "네이버"
+ *            }
  *    responses:
  *      200:
  *        description: 서치 결과 반영 & 카테고리별 채용공고 조회 성공
