@@ -3,10 +3,11 @@ import React, { useState } from "react";
 import { Favorite } from "grommet-icons";
 import "../../style/card.css";
 import API from "../../utils/api";
+import GetDday from "./GetDday";
 
-function JobCard({ key, name, start, end, position, logo, likeNo }) {
+function JobCard({ id, name, end, position, logo, likeNo }) {
   const [liked, setLiked] = useState(true);
-  const [numLikes, setnumLikes] = useState(0);
+  // const [numLikes, setnumLikes] = useState(0);
 
   const goToDetail = async () => {
     console.log("click");
@@ -23,7 +24,7 @@ function JobCard({ key, name, start, end, position, logo, likeNo }) {
     <Card width="small" background="light-1" responsive>
       <CardHeader height="xxsmall" pad="medium">
         <span className="text">{name}</span>
-        <div key={key}>
+        <div key={id}>
           <span className="text_likes">{likeNo}</span>
           {liked ? (
             <Button
@@ -53,11 +54,8 @@ function JobCard({ key, name, start, end, position, logo, likeNo }) {
             src={logo}
           />
         </Box>
-        <div className="card_duedate">D-{end.substring(end.length - 2)}</div>
-        <div>
-          {start}-{end}
-        </div>
-        <div className="card_position">{position}</div>
+          <div className="card_duedate">{GetDday(end)}</div>
+        <div className="card_position">{position.substring(0, 10) + "..."}</div>
       </div>
       <footer className="footer">
         <Button
