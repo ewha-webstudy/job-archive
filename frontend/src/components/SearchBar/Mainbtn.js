@@ -3,11 +3,15 @@ import "../../style/main.css";
 
 function MainBtn({ setBtnValue }) {
   const btnValue = ["프론트엔드", "백엔드", "데이터분석", "None"];
+  
+    // 서버 전송용 데이터 네이밍 통일
+  const send__btnValue = ["frontend", "backend", "data", "None"];
+
 
   const [select__btnClicked, setselect__btnClicked] = useState("");
 
   useEffect(() => {
-    setBtnValue(btnValue[select__btnClicked]);
+    setBtnValue(send__btnValue[select__btnClicked]);
   }, [select__btnClicked]);
 
   const handleClick = e => {
