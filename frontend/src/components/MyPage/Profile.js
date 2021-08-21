@@ -99,35 +99,6 @@ const NameInput = () => {
   );
 };
 
-const PhoneNumberInput = () => {
-  const [value, setValue] = useState("");
-  return (
-    <Grommet theme={theme}>
-      <Box direction="row" justify="start" round="15px" border>
-        <MaskedInput
-          plain
-          mask={[
-            { fixed: "010-" },
-            {
-              length: 4,
-              regexp: /^[0-9]{1,4}$/,
-              placeholder: "xxxx",
-            },
-            { fixed: "-" },
-            {
-              length: 4,
-              regexp: /^[0-9]{1,4}$/,
-              placeholder: "xxxx",
-            },
-          ]}
-          value={value}
-          onChange={(e) => setValue(e.target.value)}
-        />
-      </Box>
-    </Grommet>
-  );
-};
-
 export const Password = () => {
   const [password, setPassword] = useState("");
   const [reveal, setReveal] = useState(false);
@@ -208,7 +179,6 @@ const Profile = () => {
   const profileInputs1 = [
     { title: "이름", component: <NameInput /> },
     { title: "출생 연도", component: <YearOption /> },
-    { title: "휴대폰 번호", component: <PhoneNumberInput /> },
     { title: "이메일", component: <EmailMaskedInput /> },
   ];
 
@@ -240,6 +210,7 @@ const Profile = () => {
           })}
         </ModifyBox>
       </ProfileBlock>
+
       <ModifyButton>수정</ModifyButton>
       <ModifyButton>저장</ModifyButton>
     </>

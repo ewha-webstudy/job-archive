@@ -1,5 +1,7 @@
 import styled from "styled-components";
+import axios from "axios";
 import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
 
 const Wrapper = styled.div`
   margin: 10px auto;
@@ -80,17 +82,58 @@ const SignupButton = styled.button`
 `;
 
 const Login = () => {
+  const [id, setId] = useState("");
+  const [psword, setPsword] = useState("");
+
+  const loginData = {
+    id: id,
+    psword: psword,
+  };
+
+  useEffect(function () {
+    axios
+      .post(
+        "https://d0c457ee-4178-4d13-bd29-1d117f7e1cf5.mock.pstmn.io/api/login",
+        loginData
+      )
+      .then((result) => {
+        console.log("Result: ", result);
+      })
+      .then(() => {
+        this.props.history.push("/");
+      })
+      .catch((error) => {
+        console.log("Error: ", error);
+      });
+  }, []);
+
   return (
     <>
       <Wrapper>
         <Span>ID</Span>
-        <Input name="id" type="text" required />
+        <Input
+          id="id"
+          name="id"
+          type="text"
+          onChange={(e) => {
+            setId(e.target.value);
+          }}
+          rules={[{ required: true, message: "아이디를 입력하세요." }]}
+        />
       </Wrapper>
       <Wrapper>
         <Span>PW</Span>
-        <Input name="pw" type="password" required />
+        <Input
+          id="psword"
+          name="psword"
+          type="password"
+          onChange={(e) => {
+            setPsword(e.target.value);
+          }}
+          rules={[{ required: true, message: "비밀번호를 입력하세요." }]}
+        />
       </Wrapper>
-      <LoginButton type="submit">로그인 하기</LoginButton>
+      <LoginButton htmlType="submit">로그인 하기</LoginButton>
       <Link to={"/signup"} style={{ textDecoration: "none" }}>
         <SignupButton>회원 가입</SignupButton>
       </Link>

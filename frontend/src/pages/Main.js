@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import SearchBar from "../components/SearchBar/SearchBar";
-// import { Link as ScrollLink } from "react-scroll";
+import { Link as ScrollLink } from "react-scroll";
 import Maincard from "./Maincard";
 
 import "../style/main.css";
