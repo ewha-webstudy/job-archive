@@ -30,7 +30,7 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.INTEGER,
       allowNull: true
     },
-    zipCd: {
+    region: {
       type: DataTypes.STRING(45),
       allowNull: false
     },
