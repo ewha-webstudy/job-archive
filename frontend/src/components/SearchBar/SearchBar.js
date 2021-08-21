@@ -60,9 +60,9 @@ class SearchBar extends Component {
     } else {
       console.log(this.state.isBtnChecked);
 
-      await API.post("/api/main", {
-        btnValue: this.state.btnValue,
-        searchTxt: this.state.searchTxt
+      await API.post("/api/category/" + this.state.btnValue + "/search", {
+        tags: {},
+        searchBar: this.state.searchTxt
       })
         .then(response => {
           console.log(response);
