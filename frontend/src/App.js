@@ -1,5 +1,5 @@
 import { Grommet } from "grommet";
-import { Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Main from "./pages/Main";
 import ScrollToTop from "./components/ScrollToTop";
 import Footer from "./components/Footer/Footer";
