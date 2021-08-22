@@ -90,10 +90,17 @@ const theme = {
 };
 
 const NameInput = () => {
+  const [name, setName] = useState("");
+
   return (
     <Grommet theme={theme}>
       <Box direction="row" justify="start" round="15px" border>
-        <TextInput plain placeholder="이름을 입력하세요" />
+        <TextInput
+          plain
+          placeholder="이름을 입력하세요"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
       </Box>
     </Grommet>
   );
@@ -141,7 +148,7 @@ const YearOption = () => {
 };
 
 const EmailMaskedInput = () => {
-  const [value, setValue] = useState("");
+  const [email, setEmail] = useState("");
 
   const emailMask = [
     {
@@ -167,8 +174,8 @@ const EmailMaskedInput = () => {
           plain
           icon={<MailOption />}
           mask={emailMask}
-          value={value}
-          onChange={(e) => setValue(e.target.value)}
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
         />
       </Box>
     </Grommet>

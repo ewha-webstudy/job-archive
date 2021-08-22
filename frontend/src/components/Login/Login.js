@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import axios from "axios";
-import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { Link, useHistory } from "react-router-dom";
+import { useState } from "react";
 
 const Wrapper = styled.div`
   margin: 10px auto;
@@ -84,56 +84,64 @@ const SignupButton = styled.button`
 const Login = () => {
   const [id, setId] = useState("");
   const [psword, setPsword] = useState("");
+  const history = useHistory();
 
-  const loginData = {
-    id: id,
-    psword: psword,
-  };
+  const SubmitHandler = (e) => {
+    e.preventDefault();
+    const data = { id: id, psword: psword };
 
-  useEffect(function () {
     axios
       .post(
-        "https://d0c457ee-4178-4d13-bd29-1d117f7e1cf5.mock.pstmn.io/api/login",
-        loginData
+        "https://localhost:3001/api/login", //"https://d0c457ee-4178-4d13-bd29-1d117f7e1cf5.mock.pstmn.io/api/login"
+        data
       )
-      .then((result) => {
-        console.log("Result: ", result);
+      .then((res) => {
+        console.log(res.result);
+        localStorage.setItem("token", res.token);
+        console.log(res);
+        history.push("/");
       })
-      .then(() => {
-        this.props.history.push("/");
-      })
-      .catch((error) => {
-        console.log("Error: ", error);
+
+      .catch((err) => {
+        if (err.response && err.response.status === 400) {
+          console.log("존재하지 않는 아이디입니다.");
+        } else if (err.response && err.response.status === 407) {
+          console.log("아이디 또는 비밀번호를 확인해 주세요.");
+        } else {
+          console.log(err);
+        }
       });
-  }, []);
+  };
 
   return (
     <>
-      <Wrapper>
-        <Span>ID</Span>
-        <Input
-          id="id"
-          name="id"
-          type="text"
-          onChange={(e) => {
-            setId(e.target.value);
-          }}
-          rules={[{ required: true, message: "아이디를 입력하세요." }]}
-        />
-      </Wrapper>
-      <Wrapper>
-        <Span>PW</Span>
-        <Input
-          id="psword"
-          name="psword"
-          type="password"
-          onChange={(e) => {
-            setPsword(e.target.value);
-          }}
-          rules={[{ required: true, message: "비밀번호를 입력하세요." }]}
-        />
-      </Wrapper>
-      <LoginButton htmlType="submit">로그인 하기</LoginButton>
+      <form onSubmit={SubmitHandler}>
+        <Wrapper>
+          <Span>ID</Span>
+          <Input
+            id="id"
+            name="id"
+            type="text"
+            onChange={(e) => {
+              setId(e.target.value);
+            }}
+            rules={[{ required: true, message: "아이디를 입력하세요." }]}
+          />
+        </Wrapper>
+        <Wrapper>
+          <Span>PW</Span>
+          <Input
+            id="psword"
+            name="psword"
+            type="password"
+            onChange={(e) => {
+              setPsword(e.target.value);
+            }}
+            rules={[{ required: true, message: "비밀번호를 입력하세요." }]}
+          />
+        </Wrapper>
+        <LoginButton type="submit">로그인 하기</LoginButton>
+      </form>
       <Link to={"/signup"} style={{ textDecoration: "none" }}>
         <SignupButton>회원 가입</SignupButton>
       </Link>
