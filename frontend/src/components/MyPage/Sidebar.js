@@ -1,8 +1,8 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { useState } from "react";
 import styled from "styled-components";
 import Withdrawal from "./Withdrawal";
-import { Box, Button, Grommet, Heading, Layer } from "grommet";
+import { Grommet, Layer } from "grommet";
 import { MdClose } from "react-icons/md";
 
 const SidebarBlock = styled.div`
@@ -36,8 +36,8 @@ const SidebarButton = styled.button`
     color: #ef8d21;
   }
 
-  & + & {
-    margin-top: 15px;
+  .active & {
+    color: #ef8d21;
   }
 
   height: 10%;
@@ -45,10 +45,9 @@ const SidebarButton = styled.button`
 
   border: none;
   font-size: 24px;
-  background: none;
 
+  background: none;
   margin-top: 15px;
-  margin-left: auto;
 `;
 
 const CloseModalButton = styled(MdClose)`
@@ -60,26 +59,7 @@ const CloseModalButton = styled(MdClose)`
   z-index: 10;
 `;
 
-const sidebarMenu = [
-  { id: "1", title: "프로필 관리" },
-  { id: "2", title: "디데이 알림" },
-  { id: "3", title: "저장 목록 관리" },
-];
-
-const SidebarItem = ({ menu }) => {
-  return <SidebarButton>{menu.title}</SidebarButton>;
-};
-
-const theme = {
-  global: {
-    colors: {
-      brand: "white",
-      focus: "none",
-    },
-  },
-};
-
-export const CornerLayer = () => {
+export const Modal = () => {
   const [open, setOpen] = useState();
   const onOpen = () => setOpen(true);
   const onClose = () => setOpen(undefined);
@@ -101,11 +81,35 @@ export const CornerLayer = () => {
   );
 };
 
+const sidebarMenu = [
+  { id: "1", title: "프로필 관리" },
+  { id: "2", title: "디데이 알림" },
+  { id: "3", title: "저장 목록 관리" },
+];
+
+const SidebarItem = ({ menu, isActive }) => {
+  return isActive === true ? (
+    <SidebarButton className="sidebar-item active">{menu.title}</SidebarButton>
+  ) : (
+    <SidebarButton>{menu.title}</SidebarButton>
+  );
+};
+
+const theme = {
+  global: {
+    colors: {
+      brand: "white",
+      focus: "none",
+    },
+  },
+};
+
 const Sidebar = () => {
-  return (
-    <>
-      {/* <Withdrawal showModal={showModal} setShowModal={setShowModal} /> */}
-      <SidebarBlock>
+  const pathName = useLocation().pathname;
+
+  const SidebarMenu = () => {
+    return (
+      <>
         {sidebarMenu.map((menu) => {
           return (
             <NavLink to={"/mypage/" + menu.id}>
@@ -113,13 +117,23 @@ const Sidebar = () => {
             </NavLink>
           );
         })}
+        <Modal />
+      </>
+    );
+  };
 
-        {/* <button class="outbutton" onClick={CornerLayer}>
-          회원 탈퇴
-        </button> */}
-        <CornerLayer />
-      </SidebarBlock>
-    </>
+  const RegisterMenu = () => {
+    return (
+      <NavLink to={"/signup"}>
+        <SidebarButton>회원 가입</SidebarButton>
+      </NavLink>
+    );
+  };
+
+  return (
+    <SidebarBlock>
+      {pathName === "/signup" ? <RegisterMenu /> : <SidebarMenu />}
+    </SidebarBlock>
   );
 };
 

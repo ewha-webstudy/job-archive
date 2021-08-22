@@ -1,5 +1,7 @@
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import axios from "axios";
+import { Link, useHistory } from "react-router-dom";
+import { useState } from "react";
 
 const Wrapper = styled.div`
   margin: 10px auto;
@@ -41,7 +43,7 @@ const LoginButton = styled.button`
     cursor: pointer;
   }
 
-  background-color: #ef8d21;
+  background: #ef8d21;
   display: block;
 
   width: 70%;
@@ -51,12 +53,10 @@ const LoginButton = styled.button`
 
   margin: auto;
   margin-top: 60px;
-
   color: white;
-  text-align: center;
 `;
 
-const OtherLoginButton = styled.button`
+const SignupButton = styled.button`
   &:hover {
     cursor: pointer;
   }
@@ -65,10 +65,6 @@ const OtherLoginButton = styled.button`
     margin-top: 30px;
   }
 
-  box-shadow: 0 3px 6px rgba(87, 87, 87, 0.1), 0 3px 6px rgba(83, 83, 83, 0.23);
-  background-color: #fff;
-  display: block;
-
   width: 40%;
   height: 50px;
   border: none;
@@ -76,25 +72,78 @@ const OtherLoginButton = styled.button`
 
   margin: auto;
   margin-top: 140px;
-
-  color: #56555;
+  display: block;
   text-align: center;
+  text-decoration: none;
+
+  color: #525252;
+  background-color: #fff;
+  box-shadow: 0 3px 6px rgba(87, 87, 87, 0.1), 0 3px 6px rgba(83, 83, 83, 0.23);
 `;
 
 const Login = () => {
+  const [id, setId] = useState("");
+  const [psword, setPsword] = useState("");
+  const history = useHistory();
+
+  const SubmitHandler = (e) => {
+    e.preventDefault();
+    const data = { id: id, psword: psword };
+
+    axios
+      .post(
+        "https://localhost:3001/api/login", //"https://d0c457ee-4178-4d13-bd29-1d117f7e1cf5.mock.pstmn.io/api/login"
+        data
+      )
+      .then((res) => {
+        console.log(res.result);
+        localStorage.setItem("token", res.token);
+        console.log(res);
+        history.push("/");
+      })
+
+      .catch((err) => {
+        if (err.response && err.response.status === 400) {
+          console.log("존재하지 않는 아이디입니다.");
+        } else if (err.response && err.response.status === 407) {
+          console.log("아이디 또는 비밀번호를 확인해 주세요.");
+        } else {
+          console.log(err);
+        }
+      });
+  };
+
   return (
     <>
-      <Wrapper>
-        <Span>ID</Span>
-        <Input name="id" type="text" required />
-      </Wrapper>
-      <Wrapper>
-        <Span>PW</Span>
-        <Input name="pw" type="password" required />
-      </Wrapper>
-      <LoginButton type="submit">로그인 하기</LoginButton>
-      <Link to={"/signup"}>
-        <OtherLoginButton>회원 가입</OtherLoginButton>
+      <form onSubmit={SubmitHandler}>
+        <Wrapper>
+          <Span>ID</Span>
+          <Input
+            id="id"
+            name="id"
+            type="text"
+            onChange={(e) => {
+              setId(e.target.value);
+            }}
+            rules={[{ required: true, message: "아이디를 입력하세요." }]}
+          />
+        </Wrapper>
+        <Wrapper>
+          <Span>PW</Span>
+          <Input
+            id="psword"
+            name="psword"
+            type="password"
+            onChange={(e) => {
+              setPsword(e.target.value);
+            }}
+            rules={[{ required: true, message: "비밀번호를 입력하세요." }]}
+          />
+        </Wrapper>
+        <LoginButton type="submit">로그인 하기</LoginButton>
+      </form>
+      <Link to={"/signup"} style={{ textDecoration: "none" }}>
+        <SignupButton>회원 가입</SignupButton>
       </Link>
     </>
   );

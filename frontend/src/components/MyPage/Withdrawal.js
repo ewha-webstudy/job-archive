@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { MdClose } from "react-icons/md";
 import { Password } from "./Profile";
 
 const Background = styled.div`
@@ -60,7 +59,7 @@ const Withdrawal = ({ showModal }) => {
       {showModal ? (
         <Background>
           <Modal showModal={showModal}>
-            <BodyWrapper>정말 탈퇴하시겠습니까?</BodyWrapper>
+            <BodyWrapper>-수정 중-</BodyWrapper>
             <InputWrapper>
               <Password />
               <ConfirmButton>탈퇴하기</ConfirmButton>

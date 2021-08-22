@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import JobCard from "./JobCard";
 import styled from "styled-components";
 
 const Container = styled.div`
-  margin: 2rem auto;
+  margin: 3rem auto;
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -18,7 +18,7 @@ const Cards = styled.div`
   grid-gap: 15%;
   width: 75%;
   align-items: center;
-  margin: auto;
+  margin: 0;
 `;
 
 const ex = [

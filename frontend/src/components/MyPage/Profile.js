@@ -90,38 +90,16 @@ const theme = {
 };
 
 const NameInput = () => {
-  return (
-    <Grommet theme={theme}>
-      <Box direction="row" justify="start" round="15px" border>
-        <TextInput plain placeholder="이름을 입력하세요" />
-      </Box>
-    </Grommet>
-  );
-};
+  const [name, setName] = useState("");
 
-const PhoneNumberInput = () => {
-  const [value, setValue] = useState("");
   return (
     <Grommet theme={theme}>
       <Box direction="row" justify="start" round="15px" border>
-        <MaskedInput
+        <TextInput
           plain
-          mask={[
-            { fixed: "010-" },
-            {
-              length: 4,
-              regexp: /^[0-9]{1,4}$/,
-              placeholder: "xxxx",
-            },
-            { fixed: "-" },
-            {
-              length: 4,
-              regexp: /^[0-9]{1,4}$/,
-              placeholder: "xxxx",
-            },
-          ]}
-          value={value}
-          onChange={(e) => setValue(e.target.value)}
+          placeholder="이름을 입력하세요"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
         />
       </Box>
     </Grommet>
@@ -170,7 +148,7 @@ const YearOption = () => {
 };
 
 const EmailMaskedInput = () => {
-  const [value, setValue] = useState("");
+  const [email, setEmail] = useState("");
 
   const emailMask = [
     {
@@ -196,8 +174,8 @@ const EmailMaskedInput = () => {
           plain
           icon={<MailOption />}
           mask={emailMask}
-          value={value}
-          onChange={(e) => setValue(e.target.value)}
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
         />
       </Box>
     </Grommet>
@@ -208,7 +186,6 @@ const Profile = () => {
   const profileInputs1 = [
     { title: "이름", component: <NameInput /> },
     { title: "출생 연도", component: <YearOption /> },
-    { title: "휴대폰 번호", component: <PhoneNumberInput /> },
     { title: "이메일", component: <EmailMaskedInput /> },
   ];
 
@@ -240,6 +217,7 @@ const Profile = () => {
           })}
         </ModifyBox>
       </ProfileBlock>
+
       <ModifyButton>수정</ModifyButton>
       <ModifyButton>저장</ModifyButton>
     </>
