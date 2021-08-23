@@ -4,7 +4,6 @@ import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
 import { Favorite } from "grommet-icons";
 import "../../style/card.css";
-
 import API from "../../utils/api";
 import GetDday from "./GetDday";
 
@@ -76,12 +75,11 @@ function JobCard({ name, id, end, position, logo, likeNo, logged, userId }) {
         console.error(error);
       });
   };
-  
+
   return (
     <Card width="small" background="light-1" responsive>
       <CardHeader height="xxsmall" pad="medium">
         <span className="text">{name}</span>
-
         <div key={id}>
           <span className="text_likes">{numLikes}</span>
           <Button
@@ -94,7 +92,14 @@ function JobCard({ name, id, end, position, logo, likeNo, logged, userId }) {
       </CardHeader>
       <div className="card_body">
         <Box height="xxsmall" width="xxsmall" margin="auto">
-          <Image align="center" pad="horizontal" fit="cover" round src={logo} />
+          <Image
+            alt="job-archive"
+            align="center"
+            pad="horizontal"
+            fit="cover"
+            round
+            src={logo}
+          />
         </Box>
         <div className="card_duedate">{GetDday(end)}</div>
         <div className="card_position">{position.substring(0, 10) + "..."}</div>
@@ -105,6 +110,7 @@ function JobCard({ name, id, end, position, logo, likeNo, logged, userId }) {
           gap="medium"
           label="자세히 보기"
           hoverIndicator
+          onClick={goToDetail}
         />
       </footer>
     </Card>
