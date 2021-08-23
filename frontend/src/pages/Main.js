@@ -18,7 +18,7 @@ class Main extends Component {
             {/* 화살표 */}
           </div>
         </div>
-        <Maincard logged={this.props.logged} />
+        <Maincard logged={this.props.logged} userId={this.props.userId}/>
       </>
     );
   }
