@@ -3,7 +3,7 @@ import Profile from "../MyPage/Profile";
 const Signup = () => {
   return (
     <>
-      <Profile />
+      <Profile /> {/*수정 중 */}
     </>
   );
 };

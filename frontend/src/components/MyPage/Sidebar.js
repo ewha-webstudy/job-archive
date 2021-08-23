@@ -5,61 +5,6 @@ import Withdrawal from "./Withdrawal";
 import { Grommet, Layer } from "grommet";
 import { MdClose } from "react-icons/md";
 
-const SidebarBlock = styled.div`
-  width: 20%;
-  height: 80%;
-
-  margin-top: 7%;
-
-  float: left;
-  border-right: 2px solid #ef8d21;
-  }
-
-  .outbutton {
-    &:hover {
-        cursor: pointer;
-      }
-      
-    margin-top: 150%;
-    margin-left: 110px;
-    
-    background: white;
-    color: darkgrey;
-    font-size: 18px;
-    border: none;
-  }
-`;
-
-const SidebarButton = styled.button`
-  &:hover {
-    cursor: pointer;
-    color: #ef8d21;
-  }
-
-  .active & {
-    color: #ef8d21;
-  }
-
-  height: 10%;
-  width: 100%;
-
-  border: none;
-  font-size: 24px;
-
-  background: none;
-  margin-top: 15px;
-`;
-
-const CloseModalButton = styled(MdClose)`
-  cursor: pointer;
-
-  width: 20px;
-  height: 20px;
-  padding: 0;
-  z-index: 10;
-  y-index: 30;
-`;
-
 export const Modal = () => {
   const [open, setOpen] = useState();
   const onOpen = () => setOpen(true);
@@ -139,5 +84,60 @@ const Sidebar = () => {
     </SidebarBlock>
   );
 };
+
+const SidebarBlock = styled.div`
+  width: 20%;
+  height: 80%;
+
+  margin-top: 7%;
+
+  float: left;
+  border-right: 2px solid #ef8d21;
+  }
+
+  .outbutton {
+    &:hover {
+        cursor: pointer;
+      }
+      
+    margin-top: 150%;
+    margin-left: 110px;
+    
+    background: white;
+    color: darkgrey;
+    font-size: 18px;
+    border: none;
+  }
+`;
+
+const SidebarButton = styled.button`
+  &:hover {
+    cursor: pointer;
+    color: #ef8d21;
+  }
+
+  .active & {
+    color: #ef8d21;
+  }
+
+  height: 10%;
+  width: 100%;
+
+  border: none;
+  font-size: 24px;
+
+  background: none;
+  margin-top: 15px;
+`;
+
+const CloseModalButton = styled(MdClose)`
+  cursor: pointer;
+
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  z-index: 10;
+  y-index: 30;
+`;
 
 export default Sidebar;

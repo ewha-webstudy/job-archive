@@ -40,7 +40,7 @@ const Profile = () => {
     console.log(values);
 
     axios
-      .post("https://localhost:3001/api/mypage/profile", values)
+      .post("/api/mypage/profile", values)
       .then((res) => {
         window.alert("저장되었습니다!");
         console.log("RES: ", res);
@@ -78,6 +78,7 @@ const Profile = () => {
   const [revealConfirmPsword, setRevealConfirmPsword] = useState(false);
 
   return (
+    //수정 예정
     <form>
       <ProfileBlock>
         <ModifyBox>

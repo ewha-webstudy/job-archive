@@ -1,5 +1,5 @@
-import { Box, CheckBox, Grommet } from "grommet";
-import { useEffect, useState } from "react";
+import { CheckBox, Grommet } from "grommet";
+import { useState } from "react";
 import styled from "styled-components";
 import { ModifyButton } from "../MyPage/Profile";
 
@@ -74,18 +74,11 @@ const theme = {
   },
 };
 
-const SimpleCheckBox = ({ checked: checkedProp, ...rest }) => {
-  const [checked, setChecked] = useState(!!checkedProp);
-  const onChange = (event) => setChecked(event.target.checked);
-
-  return (
-    <Grommet theme={theme}>
-      <CheckBox {...rest} checked={checked} onChange={onChange} />
-    </Grommet>
-  );
-};
-
 const Notification = () => {
+  //수정 중
+  const [checked, setChecked] = useState(false);
+  const onChange = (e) => setChecked(!checked);
+
   const menu = [
     { id: "d14", title: "2주 전" },
     { id: "d7", title: "1주 전" },
@@ -93,31 +86,13 @@ const Notification = () => {
     { id: "d1", title: "1일 전" },
   ];
 
-  const [isProperty, setIsProperty] = useState(["전체"]);
-
-  const handlePropertyBtn = (e) => {
-    const { value } = e.target;
-
-    if (value == "전체") {
-      setIsProperty(["전체"]);
-    } else if (isProperty.length === 6) {
-      setIsProperty(["전체"]);
-    } else if (isProperty.find((e) => e === value)) {
-      setIsProperty(isProperty.filter((e) => e !== value));
-    } else if (isProperty.length > 0) {
-      setIsProperty([...isProperty.filter((e) => e !== "전체"), value]);
-    } else {
-      setIsProperty(["전체"]);
-    }
-  };
-
   return (
     <>
       <NotificationBlock>
         <InputWrapper>
           <h4>알림</h4>
           <Grommet theme={theme}>
-            <SimpleCheckBox toggle />
+            <CheckBox checked={checked} onChange={onChange} toggle />
           </Grommet>
         </InputWrapper>
 
