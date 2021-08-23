@@ -57,6 +57,7 @@ const CloseModalButton = styled(MdClose)`
   height: 20px;
   padding: 0;
   z-index: 10;
+  y-index: 30;
 `;
 
 export const Modal = () => {
@@ -72,8 +73,10 @@ export const Modal = () => {
       <Grommet theme={theme}>
         {open && (
           <Layer position="center" onClickOutside={onClose}>
-            <CloseModalButton onClick={onClose} />
-            <Withdrawal showModal={showModal} setShowModal={setShowModal} />
+            <div>
+              <CloseModalButton onClick={onClose} />
+              <Withdrawal showModal={showModal} setShowModal={setShowModal} />
+            </div>
           </Layer>
         )}
       </Grommet>

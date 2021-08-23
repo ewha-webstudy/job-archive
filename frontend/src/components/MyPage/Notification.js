@@ -1,5 +1,7 @@
-import { CheckBox, Grommet } from "grommet";
+import { Box, CheckBox, Grommet } from "grommet";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
+import { ModifyButton } from "../MyPage/Profile";
 
 const NotificationBlock = styled.div`
   width: 75%;
@@ -59,24 +61,6 @@ const NotificationButton = styled.button`
   background: none;
 `;
 
-const ModifyButton = styled.button`
-  &:hover {
-    cursor: pointer;
-    color: white;
-    background: #f3b23e;
-  }
-
-  width: 100px;
-  height: 40px;
-
-  margin-left: 1325px;
-
-  background: white;
-  border: 2px solid #f3b23e;
-  border-radius: 17px;
-  box-shadow: 0 0px 5px rgba(87, 87, 87, 0.1);
-`;
-
 const theme = {
   global: {
     colors: {
@@ -90,6 +74,17 @@ const theme = {
   },
 };
 
+const SimpleCheckBox = ({ checked: checkedProp, ...rest }) => {
+  const [checked, setChecked] = useState(!!checkedProp);
+  const onChange = (event) => setChecked(event.target.checked);
+
+  return (
+    <Grommet theme={theme}>
+      <CheckBox {...rest} checked={checked} onChange={onChange} />
+    </Grommet>
+  );
+};
+
 const Notification = () => {
   const menu = [
     { id: "d14", title: "2주 전" },
@@ -98,13 +93,31 @@ const Notification = () => {
     { id: "d1", title: "1일 전" },
   ];
 
+  const [isProperty, setIsProperty] = useState(["전체"]);
+
+  const handlePropertyBtn = (e) => {
+    const { value } = e.target;
+
+    if (value == "전체") {
+      setIsProperty(["전체"]);
+    } else if (isProperty.length === 6) {
+      setIsProperty(["전체"]);
+    } else if (isProperty.find((e) => e === value)) {
+      setIsProperty(isProperty.filter((e) => e !== value));
+    } else if (isProperty.length > 0) {
+      setIsProperty([...isProperty.filter((e) => e !== "전체"), value]);
+    } else {
+      setIsProperty(["전체"]);
+    }
+  };
+
   return (
     <>
       <NotificationBlock>
         <InputWrapper>
           <h4>알림</h4>
           <Grommet theme={theme}>
-            <CheckBox toggle />
+            <SimpleCheckBox toggle />
           </Grommet>
         </InputWrapper>
 
