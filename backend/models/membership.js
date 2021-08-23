@@ -26,10 +26,7 @@ module.exports = function(sequelize, DataTypes) {
     sequelize,
     tableName: 'membership',
     timestamps: true,
-<<<<<<< HEAD
-=======
     updatedAt: false,
->>>>>>> backend/userapi
     indexes: [
       {
         name: "PRIMARY",
