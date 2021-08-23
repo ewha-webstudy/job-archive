@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { BrowserRouter, Link } from "react-router-dom";
+import { BrowserRouter, NavLink } from "react-router-dom";
 import { Button, Nav, Anchor, Grommet } from "grommet";
 import "../../style/main.css";
 
@@ -25,37 +25,36 @@ class NavBar extends Component {
     return (
        <BrowserRouter>
         <Grommet theme={Theme}>
-          <header className="menu">
+           <header className="menu">
             <Nav direction="row">
-              <ul>
-                <ul className="home">
-                  <Link to="/">JOB-ARCHIVE</Link>
-                </ul>
+              <ul className="home">
+                <NavLink to="/">JOB-ARCHIVE</NavLink>
               </ul>
+
               <li>
-                <Link to="/api/category/frontend">
+                <NavLink to="/api/category/frontend">
                   <Anchor color="black" label="프론트엔드" hover />
-                </Link>
+                </NavLink>
               </li>
               <li>
-                <Link to="/api/category/backend">
+                <NavLink to="/api/category/backend">
                   <Anchor color="black" label="백엔드" hoverIndicator />
-                </Link>
+                </NavLink>
               </li>
               <li>
-                <Link to="/api/category/data">
+                <NavLink to="/api/category/data">
                   <Anchor color="black" label="AI/데이터분석" hoverIndicator />
-                </Link>
+                </NavLink>
               </li>
               <li>
-                <Link to="/login">
+                <NavLink to="/login">
                   <Button
                     color="#ffaf00"
                     primary
                     label="Login"
                     alignSelf="center"
                   />
-                </Link>
+                </NavLink>
               </li>
             </Nav>
           </header>
