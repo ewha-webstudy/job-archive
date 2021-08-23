@@ -10,7 +10,7 @@ async function tagTechStack() {
     // 프론트 기술 스택
     for (let a in detailArray) {
         var frontEx = new Array();
-        var title = detailArray[j]['wantedDtl']['wantedInfo']['wantedTitle'];
+        var title = detailArray[a]['wantedDtl']['wantedInfo']['wantedTitle'];
         var jobCont = detailArray[a]['wantedDtl']['wantedInfo']['jobCont'];
         var jobsNm = detailArray[a]['wantedDtl']['wantedInfo']['jobsNm'];
         var frontStackFound = false;
@@ -32,7 +32,7 @@ async function tagTechStack() {
     // 백 기술 스택
     for (let b in detailArray) {
         var backEx = new Array();
-        var title = detailArray[j]['wantedDtl']['wantedInfo']['wantedTitle'];
+        var title = detailArray[b]['wantedDtl']['wantedInfo']['wantedTitle'];
         var jobCont = detailArray[b]['wantedDtl']['wantedInfo']['jobCont'];
         var jobsNm = detailArray[b]['wantedDtl']['wantedInfo']['jobsNm'];
         var backStackFound = false;
@@ -51,7 +51,7 @@ async function tagTechStack() {
     // 인공지능 기술 스택
     for (let c in detailArray) {
         var dataEx = new Array();
-        var title = detailArray[j]['wantedDtl']['wantedInfo']['wantedTitle'];
+        var title = detailArray[c]['wantedDtl']['wantedInfo']['wantedTitle'];
         var jobCont = detailArray[c]['wantedDtl']['wantedInfo']['jobCont'];
         var jobsNm = detailArray[c]['wantedDtl']['wantedInfo']['jobsNm'];
         var dataStackFound = false;
@@ -66,4 +66,4 @@ async function tagTechStack() {
         }
     }
     console.log("dataStack = " + JSON.stringify(dataStack));
-}
+}   // 기술 스택 코드 완료.
