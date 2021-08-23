@@ -92,7 +92,7 @@ const ex = [
 ];
 
 // api 연결 시, ex =>jobs로 수정
-const CardBoard = ({ jobs }) => {
+const CardBoard = ({ jobs, logged }) => {
   return (
     <>
       <Container className="main">
@@ -106,6 +106,7 @@ const CardBoard = ({ jobs }) => {
               position={jobs.jobCont}
               logo={jobs.logo}
               likeNo={jobs.likeNo}
+              logged={logged}
             />
           ))}
         </Cards>
