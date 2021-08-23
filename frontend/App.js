@@ -15,6 +15,7 @@ class App extends Component {
     super(props);
     this.state = {
       // user id state 생성
+      userId: "",
       logged: false, // 로그인 여부 default: false
       onLogin: this.onLogin,
       onLogout: this.onLogout
@@ -22,14 +23,15 @@ class App extends Component {
   }
 
   // 로그인 로직 처리
-  onLogin = () => {
+  onLogin = userId => {
     this.setState({
+      userId: userId,
       logged: true
     });
   };
 
   // 로그아웃 로직 처리
-  onLogout = () => {
+  onLogout = userId => {
     this.setState({
       logged: false
     });
@@ -39,9 +41,9 @@ class App extends Component {
   };
 
   componentDidMount() {
-    const id = window.localStorage.getItem("id");
-    if (id) {
-      this.onLogin();
+    const userId = window.localStorage.getItem("id");
+    if (userId) {
+      this.onLogin(userId);
     } else {
       this.onLogout();
     }
@@ -55,7 +57,7 @@ class App extends Component {
   };
 
   render() {
-    const { logged, onLogout } = this.state;
+    const { logged, onLogout, userId } = this.state;
     return (
       <Router>
         <ScrollToTop />
@@ -64,7 +66,11 @@ class App extends Component {
             <Grommet className="App">
               <NavBar logged={logged} onLogout={onLogout} />
               {/* user id를 Main 컴포넌트로 전달 */}
-              <Route path="/" exact component={this._withProps(Main, logged)} />
+              <Route
+                path="/"
+                exact
+                component={this._withProps(Main, logged, userId)}
+              />
               <Route
                 path="/api/category/:category"
                 exact
