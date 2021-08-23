@@ -16,7 +16,7 @@ function MainCard() {
   return (
     <div className="main-card">
       <div className="card">
-        <CardBoard jobs={jobs} logged={logged} />
+        <CardBoard jobs={jobs} logged={logged} userId={userId}/>
       </div>
     </div>
   );
