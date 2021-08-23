@@ -1,4 +1,9 @@
+import { NavLink, useLocation } from "react-router-dom";
+import { useState } from "react";
 import styled from "styled-components";
+import Withdrawal from "./Withdrawal";
+import { Grommet, Layer } from "grommet";
+import { MdClose } from "react-icons/md";
 
 const SidebarBlock = styled.div`
   width: 20%;
@@ -7,7 +12,6 @@ const SidebarBlock = styled.div`
   margin-top: 7%;
 
   float: left;
-  background-color: white;
   border-right: 2px solid #ef8d21;
   }
 
@@ -16,7 +20,7 @@ const SidebarBlock = styled.div`
         cursor: pointer;
       }
       
-    margin-top: 460px;
+    margin-top: 150%;
     margin-left: 110px;
     
     background: white;
@@ -24,7 +28,6 @@ const SidebarBlock = styled.div`
     font-size: 18px;
     border: none;
   }
-
 `;
 
 const SidebarButton = styled.button`
@@ -33,29 +36,106 @@ const SidebarButton = styled.button`
     color: #ef8d21;
   }
 
-  & + & {
-    margin-top: 15px;
+  .active & {
+    color: #ef8d21;
   }
 
   height: 10%;
   width: 100%;
 
-  font-size: 24px;
-  background: white;
-  color: black;
   border: none;
+  font-size: 24px;
 
+  background: none;
   margin-top: 15px;
-  margin-left: auto;
 `;
 
+const CloseModalButton = styled(MdClose)`
+  cursor: pointer;
+
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  z-index: 10;
+  y-index: 30;
+`;
+
+export const Modal = () => {
+  const [open, setOpen] = useState();
+  const onOpen = () => setOpen(true);
+  const onClose = () => setOpen(undefined);
+  const [showModal, setShowModal] = useState(true);
+  return (
+    <>
+      <button class="outbutton" onClick={onOpen}>
+        회원 탈퇴
+      </button>
+      <Grommet theme={theme}>
+        {open && (
+          <Layer position="center" onClickOutside={onClose}>
+            <div>
+              <CloseModalButton onClick={onClose} />
+              <Withdrawal showModal={showModal} setShowModal={setShowModal} />
+            </div>
+          </Layer>
+        )}
+      </Grommet>
+    </>
+  );
+};
+
+const sidebarMenu = [
+  { id: "1", title: "프로필 관리" },
+  { id: "2", title: "디데이 알림" },
+  { id: "3", title: "저장 목록 관리" },
+];
+
+const SidebarItem = ({ menu, isActive }) => {
+  return isActive === true ? (
+    <SidebarButton className="sidebar-item active">{menu.title}</SidebarButton>
+  ) : (
+    <SidebarButton>{menu.title}</SidebarButton>
+  );
+};
+
+const theme = {
+  global: {
+    colors: {
+      brand: "white",
+      focus: "none",
+    },
+  },
+};
+
 const Sidebar = () => {
+  const pathName = useLocation().pathname;
+
+  const SidebarMenu = () => {
+    return (
+      <>
+        {sidebarMenu.map((menu) => {
+          return (
+            <NavLink to={"/mypage/" + menu.id}>
+              <SidebarItem menu={menu} />
+            </NavLink>
+          );
+        })}
+        <Modal />
+      </>
+    );
+  };
+
+  const RegisterMenu = () => {
+    return (
+      <NavLink to={"/signup"}>
+        <SidebarButton>회원 가입</SidebarButton>
+      </NavLink>
+    );
+  };
+
   return (
     <SidebarBlock>
-      <SidebarButton>프로필 관리</SidebarButton>
-      <SidebarButton>디데이 알림</SidebarButton>
-      <SidebarButton>저장 목록 관리</SidebarButton>
-      <button class="outbutton">회원 탈퇴</button>
+      {pathName === "/signup" ? <RegisterMenu /> : <SidebarMenu />}
     </SidebarBlock>
   );
 };

@@ -21,10 +21,11 @@ function App() {
             <Route path="/category" exact component={CategoryPage} />
             <Route path="/detail" exact component={DetailInfoPage} />
             <Route path="/login" exact component={LoginPage} />
-            <Route path="/mypage" exact component={MyPage} />
+            <Route path="/signup" exact component={MyPage} />
+            <Route path="/mypage" component={MyPage} />
             <Route path="/detail/:id" exact component={DetailInfoPage} />
 
-            <Footer />
+            {/* <Footer /> */}
           </Grommet>
         </>
       </Switch>

@@ -5,19 +5,19 @@ import "../../style/main.css";
 
 const Theme = {
   global: {
-    color: "white"
+    color: "white",
   },
   button: {
     color: "white",
-    alignSelf: "center"
+    alignSelf: "center",
   },
   anchor: {
     hover: {
       textDecoration: "underline #FFA500",
-      extend: "text-decoration-thickness 5px"
+      extend: "text-decoration-thickness 5px",
     },
-    textDecoration: "none"
-  }
+    textDecoration: "none",
+  },
 };
 
 class NavBar extends Component {
