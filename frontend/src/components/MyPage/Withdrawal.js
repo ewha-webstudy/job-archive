@@ -1,5 +1,7 @@
+import { Box, Button, Grommet, TextInput } from "grommet";
+import { Hide, View } from "grommet-icons";
+import { useState } from "react";
 import styled from "styled-components";
-import { Password } from "./Profile";
 
 const Background = styled.div`
   width: 100%;
@@ -52,6 +54,37 @@ const ConfirmButton = styled.button`
 
   margin-top: 20px;
 `;
+
+const theme = {
+  global: {
+    colors: {
+      brand: "#f3b23e",
+      focus: "none",
+    },
+  },
+};
+
+const Password = () => {
+  const [psword, setPsword] = useState("");
+  const [reveal, setReveal] = useState(false);
+
+  return (
+    <Grommet theme={theme}>
+      <Box direction="row" justify="start" round="15px" border>
+        <TextInput
+          plain
+          type={reveal ? "text" : "password"}
+          value={psword}
+          onChange={(e) => setPsword(e.target.value)}
+        />
+        <Button
+          icon={reveal ? <View size="medium" /> : <Hide size="medium" />}
+          onClick={() => setReveal(!reveal)}
+        />
+      </Box>
+    </Grommet>
+  );
+};
 
 const Withdrawal = ({ showModal }) => {
   return (
