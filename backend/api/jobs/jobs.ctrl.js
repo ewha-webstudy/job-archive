@@ -52,11 +52,10 @@ exports.search = async(req, res) => {
     }
     if(!ifTags(tags) && searchBar.length !== 0){
       console.log("search: ", searchBar);
+      const searchCondition = searchbarCondition(searchBar)[and]
       jobList = await Job.findAll({ attributes: ['wantedAuthNo'], order: [ ['regDt',  'DESC'] ], 
         where: {
-          [and]: [{ category: category }],
-          [or]: [{ wantedTitle: {[Op.substring]: searchBar} }, { jobCont: {[Op.substring]: searchBar} }, { company: {[Op.substring]: searchBar} }]
-          // 검색어 여러 개인 경우는 아직!
+          [and]: [{ category: category }, searchCondition]
         }
       })
     }
@@ -72,10 +71,10 @@ exports.search = async(req, res) => {
     if(ifTags(tags) && searchBar.length !== 0){
       console.log("search: ", searchBar)
       const {techStack, enterTp, salary, region, edubgIcd} = tagSearch(tags)
+      const searchCondition = searchbarCondition(searchBar)[and]
       jobList = await Job.findAll({ attributes: ['wantedAuthNo'], order: [ ['regDt',  'DESC'] ], 
         where: { 
-          [and]: [{category: category}, techStack, enterTp, salary, region, edubgIcd],
-          [or]: [{ wantedTitle: {[Op.substring]: searchBar} }, { jobCont: {[Op.substring]: searchBar} }, { company: {[Op.substring]: searchBar} }]
+          [and]: [{category: category}, techStack, enterTp, salary, region, edubgIcd, searchCondition]
         } 
       })
     }
@@ -117,7 +116,18 @@ const getData = async(wantedAuthNo) => {
   return { job }
 }
 
-function orCondition(key, values){
+function searchbarCondition(searchBar){
+  const words = searchBar.split(" ");
+  console.log(words.length)
+  var condition = {};
+  if(words.length > 0){
+    condition[and] = words.map(function(word){
+      return { [or]: [{ wantedTitle: {[Op.substring]: word} }, { jobCont: {[Op.substring]: word} }, { company: {[Op.substring]: word} }]}
+    })
+  }
+  return condition
+}
+
 function tagCondition(key, values){
   const array = [];
   if (values.length === 0 || values === null){
