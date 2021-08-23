@@ -21,6 +21,15 @@ const Theme = {
 };
 
 class NavBar extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      logged: this.props.logged
+    };
+    //console.log("logged", this.state.logged);
+  }
+  
+  // TODO: 로그인 상태에 따라 로그아웃, 마이페이지 렌더링
   render() {
     return (
        <BrowserRouter>
