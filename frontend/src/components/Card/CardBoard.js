@@ -91,15 +91,16 @@ const ex = [
   }
 ];
 
-// api 연결되면 jobs로 데이터 받음
+// api 연결 시, ex =>jobs로 수정
 const CardBoard = ({ jobs }) => {
   return (
     <>
       <Container className="main">
         <Cards>
-          {jobs.map(jobs => (
+          {ex.map((jobs, index) => (
             <JobCard
-              key={jobs.wantedAuthNo}
+              key={index}
+              id={jobs.wantedAuthNo}
               name={jobs.company}
               end={jobs.receiptCloseDt}
               position={jobs.jobCont}
