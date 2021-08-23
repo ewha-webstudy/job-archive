@@ -15,22 +15,16 @@ const Login = () => {
 
     axios
       .post(
-        "https://localhost:3000/api/login", //"https://d0c457ee-4178-4d13-bd29-1d117f7e1cf5.mock.pstmn.io/api/login"
+        "/api/login",
         user
       )
       .then((res) => {
-        // localStorage.setItem("token", res.token);
+        console.log("res: ", res);
         history.push("/");
       })
 
       .catch((err) => {
-        if (err.response && err.response.status === 400) {
-          console.log("존재하지 않는 아이디입니다.");
-        } else if (err.response && err.response.status === 407) {
-          console.log("아이디 또는 비밀번호를 확인해 주세요.");
-        } else {
-          console.log(err);
-        }
+        console.log("err: ", err);
       });
   };
 
