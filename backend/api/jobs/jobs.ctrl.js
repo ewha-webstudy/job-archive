@@ -55,56 +55,31 @@ exports.search = async(req, res) => {
       jobList = await Job.findAll({ attributes: ['wantedAuthNo'], order: [ ['regDt',  'DESC'] ], 
         where: {
           [and]: [{ category: category }],
-          // [or]: [{ wantedTitle: {[like]: "%" + searchBar + "%"} }, { jobCont: {[like]: "%" + searchBar + "%"} }]
-          [or]: [{ wantedTitle: {[Op.substring]: searchBar} }, { jobCont: {[Op.substring]: searchBar} }]
+          [or]: [{ wantedTitle: {[Op.substring]: searchBar} }, { jobCont: {[Op.substring]: searchBar} }, { company: {[Op.substring]: searchBar} }]
           // 검색어 여러 개인 경우는 아직!
         }
       })
     }
     if(JSON.stringify(tags) !== '{}' && searchBar.length === 0){
-      var test = await tagSearch(tags);
-      console.log(test)
-      var tagNmList = Object.keys(tags)
-      var techStacks = ['C++']
-      var whereCondition = {};
-      if (techStacks.length > 0){
-        whereCondition[or] = techStacks.map(function(id){
-          return {
-            techStack: {[Op.substring]: id}
-          };
-        })
-      }
-      whereCondition['category'] = category;
-      jobList = await Job.findAll({ attributes: ['wantedAuthNo'], order: [ ['regDt',  'DESC'] ], where: whereCondition });
+      const {techStack, enterTp, salary, region, edubgIcd} = tagSearch(tags)
+      jobList = await Job.findAll({ attributes: ['wantedAuthNo'], order: [ ['regDt',  'DESC'] ], 
+        where: {
+          [and]: [{category: category}, techStack, enterTp, salary, region, edubgIcd],
+        } 
+      });
     }
+    
     if(JSON.stringify(tags) !== '{}' && searchBar.length !== 0){
-      const tagNm = Object.keys(tags)
-      console.log("tags: ", tagNm)
       console.log("search: ", searchBar)
+      const {techStack, enterTp, salary, region, edubgIcd} = tagSearch(tags)
       jobList = await Job.findAll({ attributes: ['wantedAuthNo'], order: [ ['regDt',  'DESC'] ], 
         where: { 
-          category: category 
+          [and]: [{category: category}, techStack, enterTp, salary, region, edubgIcd],
+          [or]: [{ wantedTitle: {[Op.substring]: searchBar} }, { jobCont: {[Op.substring]: searchBar} }, { company: {[Op.substring]: searchBar} }]
         } 
       })
     }
     res.send(jobList);
-    // 마감일이 지난 공고는 보여줄지 말지?
-    // jobList = await Job.findAll({ attributes: ['wantedAuthNo'], limit: 9, order: [ ['regDt',  'DESC'] ] })
-    // JobDetail.findAll({ attributes: ['wantedAuthNo'], where: { category: category } })
-    // .then((result) => {
-    //   if(JSON.stringify(tags) === '{}'){
-    //     // 선택된 태그 없음
-    //   }
-    //   else{
-    //     // console.log(Object.keys(tags))
-    //     // const tagNm = Object.keys(tags)
-    //     // console.log(tagNm)
-    //   }
-    //   res.send(result);
-    // })
-    // .catch((err) => {
-    //   console.log("조회 Error: ", err);
-    // })
   } catch(e) {
     console.error(e);
     res.status(500).send();
@@ -132,50 +107,37 @@ const getData = async(wantedAuthNo) => {
 }
 
 function orCondition(key, values){
-  const array = []
-  for(const value of values){
-    array.push({key: value})
+  const array = [];
+  if (values.length === 0 || values === null){
+    return null
   }
-  console.log(array);
-  var condition = {}
-  // console.log(key, values)
+  for(const value of values){
+    array.push(`{ "${key}": "${value}" }`);
+  }
+  console.log(array)
+  var condition = {};
   if (values.length > 0){
-    condition[or] = values.map(function(value){
-      return{
-        key: {[Op.substring]: value}
-      };
+    condition[or] = array.map(function(value){
+      const jsonValue = JSON.parse(value);
+      const key = Object.keys(jsonValue)[0];
+      const tag = jsonValue[key];
+      const query = {[Op.substring]: tag};
+      const temp = {};
+      temp[key] = query;
+      return temp
     })
   }
   return condition;
 }
 
-const tagSearch = async(tags) => {
-  var whereCondition = {};
-  for(const [key, value] of Object.entries(tags)){
-    // console.log(key, value)
-    whereCondition[and] = orCondition(key, value)
-  }
-  return whereCondition
-}
+function tagSearch(tags){
+  const techStack = orCondition("techStack", tags.techStack);
+  const enterTp = orCondition("enterTp", tags.enterTp);
+  const salary = orCondition("salary", tags.salary);
+  const region = orCondition("region", tags.region);
+  const edubgIcd = orCondition("edubgIcd", tags.edubgIcd);
 
-const tagSearch2 = async(tags) => {
-  const tagNmList = Object.keys(tags)
-  console.log(tagNmList)
-  console.log(tags.techStack)
-  let query = ""
-  for (const [key, value] of Object.entries(tags)){
-    query += `[or]: [{ ${key}: {[Op.in]: [${value}] } }], `
-    // console.log(`${key}: {[Op.in]: [ ${value} ]}`)
-  // for(const tagNm of Object.keys(tags)){ // techStack, region
-  //  
-    // [or]: [{ wantedTitle: {[like]: "%" + searchBar + "%"} }, { jobCont: {[like]: "%" + searchBar + "%"} }]
-    // query += "[or]: ["
-    // for(const tag of tags.tagNm){ // css, javascript or seoul
-    //   // console.log(tag)
-    //   query += "{" + tagNm + ": {[Op.in]: [\"%\" " + tag + " \"%\"]}}"
-    // }
-  }
-  console.log(query)
+  return {techStack, enterTp, salary, region, edubgIcd}
 }
 
 const toCard = async(wantedAuthNo) => {
