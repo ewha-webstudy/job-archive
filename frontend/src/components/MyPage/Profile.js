@@ -1,7 +1,17 @@
 import styled from "styled-components";
 import { useState } from "react";
+import { useHistory } from "react-router-dom";
 import { Box, Button, Grommet, MaskedInput, Select, TextInput } from "grommet";
 import { Hide, MailOption, View } from "grommet-icons";
+import axios from "axios";
+
+const SubmitButton = ({ onClick }) => {
+  return (
+    <ModifyButton className="submit" onClick={onClick}>
+      저장
+    </ModifyButton>
+  );
+};
 
 const theme = {
   global: {
@@ -13,6 +23,8 @@ const theme = {
 };
 
 const Profile = () => {
+  const history = useHistory();
+
   const [values, setValues] = useState({
     name: "",
     born: "",
@@ -24,7 +36,20 @@ const Profile = () => {
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
+
     console.log(values);
+
+    axios
+      .post("https://localhost:3001/api/mypage/profile", values)
+      .then((res) => {
+        window.alert("저장되었습니다!");
+        console.log("RES: ", res);
+        history.push("/");
+      })
+
+      .catch((err) => {
+        console.log("ERR: ", err);
+      });
   };
 
   const handleChange = (e) => {
@@ -32,7 +57,6 @@ const Profile = () => {
   };
 
   const yearOptions = [...Array(80)].map((v, i) => i + 1942);
-
   const emailMask = [
     {
       regexp: /^[\w\-_.]+$/,
@@ -172,9 +196,7 @@ const Profile = () => {
         </ModifyBox>
       </ProfileBlock>
       <div>
-        <ModifyButton className="submit" onClick={handleFormSubmit}>
-          저장
-        </ModifyButton>
+        <SubmitButton onClick={handleFormSubmit} />
       </div>
     </form>
   );

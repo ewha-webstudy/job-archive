@@ -7,6 +7,9 @@ const options = {
       title: 'Dev Jobs', 
       version: '1.0.0', 
       description: 'Dev Jobs API with express', 
+      title: 'Members', 
+      version: '1.0.0', 
+      description: 'Members API with express', 
     }, 
     host: 'localhost:3001',
     basePath: '/' 

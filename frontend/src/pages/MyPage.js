@@ -5,6 +5,7 @@ import Sidebar from "../components/MyPage/Sidebar";
 import Profile from "../components/MyPage/Profile";
 import Notification from "../components/MyPage/Notification";
 import SaveList from "../components/MyPage/SaveList";
+import Signup from "../components/Login/Signup";
 
 const MyPage = () => {
   return (
@@ -13,7 +14,7 @@ const MyPage = () => {
       <MyPageTemplate>
         <Sidebar />
         <Route path="/signup">
-          <Profile />
+          <Signup />
         </Route>
         <Route path="/mypage/1">
           <Profile />
