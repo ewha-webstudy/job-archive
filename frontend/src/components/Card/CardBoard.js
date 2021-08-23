@@ -87,20 +87,28 @@ const ex = [
   },
 ];
 
-const CardBoard = () => {
+// api 연결 시, ex =>jobs로 수정
+const CardBoard = ({ jobs, logged }) => {
   return (
-    <Container>
-      <Cards>
-        {ex.map((i) => (
-          <JobCard
-            name={i.name}
-            end={i.end}
-            position={i.position}
-            logo={i.logo}
-          />
-        ))}
-      </Cards>
-    </Container>
+    <>
+      <Container className="main">
+        <Cards>
+          {ex.map((jobs, index) => (
+            <JobCard
+              key={index}
+              id={jobs.wantedAuthNo}
+              name={jobs.company}
+              end={jobs.receiptCloseDt}
+              position={jobs.jobCont}
+              logo={jobs.logo}
+              likeNo={jobs.likeNo}
+              logged={logged}
+            />
+          ))}
+        </Cards>
+      </Container>
+    </>
+
   );
 };
 export default CardBoard;
