@@ -34,7 +34,7 @@ async function tagSalary() {
             salTpCd[detailArray[i].wantedDtl.wantedAuthNo] = v_salTpCd;
             minSal[detailArray[i].wantedDtl.wantedAuthNo] = v_minSal;
             maxSal[detailArray[i].wantedDtl.wantedAuthNo] = v_maxSal;
-            avgSal[detailArray[i].wantedDtl.wantedAuthNo] = 12 * (v_minSal + v_maxSal) / 2;
+            avgSal[detailArray[i].wantedDtl.wantedAuthNo] = (v_minSal + v_maxSal) / 2;
         }
     }
     console.log(salTpCd);
