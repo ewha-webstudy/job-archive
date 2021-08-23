@@ -73,16 +73,20 @@ class SearchBar extends Component {
         searchBar: this.state.searchTxt
       })
         .then(res => {
-          console.log(res);
-
-          // 서버 HTTP 상태 코드
-          if (res.status === 200) {
-            this.setState({ isRedirected: true });
-          } else {
+          console.log(res.status);
+          // 서버에 잘 전송이 됐다면, http 상태 코드 200 받음
+          if (res.status === "200") {
+            this.props.history.push({
+              pathname: `/api/category/${this.state.btnValue}`,
+              state: this.state.searchTxt
+            });
           }
         })
         .catch(error => {
-          console.error(error);
+          if (error.response.status === 404) {
+            console.error(error);
+            // TODO: 서버 연결 확인 및 에러 처리
+          }
         });
     }
   };
