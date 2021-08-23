@@ -47,11 +47,11 @@ exports.search = async(req, res) => {
   let jobList = []
   let cardList = []
   try{
-    if(JSON.stringify(tags) === '{}' && searchBar.length === 0){
+    if(!ifTags(tags) && searchBar.length === 0){
       jobList = await Job.findAll({ attributes: ['wantedAuthNo'], order: [ ['regDt',  'DESC'] ], where: { category: category } })
     }
-    if(JSON.stringify(tags) === '{}' && searchBar.length !== 0){
-      console.log("search: ", searchBar)
+    if(!ifTags(tags) && searchBar.length !== 0){
+      console.log("search: ", searchBar);
       jobList = await Job.findAll({ attributes: ['wantedAuthNo'], order: [ ['regDt',  'DESC'] ], 
         where: {
           [and]: [{ category: category }],
@@ -60,7 +60,7 @@ exports.search = async(req, res) => {
         }
       })
     }
-    if(JSON.stringify(tags) !== '{}' && searchBar.length === 0){
+    if(ifTags(tags) && searchBar.length === 0){
       const {techStack, enterTp, salary, region, edubgIcd} = tagSearch(tags)
       jobList = await Job.findAll({ attributes: ['wantedAuthNo'], order: [ ['regDt',  'DESC'] ], 
         where: {
@@ -69,7 +69,7 @@ exports.search = async(req, res) => {
       });
     }
     
-    if(JSON.stringify(tags) !== '{}' && searchBar.length !== 0){
+    if(ifTags(tags) && searchBar.length !== 0){
       console.log("search: ", searchBar)
       const {techStack, enterTp, salary, region, edubgIcd} = tagSearch(tags)
       jobList = await Job.findAll({ attributes: ['wantedAuthNo'], order: [ ['regDt',  'DESC'] ], 
@@ -101,12 +101,24 @@ exports.unlike = async(req, res) => {
   console.log("this is unlike")
 }
 
+function ifTags(tags){
+  const tagList = Object.values(tags)
+  var isTag = false;
+  for (const tag of tagList){
+    if (tag.length > 0){
+      isTag = true;
+    }
+  }
+  return isTag;
+}
+
 const getData = async(wantedAuthNo) => {
   const job = await Job.findByPk(wantedAuthNo);
   return { job }
 }
 
 function orCondition(key, values){
+function tagCondition(key, values){
   const array = [];
   if (values.length === 0 || values === null){
     return null
@@ -131,11 +143,11 @@ function orCondition(key, values){
 }
 
 function tagSearch(tags){
-  const techStack = orCondition("techStack", tags.techStack);
-  const enterTp = orCondition("enterTp", tags.enterTp);
-  const salary = orCondition("salary", tags.salary);
-  const region = orCondition("region", tags.region);
-  const edubgIcd = orCondition("edubgIcd", tags.edubgIcd);
+  const techStack = tagCondition("techStack", tags.techStack);
+  const enterTp = tagCondition("enterTp", tags.enterTp);
+  const salary = tagCondition("salary", tags.salary);
+  const region = tagCondition("region", tags.region);
+  const edubgIcd = tagCondition("edubgIcd", tags.edubgIcd);
 
   return {techStack, enterTp, salary, region, edubgIcd}
 }
