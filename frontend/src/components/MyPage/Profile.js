@@ -1,7 +1,7 @@
+import styled from "styled-components";
+import { useState } from "react";
 import { Box, Button, Grommet, MaskedInput, Select, TextInput } from "grommet";
 import { Hide, MailOption, View } from "grommet-icons";
-import { useState } from "react";
-import styled from "styled-components";
 
 const theme = {
   global: {
@@ -12,85 +12,26 @@ const theme = {
   },
 };
 
-const NameInput = (handleChange) => {
-  const [name, setName] = useState("");
+const Profile = () => {
+  const [values, setValues] = useState({
+    name: "",
+    born: "",
+    email: "",
+    id: "",
+    psword: "",
+    confirmPsword: "",
+  });
 
-  return (
-    <Grommet theme={theme}>
-      <Box direction="row" justify="start" round="15px" border>
-        <TextInput
-          plain
-          placeholder="이름을 입력하세요"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
-      </Box>
-    </Grommet>
-  );
-};
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    console.log(values);
+  };
 
-const IdInput = () => {
-  const [id, setId] = useState("");
+  const handleChange = (e) => {
+    setValues({ ...values, [e.target.name]: e.target.value });
+  };
 
-  return (
-    <Grommet theme={theme}>
-      <Box direction="row" justify="start" round="15px" border>
-        <TextInput
-          plain
-          placeholder="이름을 입력하세요"
-          value={id}
-          onChange={(e) => setId(e.target.value)}
-        />
-      </Box>
-    </Grommet>
-  );
-};
-
-export const Password = () => {
-  const [psword, setPsword] = useState("");
-  const [reveal, setReveal] = useState(false);
-
-  return (
-    <Grommet theme={theme}>
-      <Box direction="row" justify="start" round="15px" border>
-        <TextInput
-          plain
-          type={reveal ? "text" : "password"}
-          value={psword}
-          name="psword"
-          onChange={(e) => setPsword(e.target.value)}
-        />
-        <Button
-          icon={reveal ? <View size="medium" /> : <Hide size="medium" />}
-          onClick={() => setReveal(!reveal)}
-        />
-      </Box>
-    </Grommet>
-  );
-};
-
-const YearOption = () => {
   const yearOptions = [...Array(80)].map((v, i) => i + 1942);
-  const [born, setBorn] = useState();
-  return (
-    <Grommet theme={theme}>
-      <Box round="15px" border>
-        <Select
-          plain
-          placeholder="출생 연도를 선택하세요"
-          value={born}
-          name="born"
-          options={yearOptions.reverse()}
-          onChange={({ value: nextValue }) => setBorn(nextValue)}
-          dropHeight="medium"
-        />
-      </Box>
-    </Grommet>
-  );
-};
-
-const EmailMaskedInput = (ema) => {
-  const [email, setEmail] = useState("");
 
   const emailMask = [
     {
@@ -109,99 +50,133 @@ const EmailMaskedInput = (ema) => {
     },
   ];
 
-  return (
-    <Grommet theme={theme}>
-      <Box justify="start" round="15px" border>
-        <MaskedInput
-          plain
-          icon={<MailOption />}
-          mask={emailMask}
-          name="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-      </Box>
-    </Grommet>
-  );
-};
-
-const Profile = () => {
-  const [values, setValues] = useState({
-    name: "",
-    born: "",
-    email: "",
-    id: "",
-    psword: "",
-    confirmPsword: "",
-  });
-
-  const handleChange = (e) => {
-    setValues(e.target.value);
-  };
-
-  const handleFormSubmit = (e) => {
-    e.preventDefault();
-    values.id = IdInput.id;
-    console.log(values);
-  };
-
-  const profileInputs1 = [
-    {
-      title: "이름",
-      component: <NameInput />,
-    },
-    {
-      title: "출생 연도",
-      component: <YearOption />,
-    },
-    {
-      title: "이메일",
-      component: <EmailMaskedInput />,
-    },
-  ];
-
-  const profileInputs2 = [
-    {
-      title: "아이디",
-      component: <IdInput />,
-    },
-    {
-      title: "비밀번호",
-      component: <Password />,
-    },
-    {
-      title: "비밀번호 확인",
-      component: <Password />,
-    },
-  ];
-
-  const ProfileItem = ({ input }) => {
-    return (
-      <InputWrapper>
-        <h4>{input.title}</h4>
-        {input.component}
-      </InputWrapper>
-    );
-  };
+  const [revealPsword, setRevealPsword] = useState(false);
+  const [revealConfirmPsword, setRevealConfirmPsword] = useState(false);
 
   return (
-    <>
-      <form>
-        <ProfileBlock>
-          <ModifyBox>
-            {profileInputs1.map((input) => {
-              return <ProfileItem input={input} />;
-            })}
-          </ModifyBox>
-          <ModifyBox>
-            {profileInputs2.map((input) => {
-              return <ProfileItem input={input} />;
-            })}
-          </ModifyBox>
-        </ProfileBlock>
-      </form>
-      <ModifyButton onClick={handleFormSubmit}>저장</ModifyButton>
-    </>
+    <form>
+      <ProfileBlock>
+        <ModifyBox>
+          <InputWrapper>
+            <h4>이름</h4>
+            <Grommet theme={theme}>
+              <Box direction="row" justify="start" round="15px" border>
+                <TextInput
+                  plain
+                  placeholder="이름을 입력하세요"
+                  type="text"
+                  name="name"
+                  value={values.name}
+                  onChange={handleChange}
+                />
+              </Box>
+            </Grommet>
+          </InputWrapper>
+          <InputWrapper>
+            <h4>출생연도</h4>
+            <Grommet theme={theme}>
+              <Box round="15px" border>
+                <Select
+                  plain
+                  placeholder="출생 연도를 선택하세요"
+                  options={yearOptions.reverse()}
+                  dropHeight="medium"
+                  name="born"
+                  value={values.born}
+                  onChange={handleChange}
+                />
+              </Box>
+            </Grommet>
+          </InputWrapper>
+          <InputWrapper>
+            <h4>이메일</h4>
+            <Grommet theme={theme}>
+              <Box justify="start" round="15px" border>
+                <MaskedInput
+                  plain
+                  icon={<MailOption />}
+                  mask={emailMask}
+                  name="email"
+                  value={values.email}
+                  onChange={handleChange}
+                />
+              </Box>
+            </Grommet>
+          </InputWrapper>
+        </ModifyBox>
+
+        <ModifyBox>
+          <InputWrapper>
+            <h4>아이디</h4>
+            <Grommet theme={theme}>
+              <Box direction="row" justify="start" round="15px" border>
+                <TextInput
+                  plain
+                  placeholder="아이디를 입력하세요"
+                  type="text"
+                  name="id"
+                  value={values.id}
+                  onChange={handleChange}
+                />
+              </Box>
+            </Grommet>
+          </InputWrapper>
+          <InputWrapper>
+            <h4>비밀번호</h4>
+            <Grommet theme={theme}>
+              <Box direction="row" justify="start" round="15px" border>
+                <TextInput
+                  plain
+                  type={revealPsword ? "text" : "password"}
+                  value={values.psword}
+                  name="psword"
+                  onChange={handleChange}
+                />
+                <Button
+                  icon={
+                    revealPsword ? (
+                      <View size="medium" />
+                    ) : (
+                      <Hide size="medium" />
+                    )
+                  }
+                  onClick={() => setRevealPsword(!revealPsword)}
+                />
+              </Box>
+            </Grommet>
+          </InputWrapper>
+          <InputWrapper>
+            <h4>비밀번호 확인</h4>
+            <Grommet theme={theme}>
+              <Box direction="row" justify="start" round="15px" border>
+                <TextInput
+                  plain
+                  type={revealConfirmPsword ? "text" : "password"}
+                  value={values.confirmPsword}
+                  name="confirmPsword"
+                  onChange={handleChange}
+                />
+                <Button
+                  icon={
+                    revealConfirmPsword ? (
+                      <View size="medium" />
+                    ) : (
+                      <Hide size="medium" />
+                    )
+                  }
+                  onClick={() => setRevealConfirmPsword(!revealConfirmPsword)}
+                />
+              </Box>
+            </Grommet>
+          </InputWrapper>
+        </ModifyBox>
+      </ProfileBlock>
+      <div>
+        <ModifyButton className="submit" onClick={handleFormSubmit}>
+          저장
+        </ModifyButton>
+      </div>
+    </form>
   );
 };
 
@@ -255,11 +230,9 @@ export const ModifyButton = styled.button`
     color: white;
     background: #f3b23e;
   }
-
   width: 100px;
   height: 40px;
   margin-left: 1325px;
-
   background: white;
   border: 2px solid #f3b23e;
   border-radius: 17px;
