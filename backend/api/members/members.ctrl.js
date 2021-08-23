@@ -26,7 +26,7 @@ exports.authMember = async (req, res) => {
                         expiresIn: '30m'     //유효시간
                     });
                 res.cookie('user', token);
-                res.status(201).json({ token });
+                return res.status(201).json({ token });
             }
             return res.status(412).json({ error: 'invalid password' }); //412: 비밀번호 불일치
             }
