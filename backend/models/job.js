@@ -1,14 +1,42 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('jobdetail', {
+  return sequelize.define('job', {
     wantedAuthNo: {
       type: DataTypes.STRING(45),
       allowNull: false,
-      primaryKey: true,
-      references: {
-        model: 'jobbasic',
-        key: 'wantedAuthNo'
-      }
+      primaryKey: true
+    },
+    regDt: {
+      type: DataTypes.DATEONLY,
+      allowNull: false
+    },
+    company: {
+      type: DataTypes.STRING(100),
+      allowNull: false
+    },
+    sal: {
+      type: DataTypes.STRING(45),
+      allowNull: false
+    },
+    minSal: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
+    maxSal: {
+      type: DataTypes.INTEGER,
+      allowNull: true
+    },
+    avgSal: {
+      type: DataTypes.INTEGER,
+      allowNull: true
+    },
+    region: {
+      type: DataTypes.STRING(45),
+      allowNull: false
+    },
+    wantedInfoUrl: {
+      type: DataTypes.STRING(300),
+      allowNull: false
     },
     wantedTitle: {
       type: DataTypes.STRING(200),
@@ -19,11 +47,15 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false
     },
     jobCont: {
-      type: DataTypes.STRING(500),
+      type: DataTypes.STRING(800),
       allowNull: true
     },
     category: {
       type: DataTypes.STRING(45),
+      allowNull: false
+    },
+    techStack: {
+      type: DataTypes.STRING(200),
       allowNull: false
     },
     enterTpCd: {
@@ -31,7 +63,7 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false
     },
     minEdubglcd: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING(45),
       allowNull: false
     },
     pfCond: {
@@ -56,7 +88,13 @@ module.exports = function(sequelize, DataTypes) {
     },
     likeNo: {
       type: DataTypes.INTEGER,
-      allowNull: true
+      allowNull: true,
+      defaultValue: 0
+    },
+    view: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      defaultValue: 0
     },
     indTpCdNm: {
       type: DataTypes.STRING(200),
@@ -76,7 +114,7 @@ module.exports = function(sequelize, DataTypes) {
     }
   }, {
     sequelize,
-    tableName: 'jobdetail',
+    tableName: 'job',
     timestamps: false,
     indexes: [
       {

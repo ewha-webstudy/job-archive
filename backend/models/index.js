@@ -1,7 +1,6 @@
 'use strict';
 
 
-
 const Membership = require('./membership');
 const fs = require('fs');
 const path = require('path');
@@ -38,9 +37,7 @@ db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
 
-db.JobBasic = require('./jobbasic')(sequelize, Sequelize);
-db.JobDetail = require('./jobdetail')(sequelize, Sequelize);
-
+db.Job = require('./job')(sequelize, Sequelize);
 db.Membership = require('./membership')(sequelize, Sequelize);
 db.Like = require('./like')(sequelize, Sequelize);
 

@@ -1,25 +1,18 @@
 var DataTypes = require("sequelize").DataTypes;
-var _jobbasic = require("./jobbasic");
-var _jobdetail = require("./jobdetail");
-var _like = require("./like");
+var _job = require("./job");
 var _membership = require("./membership");
+var _like = require("./like");
 
 function initModels(sequelize) {
-  var jobbasic = _jobbasic(sequelize, DataTypes);
-  var jobdetail = _jobdetail(sequelize, DataTypes);
-  var like = _like(sequelize, DataTypes);
+  var job = _job(sequelize, DataTypes);
   var membership = _membership(sequelize, DataTypes);
+  var like = _like(sequelize, DataTypes);
 
-  jobdetail.belongsTo(jobbasic, { as: "wantedAuthNo_jobbasic", foreignKey: "wantedAuthNo"});
-  jobbasic.hasOne(jobdetail, { as: "jobdetail", foreignKey: "wantedAuthNo"});
-  like.belongsTo(membership, { as: "user", foreignKey: "userid"});
-  membership.hasMany(like, { as: "likes", foreignKey: "userid"});
 
   return {
-    jobbasic,
-    jobdetail,
-    like,
+    job,
     membership,
+    like,
   };
 }
 module.exports = initModels;
