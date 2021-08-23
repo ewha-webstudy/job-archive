@@ -25,7 +25,7 @@ function App() {
             <Route path="/mypage" component={MyPage} />
             <Route path="/detail/:id" exact component={DetailInfoPage} />
 
-            {/* <Footer /> */}
+            <Footer />
           </Grommet>
         </>
       </Switch>
