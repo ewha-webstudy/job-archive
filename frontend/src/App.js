@@ -10,6 +10,7 @@ import DetailInfoPage from "./pages/DetailPage";
 import LoginPage from "./pages/Login";
 import MyPage from "./pages/MyPage";
 
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -86,6 +87,6 @@ class App extends Component {
       </Router>
     );
   }
-}
+
 
 export default App;

@@ -3,23 +3,22 @@ import JobCard from "./JobCard";
 import styled from "styled-components";
 
 const Container = styled.div`
-  margin: 2rem auto;
+  margin: 3rem auto;
   display: flex;
   align-items: center;
   flex-direction: column;
   flex-direction: row;
   justify-content: space-around;
-  width: 80%;
+  width: 100%;
   position: relative;
-  padding: 50px;
 `;
 const Cards = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-gap: 10%;
+  grid-gap: 15%;
   width: 75%;
   align-items: center;
-  margin: auto;
+  margin: 0;
 `;
 
 const ex = [
@@ -53,6 +52,7 @@ const ex = [
   },
 
   {
+
     wantedAuthNo: 1,
     company: "네이버",
     receiptCloseDt: "2021-10-30",
@@ -60,9 +60,11 @@ const ex = [
     wantedTitle:
       "AI 솔루션 개발자 모집 (웹프로그래밍 개발자 1명, AI 개발자 1명)",
     logo: "https://image.rocketpunch.com/company/5466/naver_logo.png?s=400x400&t=inside"
+
   },
 
   {
+
     wantedAuthNo: 1,
     company: "네이버",
     receiptCloseDt: "2021-08-30",
@@ -70,9 +72,11 @@ const ex = [
     wantedTitle:
       "AI 솔루션 개발자 모집 (웹프로그래밍 개발자 1명, AI 개발자 1명)",
     logo: "https://image.rocketpunch.com/company/5466/naver_logo.png?s=400x400&t=inside"
+
   },
 
   {
+
     wantedAuthNo: 1,
     company: "네이버",
     receiptCloseDt: "2021-09-01",
@@ -80,9 +84,11 @@ const ex = [
     wantedTitle:
       "AI 솔루션 개발자 모집 (웹프로그래밍 개발자 1명, AI 개발자 1명)",
     logo: "https://image.rocketpunch.com/company/5466/naver_logo.png?s=400x400&t=inside"
+
   },
 
   {
+
     wantedAuthNo: 1,
     company: "네이버",
     receiptCloseDt: "2021-09-01",
@@ -90,9 +96,11 @@ const ex = [
     wantedTitle:
       "AI 솔루션 개발자 모집 (웹프로그래밍 개발자 1명, AI 개발자 1명)",
     logo: "https://image.rocketpunch.com/company/5466/naver_logo.png?s=400x400&t=inside"
+
   },
 
   {
+
     wantedAuthNo: 1,
     company: "네이버",
     receiptCloseDt: "2021-09-01",
@@ -100,9 +108,11 @@ const ex = [
     wantedTitle:
       "AI 솔루션 개발자 모집 (웹프로그래밍 개발자 1명, AI 개발자 1명)",
     logo: "https://image.rocketpunch.com/company/5466/naver_logo.png?s=400x400&t=inside"
+
   },
 
   {
+
     wantedAuthNo: 1,
     company: "네이버",
     receiptCloseDt: "2021-09-01",
@@ -111,6 +121,7 @@ const ex = [
       "AI 솔루션 개발자 모집 (웹프로그래밍 개발자 1명, AI 개발자 1명)",
     logo: "https://image.rocketpunch.com/company/5466/naver_logo.png?s=400x400&t=inside"
   }
+
 ];
 
 // api 연결되면 jobs로 데이터 받음
@@ -134,6 +145,7 @@ const CardBoard = ({ jobs, logged }) => {
         </Cards>
       </Container>
     </>
+
   );
 };
 export default CardBoard;

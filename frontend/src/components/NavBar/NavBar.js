@@ -5,16 +5,17 @@ import "../../style/main.css";
 
 const Theme = {
   global: {
-    color: "white"
+    color: "white",
   },
   button: {
     color: "white",
-    alignSelf: "center"
+    alignSelf: "center",
   },
   anchor: {
     textDecoration: "none",
     hover: {
       textDecoration: "underline #FFA500",
+
       extend: "text-decoration-thickness 5px"
     }
   }

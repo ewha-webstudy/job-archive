@@ -9,6 +9,7 @@ function MainCard({ logged, userId }) {
   useEffect(() => {
     API.get("/api/main").then(response => {
       console.log(response.status);
+
       setJobs(response.data);
     });
   }, []);
