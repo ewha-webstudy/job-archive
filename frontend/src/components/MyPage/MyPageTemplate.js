@@ -9,7 +9,8 @@ const MyPageTemplateBlock = styled.div`
   border-radius: 20px;
 
   margin: 0 auto;
-  margin-top: 6rem;
+  margin-top: 10rem;
+  margin-bottom: 10rem;
 `;
 
 const MyPageTemplate = ({ children }) => {

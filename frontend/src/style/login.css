@@ -1,5 +1,8 @@
 .container {
   height: 675px;
+
+  margin-top: 15rem;
+  margin-bottom: 3rem;
 }
 
 .login-template {
@@ -11,7 +14,6 @@
   border-radius: 20px;
 
   margin: 0 auto;
-  margin-top: 250px;
 }
 
 .form-wrapper {
