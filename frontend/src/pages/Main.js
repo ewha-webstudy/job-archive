@@ -10,7 +10,7 @@ class Main extends Component {
     return (
       <>
         <div className="main">
-          <div className="main-container">
+          <div className="main__inner">
             <h1>채용 정보 모음 서비스</h1>
             <SearchBar />
             <br />
