@@ -5,15 +5,15 @@ import "../../style/main.css";
 
 function Footer() {
   return (
-    <div id="subscribe">
+    <div className="footer">
       <h3>채용정보 모음 서비스 </h3>
-      <div className="footer-social">
+      <div className="footer--github">
         <a href="https://github.com/ewha-webstudy">
           <p>github</p>
         </a>
       </div>
-      <div className="footer">
-        <Link to="/" smooth={true}>
+      <div className="footer__navigation">
+        <Link to="/" smooth={"true"}>
           <p>Home</p>
         </Link>
 
@@ -21,7 +21,7 @@ function Footer() {
           <p>Projects</p>
         </ScrollLink>
       </div>
-      <p className="footer-p">
+      <p className="footer__service-name">
         Team ewha | Made using React{" "}
         <span role="img" aria-label="atom">
           ⚛️
