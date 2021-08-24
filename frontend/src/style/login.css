@@ -1,3 +1,7 @@
+.container {
+  height: 675px;
+}
+
 .login-template {
   background: rgb(255, 255, 255);
   box-shadow: 0 3px 6px rgba(87, 87, 87, 0.1), 0 3px 6px rgba(83, 83, 83, 0.23);
@@ -7,7 +11,7 @@
   border-radius: 20px;
 
   margin: 0 auto;
-  margin-top: 13rem;
+  margin-top: 250px;
 }
 
 .form-wrapper {

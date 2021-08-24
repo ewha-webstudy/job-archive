@@ -30,9 +30,9 @@ export const Modal = () => {
 };
 
 const sidebarMenu = [
-  { id: "1", title: "프로필 관리" },
-  { id: "2", title: "디데이 알림" },
-  { id: "3", title: "저장 목록 관리" },
+  { id: "profile", title: "프로필 관리" },
+  { id: "notification", title: "디데이 알림" },
+  { id: "like", title: "저장 목록 관리" },
 ];
 
 const SidebarItem = ({ menu, isActive }) => {

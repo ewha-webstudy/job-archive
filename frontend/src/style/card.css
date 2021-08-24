@@ -1,29 +1,29 @@
-.text_likes{
-    position: absolute;
-    margin-left: -15px;
+.card__likes {
+  position: absolute;
+  margin-left: -15px;
 }
-.card_body {
-    text-align: center;
-    font-size: 1rem;
-    margin: auto;
-    padding: 0 1.5em;
+.card__body {
+  text-align: center;
+  font-size: 1rem;
+  margin: auto;
+  padding: 0 1.5em;
 }
-.card_body .card_duedate{
-    margin-top: 1rem;
-    font-size: 1.3rem;
-    font-weight: bold;
+.card__body .card__duedate {
+  margin-top: 1rem;
+  font-size: 1.3rem;
+  font-weight: bold;
 }
-.card_body .card_position{
-    margin-top: 1rem;
-    text-decoration: underline;
+.card__body .card__position {
+  margin-top: 1rem;
+  text-decoration: underline;
 }
-.text {
-    text-align: center;
-    font-size: 0.8em;
+.card__name {
+  text-align: center;
+  font-size: 0.8em;
 }
-.footer{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 1rem;
+.card__footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
 }

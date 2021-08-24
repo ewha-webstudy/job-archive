@@ -79,9 +79,9 @@ function JobCard({ name, id, end, position, logo, likeNo, logged, userId }) {
   return (
     <Card width="small" background="light-1" responsive>
       <CardHeader height="xxsmall" pad="medium">
-        <span className="text">{name}</span>
+        <span className="card__name">{name}</span>
         <div key={id}>
-          <span className="text_likes">{numLikes}</span>
+          <span className="card__likes">{numLikes}</span>
           <Button
             icon={<Favorite color={isliked ? "red" : "black"} />}
             style={{ padding: 0 }}
@@ -90,7 +90,7 @@ function JobCard({ name, id, end, position, logo, likeNo, logged, userId }) {
           />
         </div>
       </CardHeader>
-      <div className="card_body">
+      <div className="card__body">
         <Box height="xxsmall" width="xxsmall" margin="auto">
           <Image
             alt="job-archive"
@@ -101,10 +101,12 @@ function JobCard({ name, id, end, position, logo, likeNo, logged, userId }) {
             src={logo}
           />
         </Box>
-        <div className="card_duedate">{GetDday(end)}</div>
-        <div className="card_position">{position.substring(0, 10) + "..."}</div>
+        <div className="card__duedate">{GetDday(end)}</div>
+        <div className="card__position">
+          {position.substring(0, 10) + "..."}
+        </div>
       </div>
-      <footer className="footer">
+      <footer className="card__footer">
         <Button
           color={{ border: "gray" }}
           gap="medium"

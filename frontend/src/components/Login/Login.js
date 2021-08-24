@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import axios from "axios";
 import { Link, useHistory } from "react-router-dom";
 import { useState } from "react";
+import API from "../../utils/api";
 
 const Login = () => {
   const history = useHistory();
@@ -12,9 +12,9 @@ const Login = () => {
 
   const SubmitHandler = (e) => {
     e.preventDefault();
+    console.log(user);
 
-    axios
-      .post("/api/login", user)
+    API.post("/api/login", user)
       .then((res) => {
         console.log("res: ", res);
         history.push("/");

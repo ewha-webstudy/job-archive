@@ -24,85 +24,108 @@ const Cards = styled.div`
 
 const ex = [
   {
+    wantedAuthNo: "K120612108130052",
+    company: "네이버",
+    receiptCloseDt: "9999-01-01",
+    likeNo: 3,
+    wantedTitle:
+      "AI 솔루션 개발자 모집 (웹프로그래밍 개발자 1명, AI 개발자 1명)",
+    logo: "https://image.rocketpunch.com/company/5466/naver_logo.png?s=400x400&t=inside",
+  },
+  {
     wantedAuthNo: 1,
     company: "네이버",
-    end: "2021.7.30",
+    receiptCloseDt: "9999-01-01",
     likeNo: 3,
-    jobCont: "Data Intern",
+    wantedTitle:
+      "AI 솔루션 개발자 모집 (웹프로그래밍 개발자 1명, AI 개발자 1명)",
     logo: "https://image.rocketpunch.com/company/5466/naver_logo.png?s=400x400&t=inside",
   },
+
   {
     wantedAuthNo: 1,
     company: "네이버",
-    end: "2021.7.30",
+    receiptCloseDt: "2021-11-30",
     likeNo: 3,
-    jobCont: "Data Intern",
+    wantedTitle:
+      "AI 솔루션 개발자 모집 (웹프로그래밍 개발자 1명, AI 개발자 1명)",
     logo: "https://image.rocketpunch.com/company/5466/naver_logo.png?s=400x400&t=inside",
   },
+
   {
-    name: "우아한형제들",
-    start: "2021.7.1",
-    end: "2021.7.30",
-    position: "FrontEnd Developer",
+    wantedAuthNo: 1,
+    company: "네이버",
+    receiptCloseDt: "2021-10-30",
+    likeNo: 3,
+    wantedTitle:
+      "AI 솔루션 개발자 모집 (웹프로그래밍 개발자 1명, AI 개발자 1명)",
     logo: "https://image.rocketpunch.com/company/5466/naver_logo.png?s=400x400&t=inside",
   },
+
   {
-    name: "네이버",
-    start: "2021.7.1",
-    end: "2021.7.30",
-    position: "Data Intern",
+    wantedAuthNo: 1,
+    company: "네이버",
+    receiptCloseDt: "2021-08-30",
+    likeNo: 3,
+    wantedTitle:
+      "AI 솔루션 개발자 모집 (웹프로그래밍 개발자 1명, AI 개발자 1명)",
     logo: "https://image.rocketpunch.com/company/5466/naver_logo.png?s=400x400&t=inside",
   },
+
   {
-    name: "카카오",
-    start: "2021.7.1",
-    end: "2021.7.30",
-    position: "SW Engineering",
+    wantedAuthNo: 1,
+    company: "네이버",
+    receiptCloseDt: "2021-09-01",
+    likeNo: 3,
+    wantedTitle:
+      "AI 솔루션 개발자 모집 (웹프로그래밍 개발자 1명, AI 개발자 1명)",
     logo: "https://image.rocketpunch.com/company/5466/naver_logo.png?s=400x400&t=inside",
   },
+
   {
-    name: "우아한형제들",
-    start: "2021.7.1",
-    end: "2021.7.30",
-    position: "FrontEnd Developer",
+    wantedAuthNo: 1,
+    company: "네이버",
+    receiptCloseDt: "2021-09-01",
+    likeNo: 3,
+    wantedTitle:
+      "AI 솔루션 개발자 모집 (웹프로그래밍 개발자 1명, AI 개발자 1명)",
     logo: "https://image.rocketpunch.com/company/5466/naver_logo.png?s=400x400&t=inside",
   },
+
   {
-    name: "네이버",
-    start: "2021.7.1",
-    end: "2021.7.30",
-    position: "Data Intern",
+    wantedAuthNo: 1,
+    company: "네이버",
+    receiptCloseDt: "2021-09-01",
+    likeNo: 3,
+    wantedTitle:
+      "AI 솔루션 개발자 모집 (웹프로그래밍 개발자 1명, AI 개발자 1명)",
     logo: "https://image.rocketpunch.com/company/5466/naver_logo.png?s=400x400&t=inside",
   },
+
   {
-    name: "카카오",
-    start: "2021.7.1",
-    end: "2021.7.30",
-    position: "SW Engineering",
-    logo: "https://image.rocketpunch.com/company/5466/naver_logo.png?s=400x400&t=inside",
-  },
-  {
-    name: "우아한형제들",
-    start: "2021.7.1",
-    end: "2021.7.30",
-    position: "FrontEnd Developer",
+    wantedAuthNo: 1,
+    company: "네이버",
+    receiptCloseDt: "2021-09-01",
+    likeNo: 3,
+    wantedTitle:
+      "AI 솔루션 개발자 모집 (웹프로그래밍 개발자 1명, AI 개발자 1명)",
     logo: "https://image.rocketpunch.com/company/5466/naver_logo.png?s=400x400&t=inside",
   },
 ];
 
-// api 연결 시, ex =>jobs로 수정
+// api 연결되면 jobs로 데이터 받음
 const CardBoard = ({ jobs, logged }) => {
   return (
     <>
-      <Container className="main">
-        <Cards>
+      <Container>
+        <Cards className="main">
           {ex.map((jobs, index) => (
             <JobCard
               key={index}
               id={jobs.wantedAuthNo}
               name={jobs.company}
               end={jobs.receiptCloseDt}
-              position={jobs.jobCont}
+              position={jobs.wantedTitle}
               logo={jobs.logo}
               likeNo={jobs.likeNo}
               logged={logged}

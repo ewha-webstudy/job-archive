@@ -3,20 +3,21 @@ import CardBoard from "../components/Card/CardBoard";
 import "../style/main.css";
 import API from "../utils/api";
 
-function MainCard() {
+function MainCard({ logged, userId }) {
   const [jobs, setJobs] = useState([]);
 
   useEffect(() => {
     API.get("/api/main").then((response) => {
-      console.log(response);
+      console.log(response.status);
+
       setJobs(response.data);
     });
   }, []);
 
   return (
-    <div className="main-card">
+    <div className="main__card">
       <div className="card">
-        <CardBoard jobs={jobs} />
+        <CardBoard jobs={jobs} logged={logged} userId={userId} />
       </div>
     </div>
   );

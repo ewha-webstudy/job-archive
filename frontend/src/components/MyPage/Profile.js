@@ -37,8 +37,6 @@ const Profile = () => {
   const handleFormSubmit = (e) => {
     e.preventDefault();
 
-    console.log(values);
-
     axios
       .post("/api/mypage/profile", values)
       .then((res) => {

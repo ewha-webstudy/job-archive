@@ -7,7 +7,7 @@ import "../../style/main.css";
 import API from "../../utils/api";
 import styled from "styled-components";
 
-/* 
+/*
 const Container = styled.div`
   user-select: none;
   margin: 0 0 20px 0;
@@ -18,12 +18,16 @@ const Container = styled.div`
 */
 
 class SearchBar extends Component {
-  state = {
-    btnValue: "", // 클릭한 버튼값 (frontend, backend, data, none 중 하나)
-    searchTxt: "", // 사용자가 입력한 검색 값
-    isBtnChecked: false, // 버튼 클릭 여부
-    isRedirected: false // redirect 여부
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      btnValue: "", // 클릭한 버튼값 (frontend, backend, data, none 중 하나)
+      searchTxt: "", // 사용자가 입력한 검색 값
+      isBtnChecked: false, // 버튼 클릭 여부
+      isRedirected: false // redirect 여부
+    };
+  }
+
   handleInputChange = e => {
     this.setState({
       searchTxt: e.target.value
@@ -59,7 +63,7 @@ class SearchBar extends Component {
   }
   */
 
-  // 서버로 버튼 값, 검색 값 제출
+  // 서버로 버튼값, 검색값 제출
   onSubmit = async e => {
     if (this.state.isBtnChecked === false) {
       console.log(this.state.isBtnChecked);
@@ -85,7 +89,7 @@ class SearchBar extends Component {
         .catch(error => {
           if (error.response.status === 404) {
             console.error(error);
-            // TODO: 서버 연결 확인 및 에러 처리
+            // TODO: 에러 처리
           }
         });
     }
@@ -95,28 +99,23 @@ class SearchBar extends Component {
     return (
       <form onSubmit={this.handleSubmit} action="" method="post">
         <MainBtn setBtnValue={this.setBtnValue} />
-        {/*</form>{this.state.isRedirected && (
-          <Link to={`/api/category/${this.state.btnValue}`} />
-        )}*/}
-        <div className="search-bar-container">
+        <div className="searchbar__container">
           <input
             autoFocus
             name="name"
             type="text"
             onChange={this.handleInputChange}
             value={this.state.searchTxt}
-            className="form-content-left"
+            className="searchbar__form"
             placeholder="다양한 개발 직군과 채용정보를 검색해보세요!"
           />
-          <Link to={`/api/category/${this.state.btnValue}`}>
-            <button
-              className="search-button"
-              type="submit"
-              onClick={this.onSubmit}
-            >
-              <BsSearch color="white" />
-            </button>
-          </Link>
+          <button
+            className="searchbar__btn"
+            type="submit"
+            onClick={this.onSubmit}
+          >
+            <BsSearch color="white" />
+          </button>
           <div>{this.state.name}</div>
         </div>
       </form>
