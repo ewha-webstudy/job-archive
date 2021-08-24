@@ -74,7 +74,7 @@ module.exports = router;
  *            schema:
  *              $ref: '#/components/schemas/wrongDBIndex'
  * 
- * /api/category/{category}/search:
+ * /api/category/{category}:
  *  post:
  *    tags:
  *    - Category page
