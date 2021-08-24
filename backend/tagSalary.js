@@ -3,12 +3,16 @@ async function tagSalary() {
     var minSal = {};
     var maxSal = {};
     var avgSal = {};
+
     for (let i in basicArray) {
         var v_salTpCd = detailArray[i].wantedDtl.wantedInfo.salTpCd;
-        var temp_minSal = JSON.stringify(basicArray[i].minSal);
-        var v_minSal = JSON.parse(temp_minSal.replace(/\:\"(\d+)\"([,\}])/g, '\:$1$2'));
-        var temp_maxSal = JSON.stringify(basicArray[i].maxSal);
-        var v_maxSal = JSON.parse(temp_maxSal.replace(/\:\"(\d+)\"([,\}])/g, '\:$1$2'));
+
+        var temp_minSal = basicArray[i].minSal;
+        var temp_maxSal = basicArray[i].maxSal;
+        var v_minSal = parseInt(temp_minSal);
+        var v_maxSal = parseInt(temp_maxSal);
+        // console.log(v_minSal);
+
         // var v_maxSal = basicArray[i].maxSal;
         // 시급
         if (v_salTpCd == 'H') {
@@ -27,6 +31,9 @@ async function tagSalary() {
             salTpCd[detailArray[i].wantedDtl.wantedAuthNo] = v_salTpCd;
             minSal[detailArray[i].wantedDtl.wantedAuthNo] = v_minSal;
             maxSal[detailArray[i].wantedDtl.wantedAuthNo] = v_maxSal;
+            if (v_maxSal == 0) {
+                v_maxSal = v_minSal;
+            }
             avgSal[detailArray[i].wantedDtl.wantedAuthNo] = 12 * (v_minSal + v_maxSal) / 2;
         }
         // 연봉
@@ -34,9 +41,18 @@ async function tagSalary() {
             salTpCd[detailArray[i].wantedDtl.wantedAuthNo] = v_salTpCd;
             minSal[detailArray[i].wantedDtl.wantedAuthNo] = v_minSal;
             maxSal[detailArray[i].wantedDtl.wantedAuthNo] = v_maxSal;
+            if (v_maxSal == 0) {
+                v_maxSal = v_minSal;
+            }
             avgSal[detailArray[i].wantedDtl.wantedAuthNo] = (v_minSal + v_maxSal) / 2;
         }
+        try {
+            storeAvgSal(avgSal[detailArray[i].wantedDtl.wantedAuthNo], detailArray[i].wantedDtl.wantedAuthNo);
+        } catch (error) {
+            console.error("key not found: " + detailArray[i].wantedDtl.wantedAuthNo);
+        }
     }
-    console.log(salTpCd);
-    console.log(avgSal);
+    // console.log(salTpCd);
+    // console.log(avgSal);
+
 }
