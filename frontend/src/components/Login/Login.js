@@ -14,8 +14,9 @@ const Login = () => {
     e.preventDefault();
 
     axios
-      .post("/api/member/auth", user)
+      .post("/api/login", user)
       .then((res) => {
+        console.log("res: ", res);
         history.push("/");
         console.log("res: ", res);
       })
