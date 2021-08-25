@@ -118,7 +118,6 @@ const getData = async(wantedAuthNo) => {
 
 function searchbarCondition(searchBar){
   const words = searchBar.split(" ");
-  console.log(words.length)
   var condition = {};
   if(words.length > 0){
     condition[and] = words.map(function(word){
