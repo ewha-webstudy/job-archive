@@ -20,7 +20,7 @@ router.put("/mypage/profile", verifyToken, mypageCtrl.editProfile);
 router.get('/mypage/like', verifyToken, mypageCtrl.getLikelist);
 
 //like
-router.put('/like/:jobid', verifyToken, likeCtrl.Like); //변경?
+router.post('/like', verifyToken, likeCtrl.Like); 
 router.delete('/unlike/:jobid', verifyToken, likeCtrl.UnLike);
 
 
@@ -168,7 +168,7 @@ module.exports = router;
  *        description: db 처리 중 오류
  * 
  
- * /api/unlike:
+ * /api/unlike/:jobid:
  *  delete:
  *    tags:
  *    - Unlike

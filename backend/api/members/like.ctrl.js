@@ -5,13 +5,12 @@ const { Like } = require('../../models');
 const {UniqueConstraintError} = require('sequelize');
 
 
-/* POST /api/like/:jobid */
+/* POST /api/like */
 exports.Like = async (req, res) => {
     //특정 공고에 좋아요 설정( like db에 로그인한 userid & 해당 공고의 jobid 삽입 )
     const loggedID = res.locals.userid;
-    console.log(req.params.jobid);
-    const jobID = req.params.jobid; 
-    console.log(jobID);
+    const jobID = req.body.jobid;       //body
+    //const jobID = req.params.jobid;   //path
     console.log("this is like");
 
     if (!jobID) //400: wantedAuthNo 미입력
