@@ -5,11 +5,13 @@ const { Like } = require('../../models');
 const {UniqueConstraintError} = require('sequelize');
 
 
-/* POST /api/like */
-exports.postLike = async (req, res) => {
+/* POST /api/like/:jobid */
+exports.Like = async (req, res) => {
     //특정 공고에 좋아요 설정( like db에 로그인한 userid & 해당 공고의 jobid 삽입 )
     const loggedID = res.locals.userid;
-    const jobID = req.body.jobid;
+    console.log(req.params.jobid);
+    const jobID = req.params.jobid; 
+    console.log(jobID);
     console.log("this is like");
 
     if (!jobID) //400: wantedAuthNo 미입력
@@ -39,11 +41,12 @@ exports.postLike = async (req, res) => {
     }
 };
 
-/* DELETE /api/unlike */
-exports.deleteLike = async (req, res) => {
+/* DELETE /api/unlike/:jobid */
+exports.UnLike = async (req, res) => {
     //특정 공고에 좋아요 해제( like db에서 로그인한 userid & 해당 공고의 jobid 삭제 )
     const loggedID = res.locals.userid;
-    const jobID = req.body.jobid;
+    const jobID = req.params.jobid; 
+    console.log(jobID);
     console.log("this is unlike");
 
     if (!jobID) //400: wantedAuthNo 미입력
