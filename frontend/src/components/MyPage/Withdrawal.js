@@ -1,4 +1,3 @@
-import axios from "axios";
 import { Box, Button, Grommet, TextInput } from "grommet";
 import { Hide, View } from "grommet-icons";
 import { useState } from "react";
@@ -46,10 +45,7 @@ const Withdrawal = () => {
   const onClick = (e) => {
     e.preventDefault();
 
-    axios
-      .delete(
-        "https://f77b7f2f-3f98-4d10-acf8-31ea4b2ba99f.mock.pstmn.io/delete"
-      ) // /api/member/delete
+    API.delete("/api/member/delete")
       .then((res) => {
         alert("정상적으로 탈퇴 처리되었습니다.");
         console.log("RES: ", res);
