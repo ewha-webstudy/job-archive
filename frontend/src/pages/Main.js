@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import SearchBar from "../components/SearchBar/SearchBar";
 import { Link as ScrollLink } from "react-scroll";
-import Maincard from "./Maincard";
-
+import Maincard from "../components/Card/Maincard";
 import "../style/main.css";
 
 class Main extends Component {
@@ -18,7 +17,7 @@ class Main extends Component {
             {/* 화살표 */}
           </div>
         </div>
-        <Maincard logged={this.props.logged} userId={this.props.userId}/>
+        <Maincard logged={this.props.logged} userId={this.props.userId} />
       </>
     );
   }
