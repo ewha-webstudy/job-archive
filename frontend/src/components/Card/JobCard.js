@@ -26,16 +26,28 @@ function JobCard({ name, id, end, position, logo, likeNo, logged, userId }) {
     }
   }, []);
 
-  // 좋아요 누를 때마다 서버로 전송
-  // POST api/like/{사용자 아이디}/{채용공고 id}
   const sendnumLikes = () => {
-    API.post(`/api/like/${userId}/${id}`)
-      .then(response => {
-        console.log(response);
-      })
-      .catch(error => {
-        console.error(error);
-      });
+    // 좋아요 눌렀을 때
+    if (!isliked) {
+      console.log("isLiked status:", isliked);
+      API.post(`/api/like`, { jobid: id })
+        .then(response => {
+          console.log(response);
+        })
+        .catch(error => {
+          console.error(error);
+        });
+    } else {
+      // 좋아요 취소했을 때
+      console.log("isLiked status:", isliked);
+      API.delete(`/api/unlike/${id}`)
+        .then(response => {
+          console.log(response);
+        })
+        .catch(error => {
+          console.error(error);
+        });
+    }
   };
 
   const checkIsLogin = () => {
@@ -68,7 +80,7 @@ function JobCard({ name, id, end, position, logo, likeNo, logged, userId }) {
     await API.get(`/api/job/${id}`)
       .then(response => {
         console.log(response);
-        history.push(`/api/job/${id}`);
+        // history.push(`/api/job/${id}`);
       })
       .catch(error => {
         // TODO: 서버 HTTP 에러 코드 확인하고 예외 처리하기
@@ -107,6 +119,7 @@ function JobCard({ name, id, end, position, logo, likeNo, logged, userId }) {
         </div>
       </div>
       <footer className="card__footer">
+        <Link to={`/api/job/${id}`}>
         <Button
           color={{ border: "gray" }}
           gap="medium"
@@ -114,6 +127,7 @@ function JobCard({ name, id, end, position, logo, likeNo, logged, userId }) {
           hoverIndicator
           onClick={goToDetail}
         />
+        </Link>
       </footer>
     </Card>
   );
