@@ -14,15 +14,19 @@ const Login = () => {
     e.preventDefault();
     console.log(user);
 
-    API.post("/api/login", user)
+    API.post("/api/member/auth", user)
       .then((res) => {
         console.log("res: ", res);
         history.push("/");
-        console.log("res: ", res);
       })
-
       .catch((err) => {
         console.log("err: ", err);
+        if (err.response.status === 400) {
+          alert("존재하지 않는 아이디입니다.");
+        }
+        if (err.response.status === 412) {
+          alert("비밀번호를 다시 확인해 주세요.");
+        }
       });
   };
 

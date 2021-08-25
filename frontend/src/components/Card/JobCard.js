@@ -30,10 +30,10 @@ function JobCard({ name, id, end, position, logo, likeNo, logged, userId }) {
   // POST api/like/{사용자 아이디}/{채용공고 id}
   const sendnumLikes = () => {
     API.post(`/api/like/${userId}/${id}`)
-      .then(response => {
+      .then((response) => {
         console.log(response);
       })
-      .catch(error => {
+      .catch((error) => {
         console.error(error);
       });
   };
@@ -66,11 +66,11 @@ function JobCard({ name, id, end, position, logo, likeNo, logged, userId }) {
   const goToDetail = async () => {
     console.log("click");
     await API.get(`/api/job/${id}`)
-      .then(response => {
+      .then((response) => {
         console.log(response);
         history.push(`/api/job/${id}`);
       })
-      .catch(error => {
+      .catch((error) => {
         // TODO: 서버 HTTP 에러 코드 확인하고 예외 처리하기
         console.error(error);
       });

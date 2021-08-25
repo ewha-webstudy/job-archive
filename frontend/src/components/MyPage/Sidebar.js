@@ -2,14 +2,16 @@ import { NavLink, useLocation } from "react-router-dom";
 import { useState } from "react";
 import styled from "styled-components";
 import Withdrawal from "./Withdrawal";
-import { Grommet, Layer } from "grommet";
+import { Box, Button, Grommet, Layer } from "grommet";
 import { MdClose } from "react-icons/md";
+import { FormClose } from "grommet-icons";
 
-export const Modal = () => {
+const Modal = () => {
+  //모달 창 띄우기, 닫기
   const [open, setOpen] = useState();
   const onOpen = () => setOpen(true);
   const onClose = () => setOpen(undefined);
-  const [showModal, setShowModal] = useState(true);
+
   return (
     <>
       <button class="outbutton" onClick={onOpen}>
@@ -17,11 +19,17 @@ export const Modal = () => {
       </button>
       <Grommet theme={theme}>
         {open && (
-          <Layer position="center" onClickOutside={onClose}>
-            <div>
-              <CloseModalButton onClick={onClose} />
-              <Withdrawal showModal={showModal} setShowModal={setShowModal} />
-            </div>
+          <Layer position="center" onClickOutside={onClose} onEsc={onClose}>
+            <Box
+              pad="medium"
+              gap="small"
+              width={{ min: "medium" }}
+              height={{ min: "medium" }}
+              fill
+            >
+              <Button alignSelf="end" icon={<FormClose />} onClick={onClose} />
+              <Withdrawal />
+            </Box>
           </Layer>
         )}
       </Grommet>
@@ -132,12 +140,10 @@ const SidebarButton = styled.button`
 
 const CloseModalButton = styled(MdClose)`
   cursor: pointer;
-
   width: 20px;
   height: 20px;
   padding: 0;
   z-index: 10;
-  y-index: 30;
 `;
 
 export default Sidebar;
