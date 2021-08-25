@@ -19,16 +19,17 @@ exports.authMember = async (req, res) => {
         })
         .then((result) => {
             if(result){
-            if(PW === result.password){
-                const token = jwt.sign({    //토큰
-                    userid: result.userid
-                    }, YOUR_SECRET_KEY, {
-                        expiresIn: '30m'     //유효시간
-                    });
-                res.cookie('user', token);
-                res.status(201).json({ token });
-            }
-            return res.status(412).json({ error: 'invalid password' }); //412: 비밀번호 불일치
+                if(PW === result.password){
+                    const token = jwt.sign({    //토큰
+                        userid: result.userid
+                        }, YOUR_SECRET_KEY, {
+                            expiresIn: '30m'     //유효시간
+                        });
+                    res.cookie('user', token);
+                    console.log(token);
+                    return res.status(201).json({ result });
+                }
+                return res.status(412).json({ error: 'invalid password' }); //412: 비밀번호 불일치
             }
             return res.status(400).json({ error: 'invalid user' }); //400: 미등록 id
         })
@@ -69,8 +70,49 @@ exports.createMember = async (req, res) => {
     } 
 }; 
 
+/* POST /api/member/logout */
+exports.logout = async (req, res) => {
+    //로그아웃
+    /*
+    const loggedID = res.locals.userid;
+    console.log("this is member/logout");
+    
+    Membership.findOneAndUpdate( {userid : loggedID },
+        { token : ""},
+        (err) => {
+            if(err) return res.json({success : false, err})
+            return res.status(200).send({
+                success : true
+            })
+        })
+    */
+}
+
+
+
 /* DELETE /api/member/delete */
 exports.deleteMember = async (req, res) => {
     //회원 삭제
+    const loggedID = res.locals.userid;
+    //console.log(res.locals.userid);
+    console.log("this is member/delete");
 
+    try {
+        await Membership.destroy({ where: {userid: loggedID }
+        })
+        .then((result) => {
+            console.log(result);
+            if(result){
+                res.status(200).send({ result });
+            }
+            res.status(404).send(); //404: 
+        })
+        .catch((err) => {
+            console.log("Delete Member Error: ", err);
+            res.status(408).send(); //408
+        });
+    } catch (e) {
+      console.error(e);
+      res.status(500).send(); //500
+    }
 }
