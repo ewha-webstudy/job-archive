@@ -17,16 +17,16 @@ export default function logger(state = initialState, action) {
   switch (action.type) {
     case LOG_IN:
       return {
-        ...state, // 왜 이 코드가 있는지 의미 찾기
+        ...state,
         islogin: true,
-        token: action.token
+        token: action.token // TODO: 토큰 저장 잘 되는지 확인하기
       };
 
     case LOG_OUT:
       return {
         ...state,
         islogin: false,
-        token: "" // 이렇게 로그아웃해도 괜찮은지 확인하기
+        token: "" // TODO: 토큰 상태 변경하는지 확인하기
       };
     default:
       return state;
