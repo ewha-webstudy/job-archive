@@ -25,59 +25,68 @@ const NavBar = ({ islogin, token, onLogin, onLogout }) => {
   return (
     <BrowserRouter>
       <Grommet theme={Theme}>
-        {/* header */}
         <header className="header">
           <Nav direction="row">
             <ul className="header__logo">
-              <NavLink to="/">JOB-ARCHIVE</NavLink>
+              <Anchor href="/" label="JOB-ARCHIVE" />
             </ul>
             <div className="nav">
               <li className="nav__tag">
-                <NavLink to="/api/category/frontend">
-                  <Anchor color="black" label="프론트엔드" hover />
-                </NavLink>
+                <Anchor
+                  href="/api/category/frontend"
+                  color="black"
+                  label="프론트엔드"
+                  hover
+                />
               </li>
               <li className="nav__tag">
-                <NavLink to="/api/category/backend">
-                  <Anchor color="black" label="백엔드" hoverIndicator />
-                </NavLink>
+                <Anchor
+                  href="/api/category/backend"
+                  color="black"
+                  label="백엔드"
+                  hoverIndicator
+                />
               </li>
               <li className="nav__tag">
-                <NavLink to="/api/category/data">
-                  <Anchor color="black" label="AI/데이터분석" hoverIndicator />
-                </NavLink>
+                <Anchor
+                  href="/api/category/data"
+                  color="black"
+                  label="AI/데이터분석"
+                  hoverIndicator
+                />
               </li>
               {islogin}
               {islogin ? (
                 <>
                   {" "}
                   <li className="nav__tag">
-                    <NavLink to="/api/mypage/profile">
-                      <Anchor color="black" label="마이페이지" hoverIndicator />
-                    </NavLink>
+                    <Anchor
+                      href="/api/mypage/profile"
+                      color="black"
+                      label="마이페이지"
+                      hoverIndicator
+                    />
                   </li>{" "}
                   <li className="header__auth">
-                    <NavLink to="/">
-                      <Button
-                        color="#ffaf00"
-                        primary
-                        label="Logout"
-                        alignSelf="center"
-                        onClick={onLogout}
-                      />
-                    </NavLink>
+                    <Button
+                      href="/"
+                      color="#ffaf00"
+                      primary
+                      label="Logout"
+                      alignSelf="center"
+                      onClick={onLogout}
+                    />
                   </li>{" "}
                 </>
               ) : (
                 <li className="header__auth">
-                  <NavLink to="/login">
-                    <Button
-                      color="#ffaf00"
-                      primary
-                      label="Login"
-                      alignSelf="center"
-                    />
-                  </NavLink>
+                  <Button
+                    href="/login"
+                    color="#ffaf00"
+                    primary
+                    label="Login"
+                    alignSelf="center"
+                  />
                 </li>
               )}
             </div>

@@ -13,7 +13,6 @@ const MyPage = () => {
       <NavBar />
       <MyPageTemplate>
         <Sidebar />
-        <Route exact path="/api/member/create" component={Signup} />
         <Route exact path="/api/mypage/profile" component={Profile} />
         <Route exact path="/api/mypage/notification" component={Notification} />
         <Route exact path="/api/mypage/like" component={Like} />
