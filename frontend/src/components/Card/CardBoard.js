@@ -30,7 +30,7 @@ const ex = [
     likeNo: 3,
     wantedTitle:
       "AI 솔루션 개발자 모집 (웹프로그래밍 개발자 1명, AI 개발자 1명)",
-    logo: "https://image.rocketpunch.com/company/5466/naver_logo.png?s=400x400&t=inside"
+    logo: "https://image.rocketpunch.com/company/5466/naver_logo.png?s=400x400&t=inside",
   },
   {
     wantedAuthNo: 1,
@@ -39,7 +39,7 @@ const ex = [
     likeNo: 3,
     wantedTitle:
       "AI 솔루션 개발자 모집 (웹프로그래밍 개발자 1명, AI 개발자 1명)",
-    logo: "https://image.rocketpunch.com/company/5466/naver_logo.png?s=400x400&t=inside"
+    logo: "https://image.rocketpunch.com/company/5466/naver_logo.png?s=400x400&t=inside",
   },
 
   {
@@ -49,7 +49,7 @@ const ex = [
     likeNo: 3,
     wantedTitle:
       "AI 솔루션 개발자 모집 (웹프로그래밍 개발자 1명, AI 개발자 1명)",
-    logo: "https://image.rocketpunch.com/company/5466/naver_logo.png?s=400x400&t=inside"
+    logo: "https://image.rocketpunch.com/company/5466/naver_logo.png?s=400x400&t=inside",
   },
 
   {
@@ -59,7 +59,7 @@ const ex = [
     likeNo: 3,
     wantedTitle:
       "AI 솔루션 개발자 모집 (웹프로그래밍 개발자 1명, AI 개발자 1명)",
-    logo: "https://image.rocketpunch.com/company/5466/naver_logo.png?s=400x400&t=inside"
+    logo: "https://image.rocketpunch.com/company/5466/naver_logo.png?s=400x400&t=inside",
   },
 
   {
@@ -69,7 +69,7 @@ const ex = [
     likeNo: 3,
     wantedTitle:
       "AI 솔루션 개발자 모집 (웹프로그래밍 개발자 1명, AI 개발자 1명)",
-    logo: "https://image.rocketpunch.com/company/5466/naver_logo.png?s=400x400&t=inside"
+    logo: "https://image.rocketpunch.com/company/5466/naver_logo.png?s=400x400&t=inside",
   },
 
   {
@@ -79,7 +79,7 @@ const ex = [
     likeNo: 3,
     wantedTitle:
       "AI 솔루션 개발자 모집 (웹프로그래밍 개발자 1명, AI 개발자 1명)",
-    logo: "https://image.rocketpunch.com/company/5466/naver_logo.png?s=400x400&t=inside"
+    logo: "https://image.rocketpunch.com/company/5466/naver_logo.png?s=400x400&t=inside",
   },
 
   {
@@ -89,7 +89,7 @@ const ex = [
     likeNo: 3,
     wantedTitle:
       "AI 솔루션 개발자 모집 (웹프로그래밍 개발자 1명, AI 개발자 1명)",
-    logo: "https://image.rocketpunch.com/company/5466/naver_logo.png?s=400x400&t=inside"
+    logo: "https://image.rocketpunch.com/company/5466/naver_logo.png?s=400x400&t=inside",
   },
 
   {
@@ -99,7 +99,7 @@ const ex = [
     likeNo: 3,
     wantedTitle:
       "AI 솔루션 개발자 모집 (웹프로그래밍 개발자 1명, AI 개발자 1명)",
-    logo: "https://image.rocketpunch.com/company/5466/naver_logo.png?s=400x400&t=inside"
+    logo: "https://image.rocketpunch.com/company/5466/naver_logo.png?s=400x400&t=inside",
   },
 
   {
@@ -109,8 +109,8 @@ const ex = [
     likeNo: 3,
     wantedTitle:
       "AI 솔루션 개발자 모집 (웹프로그래밍 개발자 1명, AI 개발자 1명)",
-    logo: "https://image.rocketpunch.com/company/5466/naver_logo.png?s=400x400&t=inside"
-  }
+    logo: "https://image.rocketpunch.com/company/5466/naver_logo.png?s=400x400&t=inside",
+  },
 ];
 
 // api 연결되면 jobs로 데이터 받음

@@ -1,59 +1,9 @@
 import { Box, Button, Grommet, TextInput } from "grommet";
 import { Hide, View } from "grommet-icons";
 import { useState } from "react";
+import { useHistory } from "react-router-dom";
 import styled from "styled-components";
-
-const Background = styled.div`
-  width: 100%;
-  height: 100%;
-
-  position: fixed;
-  top: 0;
-  left: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  background: rgba(0, 0, 0, 0.8);
-`;
-
-const Modal = styled.div`
-  width: 500px;
-  height: 500px;
-
-  background: white;
-  border: 1px solid white;
-  border-radius: 10px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-`;
-
-const BodyWrapper = styled.div`
-  height: 70%;
-`;
-
-const InputWrapper = styled.div`
-  height: 30%;
-  border-top: 2px solid powderblue;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-`;
-
-const ConfirmButton = styled.button`
-  &:hover {
-    cursor: pointer;
-  }
-  height: 30px;
-  width: 260px;
-
-  background: white;
-  border: 1px solid pink;
-  border-radius: 10px;
-
-  margin-top: 20px;
-`;
+import API from "../../utils/api";
 
 const theme = {
   global: {
@@ -64,7 +14,9 @@ const theme = {
   },
 };
 
+//비밀번호 인풋 함수
 const Password = () => {
+  //비밀번호를 입력하고 탈퇴
   const [psword, setPsword] = useState("");
   const [reveal, setReveal] = useState(false);
 
@@ -86,22 +38,71 @@ const Password = () => {
   );
 };
 
-const Withdrawal = ({ showModal }) => {
+const Withdrawal = () => {
+  const history = useHistory();
+
+  //탈퇴 버튼을 누르면 실행되는 함수
+  const onClick = (e) => {
+    e.preventDefault();
+
+    API.delete("/api/member/delete")
+      .then((res) => {
+        alert("정상적으로 탈퇴 처리되었습니다.");
+        console.log("RES: ", res);
+        history.push("/");
+      })
+      .catch((err) => {
+        console.log("ERR: ", err.response.status);
+        console.log(err.response);
+      });
+  };
+
   return (
     <>
-      {showModal ? (
-        <Background>
-          <Modal showModal={showModal}>
-            <BodyWrapper>-수정 중-</BodyWrapper>
-            <InputWrapper>
-              <Password />
-              <ConfirmButton>탈퇴하기</ConfirmButton>
-            </InputWrapper>
-          </Modal>
-        </Background>
-      ) : null}
+      <BodyWrapper>
+        <h2>정말 탈퇴하시겠습니까?</h2>
+        <h4>비밀번호를 입력하세요.</h4>
+      </BodyWrapper>
+      <InputWrapper>
+        <Password />
+        <ConfirmButton onClick={onClick}>탈퇴하기</ConfirmButton>
+      </InputWrapper>
     </>
   );
 };
+
+const BodyWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  h2 {
+    color: #ef8d21;
+    margin-top: 10px;
+  }
+  h4 {
+    margin-top: 5px;
+  }
+`;
+
+const InputWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 20px;
+`;
+
+const ConfirmButton = styled.button`
+  &:hover {
+    cursor: pointer;
+  }
+  height: 35px;
+  width: 90px;
+  border: 2px solid #ef8d21;
+  border-radius: 15px;
+  color: white;
+  background: #ef8d21;
+  margin-top: 25px;
+`;
 
 export default Withdrawal;

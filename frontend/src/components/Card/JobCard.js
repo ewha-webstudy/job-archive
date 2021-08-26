@@ -19,7 +19,7 @@ function JobCard({
   islogin,
   token,
   onLogin,
-  onLogout
+  onLogout,
 }) {
   const [isliked, setLiked] = useState(false);
   const [numLikes, setnumLikes] = useState(likeNo);
@@ -29,20 +29,20 @@ function JobCard({
     if (!isliked) {
       console.log("isLiked status:", isliked);
       API.post(`/api/like`, { jobid: id })
-        .then(response => {
+        .then((response) => {
           console.log(response);
         })
-        .catch(error => {
+        .catch((error) => {
           console.error(error);
         });
     } else {
       // 좋아요를 취소한거라면
       console.log("isLiked status:", isliked);
       API.delete(`/api/unlike/${id}`)
-        .then(response => {
+        .then((response) => {
           console.log(response);
         })
-        .catch(error => {
+        .catch((error) => {
           console.error(error);
         });
     }
@@ -76,11 +76,11 @@ function JobCard({
   const goToDetail = async () => {
     console.log("click");
     await API.get(`/api/job/${id}`)
-      .then(response => {
+      .then((response) => {
         console.log(response);
         // history.push(`/api/job/${id}`);
       })
-      .catch(error => {
+      .catch((error) => {
         // TODO: 서버 HTTP 에러 코드 확인하고 예외 처리하기
         console.error(error);
       });

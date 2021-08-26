@@ -9,14 +9,15 @@ const Login = ({ islogin, token, onLogin, onLogout }) => {
   const history = useHistory();
   const [user, setUser] = useState({
     id: "",
-    psword: ""
+    psword: "",
   });
 
-  const SubmitHandler = async e => {
+  const SubmitHandler = async (e) => {
     e.preventDefault();
+    console.log(user);
 
     await API.post("/api/login", user)
-      .then(res => {
+      .then((res) => {
         console.log("res: ", res);
 
         // TODO: 토큰 로컬스토리지에 저장
@@ -34,13 +35,18 @@ const Login = ({ islogin, token, onLogin, onLogout }) => {
           res.data.data.accessToken;
         history.push("/");
       })
-
-      .catch(err => {
+      .catch((err) => {
         console.log("err: ", err);
+        if (err.response.status === 400) {
+          alert("존재하지 않는 아이디입니다.");
+        }
+        if (err.response.status === 412) {
+          alert("비밀번호를 다시 확인해 주세요.");
+        }
       });
   };
 
-  const ChangeHandler = e => {
+  const ChangeHandler = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value });
   };
 
