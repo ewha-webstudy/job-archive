@@ -5,7 +5,7 @@ import LoginTemplate from "../components/Login/LoginTemplate";
 const LoginPage = () => (
   <>
     <NavBar />
-    <LoginTemplate form={<Login />} />
+    <LoginTemplate form={<LoginContainer />} />
   </>
 );
 
