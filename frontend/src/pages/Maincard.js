@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
-import CardBoard from "./CardBoard";
-import "../../style/main.css";
-import API from "../../utils/api";
+import CardBoard from "../components/Card/CardBoard";
+import "../style/main.css";
+import API from "../utils/api";
 
 function MainCard({ logged, userId }) {
   const [jobs, setJobs] = useState([]);
 
   useEffect(() => {
-    API.get("/api/main").then(response => {
+    API.get("/api/main").then((response) => {
       console.log(response.status);
 
       setJobs(response.data);

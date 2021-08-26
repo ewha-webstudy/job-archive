@@ -1,48 +1,56 @@
 import { Card, CardHeader, Box, Image, Button } from "grommet";
 import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router";
+import { useSelector, useDispatch } from "react-redux";
+// import allActions from "../../actions";
 import { Link } from "react-router-dom";
 import { Favorite } from "grommet-icons";
 import "../../style/card.css";
 import API from "../../utils/api";
 import GetDday from "./GetDday";
 
-function JobCard({ name, id, end, position, logo, likeNo, logged, userId }) {
+// 좋아요 여부 - isLiked, logged 일단 삭제했음
+function JobCard({
+  name,
+  id,
+  end,
+  position,
+  logo,
+  likeNo,
+  islogin,
+  token,
+  onLogin,
+  onLogout,
+}) {
   const [isliked, setLiked] = useState(false);
   const [numLikes, setnumLikes] = useState(likeNo);
-  const [isLogin, setIsLogin] = useState(logged); // 초기값은 false
-  const history = useHistory();
 
-  // TODO: 로그인 상태 연결하기
-  // const user = { id: "cdnnnl", token: "___" };
-  // localStorage.setItem(id, "cdnnnl");
-
-  useEffect(() => {
-    // const userId = localStorage.getItem(id);
-    if (!isLogin) {
-      setIsLogin(true);
-    } else {
-      setIsLogin(false);
-    }
-  }, []);
-
-  // 좋아요 누를 때마다 서버로 전송
-  // POST api/like/{사용자 아이디}/{채용공고 id}
   const sendnumLikes = () => {
-    API.post(`/api/like/${userId}/${id}`)
-      .then(response => {
-        console.log(response);
-      })
-      .catch(error => {
-        console.error(error);
-      });
+    // 좋아요를 누른거라면
+    if (!isliked) {
+      console.log("isLiked status:", isliked);
+      API.post(`/api/like`, { jobid: id })
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    } else {
+      // 좋아요를 취소한거라면
+      console.log("isLiked status:", isliked);
+      API.delete(`/api/unlike/${id}`)
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    }
   };
 
   const checkIsLogin = () => {
-    console.log("isLogin", isLogin);
     // 로그인되어 있고, liked가 false라면
-
-    if (isLogin && !isliked) {
+    if (islogin && !isliked) {
       // like 상태를 true로 바꾸고, numLike는 +1 해주기
       setLiked(!isliked);
       setnumLikes(numLikes + 1);
@@ -52,9 +60,11 @@ function JobCard({ name, id, end, position, logo, likeNo, logged, userId }) {
     }
 
     // 로그인되어 있고, liked가 true인 경우
-    else if (isLogin && isliked) {
+    else if (islogin && isliked) {
       setLiked(!isliked);
       setnumLikes(numLikes - 1);
+
+      sendnumLikes();
     }
 
     // 로그인 안되어 있는 경우
@@ -66,11 +76,11 @@ function JobCard({ name, id, end, position, logo, likeNo, logged, userId }) {
   const goToDetail = async () => {
     console.log("click");
     await API.get(`/api/job/${id}`)
-      .then(response => {
+      .then((response) => {
         console.log(response);
-        history.push(`/api/job/${id}`);
+        // history.push(`/api/job/${id}`);
       })
-      .catch(error => {
+      .catch((error) => {
         // TODO: 서버 HTTP 에러 코드 확인하고 예외 처리하기
         console.error(error);
       });
@@ -107,13 +117,15 @@ function JobCard({ name, id, end, position, logo, likeNo, logged, userId }) {
         </div>
       </div>
       <footer className="card__footer">
-        <Button
-          color={{ border: "gray" }}
-          gap="medium"
-          label="자세히 보기"
-          hoverIndicator
-          onClick={goToDetail}
-        />
+        <Link to={`/api/job/${id}`}>
+          <Button
+            color={{ border: "gray" }}
+            gap="medium"
+            label="자세히 보기"
+            hoverIndicator
+            onClick={goToDetail}
+          />
+        </Link>
       </footer>
     </Card>
   );

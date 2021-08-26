@@ -3,22 +3,23 @@ import JobCard from "./JobCard";
 import styled from "styled-components";
 
 const Container = styled.div`
-  margin: 3rem auto;
+  margin: 2rem auto;
   display: flex;
   align-items: center;
   flex-direction: column;
   flex-direction: row;
   justify-content: space-around;
-  width: 100%;
+  width: 80%;
   position: relative;
+  padding: 50px;
 `;
 const Cards = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-gap: 15%;
+  grid-gap: 10%;
   width: 75%;
   align-items: center;
-  margin: 0;
+  margin: auto;
 `;
 
 const ex = [
@@ -29,7 +30,7 @@ const ex = [
     likeNo: 3,
     wantedTitle:
       "AI 솔루션 개발자 모집 (웹프로그래밍 개발자 1명, AI 개발자 1명)",
-    logo: "https://image.rocketpunch.com/company/5466/naver_logo.png?s=400x400&t=inside"
+    logo: "https://image.rocketpunch.com/company/5466/naver_logo.png?s=400x400&t=inside",
   },
   {
     wantedAuthNo: 1,
@@ -38,7 +39,7 @@ const ex = [
     likeNo: 3,
     wantedTitle:
       "AI 솔루션 개발자 모집 (웹프로그래밍 개발자 1명, AI 개발자 1명)",
-    logo: "https://image.rocketpunch.com/company/5466/naver_logo.png?s=400x400&t=inside"
+    logo: "https://image.rocketpunch.com/company/5466/naver_logo.png?s=400x400&t=inside",
   },
 
   {
@@ -48,84 +49,72 @@ const ex = [
     likeNo: 3,
     wantedTitle:
       "AI 솔루션 개발자 모집 (웹프로그래밍 개발자 1명, AI 개발자 1명)",
-    logo: "https://image.rocketpunch.com/company/5466/naver_logo.png?s=400x400&t=inside"
+    logo: "https://image.rocketpunch.com/company/5466/naver_logo.png?s=400x400&t=inside",
   },
 
   {
-
     wantedAuthNo: 1,
     company: "네이버",
     receiptCloseDt: "2021-10-30",
     likeNo: 3,
     wantedTitle:
       "AI 솔루션 개발자 모집 (웹프로그래밍 개발자 1명, AI 개발자 1명)",
-    logo: "https://image.rocketpunch.com/company/5466/naver_logo.png?s=400x400&t=inside"
-
+    logo: "https://image.rocketpunch.com/company/5466/naver_logo.png?s=400x400&t=inside",
   },
 
   {
-
     wantedAuthNo: 1,
     company: "네이버",
     receiptCloseDt: "2021-08-30",
     likeNo: 3,
     wantedTitle:
       "AI 솔루션 개발자 모집 (웹프로그래밍 개발자 1명, AI 개발자 1명)",
-    logo: "https://image.rocketpunch.com/company/5466/naver_logo.png?s=400x400&t=inside"
-
+    logo: "https://image.rocketpunch.com/company/5466/naver_logo.png?s=400x400&t=inside",
   },
 
   {
-
     wantedAuthNo: 1,
     company: "네이버",
     receiptCloseDt: "2021-09-01",
     likeNo: 3,
     wantedTitle:
       "AI 솔루션 개발자 모집 (웹프로그래밍 개발자 1명, AI 개발자 1명)",
-    logo: "https://image.rocketpunch.com/company/5466/naver_logo.png?s=400x400&t=inside"
-
+    logo: "https://image.rocketpunch.com/company/5466/naver_logo.png?s=400x400&t=inside",
   },
 
   {
-
     wantedAuthNo: 1,
     company: "네이버",
     receiptCloseDt: "2021-09-01",
     likeNo: 3,
     wantedTitle:
       "AI 솔루션 개발자 모집 (웹프로그래밍 개발자 1명, AI 개발자 1명)",
-    logo: "https://image.rocketpunch.com/company/5466/naver_logo.png?s=400x400&t=inside"
-
+    logo: "https://image.rocketpunch.com/company/5466/naver_logo.png?s=400x400&t=inside",
   },
 
   {
-
     wantedAuthNo: 1,
     company: "네이버",
     receiptCloseDt: "2021-09-01",
     likeNo: 3,
     wantedTitle:
       "AI 솔루션 개발자 모집 (웹프로그래밍 개발자 1명, AI 개발자 1명)",
-    logo: "https://image.rocketpunch.com/company/5466/naver_logo.png?s=400x400&t=inside"
-
+    logo: "https://image.rocketpunch.com/company/5466/naver_logo.png?s=400x400&t=inside",
   },
 
   {
-
     wantedAuthNo: 1,
     company: "네이버",
     receiptCloseDt: "2021-09-01",
     likeNo: 3,
     wantedTitle:
       "AI 솔루션 개발자 모집 (웹프로그래밍 개발자 1명, AI 개발자 1명)",
-    logo: "https://image.rocketpunch.com/company/5466/naver_logo.png?s=400x400&t=inside"
-  }
-
+    logo: "https://image.rocketpunch.com/company/5466/naver_logo.png?s=400x400&t=inside",
+  },
 ];
 
 // api 연결되면 jobs로 데이터 받음
-const CardBoard = ({ jobs, logged }) => {
+const CardBoard = ({ jobs, islogin, token, onLogin, onLogout }) => {
   return (
     <>
       <Container>
@@ -139,13 +128,15 @@ const CardBoard = ({ jobs, logged }) => {
               position={jobs.wantedTitle}
               logo={jobs.logo}
               likeNo={jobs.likeNo}
-              logged={logged}
+              islogin={islogin}
+              token={token}
+              onLogin={onLogin}
+              onLogout={onLogout}
             />
           ))}
         </Cards>
       </Container>
     </>
-
   );
 };
 export default CardBoard;

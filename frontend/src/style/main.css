@@ -32,7 +32,6 @@ li {
 
 .header__logo a:hover {
   cursor: pointer;
-  color: #fff !important;
 }
 
 .nav {
@@ -111,7 +110,7 @@ li {
   color: black;
   cursor: pointer;
 }
-.btn__search:hover {
+.searchbar__btn:hover {
   background-color: #ffaf00;
   color: black;
   border-bottom-color: #8480c5;
@@ -227,11 +226,24 @@ h1 {
 .searchbar__form {
   display: inline-block;
   border-radius: 15px 0 0 15px;
-  width: 650px;
+  width: 600px;
   height: 40px;
+  padding-left: 20px;
   border: 0;
   outline: 0;
   box-shadow: 5px 5px 5px 3px lightgray;
+}
+
+.searchbar__btn {
+  display: inline-block;
+  border-radius: 0 15px 15px 0;
+  height: 40px;
+  border: 0;
+  width: 50px;
+  outline: 0;
+  box-shadow: 3px 5px 5px 3px lightgray;
+  background-color: #ffc459;
+  transition-duration: 0.3s;
 }
 
 .searchbar__btn {

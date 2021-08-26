@@ -4,11 +4,12 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Main from "./pages/Main";
 import ScrollToTop from "./components/ScrollToTop";
 import Footer from "./components/Footer/Footer";
-import NavBar from "./components/NavBar/NavBar";
+import NavBarContainer from "./containers/NavBarContainer";
 import CategoryPage from "./pages/Category";
 import DetailInfoPage from "./pages/DetailPage";
 import LoginPage from "./pages/Login";
 import MyPage from "./pages/MyPage";
+<<<<<<< HEAD
 
 
 class App extends Component {
@@ -89,5 +90,34 @@ class App extends Component {
   }
 }
 
+=======
+import SignupPage from "./pages/Signup";
+
+function App() {
+  return (
+    <Router>
+      <ScrollToTop />
+      <Switch>
+        <>
+          <Grommet className="App">
+            <NavBarContainer />
+            <Route path="/" exact component={Main} />
+            <Route
+              path="/api/category/:category"
+              exact
+              component={CategoryPage}
+            />
+            <Route path="/api/job/:id" exact component={DetailInfoPage} />
+            <Route path="/login" exact component={LoginPage} />
+            <Route path="/api/member/create" exact component={SignupPage} />
+            <Route path="/api/mypage/:id" exact component={MyPage} />
+            <Footer />
+          </Grommet>
+        </>
+      </Switch>
+    </Router>
+  );
+}
+>>>>>>> 66166ac4ad3ffd431d140cdfa924ca3beb4adea3
 
 export default App;

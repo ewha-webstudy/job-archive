@@ -3,7 +3,8 @@ import CardBoard from "./CardBoard";
 import "../../style/main.css";
 import API from "../../utils/api";
 
-function MainCard({ logged, userId }) {
+// props : { logged, userId }
+function MainCard({ islogin, token, onLogin, onLogout }) {
   const [jobs, setJobs] = useState([]);
 
   useEffect(() => {
@@ -16,7 +17,14 @@ function MainCard({ logged, userId }) {
   return (
     <div className="main__card">
       <div className="card">
-        <CardBoard jobs={jobs} logged={logged} userId={userId} />
+        {/*<CardBoard jobs={jobs} logged={logged} userId={userId} />*/}
+        <CardBoard
+          jobs={jobs}
+          islogin={islogin}
+          token={token}
+          onLogin={onLogin}
+          onLogout={onLogout}
+        />
       </div>
     </div>
   );

@@ -1,32 +1,22 @@
-import { Route } from "react-router-dom";
 import MyPageTemplate from "../components/MyPage/MyPageTemplate";
 import NavBar from "../components/NavBar/NavBar";
 import Sidebar from "../components/MyPage/Sidebar";
 import Profile from "../components/MyPage/Profile";
 import Notification from "../components/MyPage/Notification";
-import SaveList from "../components/MyPage/SaveList";
-import Signup from "../components/Login/Signup";
+import Like from "../components/MyPage/Like";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 
 const MyPage = () => {
   return (
-    <>
+    <Router>
       <NavBar />
       <MyPageTemplate>
         <Sidebar />
-        <Route path="/signup">
-          <Signup />
-        </Route>
-        <Route path="/mypage/1">
-          <Profile />
-        </Route>
-        <Route path="/mypage/2">
-          <Notification />
-        </Route>
-        <Route path="/mypage/3">
-          <SaveList />
-        </Route>
+        <Route exact path="/api/mypage/profile" component={Profile} />
+        <Route exact path="/api/mypage/notification" component={Notification} />
+        <Route exact path="/api/mypage/like" component={Like} />
       </MyPageTemplate>
-    </>
+    </Router>
   );
 };
 
