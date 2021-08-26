@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import SearchBar from "../components/SearchBar/SearchBar";
 import { Link as ScrollLink } from "react-scroll";
-import Maincard from "./Maincard";
+import CardContainer from "../containers/CardContainer";
 
 import "../style/main.css";
 
@@ -15,10 +15,10 @@ class Main extends Component {
             <SearchBar />
             <br />
             <h5>스크롤을 밑으로 내려 더 많은 정보를 확인해보세요!</h5>
-            {/* 화살표 */}
+            {/* TODO: 화살표 추가 */}
           </div>
         </div>
-        <Maincard logged={this.props.logged} userId={this.props.userId}/>
+        <CardContainer />
       </>
     );
   }
