@@ -70,7 +70,7 @@ const Sidebar = () => {
       <>
         {sidebarMenu.map((menu) => {
           return (
-            <NavLink key={menu.id} to={"/mypage/" + menu.id}>
+            <NavLink key={menu.id} to={"/api/mypage/" + menu.id}>
               <SidebarItem key={menu.id} menu={menu} />
             </NavLink>
           );
