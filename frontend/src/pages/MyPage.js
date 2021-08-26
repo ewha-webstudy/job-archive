@@ -4,7 +4,6 @@ import Sidebar from "../components/MyPage/Sidebar";
 import Profile from "../components/MyPage/Profile";
 import Notification from "../components/MyPage/Notification";
 import Like from "../components/MyPage/Like";
-import Signup from "../components/Login/Signup";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
 const MyPage = () => {
