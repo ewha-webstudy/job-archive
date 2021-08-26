@@ -75,7 +75,7 @@ const Login = ({ islogin, token, onLogin, onLogout }) => {
         </Wrapper>
         <LoginButton type="submit">로그인 하기</LoginButton>
       </form>
-      <Link to={"/signup"} style={{ textDecoration: "none" }}>
+      <Link to={"/api/member/create"} style={{ textDecoration: "none" }}>
         <SignupButton>회원 가입</SignupButton>
       </Link>
     </>

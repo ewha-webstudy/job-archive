@@ -82,7 +82,7 @@ const Sidebar = () => {
 
   const RegisterMenu = () => {
     return (
-      <NavLink to={"/signup"}>
+      <NavLink to={"/api/member/create"}>
         <SidebarButton>회원 가입</SidebarButton>
       </NavLink>
     );
@@ -90,7 +90,7 @@ const Sidebar = () => {
 
   return (
     <SidebarBlock>
-      {pathName === "/signup" ? <RegisterMenu /> : <SidebarMenu />}
+      {pathName === "/api/member/create" ? <RegisterMenu /> : <SidebarMenu />}
     </SidebarBlock>
   );
 };
