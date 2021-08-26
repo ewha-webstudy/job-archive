@@ -14,7 +14,7 @@ const Modal = () => {
 
   return (
     <>
-      <button class="outbutton" onClick={onOpen}>
+      <button className="outbutton" onClick={onOpen}>
         회원 탈퇴
       </button>
       <Grommet theme={theme}>
@@ -45,7 +45,9 @@ const sidebarMenu = [
 
 const SidebarItem = ({ menu, isActive }) => {
   return isActive === true ? (
-    <SidebarButton className="sidebar-item active">{menu.title}</SidebarButton>
+    <SidebarButton key={menu.id} className="sidebar-item active">
+      {menu.title}
+    </SidebarButton>
   ) : (
     <SidebarButton>{menu.title}</SidebarButton>
   );
@@ -68,8 +70,8 @@ const Sidebar = () => {
       <>
         {sidebarMenu.map((menu) => {
           return (
-            <NavLink to={"/mypage/" + menu.id}>
-              <SidebarItem menu={menu} />
+            <NavLink key={menu.id} to={"/mypage/" + menu.id}>
+              <SidebarItem key={menu.id} menu={menu} />
             </NavLink>
           );
         })}
@@ -136,14 +138,6 @@ const SidebarButton = styled.button`
 
   background: none;
   margin-top: 15px;
-`;
-
-const CloseModalButton = styled(MdClose)`
-  cursor: pointer;
-  width: 20px;
-  height: 20px;
-  padding: 0;
-  z-index: 10;
 `;
 
 export default Sidebar;

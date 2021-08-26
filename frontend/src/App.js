@@ -9,7 +9,6 @@ import CategoryPage from "./pages/Category";
 import DetailInfoPage from "./pages/DetailPage";
 import LoginPage from "./pages/Login";
 import MyPage from "./pages/MyPage";
-import Signup from "./components/Login/Signup";
 
 class App extends Component {
   constructor(props) {

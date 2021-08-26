@@ -13,7 +13,7 @@ const MyPage = () => {
       <NavBar />
       <MyPageTemplate>
         <Sidebar />
-        <Route exact path="/signup" component={Signup} />
+        <Route exact path="/signup" component={Signup} /> 
         <Route exact path="/mypage/profile" component={Profile} />
         <Route exact path="/mypage/notification" component={Notification} />
         <Route exact path="/mypage/like" component={Like} />

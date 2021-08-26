@@ -15,7 +15,7 @@ const theme = {
 //회원가입, 회원정보수정에 사용되는 Form
 const ProfileForm = ({ value, onChange, onClick }) => {
   //출생연도 선택 시 보이는 연도 리스트
-  const yearOptions = [...Array(80)].map((v, i) => i + 1942);
+  const yearOptions = [...Array(80)].map((v, i) => `${i + 1942}`);
 
   //이메일 작성 시 사용할 수 있는 형식 지정
   const emailMask = [
