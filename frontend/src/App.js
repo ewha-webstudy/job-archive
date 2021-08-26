@@ -26,7 +26,7 @@ function App() {
             />
             <Route path="/api/job/:id" exact component={DetailInfoPage} />
             <Route path="/login" exact component={LoginPage} />
-            <Route path="/api/mypage/profile" exact component={MyPage} />
+            <Route path="/api/mypage/:id" exact component={MyPage} />
             <Footer />
           </Grommet>
         </>
