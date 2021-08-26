@@ -1,33 +1,31 @@
 import { Card, CardHeader, Box, Image, Button } from "grommet";
 import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router";
+import { useSelector, useDispatch } from "react-redux";
+// import allActions from "../../actions";
 import { Link } from "react-router-dom";
 import { Favorite } from "grommet-icons";
 import "../../style/card.css";
 import API from "../../utils/api";
 import GetDday from "./GetDday";
 
-function JobCard({ name, id, end, position, logo, likeNo, logged, userId }) {
+// 좋아요 여부 - isLiked, logged 일단 삭제했음
+function JobCard({
+  name,
+  id,
+  end,
+  position,
+  logo,
+  likeNo,
+  islogin,
+  token,
+  onLogin,
+  onLogout
+}) {
   const [isliked, setLiked] = useState(false);
   const [numLikes, setnumLikes] = useState(likeNo);
-  const [isLogin, setIsLogin] = useState(logged); // 초기값은 false
-  const history = useHistory();
-
-  // TODO: 로그인 상태 연결하기
-  // const user = { id: "cdnnnl", token: "___" };
-  // localStorage.setItem(id, "cdnnnl");
-
-  useEffect(() => {
-    // const userId = localStorage.getItem(id);
-    if (!isLogin) {
-      setIsLogin(true);
-    } else {
-      setIsLogin(false);
-    }
-  }, []);
 
   const sendnumLikes = () => {
-    // 좋아요 눌렀을 때
+    // 좋아요를 누른거라면
     if (!isliked) {
       console.log("isLiked status:", isliked);
       API.post(`/api/like`, { jobid: id })
@@ -38,7 +36,7 @@ function JobCard({ name, id, end, position, logo, likeNo, logged, userId }) {
           console.error(error);
         });
     } else {
-      // 좋아요 취소했을 때
+      // 좋아요를 취소한거라면
       console.log("isLiked status:", isliked);
       API.delete(`/api/unlike/${id}`)
         .then(response => {
@@ -51,10 +49,8 @@ function JobCard({ name, id, end, position, logo, likeNo, logged, userId }) {
   };
 
   const checkIsLogin = () => {
-    console.log("isLogin", isLogin);
     // 로그인되어 있고, liked가 false라면
-
-    if (isLogin && !isliked) {
+    if (islogin && !isliked) {
       // like 상태를 true로 바꾸고, numLike는 +1 해주기
       setLiked(!isliked);
       setnumLikes(numLikes + 1);
@@ -64,9 +60,11 @@ function JobCard({ name, id, end, position, logo, likeNo, logged, userId }) {
     }
 
     // 로그인되어 있고, liked가 true인 경우
-    else if (isLogin && isliked) {
+    else if (islogin && isliked) {
       setLiked(!isliked);
       setnumLikes(numLikes - 1);
+
+      sendnumLikes();
     }
 
     // 로그인 안되어 있는 경우
@@ -120,13 +118,13 @@ function JobCard({ name, id, end, position, logo, likeNo, logged, userId }) {
       </div>
       <footer className="card__footer">
         <Link to={`/api/job/${id}`}>
-        <Button
-          color={{ border: "gray" }}
-          gap="medium"
-          label="자세히 보기"
-          hoverIndicator
-          onClick={goToDetail}
-        />
+          <Button
+            color={{ border: "gray" }}
+            gap="medium"
+            label="자세히 보기"
+            hoverIndicator
+            onClick={goToDetail}
+          />
         </Link>
       </footer>
     </Card>
