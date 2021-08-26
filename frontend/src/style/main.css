@@ -32,7 +32,6 @@ li {
 
 .header__logo a:hover {
   cursor: pointer;
-  color: #fff !important;
 }
 
 .nav {
@@ -111,7 +110,7 @@ li {
   color: black;
   cursor: pointer;
 }
-.btn__search:hover {
+.searchbar__btn:hover {
   background-color: #ffaf00;
   color: black;
   border-bottom-color: #8480c5;
