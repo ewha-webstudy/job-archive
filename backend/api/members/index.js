@@ -11,16 +11,17 @@ const likeCtrl = require("./like.ctrl");
 //member
 router.post('/member/auth', membersCtrl.authMember);
 router.post('/member/create', membersCtrl.createMember);
-router.delete('/member/delete', membersCtrl.deleteMember);
+router.delete('/member/delete', verifyToken, membersCtrl.deleteMember);
+router.post('/member/logout', verifyToken, membersCtrl.logout);
 
-//mypage
-router.patch("/mypage/profile", verifyToken, mypageCtrl.editProfile); 
-//router.post("/mypage/notification", membersCtrl.notifyDday); 
+//mypages
+router.post("/mypage/profile", verifyToken, mypageCtrl.editProfile); 
+//router.post("/mypage/notification", verifyToken, membersCtrl.notifyDday); 
 router.get('/mypage/like', verifyToken, mypageCtrl.getLikelist);
 
 //like
-router.post('/like', verifyToken, likeCtrl.postLike);
-router.delete('/unlike', verifyToken, likeCtrl.deleteLike);
+router.post('/like', verifyToken, likeCtrl.Like); 
+router.delete('/unlike/:jobid', verifyToken, likeCtrl.UnLike);
 
 
 module.exports = router;
@@ -32,7 +33,7 @@ module.exports = router;
  *  post:
  *    tags:
  *    - Member Login
- *    description: 로그인 페이지 (토큰 이용)
+ *    description: 로그인 (토큰 이용) 
  *    parameters:
  *    - in: "body"
  *      name: "로그인"
@@ -57,7 +58,7 @@ module.exports = router;
  *  post:
  *    tags:
  *    - Member Signup
- *    description: 회원가입 페이지
+ *    description: 회원가입
  *    parameters:
  *    - in: "body"
  *      name: "회원가입"
@@ -80,19 +81,12 @@ module.exports = router;
  *    tags:
  *    - Member Delete
  *    description: 유저 삭제
- *    parameters:
- *    - in: "body"
- *      name: "좋아요 설정"
- *      required: true
- *      schema:
- *        $ref: "#/components/schemas/Like"
- *      style: simple
  *    responses:
  *      200:
  *        description: 유저 삭제 성공
  * 
  * /api/mypage/profile:
- *    patch:
+ *    post:
  *     tags:
  *     - Mypage - profile
  *     description: 프로필 관리
@@ -133,7 +127,7 @@ module.exports = router;
  *  get:
  *    tags:
  *    - Mypage - Like
- *    description: 마이페이지-저장목록 리스트 보여주기
+ *    description: 마이페이지 - 저장목록 리스트 보여주기
  *    parameters:
  *    responses:
  *      200:
@@ -169,10 +163,12 @@ module.exports = router;
  *        description: 로그인 문제(token expired)
  * 
  *      404:
- *        description: 처리 중 에러 (예. like 테이블에 이미 있는 공고번호를 추가하려고 할 때)
+ *        description: 이미 좋아요한 공고일 때 
+ *      408:
+ *        description: db 처리 중 오류
  * 
  
- * /api/unlike:
+ * /api/unlike/:jobid:
  *  delete:
  *    tags:
  *    - Unlike
@@ -195,6 +191,9 @@ module.exports = router;
  *        description: 로그인 문제 (token expired)
  * 
  *      404:
- *        description: 처리 중 에러 (예. like 테이블에 존재하지 않는 공고번호를 제거하려고 할 때)
+ *        description: 좋아요 되어있지 않은 공고
+ * 
+ *      408:
+ *        description: db 처리 중 오류
  * 
  */

@@ -8,30 +8,46 @@ const { Job } = require('../../models');
 
 /* GET /api/mypage/like */
 exports.getLikelist = async (req, res) => {
-    //마이페이지 - 저장목록에서 로그인한 유저의 좋아요 리스트 보여주기
+    //마이페이지 - 저장목록에서 로그인한 유저의 좋아요 리스트 보여주기 
     const loggedID = res.locals.userid;
-    const likeListNo = [];
+    const cardList = [];
     console.log("this is getLikelist");
 
     try{
-        await Like.findAndCountAll(
+        const jobList = await Like.findAndCountAll(
             { where: {userid: loggedID}, attributes: ['wantedAuthNo'] }
-        ).then((result) => {
-            for(var i=0; i<result.count; i++){
-                likeListNo.push((result.rows[i].wantedAuthNo));
-            }
-            return res.status(200).json({likeListNo});
-        }).catch((err) => {
-            return res.status(404).send(); //404: db처리 중 오류
-        });   
+        );
+        for(var i=0; i<jobList.count; i++){
+            cardList.push(await toCard(jobList.rows[i].wantedAuthNo));
+        }
+        res.send(cardList);
     } catch (e) {
         console.error(e);
         res.status(500).send(); //500
-    }
+    } 
 };
 
 
-/* PATCH /api/mypage/profile */
+const getData = async(wantedAuthNo) => {
+    const job = await Job.findByPk(wantedAuthNo);
+    return { job }
+  }
+
+const toCard = async(wantedAuthNo) => {
+    const { job } = await getData(wantedAuthNo);
+    return {
+        wantedAuthNo: job.wantedAuthNo,
+        wantedTitle: job.wantedTitle,
+        company: job.company,
+        logo: job.logo,
+        receiptCloseDt: job.receiptCloseDt,
+        jobCont: job.jobCont,
+        likeNo: job.likeNo
+    }
+}
+
+
+/* PUT /api/mypage/profile */
 exports.editProfile = async (req, res) => {
     //마이페이지 - 프로필 관리에서 로그인한 유저 정보의 수정사항 저장
     const client = req.body;
@@ -65,3 +81,4 @@ exports.editProfile = async (req, res) => {
 exports.notifyDday = async (req, res) => {
     //마이페이지- 디데이알림
 };
+

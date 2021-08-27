@@ -41,4 +41,18 @@ db.Membership = require('./membership')(sequelize, Sequelize);
 db.Like = require('./like')(sequelize, Sequelize);
 
 
+db.Membership.hasMany(db.Like, {
+  as: "Like",
+  foreginKey: "userid",
+  onDelete: "cascade",
+  hooks: true
+});
+
+db.Like.belongsTo(db.Membership, {
+  foreginKey: "userid",
+  as: "Membership",
+  onDelete: "cascade",
+  hooks: true
+}); 
+
 module.exports = db;
