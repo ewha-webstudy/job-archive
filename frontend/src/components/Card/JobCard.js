@@ -8,25 +8,16 @@ import "../../style/card.css";
 import API from "../../utils/api";
 import GetDday from "./GetDday";
 
-// 좋아요 여부 - isLiked, logged 일단 삭제했음
-function JobCard({
-  name,
-  id,
-  end,
-  position,
-  logo,
-  likeNo,
-  islogin,
-  token,
-  onLogin,
-  onLogout,
-}) {
+
+function JobCard({ name, id, end, position, logo, likeNo, islogin }) {
+
   const [isliked, setLiked] = useState(false);
   const [numLikes, setnumLikes] = useState(likeNo);
 
   const sendnumLikes = () => {
     // 좋아요를 누른거라면
     if (!isliked) {
+      // user 테이블 좋아요 추가
       console.log("isLiked status:", isliked);
       API.post(`/api/like`, { jobid: id })
         .then((response) => {
@@ -35,14 +26,39 @@ function JobCard({
         .catch((error) => {
           console.error(error);
         });
+
+      // job 테이블 좋아요 추가
+      API.post(`/api/likeIncrease`, { id: id })
+        .then(response => {
+          console.log(response);
+          // 좋아요 수를 res.likeNo로 설정
+          setnumLikes(response.data.likeNo);
+        })
+        .catch(error => {
+          console.error(error);
+        });
+
+      // API.post("/api/likeIncrease")
     } else {
       // 좋아요를 취소한거라면
       console.log("isLiked status:", isliked);
+      // user 테이블 좋아요 삭제
       API.delete(`/api/unlike/${id}`)
         .then((response) => {
           console.log(response);
         })
         .catch((error) => {
+          console.error(error);
+        });
+
+      // job 테이블 좋아요 감소
+      API.post(`/api/likeDecrease`, { id: id })
+        .then(response => {
+          console.log(response);
+          // 좋아요 수를 res.likeNo로 설정
+          setnumLikes(response.data.likeNo);
+        })
+        .catch(error => {
           console.error(error);
         });
     }
@@ -53,7 +69,7 @@ function JobCard({
     if (islogin && !isliked) {
       // like 상태를 true로 바꾸고, numLike는 +1 해주기
       setLiked(!isliked);
-      setnumLikes(numLikes + 1);
+      setnumLikes(numLikes);
 
       // 서버로 좋아요 수 보낸다
       sendnumLikes();
@@ -62,7 +78,7 @@ function JobCard({
     // 로그인되어 있고, liked가 true인 경우
     else if (islogin && isliked) {
       setLiked(!isliked);
-      setnumLikes(numLikes - 1);
+      setnumLikes(numLikes);
 
       sendnumLikes();
     }
@@ -73,6 +89,7 @@ function JobCard({
     }
   };
 
+  /*
   const goToDetail = async () => {
     console.log("click");
     await API.get(`/api/job/${id}`)
@@ -85,6 +102,7 @@ function JobCard({
         console.error(error);
       });
   };
+  */
 
   return (
     <Card width="small" background="light-1" responsive>
@@ -123,8 +141,8 @@ function JobCard({
             gap="medium"
             label="자세히 보기"
             hoverIndicator
-            onClick={goToDetail}
           />
+          {/* onClick={goToDetail} */}
         </Link>
       </footer>
     </Card>
