@@ -21,8 +21,7 @@ const Theme = {
   }
 };
 
-// islogin, token, onLogin, onLogout
-const NavBar = ({ islogin, onLogin, onLogout }) => {
+const NavBar = ({ islogin, onLogout }) => {
   return (
     <BrowserRouter>
       <Grommet theme={Theme}>
