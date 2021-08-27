@@ -29,16 +29,19 @@ const SaveList = () => {
 
 const SaveListBlock = styled.div`
   overflow: auto;
+
   &::-webkit-scrollbar {
     width: 10px;
     background: none;
   }
+
   &::-webkit-scrollbar-thumb {
     background: #c8c8c8;
     border-radius: 10px;
     background-clip: padding-box;
     border: 2px solid transparent;
   }
+
   &::-webkit-scrollbar-track {
     background: #ededed;
     border-radius: 10px;
@@ -47,10 +50,10 @@ const SaveListBlock = styled.div`
   width: 75%;
   height: 80%;
 
-  display: flex;
-  flex-wrap: wrap;
   float: right;
+  display: flex;
   margin-top: 7%;
-  margin-right: 4%;
+  flex-wrap: wrap;
+  margin-right: 1rem;
 `;
 export default SaveList;

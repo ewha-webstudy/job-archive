@@ -12,27 +12,13 @@ const Login = ({ islogin, token, onLogin, onLogout }) => {
     psword: "",
   });
 
-  const SubmitHandler = async (e) => {
+  const SubmitHandler = (e) => {
     e.preventDefault();
     console.log(user);
 
-    await API.post("/api/login", user)
+    API.post("/api/member/auth", user)
       .then((res) => {
         console.log("res: ", res);
-
-        // TODO: 토큰 로컬스토리지에 저장
-        // accessToken, refreshToken, 만료 기간을 반환 받고 localStorage에 저장한다.
-        localStorage.setItem("accessToken", res.data.data.accessToken);
-        localStorage.setItem("refreshToken", res.data.data.refreshToken);
-        localStorage.setItem("expiredTime", res.data.data.cur_time);
-
-        // accessToken을 store에 저장
-        onLogin(res.data.data.accessToken);
-        // onLogin("token");
-
-        // accessToken의 경우 axios 동작 시 헤더에 기본으로 붙도록 설정한다.
-        API.defaults.headers.common["x-access-token"] =
-          res.data.data.accessToken;
         history.push("/");
       })
       .catch((err) => {

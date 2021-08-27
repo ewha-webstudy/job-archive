@@ -98,24 +98,19 @@ const Sidebar = () => {
 const SidebarBlock = styled.div`
   width: 20%;
   height: 80%;
-
   margin-top: 7%;
-
   float: left;
   border-right: 2px solid #ef8d21;
-  }
+  text-align: center;
 
   .outbutton {
     &:hover {
-        cursor: pointer;
-      }
-      
+      cursor: pointer;
+    }
     margin-top: 150%;
-    margin-left: 110px;
-    
     background: white;
     color: darkgrey;
-    font-size: 18px;
+    font-size: 1rem;
     border: none;
   }
 `;
@@ -125,7 +120,6 @@ const SidebarButton = styled.button`
     cursor: pointer;
     color: #ef8d21;
   }
-
   .active & {
     color: #ef8d21;
   }
@@ -134,10 +128,10 @@ const SidebarButton = styled.button`
   width: 100%;
 
   border: none;
-  font-size: 24px;
+  font-size: 1.2rem;
 
   background: none;
-  margin-top: 15px;
+  margin-top: 0.8rem;
 `;
 
 export default Sidebar;
