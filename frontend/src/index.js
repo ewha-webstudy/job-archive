@@ -4,7 +4,8 @@ import App from "./App";
 import { Grommet } from "grommet";
 import { createStore } from "redux";
 import { Provider } from "react-redux";
-
+import { persistStore } from "redux-persist";
+import { PersistGate } from "redux-persist/integration/react";
 import rootReducer from "./modules";
 import { composeWithDevTools } from "redux-devtools-extension";
 
@@ -13,12 +14,14 @@ const Theme = {
 };
 
 const store = createStore(rootReducer, composeWithDevTools());
-
+const persistor = persistStore(store);
 ReactDOM.render(
   <Provider store={store}>
-    <Grommet theme={Theme}>
-      <App />
-    </Grommet>
+    <PersistGate loading={null} persistor={persistor}>
+      <Grommet theme={Theme}>
+        <App />
+      </Grommet>
+    </PersistGate>
   </Provider>,
   document.querySelector("#root")
 );
