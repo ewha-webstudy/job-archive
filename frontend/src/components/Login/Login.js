@@ -20,7 +20,7 @@ const Login = ({ onLogin }) => {
       .then((res) => {
         console.log("res: ", res);
 
-        const { accessToken } = res.cookie.user;
+        const accessToken = res.cookie.user;
       
         // accessToken store에 저장
         onLogin(accessToken);
@@ -28,7 +28,7 @@ const Login = ({ onLogin }) => {
         // TEST: onLogin("tokentoken");
 
         // axios 동작 시 헤더에 기본으로 붙도록 설정한다.
-        API.defaults.headers.common["Authorization"] = accessToken;
+        API.defaults.headers.common["user"] = accessToken;
         history.push("/");
       })
       .catch((err) => {
