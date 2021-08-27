@@ -4,7 +4,7 @@ const requestDetail = require('request-promise-native');
 const fs = require('fs');
 const { type } = require('os');
 const { resolve } = require('path');
-const { job } = require("../models");
+const { job } = require("./models");
 
 const HOST = 'http://openapi.work.go.kr/opi/opi/opia/wantedApi.do'
 const SERVICE_KEY = 'WNKREKMMVKGZ30G24C2D82VR1HJ'
@@ -594,12 +594,6 @@ function acceptNull(value) {
         value = value.toString();
     }
     return value;
-}
-
-async function checkDuplicate(authNo) {
-    await job.findOne({ where: { wantedAuthNo: authNo }})
-    .then(
-    );
 }
 
 async function putInDB() {
