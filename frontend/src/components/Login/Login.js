@@ -5,7 +5,7 @@ import { useState } from "react";
 
 // login: login 여부, token: 토큰
 // onLogin: 로그인하는 함수, onLogout: 로그아웃하는 함수
-const Login = ({ islogin, token, onLogin, onLogout }) => {
+const Login = ({ onLogin }) => {
   const history = useHistory();
   const [user, setUser] = useState({
     id: "",

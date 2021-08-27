@@ -1,7 +1,6 @@
 import React, { Component } from "react";
-import { BrowserRouter, Link, NavLink } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 import { Button, Nav, Anchor, Grommet } from "grommet";
-import { useSelector } from "react-redux";
 import "../../style/main.css";
 
 const Theme = {
@@ -18,10 +17,11 @@ const Theme = {
       textDecoration: "underline #FFA500",
       extend: "text-decoration-thickness 5px",
     },
+    color: "black",
   },
 };
 
-const NavBar = ({ islogin, token, onLogin, onLogout }) => {
+const NavBar = ({ islogin, onLogout }) => {
   return (
     <BrowserRouter>
       <Grommet theme={Theme}>
@@ -32,41 +32,19 @@ const NavBar = ({ islogin, token, onLogin, onLogout }) => {
             </ul>
             <div className="nav">
               <li className="nav__tag">
-                <Anchor
-                  href="/api/category/frontend"
-                  color="black"
-                  label="프론트엔드"
-                  hover
-                />
+                <Anchor href="/api/category/frontend" label="프론트엔드" />
               </li>
               <li className="nav__tag">
-                <Anchor
-                  href="/api/category/backend"
-                  color="black"
-                  label="백엔드"
-                  hoverIndicator
-                />
+                <Anchor href="/api/category/backend" label="백엔드" />
               </li>
               <li className="nav__tag">
-                <Anchor
-                  href="/api/category/data"
-                  color="black"
-                  label="AI/데이터분석"
-                  hoverIndicator
-                />
+                <Anchor href="/api/category/data" label="AI/데이터분석" />
               </li>
-              {islogin}
               {islogin ? (
                 <>
-                  {" "}
                   <li className="nav__tag">
-                    <Anchor
-                      href="/mypage/profile"
-                      color="black"
-                      label="마이페이지"
-                      hoverIndicator
-                    />
-                  </li>{" "}
+                    <Anchor href="/api/mypage/profile" label="마이페이지" />
+                  </li>
                   <li className="header__auth">
                     <Button
                       href="/"
@@ -76,7 +54,7 @@ const NavBar = ({ islogin, token, onLogin, onLogout }) => {
                       alignSelf="center"
                       onClick={onLogout}
                     />
-                  </li>{" "}
+                  </li>
                 </>
               ) : (
                 <li className="header__auth">

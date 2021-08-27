@@ -73,7 +73,9 @@ const Notification = () => {
           </ButtonGroup>
         </InputWrapper>
       </NotificationBlock>
-      <SubmitButton>저장</SubmitButton>
+      <ButtonWrapper>
+        <SubmitButton>저장</SubmitButton>
+      </ButtonWrapper>
     </>
   );
 };
@@ -134,6 +136,13 @@ const NotificationButton = styled.button`
 
   border: none;
   background: none;
+`;
+
+const ButtonWrapper = styled.div`
+  float: right;
+  width: 50rem;
+  height: 10rem;
+  display: flex;
 `;
 
 export default Notification;

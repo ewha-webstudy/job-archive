@@ -113,8 +113,8 @@ const ex = [
   },
 ];
 
-// api 연결되면 jobs로 데이터 받음
-const CardBoard = ({ jobs, islogin, token, onLogin, onLogout }) => {
+// *** api 연결하려면, line122의 ex-> jobs로 수정
+const CardBoard = ({ jobs, islogin }) => {
   return (
     <>
       <Container>
@@ -129,9 +129,6 @@ const CardBoard = ({ jobs, islogin, token, onLogin, onLogout }) => {
               logo={jobs.logo}
               likeNo={jobs.likeNo}
               islogin={islogin}
-              token={token}
-              onLogin={onLogin}
-              onLogout={onLogout}
             />
           ))}
         </Cards>
