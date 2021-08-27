@@ -16,7 +16,7 @@ const Login = ({ islogin, token, onLogin, onLogout }) => {
     e.preventDefault();
     console.log(user);
 
-    await API.post("/api/login", user)
+    await API.post("/api/member/auth", user)
       .then((res) => {
         console.log("res: ", res);
 
