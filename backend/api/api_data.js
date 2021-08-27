@@ -4,7 +4,7 @@ const requestDetail = require('request-promise-native');
 const fs = require('fs');
 const { type } = require('os');
 const { resolve } = require('path');
-const { job } = require("./models");
+const { job } = require("../models");
 
 const HOST = 'http://openapi.work.go.kr/opi/opi/opia/wantedApi.do'
 const SERVICE_KEY = 'WNKREKMMVKGZ30G24C2D82VR1HJ'
@@ -596,8 +596,8 @@ function acceptNull(value) {
     return value;
 }
 
-function checkDuplicate(authNo) {
-    job.findOne({ where: { wantedAuthNo: authNo }})
+async function checkDuplicate(authNo) {
+    await job.findOne({ where: { wantedAuthNo: authNo }})
     .then(
     );
 }
@@ -608,7 +608,7 @@ async function putInDB() {
             if(detailArray[i]['wantedDtl']['wantedAuthNo'] == basicArray[j].wantedAuthNo) {
                 var regDtStr = "20" + basicArray[j].regDt;
                 var regDtDate = to_date1(regDtStr);
-                if(job.findOne({ where: { wantedAuthNo: detailArray[i]['wantedDtl']['wantedAuthNo'] }}) != null) {
+                if(await job.findOne({ where: { wantedAuthNo: detailArray[i]['wantedDtl']['wantedAuthNo'] }}) != null) {
                     break;
                 }    
                 
@@ -653,6 +653,11 @@ async function putInDB() {
     }
 }
 
+// async function test() {
+//     await job.create({ wantedAuthNo: "test", regDt: "2021-08-28", company: "test", sal: "100만원", minSal:100, region:"서울", wantedInfoUrl: "test", wantedTitle: "test", salTpCd:"Y", jobCont:"test", category: "data", techStack: "test", enterTpCd:"N",  minEdubglcd: "00", empTpNm: "test", workdayWorkhrCont: "tset", receiptCloseDt: "9999-01-01", likeNo:0 });
+// }
+
+// test()
 
 getBasic()
     .then(addUrlToArr,
