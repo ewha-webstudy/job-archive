@@ -20,15 +20,15 @@ const Login = ({ onLogin }) => {
       .then((res) => {
         console.log("res: ", res);
 
-        // accessToken을 반환 받고 localStorage에 저장한다.
-        const { accessToken } = res.data;
+        const { accessToken } = res.cookie.user;
+      
+        // accessToken store에 저장
+        onLogin(accessToken);
+      
+        // TEST: onLogin("tokentoken");
 
-        // accessToken을 store에 저장
-        // onLogin(res.data.data.accessToken);
-        onLogin("tokentoken"); // test 코드
-
-        // accessToken의 경우 axios 동작 시 헤더에 기본으로 붙도록 설정한다.
-        API.defaults.headers.common["Authorization"] = `${accessToken}`;
+        // axios 동작 시 헤더에 기본으로 붙도록 설정한다.
+        API.defaults.headers.common["user"] = accessToken;
         history.push("/");
       })
       .catch((err) => {
