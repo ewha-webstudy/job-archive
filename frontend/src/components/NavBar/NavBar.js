@@ -15,11 +15,10 @@ const Theme = {
     textDecoration: "none",
     hover: {
       textDecoration: "underline #FFA500",
-      extend: "text-decoration-thickness 5px"
+      extend: "text-decoration-thickness 5px",
     },
-    color: "black"
-  }
-
+    color: "black",
+  },
 };
 
 const NavBar = ({ islogin, onLogout }) => {
@@ -60,7 +59,7 @@ const NavBar = ({ islogin, onLogout }) => {
               ) : (
                 <li className="header__auth">
                   <Button
-                    href="/login"
+                    href="/member/auth"
                     color="#ffaf00"
                     primary
                     label="Login"

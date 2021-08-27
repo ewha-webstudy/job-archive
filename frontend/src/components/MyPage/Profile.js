@@ -26,21 +26,21 @@ const Profile = () => {
     e.preventDefault();
     console.log("member:", member);
 
-    API.patch("/api/mypage/profile", member)
+    API.post("/api/mypage/profile", member)
       .then((res) => {
         alert("저장되었습니다!");
         console.log("RES: ", res);
         history.push("/");
       })
       .catch((err) => {
-        console.log("ERR: ", err.response.status);
+        console.log("ERR: ", err);
 
-        if (err.response.status === 401) {
-          alert("Toekn expired");
-        }
-        if (err.response.status === 412) {
-          alert("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
-        }
+        // if (err.response.status === 401) {
+        //   alert("Toekn expired");
+        // }
+        // if (err.response.status === 412) {
+        //   alert("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
+        // }
       });
   };
 
