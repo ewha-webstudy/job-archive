@@ -9,6 +9,7 @@ import CategoryPage from "./pages/Category";
 import DetailInfoPage from "./pages/DetailPage";
 import LoginPage from "./pages/Login";
 import MyPage from "./pages/MyPage";
+import SignupPage from "./pages/Signup";
 
 function App() {
   return (
@@ -26,7 +27,8 @@ function App() {
             />
             <Route path="/api/job/:id" exact component={DetailInfoPage} />
             <Route path="/login" exact component={LoginPage} />
-            <Route path="/api/mypage/profile" exact component={MyPage} />
+            <Route path="/api/member/create" exact component={SignupPage} />
+            <Route path="/api/mypage/:id" exact component={MyPage} />
             <Footer />
           </Grommet>
         </>

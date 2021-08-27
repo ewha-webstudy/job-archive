@@ -2,8 +2,98 @@ import { NavLink, useLocation } from "react-router-dom";
 import { useState } from "react";
 import styled from "styled-components";
 import Withdrawal from "./Withdrawal";
-import { Grommet, Layer } from "grommet";
+import { Box, Button, Grommet, Layer } from "grommet";
 import { MdClose } from "react-icons/md";
+import { FormClose } from "grommet-icons";
+
+const Modal = () => {
+  //모달 창 띄우기, 닫기
+  const [open, setOpen] = useState();
+  const onOpen = () => setOpen(true);
+  const onClose = () => setOpen(undefined);
+
+  return (
+    <>
+      <button className="outbutton" onClick={onOpen}>
+        회원 탈퇴
+      </button>
+      <Grommet theme={theme}>
+        {open && (
+          <Layer position="center" onClickOutside={onClose} onEsc={onClose}>
+            <Box
+              pad="medium"
+              gap="small"
+              width={{ min: "medium" }}
+              height={{ min: "medium" }}
+              fill
+            >
+              <Button alignSelf="end" icon={<FormClose />} onClick={onClose} />
+              <Withdrawal />
+            </Box>
+          </Layer>
+        )}
+      </Grommet>
+    </>
+  );
+};
+
+const sidebarMenu = [
+  { id: "profile", title: "프로필 관리" },
+  { id: "notification", title: "디데이 알림" },
+  { id: "like", title: "저장 목록 관리" },
+];
+
+const SidebarItem = ({ menu, isActive }) => {
+  return isActive === true ? (
+    <SidebarButton key={menu.id} className="sidebar-item active">
+      {menu.title}
+    </SidebarButton>
+  ) : (
+    <SidebarButton>{menu.title}</SidebarButton>
+  );
+};
+
+const theme = {
+  global: {
+    colors: {
+      brand: "white",
+      focus: "none",
+    },
+  },
+};
+
+const Sidebar = () => {
+  const pathName = useLocation().pathname;
+
+  const SidebarMenu = () => {
+    return (
+      <>
+        {sidebarMenu.map((menu) => {
+          return (
+            <NavLink key={menu.id} to={"/api/mypage/" + menu.id}>
+              <SidebarItem key={menu.id} menu={menu} />
+            </NavLink>
+          );
+        })}
+        <Modal />
+      </>
+    );
+  };
+
+  const RegisterMenu = () => {
+    return (
+      <NavLink to={"/api/member/create"}>
+        <SidebarButton>회원 가입</SidebarButton>
+      </NavLink>
+    );
+  };
+
+  return (
+    <SidebarBlock>
+      {pathName === "/api/member/create" ? <RegisterMenu /> : <SidebarMenu />}
+    </SidebarBlock>
+  );
+};
 
 const SidebarBlock = styled.div`
   width: 20%;
@@ -49,95 +139,5 @@ const SidebarButton = styled.button`
   background: none;
   margin-top: 15px;
 `;
-
-const CloseModalButton = styled(MdClose)`
-  cursor: pointer;
-
-  width: 20px;
-  height: 20px;
-  padding: 0;
-  z-index: 10;
-  y-index: 30;
-`;
-
-export const Modal = () => {
-  const [open, setOpen] = useState();
-  const onOpen = () => setOpen(true);
-  const onClose = () => setOpen(undefined);
-  const [showModal, setShowModal] = useState(true);
-  return (
-    <>
-      <button class="outbutton" onClick={onOpen}>
-        회원 탈퇴
-      </button>
-      <Grommet theme={theme}>
-        {open && (
-          <Layer position="center" onClickOutside={onClose}>
-            <div>
-              <CloseModalButton onClick={onClose} />
-              <Withdrawal showModal={showModal} setShowModal={setShowModal} />
-            </div>
-          </Layer>
-        )}
-      </Grommet>
-    </>
-  );
-};
-
-const sidebarMenu = [
-  { id: "1", title: "프로필 관리" },
-  { id: "2", title: "디데이 알림" },
-  { id: "3", title: "저장 목록 관리" },
-];
-
-const SidebarItem = ({ menu, isActive }) => {
-  return isActive === true ? (
-    <SidebarButton className="sidebar-item active">{menu.title}</SidebarButton>
-  ) : (
-    <SidebarButton>{menu.title}</SidebarButton>
-  );
-};
-
-const theme = {
-  global: {
-    colors: {
-      brand: "white",
-      focus: "none",
-    },
-  },
-};
-
-const Sidebar = () => {
-  const pathName = useLocation().pathname;
-
-  const SidebarMenu = () => {
-    return (
-      <>
-        {sidebarMenu.map((menu) => {
-          return (
-            <NavLink to={"/mypage/" + menu.id}>
-              <SidebarItem menu={menu} />
-            </NavLink>
-          );
-        })}
-        <Modal />
-      </>
-    );
-  };
-
-  const RegisterMenu = () => {
-    return (
-      <NavLink to={"/signup"}>
-        <SidebarButton>회원 가입</SidebarButton>
-      </NavLink>
-    );
-  };
-
-  return (
-    <SidebarBlock>
-      {pathName === "/signup" ? <RegisterMenu /> : <SidebarMenu />}
-    </SidebarBlock>
-  );
-};
 
 export default Sidebar;

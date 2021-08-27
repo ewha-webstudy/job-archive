@@ -8,8 +8,9 @@ import "../../style/card.css";
 import API from "../../utils/api";
 import GetDday from "./GetDday";
 
-// 좋아요 여부 - isLiked, logged 일단 삭제했음
+
 function JobCard({ name, id, end, position, logo, likeNo, islogin }) {
+
   const [isliked, setLiked] = useState(false);
   const [numLikes, setnumLikes] = useState(likeNo);
 
@@ -19,10 +20,10 @@ function JobCard({ name, id, end, position, logo, likeNo, islogin }) {
       // user 테이블 좋아요 추가
       console.log("isLiked status:", isliked);
       API.post(`/api/like`, { jobid: id })
-        .then(response => {
+        .then((response) => {
           console.log(response);
         })
-        .catch(error => {
+        .catch((error) => {
           console.error(error);
         });
 
@@ -43,10 +44,10 @@ function JobCard({ name, id, end, position, logo, likeNo, islogin }) {
       console.log("isLiked status:", isliked);
       // user 테이블 좋아요 삭제
       API.delete(`/api/unlike/${id}`)
-        .then(response => {
+        .then((response) => {
           console.log(response);
         })
-        .catch(error => {
+        .catch((error) => {
           console.error(error);
         });
 
@@ -92,11 +93,11 @@ function JobCard({ name, id, end, position, logo, likeNo, islogin }) {
   const goToDetail = async () => {
     console.log("click");
     await API.get(`/api/job/${id}`)
-      .then(response => {
+      .then((response) => {
         console.log(response);
         // history.push(`/api/job/${id}`);
       })
-      .catch(error => {
+      .catch((error) => {
         // TODO: 서버 HTTP 에러 코드 확인하고 예외 처리하기
         console.error(error);
       });

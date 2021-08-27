@@ -1,5 +1,31 @@
+import axios from "axios";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
 import CardBoard from "../Card/CardBoard";
+
+const SaveList = () => {
+  //받아온 데이터를 jobs에 저장
+  const [likes, setLikes] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("/api/mypage/like")
+      .then((res) => {
+        const likes = res.data;
+        console.log(likes);
+        setLikes(likes);
+      })
+      .catch((err) => {
+        console.log("ERR: ", err);
+      });
+  }, []);
+
+  return (
+    <SaveListBlock>
+      <CardBoard jobs={likes} logged={true} /> {/*수정 중*/}
+    </SaveListBlock>
+  );
+};
 
 const SaveListBlock = styled.div`
   overflow: auto;
@@ -27,13 +53,4 @@ const SaveListBlock = styled.div`
   margin-top: 7%;
   margin-right: 4%;
 `;
-
-const SaveList = () => {
-  return (
-    <SaveListBlock>
-      <CardBoard />
-    </SaveListBlock>
-  );
-};
-
 export default SaveList;

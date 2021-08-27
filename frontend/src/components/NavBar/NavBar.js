@@ -5,11 +5,11 @@ import "../../style/main.css";
 
 const Theme = {
   global: {
-    color: "white"
+    color: "white",
   },
   button: {
     color: "white",
-    alignSelf: "center"
+    alignSelf: "center",
   },
   anchor: {
     textDecoration: "none",
@@ -19,6 +19,7 @@ const Theme = {
     },
     color: "black"
   }
+
 };
 
 const NavBar = ({ islogin, onLogout }) => {

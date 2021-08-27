@@ -9,14 +9,15 @@ const Login = ({ onLogin }) => {
   const history = useHistory();
   const [user, setUser] = useState({
     id: "",
-    psword: ""
+    psword: "",
   });
 
-  const SubmitHandler = async e => {
+  const SubmitHandler = async (e) => {
     e.preventDefault();
+    console.log(user);
 
     await API.post("/api/login", user)
-      .then(res => {
+      .then((res) => {
         console.log("res: ", res);
 
         // accessToken을 반환 받고 localStorage에 저장한다.
@@ -30,8 +31,7 @@ const Login = ({ onLogin }) => {
         API.defaults.headers.common["Authorization"] = `${accessToken}`;
         history.push("/");
       })
-
-      .catch(err => {
+      .catch((err) => {
         console.log("err: ", err);
         if (err.response.status === 400) {
           alert("존재하지 않는 아이디입니다.");
@@ -42,7 +42,7 @@ const Login = ({ onLogin }) => {
       });
   };
 
-  const ChangeHandler = e => {
+  const ChangeHandler = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value });
   };
 
