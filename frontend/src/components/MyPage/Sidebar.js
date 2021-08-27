@@ -3,7 +3,6 @@ import { useState } from "react";
 import styled from "styled-components";
 import Withdrawal from "./Withdrawal";
 import { Box, Button, Grommet, Layer } from "grommet";
-import { MdClose } from "react-icons/md";
 import { FormClose } from "grommet-icons";
 
 const Modal = () => {
