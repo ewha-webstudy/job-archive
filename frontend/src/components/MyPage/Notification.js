@@ -21,7 +21,7 @@ const Notification = () => {
   const [toggled, setToggled] = useState(false);
 
   //이메일 알림 주기 설정 버튼
-  //수정 중
+  //전체 수정 중
   const [checked, setChecked] = useState([
     { id: "d14", isActive: false },
     { id: "d7", isActive: false },
@@ -73,7 +73,9 @@ const Notification = () => {
           </ButtonGroup>
         </InputWrapper>
       </NotificationBlock>
-      <SubmitButton>저장</SubmitButton>
+      <ButtonWrapper>
+        <SubmitButton>저장</SubmitButton>
+      </ButtonWrapper>
     </>
   );
 };
@@ -134,6 +136,13 @@ const NotificationButton = styled.button`
 
   border: none;
   background: none;
+`;
+
+const ButtonWrapper = styled.div`
+  float: right;
+  width: 50rem;
+  height: 10rem;
+  display: flex;
 `;
 
 export default Notification;

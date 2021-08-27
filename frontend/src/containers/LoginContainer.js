@@ -1,29 +1,15 @@
 import React from "react";
-import { useSelector, useDispatch } from "react-redux";
-import NavBar from "../components/NavBar/NavBar";
+import { useDispatch } from "react-redux";
 import Login from "../components/Login/Login";
-import { login, logout } from "../modules/logger";
+import { login } from "../modules/logger";
 // 컨테이너는 페이지에 포함 시키기
 
 function LoginContainer() {
-  // store의 state 값 조회
-  const { islogin, token } = useSelector(state => ({
-    islogin: state.logger.islogin,
-    token: state.logger.token
-  }));
-
   const dispatch = useDispatch();
 
-  const onLogin = () => dispatch(login());
-  const onLogout = () => dispatch(logout());
+  // 토큰 전달
+  const onLogin = token => dispatch(login(token));
 
-  return (
-    <Login
-      islogin={islogin}
-      token={token}
-      onLogin={onLogin}
-      onLogout={onLogout}
-    />
-  );
+  return <Login onLogin={onLogin} />;
 }
 export default LoginContainer;

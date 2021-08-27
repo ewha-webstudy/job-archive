@@ -5,7 +5,7 @@ import { useState } from "react";
 
 // login: login 여부, token: 토큰
 // onLogin: 로그인하는 함수, onLogout: 로그아웃하는 함수
-const Login = ({ islogin, token, onLogin, onLogout }) => {
+const Login = ({ onLogin }) => {
   const history = useHistory();
   const [user, setUser] = useState({
     id: "",
@@ -16,33 +16,29 @@ const Login = ({ islogin, token, onLogin, onLogout }) => {
     e.preventDefault();
     console.log(user);
 
-    await API.post("/api/login", user)
+    await API.post("/api/member/auth", user)
       .then((res) => {
         console.log("res: ", res);
 
-        // TODO: 토큰 로컬스토리지에 저장
-        // accessToken, refreshToken, 만료 기간을 반환 받고 localStorage에 저장한다.
-        localStorage.setItem("accessToken", res.data.data.accessToken);
-        localStorage.setItem("refreshToken", res.data.data.refreshToken);
-        localStorage.setItem("expiredTime", res.data.data.cur_time);
+        const { accessToken } = res.cookie.user;
+      
+        // accessToken store에 저장
+        onLogin(accessToken);
+      
+        // TEST: onLogin("tokentoken");
 
-        // accessToken을 store에 저장
-        onLogin(res.data.data.accessToken);
-        // onLogin("token");
-
-        // accessToken의 경우 axios 동작 시 헤더에 기본으로 붙도록 설정한다.
-        API.defaults.headers.common["x-access-token"] =
-          res.data.data.accessToken;
+        // axios 동작 시 헤더에 기본으로 붙도록 설정한다.
+        API.defaults.headers.common["Authorization"] = accessToken;
         history.push("/");
       })
       .catch((err) => {
         console.log("err: ", err);
-        if (err.response.status === 400) {
-          alert("존재하지 않는 아이디입니다.");
-        }
-        if (err.response.status === 412) {
-          alert("비밀번호를 다시 확인해 주세요.");
-        }
+        // if (err.response.status === 400) {
+        //   alert("존재하지 않는 아이디입니다.");
+        // }
+        // if (err.response.status === 412) {
+        //   alert("비밀번호를 다시 확인해 주세요.");
+        // }
       });
   };
 
@@ -75,7 +71,7 @@ const Login = ({ islogin, token, onLogin, onLogout }) => {
         </Wrapper>
         <LoginButton type="submit">로그인 하기</LoginButton>
       </form>
-      <Link to={"/api/member/create"} style={{ textDecoration: "none" }}>
+      <Link to={"/member/create"} style={{ textDecoration: "none" }}>
         <SignupButton>회원 가입</SignupButton>
       </Link>
     </>

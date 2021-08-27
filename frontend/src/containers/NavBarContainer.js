@@ -6,23 +6,14 @@ import { login, logout } from "../modules/logger";
 
 function NavBarContainer() {
   // store의 state 값 조회
-  const { islogin, token } = useSelector(state => ({
-    islogin: state.logger.islogin,
-    token: state.logger.token
+  const { islogin } = useSelector(state => ({
+    islogin: state.logger.islogin
   }));
 
   const dispatch = useDispatch();
 
-  const onLogin = () => dispatch(login());
   const onLogout = () => dispatch(logout());
 
-  return (
-    <NavBar
-      islogin={islogin}
-      token={token}
-      onLogin={onLogin}
-      onLogout={onLogout}
-    />
-  );
+  return <NavBar islogin={islogin} onLogout={onLogout} />;
 }
 export default NavBarContainer;

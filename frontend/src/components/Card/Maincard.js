@@ -4,7 +4,7 @@ import "../../style/main.css";
 import API from "../../utils/api";
 
 // props : { logged, userId }
-function MainCard({ islogin, token, onLogin, onLogout }) {
+function MainCard({ islogin }) {
   const [jobs, setJobs] = useState([]);
 
   useEffect(() => {
@@ -18,13 +18,7 @@ function MainCard({ islogin, token, onLogin, onLogout }) {
     <div className="main__card">
       <div className="card">
         {/*<CardBoard jobs={jobs} logged={logged} userId={userId} />*/}
-        <CardBoard
-          jobs={jobs}
-          islogin={islogin}
-          token={token}
-          onLogin={onLogin}
-          onLogout={onLogout}
-        />
+        <CardBoard jobs={jobs} islogin={islogin} />
       </div>
     </div>
   );

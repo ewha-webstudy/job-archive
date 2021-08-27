@@ -108,9 +108,9 @@ function App() {
               component={CategoryPage}
             />
             <Route path="/api/job/:id" exact component={DetailInfoPage} />
-            <Route path="/login" exact component={LoginPage} />
-            <Route path="/api/member/create" exact component={SignupPage} />
-            <Route path="/api/mypage/:id" exact component={MyPage} />
+            <Route path="/member/auth" exact component={LoginPage} />
+            <Route path="/member/create" exact component={SignupPage} />
+            <Route path="/mypage/:id" exact component={MyPage} />
             <Footer />
           </Grommet>
         </>
