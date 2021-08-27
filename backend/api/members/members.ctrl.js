@@ -27,7 +27,7 @@ exports.authMember = async (req, res) => {
                         });
                     res.cookie('user', token);
                     console.log(token);
-                    return res.status(201).json({ result });
+                    return res.status(201).json({ token });
                 }
                 return res.status(412).json({ error: 'invalid password' }); //412: 비밀번호 불일치
             }
