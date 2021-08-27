@@ -16,7 +16,7 @@ const Login = ({ islogin, token, onLogin, onLogout }) => {
     e.preventDefault();
     console.log(user);
 
-    await API.post("/api/login", user)
+    await API.post("/api/member/auth", user)
       .then((res) => {
         console.log("res: ", res);
 
@@ -33,12 +33,12 @@ const Login = ({ islogin, token, onLogin, onLogout }) => {
       })
       .catch((err) => {
         console.log("err: ", err);
-        if (err.response.status === 400) {
-          alert("존재하지 않는 아이디입니다.");
-        }
-        if (err.response.status === 412) {
-          alert("비밀번호를 다시 확인해 주세요.");
-        }
+        // if (err.response.status === 400) {
+        //   alert("존재하지 않는 아이디입니다.");
+        // }
+        // if (err.response.status === 412) {
+        //   alert("비밀번호를 다시 확인해 주세요.");
+        // }
       });
   };
 
@@ -71,7 +71,7 @@ const Login = ({ islogin, token, onLogin, onLogout }) => {
         </Wrapper>
         <LoginButton type="submit">로그인 하기</LoginButton>
       </form>
-      <Link to={"/api/member/create"} style={{ textDecoration: "none" }}>
+      <Link to={"/member/create"} style={{ textDecoration: "none" }}>
         <SignupButton>회원 가입</SignupButton>
       </Link>
     </>

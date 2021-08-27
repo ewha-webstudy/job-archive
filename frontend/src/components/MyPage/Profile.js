@@ -26,7 +26,7 @@ const Profile = () => {
     e.preventDefault();
     console.log("member:", member);
 
-    API.patch("/api/mypage/profile", member)
+    API.post("/api/mypage/profile", member)
       .then((res) => {
         alert("저장되었습니다!");
         console.log("RES: ", res);

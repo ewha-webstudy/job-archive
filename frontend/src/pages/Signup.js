@@ -10,7 +10,7 @@ const SignupPage = () => {
       <NavBar />
       <MyPageTemplate>
         <Sidebar />
-        <Route exact path="/api/member/create" component={Signup} />
+        <Route exact path="/member/create" component={Signup} />
       </MyPageTemplate>
     </Router>
   );

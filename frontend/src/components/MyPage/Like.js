@@ -1,6 +1,6 @@
-import axios from "axios";
 import { useState, useEffect } from "react";
 import styled from "styled-components";
+import API from "../../utils/api";
 import CardBoard from "../Card/CardBoard";
 
 const SaveList = () => {
@@ -8,8 +8,7 @@ const SaveList = () => {
   const [likes, setLikes] = useState([]);
 
   useEffect(() => {
-    axios
-      .get("/api/mypage/like")
+    API.get("/api/mypage/like")
       .then((res) => {
         const likes = res.data;
         console.log(likes);
@@ -17,6 +16,12 @@ const SaveList = () => {
       })
       .catch((err) => {
         console.log("ERR: ", err);
+        if (err.response.status === 401) {
+          alert("Token expired");
+        }
+        if (err.response.status === 404) {
+          alert("DB 처리 중 에러가 발생했습니다.");
+        }
       });
   }, []);
 

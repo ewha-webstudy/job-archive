@@ -69,7 +69,7 @@ const Sidebar = () => {
       <>
         {sidebarMenu.map((menu) => {
           return (
-            <NavLink key={menu.id} to={"/api/mypage/" + menu.id}>
+            <NavLink key={menu.id} to={"/mypage/" + menu.id}>
               <SidebarItem key={menu.id} menu={menu} />
             </NavLink>
           );
@@ -81,7 +81,7 @@ const Sidebar = () => {
 
   const RegisterMenu = () => {
     return (
-      <NavLink to={"/api/member/create"}>
+      <NavLink to={"/member/create"}>
         <SidebarButton>회원 가입</SidebarButton>
       </NavLink>
     );
@@ -89,7 +89,7 @@ const Sidebar = () => {
 
   return (
     <SidebarBlock>
-      {pathName === "/api/member/create" ? <RegisterMenu /> : <SidebarMenu />}
+      {pathName === "/member/create" ? <RegisterMenu /> : <SidebarMenu />}
     </SidebarBlock>
   );
 };

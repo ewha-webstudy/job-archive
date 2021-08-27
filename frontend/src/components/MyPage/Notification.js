@@ -21,7 +21,7 @@ const Notification = () => {
   const [toggled, setToggled] = useState(false);
 
   //이메일 알림 주기 설정 버튼
-  //수정 중
+  //전체 수정 중
   const [checked, setChecked] = useState([
     { id: "d14", isActive: false },
     { id: "d7", isActive: false },

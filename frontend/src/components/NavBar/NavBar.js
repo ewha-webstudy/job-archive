@@ -61,7 +61,7 @@ const NavBar = ({ islogin, token, onLogin, onLogout }) => {
                   {" "}
                   <li className="nav__tag">
                     <Anchor
-                      href="/api/mypage/profile"
+                      href="/mypage/profile"
                       color="black"
                       label="마이페이지"
                       hoverIndicator
@@ -81,7 +81,7 @@ const NavBar = ({ islogin, token, onLogin, onLogout }) => {
               ) : (
                 <li className="header__auth">
                   <Button
-                    href="/login"
+                    href="/member/auth"
                     color="#ffaf00"
                     primary
                     label="Login"
