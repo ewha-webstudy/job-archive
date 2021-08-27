@@ -12,6 +12,7 @@ exports.main = async(req, res) => {
   let cardList = []
   try{
     jobList = await Job.findAll({ attributes: ['wantedAuthNo'], limit: 9, order: [ ['regDt',  'DESC'] ] })
+    if (!jobList) return res.status(404).send();
     for(const job of jobList){
       cardList.push(await toCard(job.wantedAuthNo));
     }
@@ -27,7 +28,7 @@ exports.detail = async(req, res) => {
   // 각 공고의 detail data를 받아옴
   console.log("this is detail")
   const { id } = req.params;
-  if (!id) return res.status(404).send();
+  if (!id) return res.status(400).send();
   try {
     const detail = await toDetail(id);
     if (!id) return res.status(404).send();
@@ -42,7 +43,9 @@ exports.detail = async(req, res) => {
 exports.search = async(req, res) => {
   // tag 서치, text 서치 결과
   const { category } = req.params;
+  if (!category) return res.status(400).send();
   const { tags, searchBar } = req.body;
+  if (!tags || !searchBar) return res.status(400).send();
   console.log("this is category search", category)
   let jobList = []
   let cardList = []
@@ -78,26 +81,60 @@ exports.search = async(req, res) => {
         } 
       })
     }
-    res.send(jobList);
+    if (!jobList) return res.status(404).send();
+    for(const job of jobList){
+      cardList.push(await toCard(job.wantedAuthNo));
+    }
+    res.send(cardList);
   } catch(e) {
     console.error(e);
     res.status(500).send();
   }
 }
 
-/* POST /api/like/:id */
-exports.like = async(req, res) => {
+/* POST /api/likeIncrease */
+exports.likeIncrease = async(req, res) => {
   // 공고의 좋아요 수 증가하기
-  // 사용자의 계정의 like 항목에 공고를 추가함 (jobs.ctrl이 관여하는 게 맞는지 불확실)
-  // 사용자 계정이 없다면(로그아웃) 버튼 표시 X? or 버튼 표시 & 로그인 유도?
-  console.log("this is like")
+  const { id } = req.body;
+  if (!id) return res.status(400).send();
+  console.log("this is likeIncrease");
+  try{
+    await Job.increment('likeNo', {by: 1, 
+      where: {
+        wantedAuthNo: id
+      }
+    })
+    const job = await toCard(id)
+    if (!job) return res.status(404).send();
+    res.send({ message: 'like increase success', likeNo: job.likeNo });
+  }catch(e){
+    console.error(e);
+    res.status(500).send();
+  }
 }
 
-/* POST /api/unlike/:id */
-exports.unlike = async(req, res) => {
+/* POST /api/likeDecrease */
+exports.likeDecrease = async(req, res) => {
   // 공고의 좋아요 수 감소하기
-  // 사용자의 계정의 like 항목에서 공고를 제거함
-  console.log("this is unlike")
+  const { id } = req.body;
+  if (!id) return res.status(400).send();
+  console.log("this is likeDecrease");
+  try{
+    await Job.increment('likeNo', {by: -1, 
+      where: {
+        wantedAuthNo: id
+      }
+    })
+    const job = await toCard(id);
+    if (!job) return res.status(404).send();
+    if (job.likeNo < 0){
+      return res.status(404).send();
+    }
+    res.send({ message: 'like decrease success', likeNo: job.likeNo });
+  }catch(e){
+    console.error(e);
+    res.status(500).send();
+  }
 }
 
 function ifTags(tags){
@@ -118,7 +155,6 @@ const getData = async(wantedAuthNo) => {
 
 function searchbarCondition(searchBar){
   const words = searchBar.split(" ");
-  console.log(words.length)
   var condition = {};
   if(words.length > 0){
     condition[and] = words.map(function(word){

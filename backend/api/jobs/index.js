@@ -4,19 +4,12 @@ const jobsCtrl = require('./jobs.ctrl');
 
 const router = express.Router();
 
-// API 정의서 (method 불확실)
 router.get('/main', jobsCtrl.main)
 router.get('/jobs/:id', jobsCtrl.detail)
 
-// router.post('/category/:category', jobsCtrl.category)
-// params: category
-// body: sort 기준
 router.post('/category/:category', jobsCtrl.search)
-// params: category
-// body: tags, searchBar
-// 추가해야할 body: limit, skip (pagination)
-router.post('/like/:id', jobsCtrl.like)
-router.post('/unlike/:id', jobsCtrl.unlike)
+router.post('/likeIncrease', jobsCtrl.likeIncrease)
+router.post('/likeDecrease', jobsCtrl.likeDecrease)
 
 module.exports = router;
 
@@ -119,4 +112,89 @@ module.exports = router;
  *              type: array
  *              items:
  *                $ref: '#/components/schemas/jobCard'
+ * 
+ * /api/likecrease:
+ *  post:
+ *    tags:
+ *    - Like Increase
+ *    description: 해당 채용공고의 좋아요 수 증가 (사용자가 채용공고의 좋아요를 누를 때)
+ *    requestBody:
+ *      content:
+ *        application/json:
+ *          schema:
+ *            type: object
+ *            properties:
+ *              id:
+ *                type: string
+ *          example:
+ *            {
+ *              "id": "K120612108130052"
+ *            }
+ *    responses:
+ *      200:
+ *        description: 해당 채용공고의 좋아요 수 증가 성공
+ *        content:
+ *          application/json:
+ *            schema:
+ *              type: object
+ *              properties:
+ *                message:
+ *                  type: string
+ *                likeNo:
+ *                  type: integer
+ *      400:
+ *        description: params 값이 없을 때
+ *        content:
+ *          application/json:
+ *            schema:
+ *              $ref: '#/components/schemas/noParams'
+ *      404:
+ *        description: DB에서 필요한 값을 찾지 못할 때
+ *        content:
+ *          application/json:
+ *            schema:
+ *              $ref: '#/components/schemas/wrongDBIndex'
+ *      
+ * /api/likeDecrease:
+ *  post:
+ *    tags:
+ *    - Like Increase
+ *    description: 해당 채용공고의 좋아요 수 감소 (사용자가 채용공고의 좋아요를 누를 때)
+ *    requestBody:
+ *      content:
+ *        application/json:
+ *          schema:
+ *            type: object
+ *            properties:
+ *              id:
+ *                type: string
+ *          example:
+ *            {
+ *              "id": "K120612108130052"
+ *            }
+ *    responses:
+ *      200:
+ *        description: 해당 채용공고의 좋아요 수 감소 성공
+ *        content:
+ *          application/json:
+ *            schema:
+ *              type: object
+ *              properties:
+ *                message:
+ *                  type: string
+ *                likeNo:
+ *                  type: integer
+ *      400:
+ *        description: params 값이 없을 때
+ *        content:
+ *          application/json:
+ *            schema:
+ *              $ref: '#/components/schemas/noParams'
+ *      404:
+ *        description: DB에서 필요한 값을 찾지 못할 때
+ *        content:
+ *          application/json:
+ *            schema:
+ *              $ref: '#/components/schemas/wrongDBIndex'
+ *      
  */
