@@ -33,14 +33,14 @@ const Profile = () => {
         history.push("/");
       })
       .catch((err) => {
-        console.log("ERR: ", err.response.status);
+        console.log("ERR: ", err);
 
-        if (err.response.status === 401) {
-          alert("Toekn expired");
-        }
-        if (err.response.status === 412) {
-          alert("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
-        }
+        // if (err.response.status === 401) {
+        //   alert("Toekn expired");
+        // }
+        // if (err.response.status === 412) {
+        //   alert("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
+        // }
       });
   };
 

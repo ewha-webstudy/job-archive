@@ -16,12 +16,12 @@ const SaveList = () => {
       })
       .catch((err) => {
         console.log("ERR: ", err);
-        if (err.response.status === 401) {
-          alert("Token expired");
-        }
-        if (err.response.status === 404) {
-          alert("DB 처리 중 에러가 발생했습니다.");
-        }
+        // if (err.response.status === 401) {
+        //   alert("Token expired");
+        // }
+        // if (err.response.status === 404) {
+        //   alert("DB 처리 중 에러가 발생했습니다.");
+        // }
       });
   }, []);
 
