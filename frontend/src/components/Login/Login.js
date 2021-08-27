@@ -2,6 +2,7 @@ import styled from "styled-components";
 import API from "../../utils/api";
 import { Link, useHistory } from "react-router-dom";
 import { useState } from "react";
+import { useCookies } from 'react-cookie'; 
 
 // login: login 여부, token: 토큰
 // onLogin: 로그인하는 함수, onLogout: 로그아웃하는 함수
@@ -11,16 +12,20 @@ const Login = ({ onLogin }) => {
     id: "",
     psword: "",
   });
+  
+  const [cookies] = useCookies( [ 'user' ]); //토큰
 
   const SubmitHandler = async (e) => {
     e.preventDefault();
-    console.log(user);
 
-    await API.post("/api/member/auth", user)
+    await API.post("/api/member/auth", user,
+      { withCredentials: true } //서버와 쿠키 주고받기 위함 
+    )
       .then((res) => {
         console.log("res: ", res);
 
-        const accessToken = res.cookie.user;
+      const accessToken = cookies; //토큰 
+      console.log({ "Token Success" : accessToken });
       
         // accessToken store에 저장
         onLogin(accessToken);
