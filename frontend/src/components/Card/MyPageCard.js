@@ -1,27 +1,5 @@
-import React from "react";
 import JobCard from "./JobCard";
 import styled from "styled-components";
-
-const Container = styled.div`
-  margin: 2rem auto;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  flex-direction: row;
-  justify-content: space-around;
-  width: 80%;
-  position: relative;
-  padding: 50px;
-`;
-
-const Cards = styled.div`
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-gap: 15%;
-  width: 75%;
-  align-items: center;
-  margin: auto;
-`;
 
 const ex = [
   {
@@ -115,12 +93,12 @@ const ex = [
 ];
 
 // *** api 연결하려면, line122의 ex-> jobs로 수정
-const CardBoard = ({ jobs, islogin }) => {
+const MyPageCard = ({ jobs, islogin }) => {
   return (
     <>
       <Container>
-        <Cards className="main">
-          {ex.map((jobs, index) => (
+        {ex.map((jobs, index) => (
+          <CardWrapper>
             <JobCard
               key={index}
               id={jobs.wantedAuthNo}
@@ -131,10 +109,27 @@ const CardBoard = ({ jobs, islogin }) => {
               likeNo={jobs.likeNo}
               islogin={islogin}
             />
-          ))}
-        </Cards>
+          </CardWrapper>
+        ))}
       </Container>
     </>
   );
 };
-export default CardBoard;
+
+const Container = styled.div`
+  margin-left: 1rem;
+  display: flex;
+  width: 95%;
+  padding-bottom: 4rem;
+  position: relative;
+  flex-wrap: wrap;
+`;
+
+const CardWrapper = styled.div`
+  width: 190px;
+  height: 250px;
+  margin-left: 4rem;
+  margin-top: 3.5rem;
+`;
+
+export default MyPageCard;

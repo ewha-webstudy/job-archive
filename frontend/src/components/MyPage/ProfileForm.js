@@ -66,7 +66,7 @@ const ProfileForm = ({ value, onChange, onClick }) => {
             </Grommet>
           </InputWrapper>
           <InputWrapper>
-            <h4>출생연도</h4>
+            <h4>출생 연도</h4>
             <Grommet theme={theme}>
               <Box round="15px" border>
                 <Select
@@ -125,8 +125,8 @@ const ProfileForm = ({ value, onChange, onClick }) => {
               <Box
                 direction="row"
                 justify="start"
-                round="15px"
                 overflow="hidden"
+                round="15px"
                 border
               >
                 <TextInput
@@ -180,59 +180,51 @@ const ProfileForm = ({ value, onChange, onClick }) => {
             </Grommet>
           </InputWrapper>
         </ModifyBox>
-      </ProfileBlock>
-      <ButtonWrapper>
         <SubmitButton className="submit" onClick={onClick}>
           저장
         </SubmitButton>
-      </ButtonWrapper>
+      </ProfileBlock>
     </form>
   );
 };
 
 const ProfileBlock = styled.div`
   width: 75%;
+  height: 640px;
   float: right;
   display: flex;
-  margin-top: 7%;
+  margin-top: 5.5%;
   margin-right: 3%;
   align-items: flex-start;
+  flex-wrap: wrap;
 `;
 
 const ModifyBox = styled.div`
-  width: 45%;
   height: 80%;
-  margin-left: 1rem;
+  margin-left: 13%;
+  margin-top: 3%;
 `;
 
 const InputWrapper = styled.div`
   & + & {
-    margin-top: 3rem;
+    margin-top: 4rem;
   }
-  width: 13.5rem;
-  height: 5rem;
-  margin: 0 auto;
+
+  width: 240px
+  height: 80px;
 
   h4 {
     color: grey;
     margin-left: 10px;
     font-weight: lighter;
   }
-  .oneinput {
-    width: 95%;
-    height: 50%;
-    font-size: 18px;
-    padding-left: 20px;
-    background: #f5f5f5;
-    border: none;
-    border-radius: 15px;
-  }
+
   input:focus {
     outline: none;
   }
 `;
 
-const ButtonWrapper = styled.div`
+export const ButtonWrapper = styled.div`
   float: right;
   width: 50rem;
   height: 10rem;
@@ -240,7 +232,7 @@ const ButtonWrapper = styled.div`
   margin-right: 2rem;
 `;
 
-export const SubmitButton = styled.button`
+const SubmitButton = styled.button`
   &:hover {
     color: white;
     cursor: pointer;
@@ -249,13 +241,10 @@ export const SubmitButton = styled.button`
   width: 100px;
   height: 40px;
   background: white;
-  margin-top: 23%;
+  margin-top: 8.5%;
   margin-left: 83%;
-
   border-radius: 17px;
   border: 2px solid #f3b23e;
-
-  box-shadow: 0 0px 5px rgba(87, 87, 87, 0.1);
 `;
 
 export default ProfileForm;

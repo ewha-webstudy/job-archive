@@ -67,17 +67,14 @@ const CategoryPage = ({match}) =>{
 
   useEffect(() => {
     API.get("/api/category/${match.params.category}").then((response) => {
-      console.log(response.status);
+      // console.log(response.status);
       setJobs(response.data);
     });
   }, []);
 
   return (
     <div>
-      <header>
-        <NavBar />
-      </header>
-      <Grommet>
+      <Grommet style={{marginTop: 70}}>
         <Grid
           background="light-2"
           rows={["auto", "flex"]}
@@ -100,6 +97,7 @@ const CategoryPage = ({match}) =>{
             background="light-2"
             width="medium"
             align="center"
+            style={{marginTop: 75}}
           >
             <Title>카테고리</Title>
             {/* {console.log(match.params.category)} */}
@@ -110,10 +108,10 @@ const CategoryPage = ({match}) =>{
             gridArea="main"
             height="100%"
             background="light-2"
+            style={{marginTop: 75}}
           >
-            {/* 조회순, 최신순.. 없애기로함. */}
-            {/* <Filter /> */}
             <CardBoard jobs={jobs}/>
+            {/* {console.log({jobs})} */}
           </Box>
         </Grid>
       </Grommet>

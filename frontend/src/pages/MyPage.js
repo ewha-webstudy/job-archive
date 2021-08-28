@@ -9,7 +9,6 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 const MyPage = () => {
   return (
     <Router>
-      <NavBar />
       <MyPageTemplate>
         <Sidebar />
         <Route exact path="/mypage/profile" component={Profile} />

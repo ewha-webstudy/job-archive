@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
 import API from "../../utils/api";
-import CardBoard from "../Card/CardBoard";
+import MyPageCard from "../Card/MyPageCard";
 
 const SaveList = () => {
   //받아온 데이터를 jobs에 저장
@@ -27,7 +27,7 @@ const SaveList = () => {
 
   return (
     <SaveListBlock>
-      <CardBoard jobs={likes} logged={true} /> {/*수정 중*/}
+      <MyPageCard islogin={true} /> {/*수정 중*/}
     </SaveListBlock>
   );
 };
@@ -36,6 +36,7 @@ const SaveListBlock = styled.div`
   overflow: auto;
 
   &::-webkit-scrollbar {
+    height: 80%;
     width: 10px;
     background: none;
   }
@@ -56,9 +57,8 @@ const SaveListBlock = styled.div`
   height: 80%;
 
   float: right;
-  display: flex;
-  margin-top: 7%;
   flex-wrap: wrap;
-  margin-right: 1rem;
+  margin-top: 4.5rem;
+  margin-right: 2rem;
 `;
 export default SaveList;

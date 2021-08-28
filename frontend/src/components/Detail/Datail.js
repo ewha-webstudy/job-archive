@@ -1,9 +1,9 @@
 import { Grommet, Title, DataTable, Box, Text, Meter } from "grommet";
-import classNames from 'classnames';
-import React, {useState} from "react";
+import classNames from "classnames";
+import React, { useState } from "react";
 
 import API from "../../utils/api";
-import classes from './Detail.module.css';
+import classes from "./Detail.module.css";
 
 
 function DetailBox({ item }) {

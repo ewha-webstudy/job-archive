@@ -7,7 +7,6 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 const SignupPage = () => {
   return (
     <Router>
-      <NavBar />
       <MyPageTemplate>
         <Sidebar />
         <Route exact path="/member/create" component={Signup} />

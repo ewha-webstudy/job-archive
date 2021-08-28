@@ -25,7 +25,7 @@ function CategoryItem(props) {
 }
 
 function Category(props) {
-	// console.log(props);
+
 	return (
 		<ul className={classes.categoryWrapper}>
 			

@@ -20,12 +20,8 @@ function App() {
           <Grommet className="App">
             <NavBarContainer />
             <Route path="/" exact component={Main} />
-            <Route
-              path="/api/category/:category"
-              exact
-              component={CategoryPage}
-            />
-            <Route path="/api/job/:id" exact component={DetailInfoPage} />
+            <Route path="/category/:category" exact component={CategoryPage} />
+            <Route path="/job/:id" exact component={DetailInfoPage} />
             <Route path="/member/auth" exact component={LoginPage} />
             <Route path="/member/create" exact component={SignupPage} />
             <Route path="/mypage/:id" exact component={MyPage} />
