@@ -28,17 +28,21 @@ const Login = ({ onLogin }) => {
         // TEST: onLogin("tokentoken");
 
         // axios 동작 시 헤더에 기본으로 붙도록 설정한다.
-        API.defaults.headers.common["Authorization"] = accessToken;
+        API.defaults.headers.common["authorization"] = accessToken;
         history.push("/");
       })
-      .catch((err) => {
+      .catch(err => {
         console.log("err: ", err);
+
+        /*
         if (err.response.status === 400) {
           alert("존재하지 않는 아이디입니다.");
         }
         if (err.response.status === 412) {
           alert("비밀번호를 다시 확인해 주세요.");
         }
+
+        */
       });
   };
 
@@ -71,7 +75,7 @@ const Login = ({ onLogin }) => {
         </Wrapper>
         <LoginButton type="submit">로그인 하기</LoginButton>
       </form>
-      <Link to={"/api/member/create"} style={{ textDecoration: "none" }}>
+      <Link to={"/member/create"} style={{ textDecoration: "none" }}>
         <SignupButton>회원 가입</SignupButton>
       </Link>
     </>
