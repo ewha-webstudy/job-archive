@@ -33,18 +33,18 @@ const NavBar = ({ islogin, onLogout }) => {
             </ul>
             <div className="nav">
               <li className="nav__tag">
-                <Anchor href="/api/category/frontend" label="프론트엔드" />
+                <Anchor href="/category/frontend" label="프론트엔드" />
               </li>
               <li className="nav__tag">
-                <Anchor href="/api/category/backend" label="백엔드" />
+                <Anchor href="/category/backend" label="백엔드" />
               </li>
               <li className="nav__tag">
-                <Anchor href="/api/category/data" label="AI/데이터분석" />
+                <Anchor href="/category/data" label="AI/데이터분석" />
               </li>
               {islogin ? (
                 <>
                   <li className="nav__tag">
-                    <Anchor href="/api/mypage/profile" label="마이페이지" />
+                    <Anchor href="/mypage/profile" label="마이페이지" />
                   </li>
                   <li className="header__auth">
                     <Button
