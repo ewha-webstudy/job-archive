@@ -61,9 +61,6 @@ const CategoryPage = ({match}) =>{
   ]
   return (
     <div>
-      <header>
-        <NavBar />
-      </header>
       <Grommet>
         <Grid
           background="light-2"
