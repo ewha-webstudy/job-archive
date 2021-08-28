@@ -22,7 +22,9 @@ API.interceptors.request.use(function(config){
 
 // response interceptor
 API.interceptors.response.use(function(response){
-  localStorage.setItem(response.data.token)
+  console.log("interceptor response");
+  localStorage.setItem('token', response.data.token);
+
 
 }, function(error){
   console.error(error);
