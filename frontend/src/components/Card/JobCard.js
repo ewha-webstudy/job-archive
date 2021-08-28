@@ -89,20 +89,6 @@ function JobCard({ name, id, end, position, logo, likeNo, islogin }) {
     }
   };
 
-  /*
-  const goToDetail = async () => {
-    console.log("click");
-    await API.get(`/api/job/${id}`)
-      .then((response) => {
-        console.log(response);
-        // history.push(`/api/job/${id}`);
-      })
-      .catch((error) => {
-        // TODO: 서버 HTTP 에러 코드 확인하고 예외 처리하기
-        console.error(error);
-      });
-  };
-  */
 
   return (
     <Card width="small" background="light-1" responsive>
@@ -135,14 +121,13 @@ function JobCard({ name, id, end, position, logo, likeNo, islogin }) {
         </div>
       </div>
       <footer className="card__footer">
-        <Link to={`/api/job/${id}`}>
+        <Link to={`/job/${id}`}>
           <Button
             color={{ border: "gray" }}
             gap="medium"
             label="자세히 보기"
             hoverIndicator
           />
-          {/* onClick={goToDetail} */}
         </Link>
       </footer>
     </Card>
