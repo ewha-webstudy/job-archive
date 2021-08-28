@@ -8,8 +8,8 @@ function initModels(sequelize) {
   var like = _like(sequelize, DataTypes);
   var membership = _membership(sequelize, DataTypes);
 
-like.belongsTo(membership, { as: "user", foreignKey: "userid"});
-membership.hasMany(like, { as: "likes", foreignKey: "userid"});
+  like.belongsTo(membership, { as: "user", foreignKey: "userid"});
+  membership.hasMany(like, { as: "likes", foreignKey: "userid"});
 
   return {
     job,

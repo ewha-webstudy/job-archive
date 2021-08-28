@@ -3,41 +3,33 @@ const schedule = require('node-schedule');
 const rule = new schedule.RecurrenceRule();
 const moment = require('moment');
 
-let time = '2021-08-25';
-
-rule.tz = "Asia/Seoul";
-rule.year = moment(time).year();
-rule.month = moment(time).month();
-rule.date = moment(time).date();
-rule.hour = 18;
-rule.minute = 13;
-rule.second = 0;
-
-schedule.scheduleJob(rule, async function () {
-  console.log("scheduled")
-});
-
+const sequelize = require("sequelize");
 const { Membership } = require('../models');
 const { Job } = require('../models');
 const { Like } = require('../models');
-/**
- * 1) member별로 메일 전송
- *    like table에서 member별로 like한 job 목록 생성
- *    job의 마감일자가 9999-01-01이라면 목록에서 제거
- *    job의 마감일자에서 member가 설정한 알림 일정에 맞게 메일 스케쥴링
- * 
- * 2) job별로 메일 전송
- *    like table에서 job별로 member 목록 생성
- *    마감일자가 9999-01-01이라면 목록 제거
- *    ~
- * 
- * 3) like table에 column 추가
- *    alert 추가해서 만약 job의 마감일자가 9999-01-01이면 null
- *    그렇지 않으면 마감일자로부터 member가 설정한 alert를 계산하여 날짜 저장
- *    like table 별로 날짜에 맞춰서 member에게 메일 전송?
- *    updated at이라는 컬럼이 필요할 것 같기도 함.
- *    
- */
+
+async function reserveMail(){
+  let likeList = []
+  try{
+    likeList = await Like.findAll()
+    for(const like of likeList){
+      const { member } = await getMember(like.userid);
+      const { job } = await getJob(like.wantedAuthNo);
+      if(like.alertDate !== "9999-01-01"){
+        const content = toContent(member, job);
+        const rule = setTime(like.alertDate);
+        schedule.scheduleJob(rule, async function () {
+          send(content)
+        });
+      }
+    }
+  } catch(e){
+    console.error(e);
+  }
+}
+
+reserveMail()
+
 const email = {
   "service": "gmail",
   "host": "smtp.gmail.com",
@@ -49,20 +41,16 @@ const email = {
   }
 }
 
-const content = {
-  from: "kng06325@ewhain.net",
-  to: "kng06325@ewhain.net",
-  subject: "개발자의 품격",
-  // text: "",
-  html: "<h2>개발자의 품격 - nodemailer를 이용한 이메일 보내기 구현</h2>"
-};
-
 function toContent(member, job){
   var content = {
     from: "kng06325@ewhain.net",
     to: `${member.email}`,
-    subject: `${job.company}의 채용공고가 ${member.alert}일 후에 마감됩니다!`,
-    html: `<h2>${job.company}의 채용공고가 ${member.alert}일 후에 마감됩니다!</h2>`
+    subject: `${member.realname}님, ${job.company}의 채용공고가 ${member.alert}일 후에 마감됩니다!`,
+    html: `
+    <h2>${member.realname}님, ${job.company}의 채용공고가 ${member.alert}일 후에 마감됩니다!</h2>
+    <p style = "font-size:1.3em;"><strong>${job.wantedTitle}</strong></p>
+    <p style = "font-size:1.1em;">${job.jobCont}</p>
+    `
   }
   return content
 }
@@ -78,6 +66,24 @@ const send = async (data) => {
   });
 };
 
+const getMember = async(id) => {
+  const member = await Membership.findOne({ where: { userid: id } })
+  return { member }
+}
 
+const getJob = async(id) => {
+  const job = await Job.findOne({ where: { wantedAuthNo: id } })
+  return { job }
+}
 
-// send(content);
+function setTime(time){
+  rule.tz = "Asia/Seoul";
+  rule.year = moment(time).year();
+  rule.month = moment(time).month();
+  rule.date = moment(time).date();
+  rule.hour = 09;
+  rule.minute = 00;
+  rule.second = 00;
+
+  return rule;
+}
