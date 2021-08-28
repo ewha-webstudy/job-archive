@@ -3,20 +3,22 @@ import { Grommet, Box, Grid } from "grommet";
 import { Heading } from "grommet";
 
 import classes from './Category.module.css';
+import { Sidebar } from "grommet";
 
 
 function CategoryItem(props) {
-	const [checkedItems, setCheckedItems] = useState(new Set());
+	// const [checkedItems, setCheckedItems] = useState(new Set());
 
-	const checkedItemHander = (id, isChecked) => {
-		if (isChecked) {
-			checkedItems.add(id);
-			setCheckedItems(checkedItems);
-		  } else if (!isChecked && checkedItems.has(id)) {
-			checkedItems.delete(id);
-			setCheckedItems(checkedItems);
-		  }
-	}
+	// const checkedItemHander = (id, isChecked) => {
+	// 	if (isChecked) {
+	// 		checkedItems.add(id);
+	// 		setCheckedItems(checkedItems);
+	// 	  } else if (!isChecked && checkedItems.has(id)) {
+	// 		checkedItems.delete(id);
+	// 		setCheckedItems(checkedItems);
+	// 	  }
+	// 	  console.log(checkedItems);
+	// }
 
 
 	return (
@@ -36,8 +38,10 @@ function CategoryItem(props) {
 }
 
 function Category(props) {
+	// console.log(props);
 	return (
 		<ul className={classes.categoryWrapper}>
+			
 			{props.categoryList.map(item =>
 				<CategoryItem
 					key={item.id}

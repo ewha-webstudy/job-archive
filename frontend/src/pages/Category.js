@@ -1,6 +1,6 @@
 import NavBar from "../components/NavBar/NavBar";
 import CardBoard from "../components/Card/CardBoard";
-import Filter from "../components/Filter/Filter";
+// import Filter from "../components/Filter/Filter";
 import SearchBar from "../components/SearchBar/SearchBar";
 import { Grommet, Box, Grid } from "grommet";
 import styled from "styled-components";
@@ -21,35 +21,46 @@ const Title = styled.span`
   box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
 `;
 
-const DUMMY_DATA_CATEGORY = [
-	{
-		id: 1,
-		title: '언어',
-		tag: ['react', 'angular', 'vue' ]
-	},
-	{
-		id: 2,
-		title: '경력',
-		tag: ['인턴', '신입', '경력' ]
-	},
-	{
-		id: 3,
-		title: '지역',
-		tag: ['서울', '경기', '부산' ]
-	},
-	{
-		id: 4,
-		title: '학력',
-		tag: ['고등학교 졸업', '무관', '석사 이상' ]
-	}
-]
+const CategoryPage = ({match}) =>{
+  const techStack = (category_chg) =>{
+    if (category_chg === 'frontend')
+    {
+      return ['HTML', 'CSS', 'JS'];
+    }
+    else if (category_chg === 'backend')
+    {
+      return ['Ruby', 'Python', 'PHP', 'JAVA', 'scala', 'Node.js', 'REST API'];
+    } 
+    else
+    {
+      return ['Python', 'C++', 'SQL', 'TensorFlow', 'OpenGL', 'OpenCv'];
+    }
+  };
 
-function CategoryPage() {
+  const CATEGORY = [
+    {
+      id: 1,
+      title: '언어',
+      tag: techStack(match.params.category)
+    },
+    {
+      id: 2,
+      title: '경력',
+      tag: ['인턴', '신입', '경력' ]
+    },
+    {
+      id: 3,
+      title: '지역',
+      tag: ['서울', '경기', '부산' ]
+    },
+    {
+      id: 4,
+      title: '학력',
+      tag: ['고등학교 졸업', '무관', '석사 이상' ]
+    }
+  ]
   return (
     <div>
-      <header>
-        <NavBar />
-      </header>
       <Grommet>
         <Grid
           background="light-2"
@@ -75,7 +86,8 @@ function CategoryPage() {
             align="center"
           >
             <Title>카테고리</Title>
-            <Category categoryList = {DUMMY_DATA_CATEGORY} />
+            {/* {console.log(match.params.category)} */}
+            <Category categoryList = {CATEGORY} />
           </Box>
           <Box
             overflow="scroll"
@@ -83,8 +95,8 @@ function CategoryPage() {
             height="100%"
             background="light-2"
           >
-            <Filter />
-            <CardBoard />
+            {/* <Filter /> */}
+            {/* <CardBoard /> */}
           </Box>
         </Grid>
       </Grommet>

@@ -47,7 +47,13 @@ const ProfileForm = ({ value, onChange, onClick }) => {
           <InputWrapper>
             <h4>이름</h4>
             <Grommet theme={theme}>
-              <Box direction="row" justify="start" round="15px" border>
+              <Box
+                direction="row"
+                justify="start"
+                round="15px"
+                overflow="hidden"
+                border
+              >
                 <TextInput
                   plain
                   placeholder="이름을 입력하세요"
@@ -60,7 +66,7 @@ const ProfileForm = ({ value, onChange, onClick }) => {
             </Grommet>
           </InputWrapper>
           <InputWrapper>
-            <h4>출생연도</h4>
+            <h4>출생 연도</h4>
             <Grommet theme={theme}>
               <Box round="15px" border>
                 <Select
@@ -78,7 +84,7 @@ const ProfileForm = ({ value, onChange, onClick }) => {
           <InputWrapper>
             <h4>이메일</h4>
             <Grommet theme={theme}>
-              <Box justify="start" round="15px" border>
+              <Box justify="start" round="15px" overflow="hidden" border>
                 <MaskedInput
                   plain
                   icon={<MailOption />}
@@ -91,12 +97,17 @@ const ProfileForm = ({ value, onChange, onClick }) => {
             </Grommet>
           </InputWrapper>
         </ModifyBox>
-
         <ModifyBox>
           <InputWrapper>
             <h4>아이디</h4>
             <Grommet theme={theme}>
-              <Box direction="row" justify="start" round="15px" border>
+              <Box
+                direction="row"
+                justify="start"
+                round="15px"
+                overflow="hidden"
+                border
+              >
                 <TextInput
                   plain
                   placeholder="아이디를 입력하세요"
@@ -111,7 +122,13 @@ const ProfileForm = ({ value, onChange, onClick }) => {
           <InputWrapper>
             <h4>비밀번호</h4>
             <Grommet theme={theme}>
-              <Box direction="row" justify="start" round="15px" border>
+              <Box
+                direction="row"
+                justify="start"
+                overflow="hidden"
+                round="15px"
+                border
+              >
                 <TextInput
                   plain
                   type={revealPsword ? "text" : "password"}
@@ -135,7 +152,13 @@ const ProfileForm = ({ value, onChange, onClick }) => {
           <InputWrapper>
             <h4>비밀번호 확인</h4>
             <Grommet theme={theme}>
-              <Box direction="row" justify="start" round="15px" border>
+              <Box
+                direction="row"
+                justify="start"
+                round="15px"
+                overflow="hidden"
+                border
+              >
                 <TextInput
                   plain
                   type={revealConfirmPsword ? "text" : "password"}
@@ -157,71 +180,71 @@ const ProfileForm = ({ value, onChange, onClick }) => {
             </Grommet>
           </InputWrapper>
         </ModifyBox>
+        <SubmitButton className="submit" onClick={onClick}>
+          저장
+        </SubmitButton>
       </ProfileBlock>
-      <SubmitButton className="submit" onClick={onClick}>
-        저장
-      </SubmitButton>
     </form>
   );
 };
 
 const ProfileBlock = styled.div`
   width: 75%;
-  height: 80%;
-  margin-top: 7%;
-  margin-right: 3%;
+  height: 640px;
   float: right;
-  background-color: white;
   display: flex;
+  margin-top: 5.5%;
+  margin-right: 3%;
   align-items: flex-start;
+  flex-wrap: wrap;
 `;
 
 const ModifyBox = styled.div`
-  width: 45%;
   height: 80%;
+  margin-left: 13%;
+  margin-top: 3%;
 `;
 
 const InputWrapper = styled.div`
   & + & {
-    margin-top: 80px;
+    margin-top: 4rem;
   }
-  width: 300px;
-  height: 100px;
-  margin-top: 20px;
-  margin-left: 150px;
+
+  width: 240px
+  height: 80px;
+
   h4 {
     color: grey;
-    font-weight: lighter;
     margin-left: 10px;
+    font-weight: lighter;
   }
-  .oneinput {
-    width: 95%;
-    height: 50%;
-    padding-left: 20px;
-    font-size: 18px;
-    background: #f5f5f5;
-    border: none;
-    border-radius: 15px;
-    box-shadow: 0 3px 6px rgba(87, 87, 87, 0.1) inset;
-  }
+
   input:focus {
     outline: none;
   }
 `;
 
-export const SubmitButton = styled.button`
+export const ButtonWrapper = styled.div`
+  float: right;
+  width: 50rem;
+  height: 10rem;
+  display: flex;
+  margin-right: 2rem;
+`;
+
+const SubmitButton = styled.button`
   &:hover {
-    cursor: pointer;
     color: white;
+    cursor: pointer;
     background: #f3b23e;
   }
   width: 100px;
   height: 40px;
-  margin-left: 1325px;
   background: white;
-  border: 2px solid #f3b23e;
+  margin-top: 8.5%;
+  margin-left: 83%;
   border-radius: 17px;
-  box-shadow: 0 0px 5px rgba(87, 87, 87, 0.1);
+  border: 2px solid #f3b23e;
 `;
 
 export default ProfileForm;

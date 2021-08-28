@@ -15,11 +15,10 @@ const Theme = {
     textDecoration: "none",
     hover: {
       textDecoration: "underline #FFA500",
-      extend: "text-decoration-thickness 5px"
+      extend: "text-decoration-thickness 5px",
     },
-    color: "black"
-  }
-
+    color: "black",
+  },
 };
 
 const NavBar = ({ islogin, onLogout }) => {
@@ -44,7 +43,7 @@ const NavBar = ({ islogin, onLogout }) => {
               {islogin ? (
                 <>
                   <li className="nav__tag">
-                    <Anchor href="/mypage/:id" label="마이페이지" />
+                    <Anchor href="/mypage/profile" label="마이페이지" />
                   </li>
                   <li className="header__auth">
                     <Button

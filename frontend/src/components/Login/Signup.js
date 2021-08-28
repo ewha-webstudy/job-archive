@@ -31,12 +31,12 @@ const Signup = () => {
       })
       .catch((err) => {
         console.log("ERR: ", err);
-        if (err.response.status === 400) {
-          alert("아이디를 입력해 주세요.");
-        }
-        if (err.response.status === 412) {
-          alert("비밀번호 확인이 일치하지 않습니다.");
-        }
+        // if (err.response.status === 400) {
+        //   alert("아이디를 입력해 주세요.");
+        // }
+        // if (err.response.status === 412) {
+        //   alert("비밀번호 확인이 일치하지 않습니다.");
+        // }
       });
   };
 
