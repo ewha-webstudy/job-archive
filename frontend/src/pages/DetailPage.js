@@ -6,6 +6,7 @@ import { Grommet, Box, Grid } from "grommet";
 import styled from "styled-components";
 import "../style/category.css";
 import Category from "../components/Category/Category";
+import DetailBox from "../components/Detail/Datail";
 
 const Title = styled.span`
   background-color: #ffaf00;
@@ -44,14 +45,52 @@ const DUMMY_DATA_CATEGORY = [
 	}
 ]
 
-function DetailInfoPage() {
-	return (
-		<div>
-			<header>
-				<NavBar />
-			</header>
-			<Grommet>
+const DUMMY_DATA_DETAIL = [
+	{
+		id: 1,
+		title: '네이버 웹페이지 채용 공고',
+		company: '네이버',
+		career: '신입',
+		edu: '석사',
+		salary: {
+			min: 3000,
+			max: 4000,
+			// 협의/ 적혀잇지 않는 경우? 
+			consult: false
+		},
+		// srchKeywordNM?? 키워드?? 
+		jobContent: '웹 페이지 개발 기타등등 어쩌고저쩌고 모두 환영',
+		pref: '영어우대',
+		time:'월-금 9시-18시',
+		place: '서울 강남구',
+		applyurl: 'http://dddd.org',
+		closedate: '2021-05-03 21:00:00'
+	},
+	{
+		id: 2,
+		title: '네이버 웹페이지 채용 공고2',
+		company: '네이버2',
+		career: '경력',
+		edu: '무관',
+		salary: {
+			min: 3000,
+			max: 4000,
+			// 협의/ 적혀잇지 않는 경우? 
+			consult: false
+		},
+		// srchKeywordNM?? 키워드?? 
+		jobContent: '웹 페이지 개발 기타등등 어쩌고저쩌고 모두 환영',
+		pref: '영어우대',
+		time:'월-금 9시-18시',
+		place: '서울 강남구',
+		applyurl: 'http://dddd.org',
+		closedate: '2021-05-03 21:00:00'
+	}
+]
 
+function Layout(props) {
+	return (
+		<Grommet>
 				<Grid
 					background="light-2"
 					rows={["auto", "flex"]}
@@ -66,6 +105,19 @@ function DetailInfoPage() {
 						{ name: "main", start: [1, 1], end: [1, 1] },
 					]}
 				>
+								{props.children}
+				</Grid>
+			</Grommet>
+	);
+}
+
+function DetailInfoPage() {
+	return (
+		<div>
+			<header>
+				<NavBar />
+			</header>
+				<Layout>
 					{/* searchBar */}
 					<Box gridArea="search" height="xxsmall" direction="row-reverse">
 						<SearchBar />
@@ -87,9 +139,10 @@ function DetailInfoPage() {
 						height="100%"
 						background="light-2"
 					>
+						<DetailBox item={DUMMY_DATA_DETAIL[1]}
+						/>
 					</Box>
-				</Grid>
-			</Grommet>
+					</Layout>
 		</div>
 	);
 }
