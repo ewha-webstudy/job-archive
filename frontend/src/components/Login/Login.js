@@ -25,18 +25,16 @@ const Login = ({ onLogin }) => {
         console.log("res: ", res);
 
       const accessToken = cookies; //토큰 
-      console.log({ "Token Success" : accessToken });
-      
         // accessToken store에 저장
         onLogin(accessToken);
       
         // TEST: onLogin("tokentoken");
 
         // axios 동작 시 헤더에 기본으로 붙도록 설정한다.
-        API.defaults.headers.common["authorization"] = accessToken;
+        API.defaults.headers.common["authorization"] = accessToken.user; //수정
         history.push("/");
       })
-      .catch(err => {
+      .catch((err) => {
         console.log("err: ", err);
         // if (err.response.status === 400) {
         //   alert("존재하지 않는 아이디입니다.");
