@@ -19,9 +19,12 @@ function JobCard({ name, id, end, position, logo, likeNo, islogin }) {
     if (!isliked) {
       // user 테이블 좋아요 추가
       console.log("isLiked status:", isliked);
+      API.defaults.headers.common['authorization'] =  localStorage.getItem('token')
       API.post(`/api/like`, { jobid: id })
         .then((response) => {
           console.log(response);
+          localStorage.setItem('token', response.data.data.token)
+          API.defaults.headers.common['authorization'] =  localStorage.getItem('token')
         })
         .catch((error) => {
           console.error(error);
@@ -33,6 +36,8 @@ function JobCard({ name, id, end, position, logo, likeNo, islogin }) {
           console.log(response);
           // 좋아요 수를 res.likeNo로 설정
           setnumLikes(response.data.likeNo);
+          localStorage.setItem('token', response.data.data.token)
+          API.defaults.headers.common['authorization'] =  localStorage.getItem('token')
         })
         .catch(error => {
           console.error(error);
@@ -41,11 +46,14 @@ function JobCard({ name, id, end, position, logo, likeNo, islogin }) {
       // API.post("/api/likeIncrease")
     } else {
       // 좋아요를 취소한거라면
+      API.defaults.headers.common['authorization'] =  localStorage.getItem('token')
       console.log("isLiked status:", isliked);
       // user 테이블 좋아요 삭제
       API.delete(`/api/unlike/${id}`)
         .then((response) => {
           console.log(response);
+          localStorage.setItem('token', response.data.data.token)
+          API.defaults.headers.common['authorization'] =  localStorage.getItem('token')
         })
         .catch((error) => {
           console.error(error);
@@ -57,6 +65,8 @@ function JobCard({ name, id, end, position, logo, likeNo, islogin }) {
           console.log(response);
           // 좋아요 수를 res.likeNo로 설정
           setnumLikes(response.data.likeNo);
+          localStorage.setItem('token', response.data.data.token)
+          API.defaults.headers.common['authorization'] =  localStorage.getItem('token')
         })
         .catch(error => {
           console.error(error);
