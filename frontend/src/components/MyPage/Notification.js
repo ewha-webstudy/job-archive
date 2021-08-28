@@ -1,7 +1,6 @@
 import { CheckBox, Grommet } from "grommet";
 import { useState } from "react";
 import styled from "styled-components";
-import { SubmitButton } from "../MyPage/ProfileForm";
 
 const theme = {
   global: {
@@ -53,40 +52,35 @@ const Notification = () => {
   ];
 
   return (
-    <>
-      <NotificationBlock>
-        <InputWrapper>
-          <h4>알림</h4>
-          <Grommet theme={theme}>
-            <CheckBox checked={toggled} onChange={onChange} toggle />
-          </Grommet>
-        </InputWrapper>
+    <NotificationBlock>
+      <InputWrapper>
+        <h4>알림</h4>
+        <Grommet theme={theme}>
+          <CheckBox checked={toggled} onChange={onChange} toggle />
+        </Grommet>
+      </InputWrapper>
 
-        <InputWrapper>
-          <h4>이메일 알림</h4>
-          <ButtonGroup>
-            {menu.map((menu) => (
-              <NotificationButton key={menu.id} id={menu.id} onClick={onClick}>
-                {menu.title}
-              </NotificationButton>
-            ))}
-          </ButtonGroup>
-        </InputWrapper>
-      </NotificationBlock>
-      <ButtonWrapper>
-        <SubmitButton>저장</SubmitButton>
-      </ButtonWrapper>
-    </>
+      <InputWrapper>
+        <h4>이메일 알림</h4>
+        <ButtonGroup>
+          {menu.map((menu) => (
+            <NotificationButton key={menu.id} id={menu.id} onClick={onClick}>
+              {menu.title}
+            </NotificationButton>
+          ))}
+        </ButtonGroup>
+      </InputWrapper>
+
+      <SubmitButton>저장</SubmitButton>
+    </NotificationBlock>
   );
 };
 
 const NotificationBlock = styled.div`
   width: 75%;
   height: 80%;
-
   margin-top: 7%;
   margin-right: 3%;
-
   float: right;
 `;
 
@@ -114,7 +108,6 @@ const ButtonGroup = styled.div`
 
   width: 100%;
   height: 50%;
-
   border: 1px solid lightgrey;
   border-radius: 15px;
   overflow: hidden;
@@ -133,16 +126,25 @@ const NotificationButton = styled.button`
 
   width: 25%;
   height: 100%;
-
   border: none;
   background: none;
 `;
 
-const ButtonWrapper = styled.div`
-  float: right;
-  width: 50rem;
-  height: 10rem;
-  display: flex;
+const SubmitButton = styled.button`
+  &:hover {
+    color: white;
+    cursor: pointer;
+    background: #f3b23e;
+  }
+  align-item: center;
+  width: 100px;
+  height: 40px;
+  background: white;
+  margin-top: 33%;
+  margin-left: 83%;
+  border-radius: 17px;
+  border: 2px solid #f3b23e;
+  box-shadow: 0 0px 5px rgba(87, 87, 87, 0.1);
 `;
 
 export default Notification;
