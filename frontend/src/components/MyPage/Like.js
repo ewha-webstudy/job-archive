@@ -2,18 +2,15 @@ import { useState, useEffect } from "react";
 import styled from "styled-components";
 import API from "../../utils/api";
 import MyPageCard from "../Card/MyPageCard";
-import { useSelector } from "react-redux";
 
-const LikeCards = ({ islogin }) => {
+const Like = ({ islogin }) => {
   const [likes, setLikes] = useState([]);
 
   useEffect(() => {
     API.get("/api/mypage/like")
       .then((res) => {
         console.log(res.data);
-
-        //likes에 받아온 데이터를 저장
-        setLikes(res.data);
+        setLikes(res.data); //likes에 받아온 데이터를 저장
       })
       .catch((err) => {
         console.log("ERR: ", err);
@@ -32,15 +29,6 @@ const LikeCards = ({ islogin }) => {
     </SaveListBlock>
   );
 };
-
-function Like() {
-  //store의 state 값 조회
-  const { islogin } = useSelector((state) => ({
-    islogin: state.logger.islogin,
-  }));
-
-  return <LikeCards islogin={islogin} />;
-}
 
 const SaveListBlock = styled.div`
   overflow: auto;
