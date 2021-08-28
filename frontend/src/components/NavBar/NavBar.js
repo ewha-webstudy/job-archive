@@ -44,7 +44,7 @@ const NavBar = ({ islogin, onLogout }) => {
               {islogin ? (
                 <>
                   <li className="nav__tag">
-                    <Anchor href="/mypage/profile" label="마이페이지" />
+                    <Anchor href="/mypage/:id" label="마이페이지" />
                   </li>
                   <li className="header__auth">
                     <Button
