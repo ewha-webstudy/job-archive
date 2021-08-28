@@ -5,21 +5,53 @@ import React, {useState} from "react";
 import API from "../../utils/api";
 import classes from './Detail.module.css';
 
-// function getKey
-function DetailBox({
-	watedTitle,
-	salTpNm,
-	sal,
-	corpAddr,
-	workdayWorkhrCont,
-	title,
 
-}) {
+function DetailBox({ item }) {
+	// function closedate(date){
+	// 	const arr = date.split("-");
+	// 	console.log(arr);
+	// 	return remaindTime(arr);
+	// }
+
+	// function remaindTime({arr}) {
+	// 	var now = new Date(); //현재시간을 구한다. 
+	// 	var open = new Date(arr[0], arr[1], arr[2], 0, 0, 0);
+
+	// 	var nt = now.getTime(); // 현재의 시간만 가져온다
+	// 	var ot = open.getTime(); // 오픈시간만 가져온다
+
+	// 	if (nt < ot) { //현재시간이 오픈시간보다 이르면 오픈시간까지의 남은 시간을 구한다.   
+	// 		let sec = parseInt(ot - nt) / 1000;
+	// 		let hour = parseInt(sec / 60 / 60);
+	// 		sec = (sec - (hour * 60 * 60));
+	// 		let min = parseInt(sec / 60);
+	// 		sec = parseInt(sec - (min * 60));
+
+	// 		if (hour < 10) { hour = "0" + hour; }
+	// 		if (min < 10) { min = "0" + min; }
+	// 		if (sec < 10) { sec = "0" + sec; }
+	// 		return(
+	// 			<div>
+	// 				{hour} : {min} : {sec}
+	// 			</div>
+	// 		);
+	// 	} else { //현재시간이 종료시간보다 크면
+	// 		// $("#d-day-hour").html('00');
+	// 		// $("#d-day-min").html('00');
+	// 		// $("#d-day-sec").html('00');'
+	// 		return(
+	// 			<div>
+	// 				00: 00 : 00
+	// 			</div>
+	// 		);
+	// 	}
+	// }
+	// setInterval(remaindTime, 1000);
 
 	return (
 		<section className={classes.detailBox}>
-			<div className={classes.title__company}>{title}</div>
-			<h1 className={classes.title}>네이버 프론트엔드 채용공고</h1>
+			<div className={classes.title__company}>{item.company}</div>
+			<h1 className={classes.title}>{item.wantedTitle}</h1>
 			{/*  태그사항 */}
 			<div className={classNames({ [classes.clearfix]: true, [classes.tbBox]: true })}>
 				<div className={classes.tb__title}>
@@ -27,11 +59,11 @@ function DetailBox({
 					<dl className={classes.tbList}>
 						<dt>경력</dt>
 						<dd>
-							<strong class="col_1">{watedTitle}</strong>
+							<strong class="col_1">{item.enterTpCd}</strong>
 						</dd>
 						<dt>학력</dt>
 						<dd>
-							<strong class="col_1">초대졸이상</strong>
+							<strong class="col_1">{item.minEdubgIcd}</strong>
 						</dd>
 					</dl>
 				</div>
@@ -48,20 +80,20 @@ function DetailBox({
 						</dd>
 						<dt>급여</dt>
 						<dd>
-							<em class="dotum"></em> {salTpNm}{sal}
+							{item.salTpNm} {item.sal}
 						</dd>
 						<dt>지역</dt>
-						<dd>{corpAddr}					</dd>
+						<dd>{item.corpAddr}					</dd>
 						<dt>시간</dt>
 						<dd>
-							<span>{workdayWorkhrCont}</span>
+							<span>{item.workdayWorkhrCont}</span>
 						</dd>
 					</dl>
 				</div>
 			</div>
 			<div className={classes.apply_box}>
-				<a className={classes.apply_button} href="{wantedInfoUrl}">홈페이지 지원</a>
-				<div className={classes.apply_ddayleft}> D-12</div>
+				<a className={classes.apply_button} href="${item.wantedInfoUrl}">홈페이지 지원</a>
+				{/* <div className={classes.apply_ddayleft}> {closedate(item.receiptCloseDt)}</div> */}
 			</div>
 			{/* 채용공고 */}
 			<h2 className={classes.h2}>직무내용</h2>

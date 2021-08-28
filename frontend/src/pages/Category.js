@@ -1,3 +1,4 @@
+import React, {useState, useEffect} from "react";
 import NavBar from "../components/NavBar/NavBar";
 import CardBoard from "../components/Card/CardBoard";
 // import Filter from "../components/Filter/Filter";
@@ -6,6 +7,7 @@ import { Grommet, Box, Grid } from "grommet";
 import styled from "styled-components";
 import "../style/category.css";
 import Category from "../components/Category/Category";
+import API from "../utils/api";
 
 const Title = styled.span`
   background-color: #ffaf00;
@@ -22,6 +24,8 @@ const Title = styled.span`
 `;
 
 const CategoryPage = ({match}) =>{
+  const [jobs , setJobs] = useState([]);
+
   const techStack = (category_chg) =>{
     if (category_chg === 'frontend')
     {
@@ -46,7 +50,7 @@ const CategoryPage = ({match}) =>{
     {
       id: 2,
       title: '경력',
-      tag: ['인턴', '신입', '경력' ]
+      tag: ['관계없음', '신입', '경력' ]
     },
     {
       id: 3,
@@ -59,6 +63,15 @@ const CategoryPage = ({match}) =>{
       tag: ['고등학교 졸업', '무관', '석사 이상' ]
     }
   ]
+  API.get("")
+
+  useEffect(() => {
+    API.get("/api/category/${match.params.category}").then((response) => {
+      console.log(response.status);
+      setJobs(response.data);
+    });
+  }, []);
+
   return (
     <div>
       <header>
@@ -98,8 +111,9 @@ const CategoryPage = ({match}) =>{
             height="100%"
             background="light-2"
           >
+            {/* 조회순, 최신순.. 없애기로함. */}
             {/* <Filter /> */}
-            {/* <CardBoard /> */}
+            <CardBoard jobs={jobs}/>
           </Box>
         </Grid>
       </Grommet>
