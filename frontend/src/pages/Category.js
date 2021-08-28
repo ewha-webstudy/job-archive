@@ -8,6 +8,7 @@ import styled from "styled-components";
 import "../style/category.css";
 import Category from "../components/Category/Category";
 import API from "../utils/api";
+import Layout from "../components/Category/CategoryLayout";
 
 const Title = styled.span`
   background-color: #ffaf00;
@@ -74,20 +75,7 @@ const CategoryPage = ({match}) =>{
 
   return (
     <div>
-      <Grommet style={{marginTop: 70}}>
-        <Grid
-          background="light-2"
-          rows={["auto", "flex"]}
-          columns={["auto", "flex"]}
-          height="full-screen"
-          gap="small"
-          pad="medium"
-          responsive
-          areas={[
-            { name: "search", start: [0, 0], end: [1, 0] },
-            { name: "nav", start: [0, 1], end: [0, 1] },
-            { name: "main", start: [1, 1], end: [1, 1] },
-          ]}
+      <Layout
         >
           <Box gridArea="search" height="xxsmall" direction="row-reverse">
             <SearchBar />
@@ -113,8 +101,7 @@ const CategoryPage = ({match}) =>{
             <CardBoard jobs={jobs}/>
             {/* {console.log({jobs})} */}
           </Box>
-        </Grid>
-      </Grommet>
+      </Layout>
     </div>
   );
 }

@@ -11,6 +11,7 @@ import SearchBar from "../components/SearchBar/SearchBar";
 import Category from "../components/Category/Category";
 import DetailBox from "../components/Detail/Datail";
 import API from "../utils/api";
+import Layout from "../components/Category/CategoryLayout";
 
 const Title = styled.span`
   background-color: #ffaf00;
@@ -94,28 +95,6 @@ const DUMMY_DATA_DETAIL = [
 	}
 ]
 
-function Layout(props) {
-	return (
-		<Grommet>
-				<Grid
-					background="light-2"
-					rows={["auto", "flex"]}
-					columns={["auto", "flex"]}
-					height="full-screen"
-					gap="small"
-					pad="medium"
-					responsive
-					areas={[
-						{ name: "search", start: [0, 0], end: [1, 0] },
-						{ name: "nav", start: [0, 1], end: [0, 1] },
-						{ name: "main", start: [1, 1], end: [1, 1] },
-					]}
-				>
-								{props.children}
-				</Grid>
-			</Grommet>
-	);
-}
 
 const DetailInfoPage = ({match}) => {
 	const [content, setContent] = useState([]);
@@ -152,6 +131,7 @@ const DetailInfoPage = ({match}) => {
 						background="light-2"
 						width="medium"
 						align="center"
+						style={{marginTop: 75}}
 					>
 						<Title>카테고리</Title>
 						<Category categoryList={DUMMY_DATA_CATEGORY} />
@@ -162,6 +142,7 @@ const DetailInfoPage = ({match}) => {
 						gridArea="main"
 						height="100%"
 						background="light-2"
+						style={{marginTop: 75}}
 					>
 						<DetailBox item={ DUMMY_DATA_DETAIL[0]}
 						/>

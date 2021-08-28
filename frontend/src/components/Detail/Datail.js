@@ -6,6 +6,7 @@ import API from "../../utils/api";
 import classes from "./Detail.module.css";
 
 
+
 function DetailBox({ item }) {
 	// function closedate(date){
 	// 	const arr = date.split("-");
