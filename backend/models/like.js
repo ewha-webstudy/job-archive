@@ -14,6 +14,14 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING(45),
       allowNull: false,
       primaryKey: true
+    },
+    alertDate: {
+      type: DataTypes.DATEONLY,
+      allowNull: true
+    },
+    updateAt: {
+      type: DataTypes.DATEONLY,
+      allowNull: true
     }
   }, {
     sequelize,

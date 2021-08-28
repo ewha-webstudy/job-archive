@@ -45,7 +45,6 @@ exports.search = async(req, res) => {
   const { category } = req.params;
   if (!category) return res.status(400).send();
   const { tags, searchBar } = req.body;
-  if (!tags || !searchBar) return res.status(400).send();
   console.log("this is category search", category)
   let jobList = []
   let cardList = []

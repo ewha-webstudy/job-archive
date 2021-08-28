@@ -141,9 +141,6 @@ const DetailInfoPage = ({match}) => {
 
 	return (
 		<div>
-			<header>
-				<NavBar />
-			</header>
 				<Layout>
 					{/* searchBar */}
 					<Box gridArea="search" height="xxsmall" direction="row-reverse">

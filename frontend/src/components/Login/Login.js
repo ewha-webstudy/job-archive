@@ -36,7 +36,7 @@ const Login = ({ onLogin }) => {
         API.defaults.headers.common["authorization"] = accessToken;
         history.push("/");
       })
-      .catch((err) => {
+      .catch(err => {
         console.log("err: ", err);
         // if (err.response.status === 400) {
         //   alert("존재하지 않는 아이디입니다.");
