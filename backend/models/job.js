@@ -47,16 +47,16 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false
     },
     jobCont: {
-      type: DataTypes.STRING(800),
+      type: DataTypes.STRING(2000),
       allowNull: true
     },
     category: {
-      type: DataTypes.STRING(45),
-      allowNull: false
+      type: DataTypes.STRING(200),
+      allowNull: true
     },
     techStack: {
       type: DataTypes.STRING(200),
-      allowNull: false
+      allowNull: true
     },
     enterTpCd: {
       type: DataTypes.STRING(45),
@@ -75,7 +75,7 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false
     },
     workdayWorkhrCont: {
-      type: DataTypes.STRING(100),
+      type: DataTypes.STRING(1000),
       allowNull: false
     },
     receiptCloseDt: {
