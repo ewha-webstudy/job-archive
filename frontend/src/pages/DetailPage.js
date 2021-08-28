@@ -1,12 +1,17 @@
+
+import { Grommet, Box, Grid } from "grommet";
+import styled from "styled-components";
+import React, {useState, useEffect} from "react";
+
+import "../style/category.css";
 import NavBar from "../components/NavBar/NavBar";
 import CardBoard from "../components/Card/CardBoard";
 import Filter from "../components/Filter/Filter";
 import SearchBar from "../components/SearchBar/SearchBar";
-import { Grommet, Box, Grid } from "grommet";
-import styled from "styled-components";
-import "../style/category.css";
 import Category from "../components/Category/Category";
 import DetailBox from "../components/Detail/Datail";
+import API from "../utils/api";
+import Layout from "../components/Category/CategoryLayout";
 
 const Title = styled.span`
   background-color: #ffaf00;
@@ -47,71 +52,72 @@ const DUMMY_DATA_CATEGORY = [
 
 const DUMMY_DATA_DETAIL = [
 	{
-		id: 1,
-		title: '네이버 웹페이지 채용 공고',
-		company: '네이버',
-		career: '신입',
-		edu: '석사',
-		salary: {
-			min: 3000,
-			max: 4000,
-			// 협의/ 적혀잇지 않는 경우? 
-			consult: false
-		},
-		// srchKeywordNM?? 키워드?? 
-		jobContent: '웹 페이지 개발 기타등등 어쩌고저쩌고 모두 환영',
-		pref: '영어우대',
-		time:'월-금 9시-18시',
-		place: '서울 강남구',
-		applyurl: 'http://dddd.org',
-		closedate: '2021-05-03 21:00:00'
+		wantedAuthNo: "K120612108130052",
+        wantedTitle: "AI 솔루션 개발자 모집(웹프로그램 개발자 1명 , AI 개발자 1명, C/S 개발자 1명)",
+        company: "주식회사브이씨아이",
+        logo: "",
+        reperNm: "",
+        indTpCdNm: "",
+        corpAddr: "08511 서울특별시 금천구 벚꽃로 254, 11층 1111호",
+        homePg: "www.vcicorp.co.kr",
+        receiptCloseDt: "9999-01-01",
+        jobCont: "[직무내용] ㆍ웹프로그램 개발자 1명(JSP, JAVA, postgresql DB) ㆍ응용프로그램 개발자 2명 - AI 개발자 1명 : C++, win32, 카메라 제어(RTSP, OpenCV, 알고리즘 개발) - C/S 개발자 1명 : C++ DLL, C#(WPF) 클라이언트 개발(RTSP, OpenCV, FFMPEG) [우대사항] ○ OpenCV, FFMPEG 이용 가능자 ○ 네트워크 프로그래밍 ○ 실력보다 성실성 중요 [그 외 사항] ○ 연봉은 2800만원 면접 후 협의 가능합니다. ○ 월 복지금 실비지급 ** 지원자는 이력서와 자기소개서를 이메일( vcicorp@vcicorp.co.kr), 팩스는 (02-853-8332)로 지원하시기 바랍니다.",
+        wantedInfoUrl: "http://www.work.go.kr/empDetailRedirect.do?wantedAuthNo=K120612108130052",
+        empTpNm: "기간의 정함이 없는 근로계약/ 파견근로 비희망",
+        enterTpCd: "N ",     
+        minEdubgIcd: "04",
+        pfCond: "",
+        salTpNm: "연봉",
+        sal: "2800만원 ~ 2800만원",
+        workdayWorkhrCont: "평일 : 09:30~18:30, 주 5일 근무, 평균근무시간 : 40",
+        likeNo: 0
 	},
 	{
-		id: 2,
-		title: '네이버 웹페이지 채용 공고2',
-		company: '네이버2',
-		career: '경력',
-		edu: '무관',
-		salary: {
-			min: 3000,
-			max: 4000,
-			// 협의/ 적혀잇지 않는 경우? 
-			consult: false
-		},
-		// srchKeywordNM?? 키워드?? 
-		jobContent: '웹 페이지 개발 기타등등 어쩌고저쩌고 모두 환영',
-		pref: '영어우대',
-		time:'월-금 9시-18시',
-		place: '서울 강남구',
-		applyurl: 'http://dddd.org',
-		closedate: '2021-05-03 21:00:00'
+		wantedAuthNo: "K120612108130052",
+        wantedTitle: "AI 솔루션 개발자 모집(웹프로그램 개발자 1명 , AI 개발자 1명, C/S 개발자 1명)",
+        company: "주식회사브이씨아이",
+        logo: "",
+        reperNm: "",
+        indTpCdNm: "",
+        corpAddr: "08511 서울특별시 금천구 벚꽃로 254, 11층 1111호",
+        homePg: "www.vcicorp.co.kr",
+        receiptCloseDt: "9999-01-01",
+        jobCont: "[직무내용] ㆍ웹프로그램 개발자 1명(JSP, JAVA, postgresql DB) ㆍ응용프로그램 개발자 2명 - AI 개발자 1명 : C++, win32, 카메라 제어(RTSP, OpenCV, 알고리즘 개발) - C/S 개발자 1명 : C++ DLL, C#(WPF) 클라이언트 개발(RTSP, OpenCV, FFMPEG) [우대사항] ○ OpenCV, FFMPEG 이용 가능자 ○ 네트워크 프로그래밍 ○ 실력보다 성실성 중요 [그 외 사항] ○ 연봉은 2800만원 면접 후 협의 가능합니다. ○ 월 복지금 실비지급 ** 지원자는 이력서와 자기소개서를 이메일( vcicorp@vcicorp.co.kr), 팩스는 (02-853-8332)로 지원하시기 바랍니다.",
+        wantedInfoUrl: "http://www.work.go.kr/empDetailRedirect.do?wantedAuthNo=K120612108130052",
+        empTpNm: "기간의 정함이 없는 근로계약/ 파견근로 비희망",
+        enterTpCd: "N ",     
+        minEdubgIcd: "04",
+        pfCond: "",
+        salTpNm: "연봉",
+        sal: "2800만원 ~ 2800만원",
+        workdayWorkhrCont: "평일 : 09:30~18:30, 주 5일 근무, 평균근무시간 : 40",
+        likeNo: 0
 	}
 ]
 
-function Layout(props) {
-	return (
-		<Grommet>
-				<Grid
-					background="light-2"
-					rows={["auto", "flex"]}
-					columns={["auto", "flex"]}
-					height="full-screen"
-					gap="small"
-					pad="medium"
-					responsive
-					areas={[
-						{ name: "search", start: [0, 0], end: [1, 0] },
-						{ name: "nav", start: [0, 1], end: [0, 1] },
-						{ name: "main", start: [1, 1], end: [1, 1] },
-					]}
-				>
-								{props.children}
-				</Grid>
-			</Grommet>
-	);
-}
 
-function DetailInfoPage() {
+const DetailInfoPage = ({match}) => {
+	const [content, setContent] = useState([]);
+	const [error, setError] = useState(null);
+
+	const datakey = match.params.id;
+
+	useEffect(() => {
+		const fetchContents = async () => {
+			try {
+				setContent(null);
+				setError(null);
+				API.get("/api/category/${datakey}").then((response) => {
+					console.log(response.status);
+					setContent(response.data);
+				});
+			} catch (e) {
+				setError(e);
+			}
+		}
+		fetchContents();
+	}, []);
+
 	return (
 		<div>
 				<Layout>
@@ -125,6 +131,7 @@ function DetailInfoPage() {
 						background="light-2"
 						width="medium"
 						align="center"
+						style={{marginTop: 75}}
 					>
 						<Title>카테고리</Title>
 						<Category categoryList={DUMMY_DATA_CATEGORY} />
@@ -135,8 +142,9 @@ function DetailInfoPage() {
 						gridArea="main"
 						height="100%"
 						background="light-2"
+						style={{marginTop: 75}}
 					>
-						<DetailBox item={DUMMY_DATA_DETAIL[1]}
+						<DetailBox item={ DUMMY_DATA_DETAIL[0]}
 						/>
 					</Box>
 					</Layout>

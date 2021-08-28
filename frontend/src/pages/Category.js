@@ -1,3 +1,4 @@
+import React, {useState, useEffect} from "react";
 import NavBar from "../components/NavBar/NavBar";
 import CardBoard from "../components/Card/CardBoard";
 // import Filter from "../components/Filter/Filter";
@@ -6,6 +7,8 @@ import { Grommet, Box, Grid } from "grommet";
 import styled from "styled-components";
 import "../style/category.css";
 import Category from "../components/Category/Category";
+import API from "../utils/api";
+import Layout from "../components/Category/CategoryLayout";
 
 const Title = styled.span`
   background-color: #ffaf00;
@@ -22,6 +25,8 @@ const Title = styled.span`
 `;
 
 const CategoryPage = ({match}) =>{
+  const [jobs , setJobs] = useState([]);
+
   const techStack = (category_chg) =>{
     if (category_chg === 'frontend')
     {
@@ -46,7 +51,7 @@ const CategoryPage = ({match}) =>{
     {
       id: 2,
       title: '경력',
-      tag: ['인턴', '신입', '경력' ]
+      tag: ['관계없음', '신입', '경력' ]
     },
     {
       id: 3,
@@ -59,22 +64,18 @@ const CategoryPage = ({match}) =>{
       tag: ['고등학교 졸업', '무관', '석사 이상' ]
     }
   ]
+  API.get("")
+
+  useEffect(() => {
+    API.get("/api/category/${match.params.category}").then((response) => {
+      // console.log(response.status);
+      setJobs(response.data);
+    });
+  }, []);
+
   return (
     <div>
-      <Grommet>
-        <Grid
-          background="light-2"
-          rows={["auto", "flex"]}
-          columns={["auto", "flex"]}
-          height="full-screen"
-          gap="small"
-          pad="medium"
-          responsive
-          areas={[
-            { name: "search", start: [0, 0], end: [1, 0] },
-            { name: "nav", start: [0, 1], end: [0, 1] },
-            { name: "main", start: [1, 1], end: [1, 1] },
-          ]}
+      <Layout
         >
           <Box gridArea="search" height="xxsmall" direction="row-reverse">
             <SearchBar />
@@ -84,6 +85,7 @@ const CategoryPage = ({match}) =>{
             background="light-2"
             width="medium"
             align="center"
+            style={{marginTop: 75}}
           >
             <Title>카테고리</Title>
             {/* {console.log(match.params.category)} */}
@@ -94,12 +96,12 @@ const CategoryPage = ({match}) =>{
             gridArea="main"
             height="100%"
             background="light-2"
+            style={{marginTop: 75}}
           >
-            {/* <Filter /> */}
-            {/* <CardBoard /> */}
+            <CardBoard jobs={jobs}/>
+            {/* {console.log({jobs})} */}
           </Box>
-        </Grid>
-      </Grommet>
+      </Layout>
     </div>
   );
 }

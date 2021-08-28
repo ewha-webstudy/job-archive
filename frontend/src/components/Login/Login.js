@@ -13,7 +13,7 @@ const Login = ({ onLogin }) => {
     psword: "",
   });
 
-  const [cookies] = useCookies(["user"]); //토큰
+  // const [cookies] = useCookies( [ 'user' ]); //토큰
 
   const SubmitHandler = async (e) => {
     e.preventDefault();
@@ -26,16 +26,12 @@ const Login = ({ onLogin }) => {
       .then((res) => {
         console.log("res: ", res);
 
-        const accessToken = cookies; //토큰
-        console.log({ "Token Success": accessToken });
+        localStorage.setItem("token", res.data.data.token);
 
-        // accessToken store에 저장
-        onLogin(accessToken);
-
-        // TEST: onLogin("tokentoken");
+        onLogin(res.data.token);
 
         // axios 동작 시 헤더에 기본으로 붙도록 설정한다.
-        API.defaults.headers.common["authorization"] = accessToken;
+        API.defaults.headers.common["authorization"] = res.data.token; //수정
         history.push("/");
       })
       .catch((err) => {
