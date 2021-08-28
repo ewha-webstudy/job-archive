@@ -4,33 +4,31 @@ import { Link, useHistory } from "react-router-dom";
 import { useState } from "react";
 import { useCookies } from 'react-cookie'; 
 
-// login: login 여부, token: 토큰
-// onLogin: 로그인하는 함수, onLogout: 로그아웃하는 함수
 const Login = ({ onLogin }) => {
   const history = useHistory();
   const [user, setUser] = useState({
     id: "",
     psword: "",
   });
-  
- // const [cookies] = useCookies( [ 'user' ]); //토큰
-
+   
   const SubmitHandler = async (e) => {
     e.preventDefault();
 
     await API.post("/api/member/auth", user,
-      { withCredentials: true } //서버와 쿠키 주고받기 위함 
+      { withCredentials: true } 
     )
       .then((res) => {
         console.log("res: ", res);
       
-      localStorage.setItem('token', res.data.data.token);
+      // localStorage에 토큰 저장
+      localStorage.setItem('token', res.data.token);
 
+      // store에 토큰 저장
       onLogin(res.data.token);  
 
-        // axios 동작 시 헤더에 기본으로 붙도록 설정한다.
-        API.defaults.headers.common["authorization"] = res.data.token; //수정
-        history.push("/");
+      // axios 동작 시 헤더에 기본으로 붙도록 설정한다.
+      API.defaults.headers.common["authorization"] = res.data.token; 
+      history.push("/");
       })
       .catch((err) => {
         console.log("err: ", err);
