@@ -33,7 +33,7 @@ const Login = ({ onLogin }) => {
         // TEST: onLogin("tokentoken");
 
         // axios 동작 시 헤더에 기본으로 붙도록 설정한다.
-        API.defaults.headers.common["user"] = accessToken;
+        API.defaults.headers.common["authorization"] = accessToken;
         history.push("/");
       })
       .catch((err) => {
