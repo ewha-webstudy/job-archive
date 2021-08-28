@@ -12,6 +12,7 @@ exports.getLikelist = async (req, res) => {
     const loggedID = res.locals.userid;
     const cardList = [];
     console.log("this is getLikelist");
+    console.log({ "좋아요 페이지" : loggedID}); //test
 
     try{
         const jobList = await Like.findAndCountAll(
