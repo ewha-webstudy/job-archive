@@ -22,7 +22,6 @@ const fd = fs.openSync('jobdetail.json', 'a+');
 
 let detailjson = fs.readFileSync(fd, "utf-8");
 let details = new Array();
-//details.push(JSON.parse(detailjson));
 
 
 function getBasic() {
@@ -35,7 +34,6 @@ function getBasic() {
             else {
                 if (res.statusCode == 200) {
                     var result = body
-                    // console.log(`body data => ${result}`)
                     var xmlToJson = convert.xml2json(result, { textFn: RemoveJsonTextAttribute, compact: true, spaces: 4 });
                     const jsonData = JSON.parse(xmlToJson);
                     len = jsonData.wantedRoot.wanted.length;
@@ -96,13 +94,6 @@ function getDetail(url) {
                         }
                         catch (e) { }
                     }
-
-
-                    fs.appendFile(`./jobdetail.json`, xmlToJson, function (err) {
-                        if (err) throw err;
-                    });
-
-
                     resolve(jsonData);
                 }
             }
@@ -113,18 +104,14 @@ function getDetail(url) {
 async function getDetailIter(arr) {
     for (var i in arr) {
         const res = await getDetail(arr[i])
-        //console.log(res)
         detailArray.push(res);
     }
-    //console.log(detailArray)
     return detailArray;
 }
 
-var category = new Array();
 
-// TODO: 카테고리
+var category = new Array();
 async function categorize() {
-    // var category = new Array();
     var frontArray = new Array();
     var backArray = new Array();
     var dataArray = new Array();
@@ -185,7 +172,6 @@ async function tagRegion(basicArray) {
         var zip = parseInt(basicArray[i].zipCd.substring(0, 2));
         var found = false;
         var index;
-        //console.log(zip)
         for (var j in detailArray) {
             if (currAuth == detailArray[j]['wantedDtl']['wantedAuthNo']) {
                 found = true;
@@ -197,94 +183,73 @@ async function tagRegion(basicArray) {
             if (1 <= zip && zip <= 9) {
                 region = "서울";
                 detailArray[j].wantedDtl.wantedInfo.regionCd = region;
-                // console.log(detailArray[j].wantedDtl.wantedInfo.regionCd)
             }
             else if (46 <= zip && zip <= 49) {
                 region = "부산";
                 detailArray[j].wantedDtl.wantedInfo.regionCd = region;
-                // console.log(detailArray[j].wantedDtl.wantedInfo.regionCd)
             }
             else if (41 <= zip && zip <= 43) {
                 region = "대구";
                 detailArray[j].wantedDtl.wantedInfo.regionCd = region;
-                // console.log(detailArray[j].wantedDtl.wantedInfo.regionCd)
             }
             else if (21 <= zip && zip <= 23) {
                 var region = "인천";
                 detailArray[j].wantedDtl.wantedInfo.regionCd = region;
-                // console.log(detailArray[j].wantedDtl.wantedInfo.regionCd)
             }
             else if (61 <= zip && zip <= 62) {
                 var region = "광주";
                 detailArray[j].wantedDtl.wantedInfo.regionCd = region;
-                // /console.log(detailArray[j].wantedDtl.wantedInfo.regionCd)
             }
             else if (34 <= zip && zip <= 35) {
                 var region = "대전";
                 detailArray[j].wantedDtl.wantedInfo.regionCd = region;
-                // console.log(detailArray[j].wantedDtl.wantedInfo.regionCd)
             }
             else if (44 <= zip && zip <= 45) {
                 var region = "울산";
                 detailArray[j].wantedDtl.wantedInfo.regionCd = region;
-                // console.log(detailArray[j].wantedDtl.wantedInfo.regionCd)
             }
             else if (zip == 30) {
                 var region = "세종";
                 detailArray[j].wantedDtl.wantedInfo.regionCd = region;
-                // console.log(detailArray[j].wantedDtl.wantedInfo.regionCd)
             }
             else if (10 <= zip && zip <= 20) {
                 var region = "경기";
                 detailArray[j].wantedDtl.wantedInfo.regionCd = region;
-                // console.log(detailArray[j].wantedDtl.wantedInfo.regionCd)
             }
             else if (24 <= zip && zip <= 26) {
                 var region = "강원";
                 detailArray[j].wantedDtl.wantedInfo.regionCd = region;
-                // console.log(detailArray[j].wantedDtl.wantedInfo.regionCd)
             }
             else if (27 <= zip && zip <= 29) {
                 var region = "충북";
                 detailArray[j].wantedDtl.wantedInfo.regionCd = region;
-                // console.log(detailArray[j].wantedDtl.wantedInfo.regionCd)
             }
             else if (31 <= zip && zip <= 33) {
                 var region = "충남";
                 detailArray[j].wantedDtl.wantedInfo.regionCd = region;
-                // console.log(detailArray[j].wantedDtl.wantedInfo.regionCd)
             }
             else if (54 <= zip && zip <= 56) {
                 var region = "전북";
                 detailArray[j].wantedDtl.wantedInfo.regionCd = region;
-                // console.log(detailArray[j].wantedDtl.wantedInfo.regionCd)
             }
             else if (57 <= zip && zip <= 60) {
                 var region = "전남";
                 detailArray[j].wantedDtl.wantedInfo.regionCd = region;
-                // console.log(detailArray[j].wantedDtl.wantedInfo.regionCd)
             }
             else if (36 <= zip && zip <= 40) {
                 var region = "경북";
                 detailArray[j].wantedDtl.wantedInfo.regionCd = region;
-                // console.log(detailArray[j].wantedDtl.wantedInfo.regionCd)
             }
             else if (50 <= zip && zip <= 53) {
                 var region = "경남";
                 detailArray[j].wantedDtl.wantedInfo.regionCd = region;
-                // console.log(detailArray[j].wantedDtl.wantedInfo.regionCd)
             }
             else if (zip == 63) {
                 var region = "제주";
                 detailArray[j].wantedDtl.wantedInfo.regionCd = region;
-                // console.log(detailArray[j].wantedDtl.wantedInfo.regionCd)
             }
         }
 
-    }
-
-    for (var i in detailArray) {
-        //console.log(detailArray[i]);
     }
     return detailArray;
 }
@@ -294,47 +259,38 @@ async function tagEdu() {
     for (var j in detailArray) {
         var edu;
         var edu = parseInt(detailArray[j]['wantedDtl']['wantedInfo']['minEdubgIcd']);
-        //console.log(edu)
 
         if (edu == 0) {
             edu = "학력무관";
             detailArray[j].wantedDtl.wantedInfo.minEdubgIcd = edu;
-            // console.log(detailArray[j].wantedDtl.wantedInfo.minEdubgIcd)
         }
         else if (edu == 1) {
             edu = "초졸이하";
             detailArray[j].wantedDtl.wantedInfo.minEdubgIcd = edu;
-            // console.log(detailArray[j].wantedDtl.wantedInfo.minEdubgIcd)
         }
         else if (edu == 2) {
             edu = "중졸";
             detailArray[j].wantedDtl.wantedInfo.minEdubgIcd = edu;
-            // console.log(detailArray[j].wantedDtl.wantedInfo.minEdubgIcd)
         }
         else if (edu == 3) {
             edu = "고졸";
             detailArray[j].wantedDtl.wantedInfo.minEdubgIcd = edu;
-            // console.log(detailArray[j].wantedDtl.wantedInfo.minEdubgIcd)
         }
         else if (edu == 4) {
             edu = "대졸(2~3년)";
             detailArray[j].wantedDtl.wantedInfo.minEdubgIcd = edu;
-            // console.log(detailArray[j].wantedDtl.wantedInfo.minEdubgIcd)
         }
         else if (edu == 5) {
             edu = "대졸(4년)";
             detailArray[j].wantedDtl.wantedInfo.minEdubgIcd = edu;
-            // console.log(detailArray[j].wantedDtl.wantedInfo.minEdubgIcd)
         }
         else if (edu == 6) {
             edu = "석사";
             detailArray[j].wantedDtl.wantedInfo.minEdubgIcd = edu;
-            // console.log(detailArray[j].wantedDtl.wantedInfo.minEdubgIcd)
         }
         else if (edu == 7) {
             edu = "박사";
             detailArray[j].wantedDtl.wantedInfo.minEdubgIcd = edu;
-            // console.log(detailArray[j].wantedDtl.wantedInfo.minEdubgIcd)
         }
 
     }
@@ -345,38 +301,28 @@ async function tagCareer() {
     for (var j in detailArray) {
         var career;
         var career = detailArray[j]['wantedDtl']['wantedInfo']['enterTpCd'];
-        // console.log(career)
 
         if (career == "N") {
             career = "신입";
             detailArray[j].wantedDtl.wantedInfo.enterTpCd = career;
-            // console.log(detailArray[j].wantedDtl.wantedInfo.enterTpCd)
         }
         else if (career == "E") {
             career = "경력";
             detailArray[j].wantedDtl.wantedInfo.enterTpCd = career;
-            // console.log(detailArray[j].wantedDtl.wantedInfo.enterTpCd)
         }
         else if (career == "Z") {
             career = "관계없음";
             detailArray[j].wantedDtl.wantedInfo.enterTpCd = career;
-            // console.log(detailArray[j].wantedDtl.wantedInfo.enterTpCd)
         }
 
     }
-
-    for (var i in detailArray)
-        //console.log(detailArray[i])
-        return detailArray;
 }
 
 var avgSal = {};
-
 async function tagSalary() {
     var salTpCd = {};
     var minSal = {};
     var maxSal = {};
-    // var avgSal = {};
 
     for (let i in basicArray) {
         var v_salTpCd = detailArray[i].wantedDtl.wantedInfo.salTpCd;
@@ -385,9 +331,7 @@ async function tagSalary() {
         var temp_maxSal = basicArray[i].maxSal;
         var v_minSal = parseInt(temp_minSal);
         var v_maxSal = parseInt(temp_maxSal);
-        // console.log(v_minSal);
 
-        // var v_maxSal = basicArray[i].maxSal;
         // 시급
         if (v_salTpCd == 'H') {
             salTpCd[detailArray[i].wantedDtl.wantedAuthNo] = v_salTpCd;
@@ -463,9 +407,7 @@ async function tagSalary() {
     }
 }
 
-// TODO: 태그
 var tagStack = {};
-
 async function tagTechStack() {
     const frontTech = ["html", "css", "js", "javascript"];
     const backTech = ["ruby", "python", "php", "java", "scala", "node.js", "rest api"];
@@ -480,7 +422,6 @@ async function tagTechStack() {
         var frontStackFound = false;
         var backStackFound = false;
         var dataStackFound = false;
-        const JSON_NULL = "NULL";
 
         for (let i in frontTech) {
             if (title.toLowerCase().includes(frontTech[i]) || jobCont.toLowerCase().includes(frontTech[i]) || jobsNm.toLowerCase().includes(frontTech[i])) {
@@ -490,9 +431,6 @@ async function tagTechStack() {
         }
         if (frontStackFound) {
             tagStack[detailArray[a].wantedDtl.wantedAuthNo] = stackEx.join(',');
-        }
-        else {
-            tagStack[detailArray[a].wantedDtl.wantedAuthNo] = JSON_NULL;
         }
 
         for (let j in backTech) {
@@ -504,9 +442,6 @@ async function tagTechStack() {
         if (backStackFound) {
             tagStack[detailArray[a].wantedDtl.wantedAuthNo] = stackEx.join(',');
         }
-        else {
-            tagStack[detailArray[a].wantedDtl.wantedAuthNo] = JSON_NULL;
-        }
 
         for (let k in dataTech) {
             if (title.toLowerCase().includes(dataTech[k]) || jobCont.toLowerCase().includes(dataTech[k]) || jobsNm.toLowerCase().includes(dataTech[k])) {
@@ -517,11 +452,7 @@ async function tagTechStack() {
         if (dataStackFound) {
             tagStack[detailArray[a].wantedDtl.wantedAuthNo] = stackEx.join(',');
         }
-        else {
-            tagStack[detailArray[a].wantedDtl.wantedAuthNo] = JSON_NULL;
-        }
     }
-    console.log(">>>>>>>>>>TAG>>>>>>>>" + JSON.stringify(tagStack));
 }
 
 function to_date1(date_str) {
@@ -530,7 +461,6 @@ function to_date1(date_str) {
     var sMonth = yyyyMMdd.substring(5, 7);
     var sDate = yyyyMMdd.substring(8, 10);
 
-    //alert("sYear :"+sYear +"   sMonth :"+sMonth + "   sDate :"+sDate);
     return new Date(Number(sYear), Number(sMonth) - 1, Number(sDate));
 }
 
@@ -566,6 +496,9 @@ function acceptNull(value) {
 
 async function putInDB() {
     for (var i in detailArray) {
+        if (category[detailArray[i]['wantedDtl']['wantedAuthNo']] == null) {
+            continue;
+        }
         for (var j in basicArray) {
             if (detailArray[i]['wantedDtl']['wantedAuthNo'] == basicArray[j].wantedAuthNo) {
                 var regDtStr = "20" + basicArray[j].regDt;
@@ -574,9 +507,6 @@ async function putInDB() {
                     break;
                 }
 
-                //console.log(regDtDate)
-                //console.log(detailArray[i].wantedDtl.wantedInfo.minEdubgIcd)
-                //console.log(modifyPfCond(detailArray[i].wantedDtl.wantedInfo.pfCond))
                 await job.create({
                     wantedAuthNo: detailArray[i]['wantedDtl']['wantedAuthNo'],
                     regDt: regDtDate,
