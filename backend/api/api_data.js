@@ -528,7 +528,7 @@ async function putInDB() {
                     empTpNm: detailArray[i].wantedDtl.wantedInfo.empTpNm,
                     workdayWorkhrCont: detailArray[i].wantedDtl.wantedInfo.workdayWorkhrCont,
                     receiptCloseDt: modifyReceiptCloseDt(detailArray[i].wantedDtl.wantedInfo.receiptCloseDt),
-                    logo: null,
+                    logo: 'https://ibb.co/ZKPzhMC',
                     likeNo: 0,
                     view: 0,
                     indTpCdNm: detailArray[i].wantedDtl.corpInfo.indTpCdNm,
