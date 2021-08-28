@@ -7,19 +7,6 @@ import { Sidebar } from "grommet";
 
 
 function CategoryItem(props) {
-	// const [checkedItems, setCheckedItems] = useState(new Set());
-
-	// const checkedItemHander = (id, isChecked) => {
-	// 	if (isChecked) {
-	// 		checkedItems.add(id);
-	// 		setCheckedItems(checkedItems);
-	// 	  } else if (!isChecked && checkedItems.has(id)) {
-	// 		checkedItems.delete(id);
-	// 		setCheckedItems(checkedItems);
-	// 	  }
-	// 	  console.log(checkedItems);
-	// }
-
 
 	return (
 		<li>
@@ -38,7 +25,7 @@ function CategoryItem(props) {
 }
 
 function Category(props) {
-	// console.log(props);
+
 	return (
 		<ul className={classes.categoryWrapper}>
 			

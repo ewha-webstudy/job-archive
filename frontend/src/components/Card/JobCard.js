@@ -5,8 +5,7 @@ import { Favorite } from "grommet-icons";
 import "../../style/card.css";
 import API from "../../utils/api";
 import GetDday from "./GetDday";
-import { motion } from "framer-motion";
-import { useAnimation } from "framer-motion";
+import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 
 function JobCard({ name, id, end, position, logo, likeNo, islogin }) {
@@ -92,7 +91,7 @@ function JobCard({ name, id, end, position, logo, likeNo, islogin }) {
       alert("책갈피는 로그인 후 이용할 수 있습니다!");
     }
   };
-
+  
   return (
     <motion.div ref={ref} animate={animation} className="b-container">
     <Card width="small" background="light-1" responsive>
