@@ -60,7 +60,7 @@ const NavBar = ({ islogin, onLogout }) => {
               ) : (
                 <li className="header__auth">
                   <Button
-                    href="/login"
+                    href="/member/auth"
                     color="#ffaf00"
                     primary
                     label="Login"
