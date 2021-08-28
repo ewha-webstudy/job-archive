@@ -23,6 +23,8 @@ const Login = ({ onLogin }) => {
     )
       .then((res) => {
         console.log("res: ", res);
+      
+      localStorage.setItem('token', res.data.data.token);
 
       onLogin(res.data.token);  
 
