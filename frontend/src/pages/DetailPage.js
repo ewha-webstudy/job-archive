@@ -114,9 +114,6 @@ function Layout(props) {
 function DetailInfoPage() {
 	return (
 		<div>
-			<header>
-				<NavBar />
-			</header>
 				<Layout>
 					{/* searchBar */}
 					<Box gridArea="search" height="xxsmall" direction="row-reverse">
