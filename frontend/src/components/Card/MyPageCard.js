@@ -92,12 +92,12 @@ const ex = [
   },
 ];
 
-// *** api 연결하려면, line122의 ex-> jobs로 수정
+//데이터를 받아서 카드로 보여줌
 const MyPageCard = ({ jobs, islogin }) => {
   return (
     <>
       <Container>
-        {ex.map((jobs, index) => (
+        {jobs.map((jobs, index) => (
           <CardWrapper>
             <JobCard
               key={index}

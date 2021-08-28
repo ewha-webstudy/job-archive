@@ -10,7 +10,7 @@ import rootReducer from "./modules";
 import { composeWithDevTools } from "redux-devtools-extension";
 
 const Theme = {
-  global: { colors: { doc: "#ff99cc" } }
+  global: { colors: { doc: "#ff99cc" } },
 };
 
 const store = createStore(rootReducer, composeWithDevTools());
