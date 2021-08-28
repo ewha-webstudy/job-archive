@@ -1,7 +1,5 @@
 'use strict';
 
-
-const Membership = require('./membership');
 const fs = require('fs');
 const path = require('path');
 const Sequelize = require('sequelize');
@@ -35,25 +33,5 @@ Object.keys(db).forEach(modelName => {
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
-
-
-db.Job = require('./job')(sequelize, Sequelize);
-db.Membership = require('./membership')(sequelize, Sequelize);
-db.Like = require('./like')(sequelize, Sequelize);
-
-
-db.Membership.hasMany(db.Like, {
-  as: "Like",
-  foreginKey: "userid",
-  onDelete: "cascade",
-  hooks: true
-});
-
-db.Like.belongsTo(db.Membership, {
-  foreginKey: "userid",
-  as: "Membership",
-  onDelete: "cascade",
-  hooks: true
-}); 
 
 module.exports = db;

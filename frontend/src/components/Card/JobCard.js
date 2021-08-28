@@ -8,7 +8,6 @@ import "../../style/card.css";
 import API from "../../utils/api";
 import GetDday from "./GetDday";
 
-
 function JobCard({ name, id, end, position, logo, likeNo, islogin }) {
 
   const [isliked, setLiked] = useState(false);
@@ -19,12 +18,9 @@ function JobCard({ name, id, end, position, logo, likeNo, islogin }) {
     if (!isliked) {
       // user 테이블 좋아요 추가
       console.log("isLiked status:", isliked);
-      API.defaults.headers.common['authorization'] =  localStorage.getItem('token')
       API.post(`/api/like`, { jobid: id })
         .then((response) => {
           console.log(response);
-          localStorage.setItem('token', response.data.data.token)
-          API.defaults.headers.common['authorization'] =  localStorage.getItem('token')
         })
         .catch((error) => {
           console.error(error);
@@ -36,8 +32,6 @@ function JobCard({ name, id, end, position, logo, likeNo, islogin }) {
           console.log(response);
           // 좋아요 수를 res.likeNo로 설정
           setnumLikes(response.data.likeNo);
-          localStorage.setItem('token', response.data.data.token)
-          API.defaults.headers.common['authorization'] =  localStorage.getItem('token')
         })
         .catch(error => {
           console.error(error);
@@ -46,14 +40,11 @@ function JobCard({ name, id, end, position, logo, likeNo, islogin }) {
       // API.post("/api/likeIncrease")
     } else {
       // 좋아요를 취소한거라면
-      API.defaults.headers.common['authorization'] =  localStorage.getItem('token')
       console.log("isLiked status:", isliked);
       // user 테이블 좋아요 삭제
       API.delete(`/api/unlike/${id}`)
         .then((response) => {
           console.log(response);
-          localStorage.setItem('token', response.data.data.token)
-          API.defaults.headers.common['authorization'] =  localStorage.getItem('token')
         })
         .catch((error) => {
           console.error(error);
@@ -65,8 +56,6 @@ function JobCard({ name, id, end, position, logo, likeNo, islogin }) {
           console.log(response);
           // 좋아요 수를 res.likeNo로 설정
           setnumLikes(response.data.likeNo);
-          localStorage.setItem('token', response.data.data.token)
-          API.defaults.headers.common['authorization'] =  localStorage.getItem('token')
         })
         .catch(error => {
           console.error(error);
@@ -89,7 +78,6 @@ function JobCard({ name, id, end, position, logo, likeNo, islogin }) {
     else if (islogin && isliked) {
       setLiked(!isliked);
       setnumLikes(numLikes);
-
       sendnumLikes();
     }
 
@@ -98,8 +86,7 @@ function JobCard({ name, id, end, position, logo, likeNo, islogin }) {
       alert("책갈피는 로그인 후 이용할 수 있습니다!");
     }
   };
-
-
+  
   return (
     <Card width="small" background="light-1" responsive>
       <CardHeader height="xxsmall" pad="medium">
