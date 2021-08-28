@@ -1,3 +1,15 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;1,900&display=swap");
+
+@import url("https://fonts.googleapis.com/css2?family=Syne:wght@800&display=swap");
+
+:root {
+  --main-color: #ffaf00;
+  --nav-bg-color: #070707;
+  --highlight: #1d1c1c;
+  --highlight-alt: #332f2fde;
+  --secondary-text: #3b3030;
+}
+
 h3 {
   padding-left: 20px;
 }
@@ -69,7 +81,7 @@ li {
   background: #fff;
   line-height: 15px;
 
-  box-shadow: 0px 5px 3px 0px #ffaf00;
+  box-shadow: 0px 5px 3px 0px var(--main-color);
   font-weight: bold;
   color: #333;
   align-items: center;
@@ -89,10 +101,10 @@ li {
   text-align: center;
   border-radius: 30px 30px 30px 30px;
   padding: 15px 20px;
-  background: #ffaf00;
+  background:var(--main-color);
   line-height: 15px;
 
-  box-shadow: 0px 5px 3px 0px #ffaf00;
+  box-shadow: 0px 5px 3px 0px var(--main-color);
   font-weight: bold;
   color: white;
   align-items: center;
@@ -106,12 +118,12 @@ li {
 }
 
 .btn__search:active {
-  background-color: #ffaf00;
+  background-color:var(--main-color);
   color: black;
   cursor: pointer;
 }
 .searchbar__btn:hover {
-  background-color: #ffaf00;
+  background-color: var(--main-color);
   color: black;
   border-bottom-color: #8480c5;
   cursor: pointer;
@@ -139,6 +151,7 @@ li {
 
 .main__card {
   height: 1200px;
+  justify-content: center;
   position: relative;
   align-items: center;
   background-repeat: no-repeat;
@@ -156,7 +169,7 @@ li {
 /*** FOOTER ***/
 
 .footer {
-  background-color: #ffaf00;
+  background-color:rgb(247, 248, 249);;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -171,28 +184,40 @@ li {
   font-weight: 900 !important;
   font-size: 2.5rem;
   margin: 20px;
-  color: #ffffff;
+  color: rgb(77, 77, 96);
 }
 
 .footer__navigation {
   display: inline-flex;
   text-align: center;
-  color: white;
+  color: rgb(181, 183, 191);
 }
 
 .footer--github {
   display: inline-flex;
   text-align: center;
+  color: rgb(181, 183, 191);
+}
+
+.footer--github a:visited{
+  text-decoration:none;
 }
 
 .footer--github p {
   padding: 0 10px;
-  color: var(--main-bg-color);
+  color: rgb(181, 183, 191);
   text-decoration: none;
 }
 
 .footer--github a:hover {
-  text-decoration: underline;
+  text-decoration: none;
+  text-decoration-color: var(--main-bg-color);
+  cursor: pointer;
+  transition: 0.1s ease-in;
+}
+
+.footer--github a:active {
+  text-decoration: none;
   text-decoration-color: var(--main-bg-color);
   cursor: pointer;
   transition: 0.1s ease-in;
@@ -202,9 +227,6 @@ li {
   padding: 0 10px;
   color: var(--main-bg-color);
   text-decoration: none;
-}
-
-.footer__service-name {
   padding: 0 10px;
 }
 
@@ -212,6 +234,27 @@ li {
   text-decoration: underline;
   cursor: pointer;
   transition: 0.1s ease-in;
+}
+
+.to-top-btn {
+  width: 140px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid black;
+  color: red 6;
+  border-radius: 0px;
+  margin-left: 20px;
+  transition: all ease 0.5s;
+}
+
+.to-top-btn:hover {
+  background-color: white;
+  transition: all ease 0.5s;
+  color: black;
+  cursor: pointer;
+
 }
 
 h1 {
@@ -276,7 +319,7 @@ h1 {
   padding: 15px 20px;
   background: #fff;
 
-  box-shadow: 0px 5px 3px 0px #ffaf00;
+  box-shadow: 0px 5px 3px 0px var(--main-color);
   font-weight: bold;
   color: #333;
 
