@@ -25,7 +25,7 @@ module.exports = function(sequelize, DataTypes) {
     alert: {
       type: DataTypes.INTEGER,
       allowNull: true
-    },
+    }
   }, {
     sequelize,
     tableName: 'membership',
