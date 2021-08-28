@@ -92,6 +92,7 @@ const ex = [
   },
 ];
 
+//데이터를 받아서 카드로 보여줌
 const MyPageCard = ({ jobs, islogin }) => {
   return (
     <>
