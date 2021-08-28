@@ -16,7 +16,7 @@ router.post('/member/logout', verifyToken, membersCtrl.logout);
 
 //mypages
 router.post("/mypage/profile", verifyToken, mypageCtrl.editProfile); 
-//router.post("/mypage/notification", verifyToken, membersCtrl.notifyDday); 
+router.post("/mypage/notification", verifyToken, mypageCtrl.notifyDday); 
 router.get('/mypage/like', verifyToken, mypageCtrl.getLikelist);
 
 //like
@@ -111,7 +111,7 @@ module.exports = router;
  *  post:
  *    tags:
  *    - Mypage - notification
- *    description: 디데이 알림 설정 (아직 구현 X)
+ *    description: 디데이 알림 설정
  *    parameters:
  *    - in: "body"
  *      name: "디데이 알림"
@@ -122,6 +122,8 @@ module.exports = router;
  *    responses:
  *      200:
  *        description: 디데이알림 설정 성공
+ *      400:
+ *        description: body를 잘못 전달했을 때
  * 
  * /api/mypage/like:
  *  get:

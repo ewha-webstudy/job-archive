@@ -65,11 +65,15 @@ components:
     Dday:
       type: object
       properties:
-        dday:
+        ifNotif:
           type: string 
-          description: 
+          description: true or false
+        notifDay:
+          type: integer
+          description: 1, 3, 7, or 14
       example:
-        dday: ""
+        ifNotif: "true"
+        notifDay: 14
 
     profileInfo:
       type: object
