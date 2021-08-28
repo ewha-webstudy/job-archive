@@ -528,7 +528,7 @@ async function putInDB() {
                     empTpNm: detailArray[i].wantedDtl.wantedInfo.empTpNm,
                     workdayWorkhrCont: detailArray[i].wantedDtl.wantedInfo.workdayWorkhrCont,
                     receiptCloseDt: modifyReceiptCloseDt(detailArray[i].wantedDtl.wantedInfo.receiptCloseDt),
-                    logo: 'https://ibb.co/ZKPzhMC',
+                    logo: 'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FcKImmz%2Fbtrdo5bl2PJ%2Fl4JuZiDi74WKfDA9B1Pn6k%2Fimg.png',
                     likeNo: 0,
                     view: 0,
                     indTpCdNm: detailArray[i].wantedDtl.corpInfo.indTpCdNm,
