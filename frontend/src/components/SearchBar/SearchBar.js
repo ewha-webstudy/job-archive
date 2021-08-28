@@ -31,7 +31,6 @@ class SearchBar extends Component {
   };
 
   setBtnValue = btnValue => {
-    // 초기 상태나 버튼 클릭 해지할 때, isBtnChecked: false
     if (btnValue === "None" || btnValue === undefined) {
       this.setState({
         isBtnChecked: false,
@@ -46,7 +45,6 @@ class SearchBar extends Component {
     }
   };
 
-  // 서버로 버튼값, 검색값 제출
   onSubmit = async e => {
     if (this.state.isBtnChecked === false) {
       console.log(this.state.isBtnChecked);
@@ -56,26 +54,21 @@ class SearchBar extends Component {
       console.log(this.state.isBtnChecked);
 
       await API.post(`/api/category/${this.state.btnValue}`, {
-        tags: {},
+        tags: {
+          techStack: [],
+          enterTp: [],
+          salary: [],
+          region: [],
+          edubgIcd: []
+        },
         searchBar: this.state.searchTxt
       })
         .then(res => {
           console.log(res.status);
-
-          /*
-          // 서버에 잘 전송이 됐다면, http 상태 코드 200 받음
-          if (res.status === "200") {
-            this.props.history.push({
-              pathname: `/api/category/${this.state.btnValue}`,
-              state: this.state.searchTxt
-            });
-          }
-          */
         })
         .catch(error => {
           if (error.response.status === 404) {
             console.error(error);
-            // TODO: 에러 처리
           }
         });
     }
