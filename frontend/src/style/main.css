@@ -1,27 +1,217 @@
-.container {
-  display: flex;
-  margin-top: 130px;
-  flex-direction: column;
-  align-items: center;
-}
-
 h3 {
   padding-left: 20px;
 }
 
-header {
-  padding: 10px;
-  padding-right: 20px;
-  align-items: center;
+li {
+  list-style: none;
 }
 
-.search-button:hover {
+/*** MENU ***/
+.header {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  padding: 10px;
+  margin: 0px;
+  height: 50px;
+  align-items: center;
+  z-index: 1;
+  background-color: #fff;
+}
+
+.header .header__logo {
+  line-height: 43px;
+  margin: 3px;
+  padding: 0px 20px;
+  display: flex;
+  flex-grow: 1;
+  text-decoration: none !important;
+  font-weight: bold !important;
+}
+
+.header__logo a:hover {
+  cursor: pointer;
+}
+
+.nav {
+  line-height: 43px;
+  margin: 3px;
+  padding: 0px 20px;
+  display: flex;
+}
+
+.nav__tag {
+  padding-right: 20px;
+  text-decoration: none;
+}
+
+/*** Main page btn component ***/
+.btn {
+  user-select: none;
+  margin: 0 0 20px 0;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.btn__search {
+  border-style: solid;
+  width: 180px;
+  height: 45px;
+  font-size: 18px;
+  margin-left: auto;
+  margin-right: auto;
+  display: inline-block;
+  border-color: black;
+  text-align: center;
+  border-radius: 30px 30px 30px 30px;
+  padding: 15px 20px;
+  background: #fff;
+  line-height: 15px;
+
+  box-shadow: 0px 5px 3px 0px #ffaf00;
+  font-weight: bold;
+  color: #333;
+  align-items: center;
+  cursor: pointer;
+  justify-content: space-between;
+}
+
+.btn__search--clicked {
+  border-style: none;
+  width: 180px;
+  height: 45px;
+  font-size: 18px;
+  margin-left: auto;
+  margin-right: auto;
+  display: inline-block;
+  border-color: black;
+  text-align: center;
+  border-radius: 30px 30px 30px 30px;
+  padding: 15px 20px;
+  background: #ffaf00;
+  line-height: 15px;
+
+  box-shadow: 0px 5px 3px 0px #ffaf00;
+  font-weight: bold;
+  color: white;
+  align-items: center;
+  cursor: pointer;
+  justify-content: space-between;
+}
+.btn__search:hover {
+  background-color: #ffead8;
+  color: black;
+  cursor: pointer;
+}
+
+.btn__search:active {
+  background-color: #ffaf00;
+  color: black;
+  cursor: pointer;
+}
+.searchbar__btn:hover {
   background-color: #ffaf00;
   color: black;
   border-bottom-color: #8480c5;
+  cursor: pointer;
 }
 .select {
   display: inline-block;
+}
+
+.main {
+  width: 100%;
+  height: 700px;
+  position: relative;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+/*** MAINCARD COMPONENT ***/
+
+.main__inner {
+  display: flex;
+  margin-top: 200px;
+  flex-direction: column;
+  align-items: center;
+}
+
+.main__card {
+  height: 1200px;
+  position: relative;
+  align-items: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.main__card .card {
+  display: flex;
+}
+
+.container h5 {
+  color: #868e96;
+}
+
+/*** FOOTER ***/
+
+.footer {
+  background-color: #ffaf00;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 10px 0px 0px 0px;
+  margin-top: 80px;
+  padding: 30px 0px;
+}
+
+.footer h3 {
+  font-family: "Montserrat" !important;
+  font-weight: 900 !important;
+  font-size: 2.5rem;
+  margin: 20px;
+  color: #ffffff;
+}
+
+.footer__navigation {
+  display: inline-flex;
+  text-align: center;
+  color: white;
+}
+
+.footer--github {
+  display: inline-flex;
+  text-align: center;
+}
+
+.footer--github p {
+  padding: 0 10px;
+  color: var(--main-bg-color);
+  text-decoration: none;
+}
+
+.footer--github a:hover {
+  text-decoration: underline;
+  text-decoration-color: var(--main-bg-color);
+  cursor: pointer;
+  transition: 0.1s ease-in;
+}
+
+.footer__service-name {
+  padding: 0 10px;
+  color: var(--main-bg-color);
+  text-decoration: none;
+}
+
+.footer__service-name {
+  padding: 0 10px;
+}
+
+.footer__service-name:hover {
+  text-decoration: underline;
+  cursor: pointer;
+  transition: 0.1s ease-in;
 }
 
 h1 {
@@ -31,17 +221,20 @@ h1 {
   padding-bottom: 20px;
 }
 
-.form-content-left {
+/*** SEARCHBAR COMPONENT ***/
+
+.searchbar__form {
   display: inline-block;
   border-radius: 15px 0 0 15px;
-  width: 650px;
+  width: 600px;
   height: 40px;
+  padding-left: 20px;
   border: 0;
   outline: 0;
   box-shadow: 5px 5px 5px 3px lightgray;
 }
 
-.search-button {
+.searchbar__btn {
   display: inline-block;
   border-radius: 0 15px 15px 0;
   height: 40px;
@@ -52,6 +245,20 @@ h1 {
   background-color: #ffc459;
   transition-duration: 0.3s;
 }
+
+.searchbar__btn {
+  display: inline-block;
+  border-radius: 0 15px 15px 0;
+  height: 40px;
+  border: 0;
+  width: 50px;
+  outline: 0;
+  box-shadow: 3px 5px 5px 3px lightgray;
+  background-color: #ffc459;
+  transition-duration: 0.3s;
+}
+
+/*** DROPDOWN COMPONENT ***/
 
 .dropdown {
   width: 130px;

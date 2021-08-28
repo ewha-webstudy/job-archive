@@ -1,0 +1,97 @@
+# /swagger/product.yml
+
+components: 
+  schemas: 
+    signupInfo:
+      type: object
+      properties:
+        name: 
+          type: string 
+          description: 실명
+        id:
+          type: string 
+          description: 아이디
+        email: 
+          type: string 
+          description: 이메일
+        born:
+          type: year
+          description: 출생연도
+        psword: 
+          type: string 
+          description: 비밀번호
+        confirmPsword: 
+          type: string 
+          description: 비밀번호 확인
+      example:
+        name: 홍길동
+        id: test
+        email: test@gmail.com
+        born: "2000"
+        psword: "0000"
+        confirmPsword: "0000"
+    
+    LoginInfo:
+      type: object
+      properties:
+        id:
+          type: string 
+          description: 아이디
+        psword: 
+          type: string 
+          description: 비밀번호
+      example:
+        id: test
+        psword: "0000"
+
+    LoginResult:
+      type: object
+      properties:
+        token: 
+          type: string
+          description: 토큰
+      example:
+        token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOiJ0ZXN0IiwiaWF0IjoxNjI5NDc4OTQ2LCJleHAiOjE2Mjk0NzkwMDZ9.xny95Ol17-l1Q1Z2m-b1DemwRPYAXyzV0b5Q4L-7mTU
+
+    Like:
+      type: object
+      properties:
+        jobid:
+          type: string 
+          description: 구인공고번호(wantedAuthNo)
+      example:
+        jobid: KF10952108130008
+
+    Dday:
+      type: object
+      properties:
+        dday:
+          type: string 
+          description: 
+      example:
+        dday: ""
+
+    profileInfo:
+      type: object
+      properties:
+        name: 
+          type: string 
+          description: 실명
+        email: 
+          type: string 
+          description: 이메일
+        born:
+          type: year
+          description: 출생연도
+        psword: 
+          type: string 
+          description: 비밀번호
+        confirmPsword: 
+          type: string 
+          description: 비밀번호 확인
+      example:
+        name: 홍길동
+        email: modify@gmail.com
+        born: "2000"
+        psword: "1111"
+        confirmPsword: "1111"
