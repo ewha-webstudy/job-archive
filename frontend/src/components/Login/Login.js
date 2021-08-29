@@ -2,7 +2,6 @@ import styled from "styled-components";
 import API from "../../utils/api";
 import { Link, useHistory } from "react-router-dom";
 import { useState } from "react";
-import { useCookies } from "react-cookie";
 
 const Login = ({ onLogin }) => {
   const history = useHistory();
