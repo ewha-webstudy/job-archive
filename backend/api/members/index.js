@@ -12,7 +12,6 @@ const likeCtrl = require("./like.ctrl");
 router.post('/member/auth', membersCtrl.authMember);
 router.post('/member/create', membersCtrl.createMember);
 router.delete('/member/delete', verifyToken, membersCtrl.deleteMember);
-router.post('/member/logout', verifyToken, membersCtrl.logout);
 
 //mypages
 router.post("/mypage/profile", verifyToken, mypageCtrl.editProfile); 
