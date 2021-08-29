@@ -14,8 +14,7 @@ const Profile = () => {
     confirmPsword: "",
   });
 
-  //입력한 값으로 변경
-  //수정 중
+  //입력한 값으로 변경 (수정 중)
   const handleChange = (e) => {
     setMember({ ...member, [e.target.name]: e.target.value });
   };

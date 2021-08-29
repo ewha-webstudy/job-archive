@@ -9,12 +9,11 @@ import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 
 function JobCard({ name, id, end, position, logo, likeNo, islogin }) {
-
   const [isliked, setLiked] = useState(false);
   const [numLikes, setnumLikes] = useState(likeNo);
 
   const { ref, inView } = useInView({
-    threshold: 0.1
+    threshold: 0.1,
   });
   const animation = useAnimation();
 
@@ -23,14 +22,14 @@ function JobCard({ name, id, end, position, logo, likeNo, islogin }) {
       animation.start({
         y: -100,
         opacity: 1,
-        transition: { duration: 0.5, ease: "easeInOut" }
+        transition: { duration: 0.5, ease: "easeInOut" },
       });
     }
     if (!inView) {
       animation.start({
         y: 0,
         opacity: 0,
-        transition: { duration: 0.5, ease: "easeInOut" }
+        transition: { duration: 0.5, ease: "easeInOut" },
       });
     }
     // console.log("print inView", inView);
@@ -48,14 +47,13 @@ function JobCard({ name, id, end, position, logo, likeNo, islogin }) {
         });
 
       API.post(`/api/likeIncrease`, { id: id })
-        .then(response => {
+        .then((response) => {
           console.log(response);
           setnumLikes(response.data.likeNo);
         })
-        .catch(error => {
+        .catch((error) => {
           console.error(error);
         });
-
     } else {
       console.log("isLiked status:", isliked);
       API.delete(`/api/unlike/${id}`)
@@ -66,11 +64,11 @@ function JobCard({ name, id, end, position, logo, likeNo, islogin }) {
           console.error(error);
         });
       API.post(`/api/likeDecrease`, { id: id })
-        .then(response => {
+        .then((response) => {
           console.log(response);
           setnumLikes(response.data.likeNo);
         })
-        .catch(error => {
+        .catch((error) => {
           console.error(error);
         });
     }
@@ -81,59 +79,57 @@ function JobCard({ name, id, end, position, logo, likeNo, islogin }) {
       setLiked(!isliked);
       setnumLikes(numLikes);
       sendnumLikes();
-    }
-    else if (islogin && isliked) {
+    } else if (islogin && isliked) {
       setLiked(!isliked);
       setnumLikes(numLikes);
       sendnumLikes();
-    }
-    else {
+    } else {
       alert("책갈피는 로그인 후 이용할 수 있습니다!");
     }
   };
-  
+
   return (
     <motion.div ref={ref} animate={animation} className="b-container">
-    <Card width="small" background="light-1" responsive>
-      <CardHeader height="xxsmall" pad="medium">
-        <span className="card__name">{name}</span>
-        <div key={id}>
-          <span className="card__likes">{numLikes}</span>
-          <Button
-            icon={<Favorite color={isliked ? "red" : "black"} />}
-            style={{ padding: 0 }}
-            onClick={checkIsLogin}
-            hoverIndicator
-          />
+      <Card width="small" background="light-1" responsive>
+        <CardHeader height="xxsmall" pad="medium">
+          <span className="card__name">{name}</span>
+          <div key={id}>
+            <span className="card__likes">{numLikes}</span>
+            <Button
+              icon={<Favorite color={isliked ? "red" : "black"} />}
+              style={{ padding: 0 }}
+              onClick={checkIsLogin}
+              hoverIndicator
+            />
+          </div>
+        </CardHeader>
+        <div className="card__body">
+          <Box height="xxsmall" width="xxsmall" margin="auto">
+            <Image
+              alt="job-archive"
+              align="center"
+              pad="horizontal"
+              fit="cover"
+              round
+              src={logo}
+            />
+          </Box>
+          <div className="card__duedate">{GetDday(end)}</div>
+          <div className="card__position">
+            {position.substring(0, 10) + "..."}
+          </div>
         </div>
-      </CardHeader>
-      <div className="card__body">
-        <Box height="xxsmall" width="xxsmall" margin="auto">
-          <Image
-            alt="job-archive"
-            align="center"
-            pad="horizontal"
-            fit="cover"
-            round
-            src={logo}
-          />
-        </Box>
-        <div className="card__duedate">{GetDday(end)}</div>
-        <div className="card__position">
-          {position.substring(0, 10) + "..."}
-        </div>
-      </div>
-      <footer className="card__footer">
-        <Link to={`/job/${id}`}>
-          <Button
-            color={{ border: "gray" }}
-            gap="medium"
-            label="자세히 보기"
-            hoverIndicator
-          />
-        </Link>
-      </footer>
-    </Card>
+        <footer className="card__footer">
+          <Link to={`/job/${id}`}>
+            <Button
+              color={{ border: "gray" }}
+              gap="medium"
+              label="자세히 보기"
+              hoverIndicator
+            />
+          </Link>
+        </footer>
+      </Card>
     </motion.div>
   );
 }

@@ -52,8 +52,8 @@ const Withdrawal = () => {
         history.push("/");
       })
       .catch((err) => {
-        console.log("ERR: ", err.response.status);
-        console.log(err.response);
+        console.log("ERR: ", err);
+        //console.log(err.response);
       });
   };
 
