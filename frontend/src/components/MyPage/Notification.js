@@ -30,7 +30,7 @@ const Notification = () => {
   // 알림 ON/OFF 설정 함수
   const onChange = () => {
     setToggled(!toggled);
-    Dday.ifNotif = toggled;
+    Dday.ifNotif = toggled.toString();
   };
 
   // 디데이 선택 버튼
