@@ -48,13 +48,13 @@ const Notification = () => {
       alert("알림 D-Day를 선택하세요.");
     }
 
-    // API.post("/api/mypage/notification", Dday)
-    //   .then((res) => {
-    //     console.log("RES: ", res);
-    //   })
-    //   .catch((err) => {
-    //     console.log("ERR: ", err);
-    //   });
+    API.post("/api/mypage/notification", Dday)
+      .then((res) => {
+        console.log("RES: ", res);
+      })
+      .catch((err) => {
+        console.log("ERR: ", err);
+      });
   };
 
   // 버튼 요소
@@ -101,12 +101,10 @@ const InputWrapper = styled.div`
   & + & {
     margin-top: 80px;
   }
-
   width: 400px;
   height: 100px;
   margin-top: 20px;
   margin-left: 150px;
-
   h4 {
     color: grey;
     font-weight: lighter;
@@ -119,7 +117,6 @@ const ButtonGroup = styled.div`
   &:hover {
     cursor: pointer;
   }
-
   width: 100%;
   height: 50%;
   border: 1px solid lightgrey;
@@ -133,11 +130,9 @@ const NotificationButton = styled.button`
     color: #ffa500;
     font-weight: 600;
   }
-
   & + & {
     border-left: 1px solid lightgrey;
   }
-
   width: 25%;
   height: 100%;
   border: none;
