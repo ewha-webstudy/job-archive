@@ -48,13 +48,13 @@ const Notification = () => {
       alert("알림 D-Day를 선택하세요.");
     }
 
-    API.post("/api/mypage/notification", Dday)
-      .then((res) => {
-        console.log("RES: ", res);
-      })
-      .catch((err) => {
-        console.log("ERR: ", err);
-      });
+    // API.post("/api/mypage/notification", Dday)
+    //   .then((res) => {
+    //     console.log("RES: ", res);
+    //   })
+    //   .catch((err) => {
+    //     console.log("ERR: ", err);
+    //   });
   };
 
   // 버튼 요소
