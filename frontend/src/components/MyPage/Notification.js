@@ -1,4 +1,4 @@
-import { Box, CheckBox, Grommet } from "grommet";
+import { CheckBox, Grommet } from "grommet";
 import { useState } from "react";
 import styled from "styled-components";
 import API from "../../utils/api";
@@ -43,6 +43,11 @@ const Notification = () => {
     e.preventDefault();
     console.log("Dday: ", Dday);
 
+    // 알림은 ON인데 디데이를 선택하지 않은 경우
+    if (toggled && Dday.notifDay === 0) {
+      alert("알림 D-Day를 선택하세요.");
+    }
+
     API.post("/api/mypage/notification", Dday)
       .then((res) => {
         console.log("RES: ", res);
@@ -70,7 +75,7 @@ const Notification = () => {
       </InputWrapper>
 
       <InputWrapper>
-        <h4>이메일 알림</h4>
+        <h4>알림 D-Day</h4>
         <ButtonGroup>
           {menu.map((menu) => (
             <NotificationButton key={menu.id} id={menu.id} onClick={onClick}>
@@ -96,12 +101,10 @@ const InputWrapper = styled.div`
   & + & {
     margin-top: 80px;
   }
-
   width: 400px;
   height: 100px;
   margin-top: 20px;
   margin-left: 150px;
-
   h4 {
     color: grey;
     font-weight: lighter;
@@ -114,7 +117,6 @@ const ButtonGroup = styled.div`
   &:hover {
     cursor: pointer;
   }
-
   width: 100%;
   height: 50%;
   border: 1px solid lightgrey;
@@ -128,11 +130,9 @@ const NotificationButton = styled.button`
     color: #ffa500;
     font-weight: 600;
   }
-
   & + & {
     border-left: 1px solid lightgrey;
   }
-
   width: 25%;
   height: 100%;
   border: none;

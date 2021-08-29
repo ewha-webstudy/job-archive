@@ -60,7 +60,7 @@ const Withdrawal = () => {
   return (
     <>
       <BodyWrapper>
-        <h2>정말 탈퇴하시겠습니까?</h2>
+        <span>정말 탈퇴하시겠습니까?</span>
         <h4>비밀번호를 입력하세요.</h4>
       </BodyWrapper>
       <InputWrapper>
@@ -75,21 +75,24 @@ const BodyWrapper = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
-  h2 {
+
+  span {
     color: #ef8d21;
-    margin-top: 10px;
+    font-size: 28px;
+    margin-top: 15px;
   }
+
   h4 {
-    margin-top: 5px;
+    margin-top: 15px;
   }
 `;
 
 const InputWrapper = styled.div`
+  margin-top: 35px;
   display: flex;
-  justify-content: center;
   align-items: center;
   flex-direction: column;
-  margin-top: 20px;
+  justify-content: center;
 `;
 
 const ConfirmButton = styled.button`

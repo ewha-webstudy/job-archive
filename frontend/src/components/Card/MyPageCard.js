@@ -95,24 +95,22 @@ const ex = [
 //데이터를 받아서 카드로 보여줌
 const MyPageCard = ({ jobs, islogin }) => {
   return (
-    <>
-      <Container>
-        {jobs.map((jobs, index) => (
-          <CardWrapper>
-            <JobCard
-              key={index}
-              id={jobs.wantedAuthNo}
-              name={jobs.company}
-              end={jobs.receiptCloseDt}
-              position={jobs.wantedTitle}
-              logo={jobs.logo}
-              likeNo={jobs.likeNo}
-              islogin={islogin}
-            />
-          </CardWrapper>
-        ))}
-      </Container>
-    </>
+    <Container>
+      {jobs.map((jobs, index) => (
+        <CardWrapper>
+          <JobCard
+            key={index}
+            id={jobs.wantedAuthNo}
+            name={jobs.company}
+            end={jobs.receiptCloseDt}
+            position={jobs.wantedTitle}
+            logo={jobs.logo}
+            likeNo={jobs.likeNo}
+            islogin={islogin}
+          />
+        </CardWrapper>
+      ))}
+    </Container>
   );
 };
 
@@ -129,7 +127,7 @@ const CardWrapper = styled.div`
   width: 190px;
   height: 250px;
   margin-left: 4rem;
-  margin-top: 3.5rem;
+  margin-top: 6rem;
 `;
 
 export default MyPageCard;
