@@ -13,8 +13,7 @@ const LoginTemplate = ({ form, children }) => {
 
 const Container = styled.div`
   height: 675px;
-  margin-top: 12rem;
-  margin-bottom: 3rem;
+  margin-top: 20vh;
 `;
 
 const LoginBox = styled.div`
