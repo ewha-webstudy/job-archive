@@ -19,11 +19,15 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false
     },
     password: {
-      type: DataTypes.STRING(60),
+      type: DataTypes.STRING(100),
       allowNull: false
     },
     alert: {
       type: DataTypes.INTEGER,
+      allowNull: true
+    },
+    salt: {
+      type: DataTypes.STRING(100),
       allowNull: true
     }
   }, {
