@@ -1,8 +1,8 @@
 {
   "development": {
-    "username": "heewon",
-    "password": "12345*",
-    "database": "JOBARCHIVE",
+    "username": "root",
+    "password": "password",
+    "database": "database name",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
