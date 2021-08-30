@@ -79,11 +79,14 @@ exports.editProfile = async (req, res) => {
     if(client.psword !== client.confirmPsword) //412: 비밀번호 확인 실패
         return res.status(412).send(); 
     try {
+        const {hashedPW, salt} = await createHashedPW(client.psword); //암호화
+
         await Membership.update(   
             {realname: client.name, 
                 email: client.email,
                 born: client.born,
-                password: client.psword
+                password: hashedPW, //암호화된 비밀번호
+                salt: salt //salt
             },
             {where: {userid: loggedID} 
         })
@@ -98,6 +101,35 @@ exports.editProfile = async (req, res) => {
         res.status(500).send(); //500
     } 
 };
+
+const createSalt = () =>
+//Salt 반환
+    new Promise((resolve, reject) => {
+        crypto.randomBytes(64, (err, buffer) => {
+            if (err){
+                console.log("createSalt Error: ", err);
+                reject(err);
+            }
+            resolve(buffer.toString('base64'));
+        });
+    });
+
+const createHashedPW = (realPW) =>
+//clientPw를 해싱하여 psword와 Salt 반환
+    new Promise(async (resolve, reject) =>{
+        const salt = await createSalt();
+
+        crypto.pbkdf2(realPW, salt, 9999, 64, 'sha512', (err,key) =>{
+            if (err){
+                console.log("createHashedPW Error: ", err);
+                reject(err);
+            }
+            resolve({hashedPW: key.toString('base64'), salt});
+        })
+    })
+
+
+    
 
 /* GET /api/mypage/notification */
 exports.getDday = async (req, res) => {
