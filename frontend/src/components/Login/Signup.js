@@ -27,7 +27,7 @@ const Signup = () => {
       .then((res) => {
         alert("환영합니다!");
         console.log("RES: ", res);
-        history.push("/");
+        history.push("/member/auth");
       })
       .catch((err) => {
         console.log("ERR: ", err);
