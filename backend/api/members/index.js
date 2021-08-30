@@ -14,7 +14,9 @@ router.post('/member/create', membersCtrl.createMember);
 router.delete('/member/delete', verifyToken, membersCtrl.deleteMember);
 
 //mypages
-router.post("/mypage/profile", verifyToken, mypageCtrl.editProfile); 
+router.get("/mypage/profile", verifyToken, mypageCtrl.getProfile);
+router.post("/mypage/profile", verifyToken, mypageCtrl.editProfile);
+router.get("/mypage/notification", verifyToken, mypageCtrl.getDday); 
 router.post("/mypage/notification", verifyToken, mypageCtrl.notifyDday); 
 router.get('/mypage/like', verifyToken, mypageCtrl.getLikelist);
 
