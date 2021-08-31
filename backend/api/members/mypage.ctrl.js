@@ -7,6 +7,7 @@ const { Job } = require('../../models');
 const moment = require('moment');
 const sequelize = require("sequelize");
 const { and } = sequelize.Op;
+const crypto = require('crypto');
 
 /* GET /api/mypage/like */
 exports.getLikelist = async (req, res) => {
