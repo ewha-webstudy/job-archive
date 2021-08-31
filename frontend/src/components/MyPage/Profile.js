@@ -4,7 +4,6 @@ import ProfileForm from "./ProfileForm";
 import API from "../../utils/api";
 
 /* 수정 중 */
-// TODO: 이름, 아이디 변경 비활성화
 const Profile = ({ islogin }) => {
   const history = useHistory();
   const [member, setMember] = useState({
@@ -22,9 +21,7 @@ const Profile = ({ islogin }) => {
     //   alert("로그인 후 이용 가능합니다.");
     //   history.push("/member/auth");
     // } else {
-    API.get(
-      "https://f77b7f2f-3f98-4d10-acf8-31ea4b2ba99f.mock.pstmn.io/products"
-    ) // /api/mypage/profile
+    API.get("/api/mypage/profile")
       .then((res) => {
         console.log(res.data);
         setMember(res.data);
