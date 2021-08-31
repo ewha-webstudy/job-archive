@@ -20,10 +20,13 @@ const Profile = ({ islogin }) => {
   useEffect(() => {
     if (!islogin) {
       alert("로그인 후 이용 가능합니다.");
+      history.push("/member/auth");
     } else {
       API.get("/api/mypage/profile")
         .then((res) => {
           console.log(res.data);
+          setMember(res.data);
+          console.log(member);
         })
         .catch((err) => {
           console.log("ERR: ", err);
@@ -45,16 +48,15 @@ const Profile = ({ islogin }) => {
       .then((res) => {
         alert("저장되었습니다!");
         console.log("RES: ", res);
-        history.push("/");
       })
       .catch((err) => {
         console.log("ERR: ", err);
-        // if (err.response.status === 401) {
-        //   alert("Toekn expired");
-        // }
-        // if (err.response.status === 412) {
-        //   alert("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
-        // }
+        if (err.response.status === 401) {
+          alert("Toekn expired");
+        }
+        if (err.response.status === 412) {
+          alert("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
+        }
       });
   };
 

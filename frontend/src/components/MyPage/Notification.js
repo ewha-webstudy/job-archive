@@ -25,7 +25,8 @@ const Notification = ({ islogin }) => {
     } else {
       API.get("/api/mypage/notification")
         .then((res) => {
-          console.log(res.data);
+          setDday(res.data);
+          console.log(Dday);
         })
         .catch((err) => {
           console.log("ERR: ", err);
@@ -37,10 +38,10 @@ const Notification = ({ islogin }) => {
   const [toggled, setToggled] = useState(false);
 
   // API body
-  const Dday = {
+  const [Dday, setDday] = useState({
     ifNotif: toggled,
     notifDay: 0,
-  };
+  });
 
   // 알림 ON/OFF 설정 함수
   const onChange = () => {
