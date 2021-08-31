@@ -2,6 +2,7 @@ import React, {useState, useEffect} from "react";
 import NavBar from "../components/NavBar/NavBar";
 import CardBoard from "../components/Card/CardBoard";
 // import Filter from "../components/Filter/Filter";
+import CategorySearch from "../components/Category/CategorySearch";
 import SearchBar from "../components/SearchBar/SearchBar";
 import { Grommet, Box, Grid } from "grommet";
 import styled from "styled-components";
@@ -78,7 +79,7 @@ const CategoryPage = ({match}) =>{
       <Layout
         >
           <Box gridArea="search" height="xxsmall" direction="row-reverse">
-            <SearchBar />
+            <CategorySearch category={match.params.category}/>
           </Box>
           <Box
             gridArea="nav"
