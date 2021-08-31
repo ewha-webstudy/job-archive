@@ -45,6 +45,7 @@ const Signup = () => {
       value={member}
       onChange={handleChange}
       onClick={handleSubmit}
+      disabled={false}
     />
   );
 };

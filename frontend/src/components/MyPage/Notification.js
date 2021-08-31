@@ -74,12 +74,22 @@ const Notification = ({ islogin }) => {
   };
 
   // 버튼 요소
-  const menu = [
+  const element = [
     { id: 14, name: "2주 전" },
     { id: 7, name: "1주 전" },
     { id: 3, name: "3일 전" },
     { id: 1, name: "1일 전" },
   ];
+
+  const DdayItem = ({ element, isActive }) => {
+    return isActive ? (
+      <NotificationButton key={element.id} id={element.id} onClick={onClick}>
+        {element.name}
+      </NotificationButton>
+    ) : (
+      <NotificationButton>{element.name}</NotificationButton>
+    );
+  };
 
   return (
     <NotificationBlock>
@@ -93,10 +103,8 @@ const Notification = ({ islogin }) => {
       <InputWrapper>
         <h4>알림 D-Day</h4>
         <ButtonGroup>
-          {menu.map((menu) => (
-            <NotificationButton key={menu.id} id={menu.id} onClick={onClick}>
-              {menu.name}
-            </NotificationButton>
+          {element.map((element) => (
+            <DdayItem key={element.id} />
           ))}
         </ButtonGroup>
       </InputWrapper>
