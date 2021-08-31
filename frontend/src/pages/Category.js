@@ -27,6 +27,7 @@ const Title = styled.span`
 
 const CategoryPage = ({match}) =>{
   const [jobs , setJobs] = useState([]);
+  const [error, setError] = useState(null);
 
   const techStack = (category_chg) =>{
     if (category_chg === 'frontend')
@@ -66,13 +67,23 @@ const CategoryPage = ({match}) =>{
     }
   ]
   API.get("")
+	useEffect(() => {
+		const fetchContents = async () => {
+			try {
+				setJobs(null);
+				setError(null);
+				API.get("/api/category/${match.params.category}").then((response) => {
+					console.log(response.status);
+					setJobs(response.data);
+				});
+			} catch (e) {
+				setError(e);
+			}
+		}
+		fetchContents();
+	}, []);
 
-  useEffect(() => {
-    API.get("/api/category/${match.params.category}").then((response) => {
-      // console.log(response.status);
-      setJobs(response.data);
-    });
-  }, []);
+
 
   return (
     <div>
