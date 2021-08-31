@@ -31,9 +31,10 @@ function MainBtn({ setBtnValue }) {
 
   return (
     <Btns>
-      {btn_value.map(btn => {
+      {btn_value.map((btn, index) => {
         return btn.id !== "None" ? (
           <button
+            key={index}
             value={btn.value}
             onClick={handleClick}
             className={
