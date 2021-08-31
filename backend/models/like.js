@@ -18,15 +18,12 @@ module.exports = function(sequelize, DataTypes) {
     alertDate: {
       type: DataTypes.DATEONLY,
       allowNull: true
-    },
-    updateAt: {
-      type: DataTypes.DATEONLY,
-      allowNull: true
     }
   }, {
     sequelize,
     tableName: 'like',
     timestamps: false,
+    updatedAt: false,
     indexes: [
       {
         name: "PRIMARY",
