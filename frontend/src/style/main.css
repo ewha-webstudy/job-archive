@@ -37,13 +37,24 @@ li {
   margin: 3px;
   padding: 0px 20px;
   display: flex;
+
   flex-grow: 1;
+}
+
+.header__logo a {
   text-decoration: none !important;
   font-weight: bold !important;
+
+  color: black;
 }
 
 .header__logo a:hover {
   cursor: pointer;
+}
+
+.header__logo a:active {
+  cursor: pointer;
+  text-decoration: none !important;
 }
 
 .nav {
@@ -55,7 +66,21 @@ li {
 
 .nav__tag {
   padding-right: 20px;
+  font-weight: bold;
+  color: black;
   text-decoration: none;
+}
+
+.nav__tag:hover {
+  text-decoration: underline #ffa500;
+  text-decoration-thickness: 5px;
+}
+
+.nav__tag--active {
+  padding-right: 20px;
+  font-weight: bold;
+  text-decoration: underline #ffa500;
+  text-decoration-thickness: 5px;
 }
 
 /*** Main page btn component ***/
@@ -101,7 +126,7 @@ li {
   text-align: center;
   border-radius: 30px 30px 30px 30px;
   padding: 15px 20px;
-  background:var(--main-color);
+  background: var(--main-color);
   line-height: 15px;
 
   box-shadow: 0px 5px 3px 0px var(--main-color);
@@ -111,6 +136,7 @@ li {
   cursor: pointer;
   justify-content: space-between;
 }
+
 .btn__search:hover {
   background-color: #ffead8;
   color: black;
@@ -118,7 +144,7 @@ li {
 }
 
 .btn__search:active {
-  background-color:var(--main-color);
+  background-color: var(--main-color);
   color: black;
   cursor: pointer;
 }
@@ -169,7 +195,7 @@ li {
 /*** FOOTER ***/
 
 .footer {
-  background-color:rgb(247, 248, 249);;
+  background-color: rgb(247, 248, 249);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -199,8 +225,8 @@ li {
   color: rgb(181, 183, 191);
 }
 
-.footer--github a:visited{
-  text-decoration:none;
+.footer--github a:visited {
+  text-decoration: none;
 }
 
 .footer--github p {
@@ -254,7 +280,6 @@ li {
   transition: all ease 0.5s;
   color: black;
   cursor: pointer;
-
 }
 
 h1 {
@@ -269,24 +294,12 @@ h1 {
 .searchbar__form {
   display: inline-block;
   border-radius: 15px 0 0 15px;
-  width: 600px;
+  width: 500px;
   height: 40px;
   padding-left: 20px;
   border: 0;
   outline: 0;
   box-shadow: 5px 5px 5px 3px lightgray;
-}
-
-.searchbar__btn {
-  display: inline-block;
-  border-radius: 0 15px 15px 0;
-  height: 40px;
-  border: 0;
-  width: 50px;
-  outline: 0;
-  box-shadow: 3px 5px 5px 3px lightgray;
-  background-color: #ffc459;
-  transition-duration: 0.3s;
 }
 
 .searchbar__btn {
