@@ -1,5 +1,5 @@
 import { CheckBox, Grommet } from "grommet";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
 import API from "../../utils/api";
 
@@ -17,7 +17,22 @@ const theme = {
 };
 
 // 수정 중!!
-const Notification = () => {
+const Notification = ({ islogin }) => {
+  // 로그인 여부 확인
+  useEffect(() => {
+    if (!islogin) {
+      alert("로그인 후 이용 가능합니다.");
+    } else {
+      API.get("/api/mypage/notification")
+        .then((res) => {
+          console.log(res.data);
+        })
+        .catch((err) => {
+          console.log("ERR: ", err);
+        });
+    }
+  }, [islogin]);
+
   // 알림 설정 토글 버튼
   const [toggled, setToggled] = useState(false);
 

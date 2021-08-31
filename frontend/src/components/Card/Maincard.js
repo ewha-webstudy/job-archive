@@ -8,7 +8,7 @@ function MainCard({ islogin }) {
   const [jobs, setJobs] = useState([]);
 
   useEffect(() => {
-    API.get("/api/main").then(response => {
+    API.get("/api/main").then((response) => {
       console.log(response.status);
       setJobs(response.data);
     });

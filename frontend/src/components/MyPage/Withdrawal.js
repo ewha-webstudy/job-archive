@@ -1,6 +1,6 @@
 import { Box, Button, Grommet, TextInput } from "grommet";
 import { Hide, View } from "grommet-icons";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import API from "../../utils/api";
