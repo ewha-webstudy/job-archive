@@ -4,11 +4,12 @@ import Profile from "../components/MyPage/Profile";
 import Notification from "../components/MyPage/Notification";
 import Like from "../components/MyPage/Like";
 import { BrowserRouter as Router, Route } from "react-router-dom";
+import MyPageContainer from "../containers/MyPageContainer";
 
 const MyPage = () => {
   return (
     <Router>
-      <MyPageTemplate>
+      <MyPageTemplate children={MyPageContainer}>
         <Sidebar />
         <Route exact path="/mypage/profile" component={Profile} />
         <Route exact path="/mypage/notification" component={Notification} />

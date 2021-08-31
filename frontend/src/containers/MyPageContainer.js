@@ -14,7 +14,6 @@ function MyPageContainer() {
     <>
       <Profile islogin={islogin} />
       <Notification islogin={islogin} />
-
       <MyPageCard islogin={islogin} />
     </>
   );
