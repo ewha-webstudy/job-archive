@@ -4,7 +4,7 @@ const requestDetail = require('request-promise-native');
 const fs = require('fs');
 const { type } = require('os');
 const { resolve } = require('path');
-const { job } = require("./models"); //폴더 구성에 따라 달라질 수 있음.
+const { job } = require("../models"); //폴더 구성에 따라 달라질 수 있음.
 
 const HOST = 'http://openapi.work.go.kr/opi/opi/opia/wantedApi.do'
 const SERVICE_KEY = 'WNKREKMMVKGZ30G24C2D82VR1HJ'
