@@ -2,6 +2,7 @@ import { CheckBox, Grommet } from "grommet";
 import { useState, useEffect } from "react";
 import styled from "styled-components";
 import API from "../../utils/api";
+import "../../style/noti.css";
 
 const theme = {
   global: {
@@ -17,31 +18,30 @@ const theme = {
 };
 
 // 수정 중!!
-const Notification = ({ islogin }) => {
-  // 로그인 여부 확인
-  useEffect(() => {
-    if (!islogin) {
-      alert("로그인 후 이용 가능합니다.");
-    } else {
-      API.get("/api/mypage/notification")
-        .then((res) => {
-          setDday(res.data);
-          console.log(Dday);
-        })
-        .catch((err) => {
-          console.log("ERR: ", err);
-        });
-    }
-  }, [islogin]);
-
+const Notification = () => {
   // 알림 설정 토글 버튼
   const [toggled, setToggled] = useState(false);
 
+  // 디데이 선택 버튼
+  const [day, setDay] = useState();
+
   // API body
-  const [Dday, setDday] = useState({
+  const Dday = {
     ifNotif: toggled,
     notifDay: 0,
-  });
+  };
+
+  // 로그인 여부 확인 (수정 중) & 기존 데이터 불러오기
+  useEffect(() => {
+    API.get("/api/mypage/notification")
+      .then((res) => {
+        Dday.notifDay = res.data.notifDay;
+        setToggled(res.data.ifNotif);
+      })
+      .catch((err) => {
+        console.log("ERR: ", err);
+      });
+  }, []);
 
   // 알림 ON/OFF 설정 함수
   const onChange = () => {
@@ -50,7 +50,8 @@ const Notification = ({ islogin }) => {
   };
 
   // 디데이 선택 버튼
-  const onClick = (e) => {
+  const onClick = (e, id) => {
+    setDay(id);
     toggled && (Dday.notifDay = parseInt(e.target.id));
   };
 
@@ -64,13 +65,13 @@ const Notification = ({ islogin }) => {
       alert("알림 D-Day를 선택하세요.");
     }
 
-    API.post("/api/mypage/notification", Dday)
-      .then((res) => {
-        console.log("RES: ", res);
-      })
-      .catch((err) => {
-        console.log("ERR: ", err);
-      });
+    // API.post("/api/mypage/notification", Dday)
+    //   .then((res) => {
+    //     console.log("RES: ", res);
+    //   })
+    //   .catch((err) => {
+    //     console.log("ERR: ", err);
+    //   });
   };
 
   // 버튼 요소
@@ -86,15 +87,20 @@ const Notification = ({ islogin }) => {
       <InputWrapper>
         <h4>알림</h4>
         <Grommet theme={theme}>
-          <CheckBox toggled={toggled} onChange={onChange} toggle />
+          <CheckBox onChange={onChange} toggle checked={toggled} />
         </Grommet>
       </InputWrapper>
 
       <InputWrapper>
         <h4>알림 D-Day</h4>
         <ButtonGroup>
-          {element.map((menu) => (
-            <NotificationButton key={menu.id} id={menu.id} onClick={onClick}>
+          {element.map((menu, i) => (
+            <NotificationButton
+              key={i}
+              name={menu.id}
+              onClick={(e) => onClick(e, i)}
+              className={i === day ? "customButton activeBtn" : "customButton"}
+            >
               {menu.name}
             </NotificationButton>
           ))}
@@ -144,15 +150,11 @@ const NotificationButton = styled.button`
   &:hover {
     cursor: pointer;
     color: #ffa500;
-    font-weight: 600;
   }
+
   & + & {
     border-left: 1px solid lightgrey;
   }
-  width: 25%;
-  height: 100%;
-  border: none;
-  background: none;
 `;
 
 const SubmitButton = styled.button`

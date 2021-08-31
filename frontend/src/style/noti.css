@@ -1,0 +1,14 @@
+.customButton {
+  width: 25%;
+  height: 100%;
+  letter-spacing: 0.5px;
+  background-color: white;
+  color: black;
+  cursor: pointer;
+  border: none;
+}
+
+.activeBtn {
+  color: orange;
+  font-weight: bold;
+}
