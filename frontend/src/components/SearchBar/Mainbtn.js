@@ -12,10 +12,7 @@ const Btns = styled.div`
 
 function MainBtn({ setBtnValue }) {
   const btnValue = ["프론트엔드", "백엔드", "데이터분석", "None"];
-
-  // 서버 전송용 데이터 네이밍 통일
   const send__btnValue = ["frontend", "backend", "data", "None"];
-
   const [select__btnClicked, setselect__btnClicked] = useState("");
 
   useEffect(() => {
@@ -26,7 +23,6 @@ function MainBtn({ setBtnValue }) {
     console.log(btnValue[e.target.value]);
     e.preventDefault();
 
-    // 버튼 클릭 해제를 구분하기 위해 send_btnValue를 None으로 설정
     if (e.target.value === select__btnClicked) {
       setselect__btnClicked("3");
     } else {
