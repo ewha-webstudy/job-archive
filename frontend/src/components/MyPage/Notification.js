@@ -81,16 +81,6 @@ const Notification = ({ islogin }) => {
     { id: 1, name: "1일 전" },
   ];
 
-  const DdayItem = ({ element, isActive }) => {
-    return isActive ? (
-      <NotificationButton key={element.id} id={element.id} onClick={onClick}>
-        {element.name}
-      </NotificationButton>
-    ) : (
-      <NotificationButton>{element.name}</NotificationButton>
-    );
-  };
-
   return (
     <NotificationBlock>
       <InputWrapper>
@@ -103,8 +93,10 @@ const Notification = ({ islogin }) => {
       <InputWrapper>
         <h4>알림 D-Day</h4>
         <ButtonGroup>
-          {element.map((element) => (
-            <DdayItem key={element.id} />
+          {element.map((menu) => (
+            <NotificationButton key={menu.id} id={menu.id} onClick={onClick}>
+              {menu.name}
+            </NotificationButton>
           ))}
         </ButtonGroup>
       </InputWrapper>
