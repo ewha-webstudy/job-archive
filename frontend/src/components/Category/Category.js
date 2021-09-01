@@ -45,7 +45,7 @@ const Category= ({categoryList, category_chg})=> {
 		if(isChecked){
 			k.set.add(tag);
 			setCheckedItems(checkedItems);
-			await API.post(`api/category/${category_chg}`, {
+			await API.post(`/category/${category_chg}`, {
 				tags: {
 					techStack: checkedItems.find(element => element.category === 'techStack').set,
 					enterTp: checkedItems.find(element => element.category === 'enterTp').set,
@@ -67,7 +67,7 @@ const Category= ({categoryList, category_chg})=> {
 		else if (!isChecked && k.set.has(tag)){
 			k.set.delete(tag);
 			setCheckedItems(checkedItems);
-			await API.post(`api/category/${category_chg}`, {
+			await API.post(`/category/${category_chg}`, {
 				tags: {
 					techStack: checkedItems.find(element => element.category === 'techStack').set,
 					enterTp: checkedItems.find(element => element.category === 'enterTp').set,

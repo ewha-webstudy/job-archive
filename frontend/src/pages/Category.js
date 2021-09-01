@@ -79,7 +79,7 @@ const CategoryPage = ({match}) =>{
       try {
         setJobs(null);
         setError(null);
-        API.get(`/api/category/${category_chg}`).then((response) => {
+        API.get(`/category/${category_chg}`).then((response) => {
           console.log(response.status);
           setJobs(response.data);
         });
