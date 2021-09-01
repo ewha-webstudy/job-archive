@@ -18,14 +18,10 @@ function MainBtn({ setBtnValue }) {
 
   const handleClick = e => {
     e.preventDefault();
-
-    switch (e.target.value) {
-      case select__btnClicked:
-        setselect__btnClicked("3");
-        break;
-      default:
-        setselect__btnClicked(e.target.value);
-        break;
+    if (e.target.value === select__btnClicked) {
+      setselect__btnClicked("3");
+    } else {
+      setselect__btnClicked(e.target.value);
     }
   };
 
