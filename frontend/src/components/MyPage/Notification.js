@@ -1,7 +1,8 @@
 import { CheckBox, Grommet } from "grommet";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
 import API from "../../utils/api";
+import "../../style/noti.css";
 
 const theme = {
   global: {
@@ -18,25 +19,93 @@ const theme = {
 
 // 수정 중!!
 const Notification = () => {
+  // 알림 설정 토글 버튼
+  const [toggled, setToggled] = useState(false);
+
+  // 디데이 선택 버튼
+  const [day, setDay] = useState();
+
+  // API body
+  const Dday = {
+    ifNotif: toggled,
+    notifDay: 0,
+  };
+
+  // 로그인 여부 확인 (수정 중) & 기존 데이터 불러오기
+  useEffect(() => {
+    API.get("https://f77b7f2f-3f98-4d10-acf8-31ea4b2ba99f.mock.pstmn.io/noti")
+      .then((res) => {
+        Dday.notifDay = res.data.notifDay;
+        setToggled(res.data.ifNotif);
+      })
+      .catch((err) => {
+        console.log("ERR: ", err);
+      });
+  }, []);
+
+  // 알림 ON/OFF 설정 함수
+  const onChange = () => {
+    setToggled(!toggled);
+    Dday.ifNotif = toggled.toString();
+  };
+
+  // 디데이 선택 버튼
+  const onClick = (e, i) => {
+    setDay(i);
+    Dday.notifDay = parseInt(e.target.id);
+  };
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    console.log("Dday: ", Dday);
+
+    // 알림은 ON인데 디데이를 선택하지 않은 경우
+    if (toggled && Dday.notifDay === 0) {
+      alert("알림 D-Day를 선택하세요.");
+    }
+
+    // API.post("/api/mypage/notification", Dday)
+    //   .then((res) => {
+    //     console.log("RES: ", res);
+    //   })
+    //   .catch((err) => {
+    //     console.log("ERR: ", err);
+    //   });
+  };
+
+  // 버튼 요소
+  const element = [
+    { id: 14, name: "2주 전" },
+    { id: 7, name: "1주 전" },
+    { id: 3, name: "3일 전" },
+    { id: 1, name: "1일 전" },
+  ];
+
   return (
     <NotificationBlock>
       <InputWrapper>
         <h4>알림</h4>
         <Grommet theme={theme}>
-          <CheckBox toggle />
+          <CheckBox onChange={onChange} toggle checked={toggled} />
         </Grommet>
       </InputWrapper>
 
       <InputWrapper>
         <h4>알림 D-Day</h4>
         <ButtonGroup>
-          <NotificationButton id={14}>2주 전</NotificationButton>
-          <NotificationButton id={7}>1주 전</NotificationButton>
-          <NotificationButton id={3}>3일 전</NotificationButton>
-          <NotificationButton id={1}>1일 전</NotificationButton>
+          {element.map((menu, i) => (
+            <NotificationButton
+              key={i}
+              id={menu.id}
+              onClick={(e) => onClick(e, i)}
+              className={i === day ? "customButton activeBtn" : "customBtn"}
+            >
+              {menu.name}
+            </NotificationButton>
+          ))}
         </ButtonGroup>
       </InputWrapper>
-      <SubmitButton>저장</SubmitButton>
+      <SubmitButton onClick={onSubmit}>저장</SubmitButton>
     </NotificationBlock>
   );
 };
@@ -80,17 +149,10 @@ const NotificationButton = styled.button`
   &:hover {
     cursor: pointer;
     color: #ffa500;
-    font-weight: 600;
   }
-
   & + & {
     border-left: 1px solid lightgrey;
   }
-
-  width: 25%;
-  height: 100%;
-  border: none;
-  background: none;
 `;
 
 const SubmitButton = styled.button`

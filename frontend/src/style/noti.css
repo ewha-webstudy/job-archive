@@ -11,4 +11,9 @@
 .activeBtn {
   color: orange;
   font-weight: bold;
+  width: 25%;
+  height: 100%;
+  background-color: white;
+  cursor: pointer;
+  border: none;
 }
