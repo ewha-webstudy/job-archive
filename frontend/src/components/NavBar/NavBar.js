@@ -1,7 +1,5 @@
-import React, { useState } from "react";
-import { NavLink, useLocation } from "react-router-dom";
-import { BrowserRouter } from "react-router-dom";
-import { Button, Box, Text, Nav, Grommet } from "grommet";
+import React from "react";
+import { Button, Nav, Grommet } from "grommet";
 import "../../style/main.css";
 
 const Theme = {
