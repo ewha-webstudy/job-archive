@@ -6,8 +6,20 @@ const GetDday = end => {
   const now = new Date();
   const distance = dday.getTime() - now.getTime();
   const day = Math.floor(distance / (1000 * 60 * 60 * 24));
-  return <>D-{day}</>;
-};
 
+  let result;
+
+  console.log("dday:", day);
+
+  if (day > 0) {
+    result = <>D-{day}</>;
+  } else if (day === 0) {
+    result = <>D-DAY</>;
+  } else {
+    result = <>{"모집 마감"}</>;
+  }
+
+  return result;
+};
 
 export default GetDday;
