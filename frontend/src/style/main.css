@@ -1,11 +1,11 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;1,900&display=swap");
-
 @import url("https://fonts.googleapis.com/css2?family=Syne:wght@800&display=swap");
 
 :root {
   --main-color: #ffaf00;
-  --nav-bg-color: #070707;
-  --highlight: #1d1c1c;
+  --main-bg-color: #fff;
+  --nav-bg-color: #ffa500;
+  --btn-hover-color: #ffead8;
   --highlight-alt: #332f2fde;
   --secondary-text: #3b3030;
 }
@@ -29,7 +29,7 @@ li {
   height: 50px;
   align-items: center;
   z-index: 1;
-  background-color: #fff;
+  background-color: var(--main-bg-color);
 }
 
 .header .header__logo {
@@ -44,7 +44,6 @@ li {
 .header__logo a {
   text-decoration: none !important;
   font-weight: bold !important;
-
   color: black;
 }
 
@@ -72,14 +71,14 @@ li {
 }
 
 .nav__tag:hover {
-  text-decoration: underline #ffa500;
+  text-decoration: underline var(--nav-bg-color);
   text-decoration-thickness: 5px;
 }
 
 .nav__tag--active {
   padding-right: 20px;
   font-weight: bold;
-  text-decoration: underline #ffa500;
+  text-decoration: underline var(--nav-bg-color);
   text-decoration-thickness: 5px;
 }
 
@@ -91,6 +90,7 @@ li {
   display: flex;
   align-items: center;
 }
+
 .btn__search {
   border-style: solid;
   width: 180px;
@@ -103,7 +103,7 @@ li {
   text-align: center;
   border-radius: 30px 30px 30px 30px;
   padding: 15px 20px;
-  background: #fff;
+  background: var(--main-bg-color);
   line-height: 15px;
 
   box-shadow: 0px 5px 3px 0px var(--main-color);
@@ -138,7 +138,7 @@ li {
 }
 
 .btn__search:hover {
-  background-color: #ffead8;
+  background-color: var(--btn-hover-color);
   color: black;
   cursor: pointer;
 }
@@ -251,7 +251,7 @@ li {
 
 .footer__service-name {
   padding: 0 10px;
-  color: var(--main-bg-color);
+  color: black;
   text-decoration: none;
   padding: 0 10px;
 }
@@ -330,7 +330,7 @@ h1 {
   text-align: center;
   border-radius: 30px 30px 30px 30px;
   padding: 15px 20px;
-  background: #fff;
+  background: var(--main-bg-color);
 
   box-shadow: 0px 5px 3px 0px var(--main-color);
   font-weight: bold;
@@ -347,7 +347,7 @@ h1 {
   top: 110%;
   left: 0;
   padding: 10px;
-  background: #fff;
+  background: var(--main-bg-color);
   box-shadow: 3px 3px 10px 6px rgba(0, 0, 0, 0.06);
   font-weight: 500;
   color: #333;
