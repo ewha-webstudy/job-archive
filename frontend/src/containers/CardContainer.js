@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import Maincard from "../components/Card/Maincard";
-import Categorycard from "../components/Card/CategoryCard";
+//import Categorycard from "../components/Card/CategoryCard";
 import API from "../utils/api";
 
 export function MainCardContainer() {
@@ -18,7 +18,7 @@ export function MainCardContainer() {
 
   return <Maincard islogin={islogin} jobs={jobs} />;
 }
-
+/*
 export function CategoryCardContainer() {
   const { islogin } = useSelector(state => ({
     islogin: state.logger.islogin
@@ -26,3 +26,4 @@ export function CategoryCardContainer() {
 
   return <Categorycard islogin={islogin} />;
 }
+*/
