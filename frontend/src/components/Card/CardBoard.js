@@ -120,7 +120,7 @@ const CardBoard = ({ jobs, islogin }) => {
     <>
       <Container>
         <Cards className="main">
-          {ex.map((jobs, index) => (
+          {jobs.map((jobs, index) => (
             <JobCard
               key={index}
               id={jobs.wantedAuthNo}

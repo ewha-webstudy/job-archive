@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import CardContainer from "../containers/CardContainer";
 import MainSearch from "../components/SearchBar/MainSearch";
 import "../style/main.css";
+import { MainCardContainer } from "../containers/CardContainer";
 
 class Main extends Component {
   render() {
@@ -13,10 +13,9 @@ class Main extends Component {
             <MainSearch />
             <br />
             <h5>스크롤을 밑으로 내려 더 많은 정보를 확인해보세요!</h5>
-            {/* TODO: 화살표 추가 */}
           </div>
         </div>
-        <CardContainer />
+        <MainCardContainer />
       </>
     );
   }

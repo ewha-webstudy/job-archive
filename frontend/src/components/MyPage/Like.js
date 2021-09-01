@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
 import API from "../../utils/api";
-import MyPageCard from "../Card/MyPageCard";
+import MyPageContainer from "../../containers/MyPageContainer";
 
 /* 수정 중 */
 const Like = ({ islogin }) => {
@@ -14,8 +14,9 @@ const Like = ({ islogin }) => {
     } else {
       API.get("api/mypage/like")
         .then((res) => {
-          console.log(res.data);
-          setLikes(res.data);
+          const likes = res.data;
+          console.log(likes);
+          setLikes(likes);
         })
         .catch((err) => {
           console.log("ERR: ", err);
@@ -25,7 +26,7 @@ const Like = ({ islogin }) => {
 
   return (
     <SaveListBlock>
-      <MyPageCard jobs={likes} islogin={islogin} />
+      <MyPageContainer />
     </SaveListBlock>
   );
 };

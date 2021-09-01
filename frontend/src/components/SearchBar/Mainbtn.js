@@ -2,27 +2,22 @@ import React, { useState, useEffect } from "react";
 import "../../style/main.css";
 import styled from "styled-components";
 
-const Btns = styled.div`
-  user-select: none;
-  margin: 0 0 20px 0;
-  position: relative;
-  display: flex;
-  align-items: center;
-`;
-
 function MainBtn({ setBtnValue }) {
-  const btnValue = ["프론트엔드", "백엔드", "데이터분석", "None"];
-  const send__btnValue = ["frontend", "backend", "data", "None"];
-  const [select__btnClicked, setselect__btnClicked] = useState("");
+  const btn_value = [
+    { id: "frontend", name: "프론트엔드", value: "0" },
+    { id: "backend", name: "백엔드", value: "1" },
+    { id: "data", name: "AI/데이터분석", value: "2" },
+    { id: "None", name: "None", value: "3" }
+  ];
+
+  const [select__btnClicked, setselect__btnClicked] = useState("3");
 
   useEffect(() => {
-    setBtnValue(send__btnValue[select__btnClicked]);
+    setBtnValue(btn_value[select__btnClicked]["id"]);
   }, [select__btnClicked]);
 
   const handleClick = e => {
-    console.log(btnValue[e.target.value]);
     e.preventDefault();
-
     if (e.target.value === select__btnClicked) {
       setselect__btnClicked("3");
     } else {
@@ -32,35 +27,33 @@ function MainBtn({ setBtnValue }) {
 
   return (
     <Btns>
-      <button
-        value="0"
-        onClick={handleClick}
-        className={
-          select__btnClicked === "0" ? "btn__search--clicked" : "btn__search"
-        }
-      >
-        {btnValue[0]}
-      </button>
-      <button
-        value="1"
-        onClick={handleClick}
-        className={
-          select__btnClicked === "1" ? "btn__search--clicked" : "btn__search"
-        }
-      >
-        {btnValue[1]}
-      </button>
-      <button
-        value="2"
-        onClick={handleClick}
-        className={
-          select__btnClicked === "2" ? "btn__search--clicked" : "btn__search"
-        }
-      >
-        {btnValue[2]}
-      </button>
+      {btn_value.map((btn, index) => {
+        return btn.id !== "None" ? (
+          <button
+            key={index}
+            value={btn.value}
+            onClick={handleClick}
+            className={
+              select__btnClicked === btn.value
+                ? "btn__search--clicked"
+                : "btn__search"
+            }
+          >
+            {btn.name}
+          </button>
+        ) : null;
+      })}
     </Btns>
   );
 }
+
+const Btns = styled.div`
+  user-select: none;
+  margin: 0 0 20px 0;
+  justify-content: space-between;
+  position: relative;
+  display: flex;
+  align-items: center;
+`;
 
 export default MainBtn;
