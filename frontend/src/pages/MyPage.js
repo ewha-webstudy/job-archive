@@ -1,5 +1,4 @@
 import MyPageTemplate from "../components/MyPage/MyPageTemplate";
-import NavBar from "../components/NavBar/NavBar";
 import Sidebar from "../components/MyPage/Sidebar";
 import Profile from "../components/MyPage/Profile";
 import Notification from "../components/MyPage/Notification";

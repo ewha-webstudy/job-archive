@@ -3,16 +3,14 @@ import styled from "styled-components";
 import API from "../../utils/api";
 import MyPageCard from "../Card/MyPageCard";
 
-const SaveList = () => {
-  //받아온 데이터를 jobs에 저장
+const Like = ({ islogin }) => {
   const [likes, setLikes] = useState([]);
 
   useEffect(() => {
     API.get("/api/mypage/like")
       .then((res) => {
-        const likes = res.data;
-        console.log(likes);
-        setLikes(likes);
+        console.log(res.data);
+        setLikes(res.data); //likes에 받아온 데이터를 저장
       })
       .catch((err) => {
         console.log("ERR: ", err);
@@ -27,7 +25,7 @@ const SaveList = () => {
 
   return (
     <SaveListBlock>
-      <MyPageCard islogin={true} /> {/*수정 중*/}
+      <MyPageCard jobs={likes} islogin={islogin} />
     </SaveListBlock>
   );
 };
@@ -61,4 +59,4 @@ const SaveListBlock = styled.div`
   margin-top: 4.5rem;
   margin-right: 2rem;
 `;
-export default SaveList;
+export default Like;

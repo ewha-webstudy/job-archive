@@ -1,5 +1,6 @@
 'use strict';
 
+
 const Membership = require('./membership');
 const fs = require('fs');
 const path = require('path');

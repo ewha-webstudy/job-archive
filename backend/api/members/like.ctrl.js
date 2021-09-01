@@ -9,9 +9,9 @@ const {UniqueConstraintError} = require('sequelize');
 exports.Like = async (req, res) => {
     //특정 공고에 좋아요 설정( like db에 로그인한 userid & 해당 공고의 jobid 삽입 )
     const loggedID = res.locals.userid;
-    const jobID = req.body.jobid;       //body
-    //const jobID = req.params.jobid;   //path
+    const jobID = req.body.jobid;  
     console.log("this is like");
+    console.log({ "좋아요 설정 " : loggedID}); //test
 
     if (!jobID) //400: wantedAuthNo 미입력
         return res.status(400).send();
@@ -47,6 +47,7 @@ exports.UnLike = async (req, res) => {
     const jobID = req.params.jobid; 
     console.log(jobID);
     console.log("this is unlike");
+    console.log({ "좋아요 해제 " : loggedID}); //test
 
     if (!jobID) //400: wantedAuthNo 미입력
         return res.status(400).send();

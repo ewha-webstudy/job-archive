@@ -1,0 +1,10 @@
+CREATE TABLE `db`.`membership` (
+  `realname` VARCHAR(45) NOT NULL,
+  `userid` VARCHAR(60) NOT NULL,
+  `email` VARCHAR(60) NOT NULL,
+  `born` YEAR(4) NOT NULL,
+  `password` VARCHAR(100) NOT NULL,
+  `salt` VARCHAR(100) NOT NULL,
+  `alert` INT NULL,
+  `createdAt` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`userid`));

@@ -24,7 +24,7 @@ function App() {
             <Route path="/job/:id" exact component={DetailInfoPage} />
             <Route path="/member/auth" exact component={LoginPage} />
             <Route path="/member/create" exact component={SignupPage} />
-            <Route path="/mypage/profile" exact component={MyPage} />
+            <Route path="/mypage/:id" exact component={MyPage} />
             <Footer />
           </Grommet>
         </>

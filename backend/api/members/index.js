@@ -12,11 +12,12 @@ const likeCtrl = require("./like.ctrl");
 router.post('/member/auth', membersCtrl.authMember);
 router.post('/member/create', membersCtrl.createMember);
 router.delete('/member/delete', verifyToken, membersCtrl.deleteMember);
-router.post('/member/logout', verifyToken, membersCtrl.logout);
 
 //mypages
-router.post("/mypage/profile", verifyToken, mypageCtrl.editProfile); 
-//router.post("/mypage/notification", verifyToken, membersCtrl.notifyDday); 
+router.get("/mypage/profile", verifyToken, mypageCtrl.getProfile);
+router.post("/mypage/profile", verifyToken, mypageCtrl.editProfile);
+router.get("/mypage/notification", verifyToken, mypageCtrl.getDday); 
+router.post("/mypage/notification", verifyToken, mypageCtrl.notifyDday); 
 router.get('/mypage/like', verifyToken, mypageCtrl.getLikelist);
 
 //like
@@ -86,6 +87,34 @@ module.exports = router;
  *        description: 유저 삭제 성공
  * 
  * /api/mypage/profile:
+ *    get:
+ *     tags:
+ *     - Mypage - profile
+ *     description: 프로필 기존 설정값 불러오기
+ *     responses:
+ *      200:
+ *        description: 프로필 기존 설정값 불러오기 성공
+ *        content:
+ *          application/json:
+ *            schema:
+ *              type: object
+ *              properties:
+ *               name:
+ *                type: string
+ *               born:
+ *                type: integer
+ *               email:
+ *                type: string
+ *               id:
+ *                type: string
+ *            example:
+ *              {
+ *                "name": "홍길동",
+ *                "born": "2021",
+ *                "email": "0000@naver.com",
+ *                "id": "0000"
+ *              }
+ *       
  *    post:
  *     tags:
  *     - Mypage - profile
@@ -106,12 +135,34 @@ module.exports = router;
  * 
  *       412:
  *          description: 비밀번호확인이 일치하지 않을 때
- * 
+ *
  * /api/mypage/notification:
+ *  get:
+ *    tags:
+ *    - Mypage - notification
+ *    description: 디데이 기존 설정값 불러오기
+ *    responses:
+ *      200:
+ *        description: 디데이 기존 설정값 불러오기 성공
+ *        content:
+ *          application/json:
+ *            schema:
+ *              type: object
+ *              properties:
+ *               ifNotif:
+ *                type: boolean
+ *               notifDay:
+ *                type: integer
+ *            example:
+ *              {
+ *                "ifNotif": true,
+ *                "notifDay": 14
+ *              }
+ * 
  *  post:
  *    tags:
  *    - Mypage - notification
- *    description: 디데이 알림 설정 (아직 구현 X)
+ *    description: 디데이 알림 설정
  *    parameters:
  *    - in: "body"
  *      name: "디데이 알림"
@@ -122,6 +173,8 @@ module.exports = router;
  *    responses:
  *      200:
  *        description: 디데이알림 설정 성공
+ *      400:
+ *        description: body를 잘못 전달했을 때
  * 
  * /api/mypage/like:
  *  get:

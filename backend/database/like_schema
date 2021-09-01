@@ -1,0 +1,11 @@
+CREATE TABLE `JOBARCHIVE`.`like` (
+  `userid` VARCHAR(60) NOT NULL,
+  `wantedAuthNo` VARCHAR(45) NOT NULL,
+  `alertDate` DATE NULL,
+  `updateAt` DATE NULL,
+  PRIMARY KEY (`userid`, `wantedAuthNo`),
+  CONSTRAINT `userid`
+    FOREIGN KEY (`userid`)
+    REFERENCES `JOBARCHIVE`.`membership` (`userid`)
+    ON DELETE CASCADE
+    ON UPDATE NO ACTION);
