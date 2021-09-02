@@ -49,8 +49,8 @@ const Notification = () => {
   };
 
   // 디데이 선택 버튼
-  const OnClick = (e, i) => {
-    setDay(i);
+  const OnClick = (e, menu) => {
+    setDay(menu.id);
   };
 
   const onSubmit = (e) => {
@@ -97,8 +97,10 @@ const Notification = () => {
             <NotificationButton
               key={i}
               id={menu.id}
-              onClick={(e) => OnClick(e, i)}
-              className={i === day ? "customButton activeBtn" : "customBtn"}
+              onClick={(e) => OnClick(e, menu)}
+              className={
+                menu.id === day ? "customButton activeBtn" : "customBtn"
+              }
             >
               {menu.name}
             </NotificationButton>
