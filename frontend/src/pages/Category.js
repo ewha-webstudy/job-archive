@@ -29,6 +29,8 @@ const CategoryPage = ({match}) =>{
   const [jobs , setJobs] = useState([]);
   const [error, setError] = useState(null);
 
+  const category_chg = match.params.category;
+
   const techStack = (category_chg) =>{
     if (category_chg === 'frontend')
     {
@@ -46,43 +48,49 @@ const CategoryPage = ({match}) =>{
 
   const CATEGORY = [
     {
-      id: 1,
+      id: 'techStack',
       title: '언어',
-      tag: techStack(match.params.category)
+      tag: techStack(category_chg)
     },
     {
-      id: 2,
+      id: 'enterTp',
       title: '경력',
       tag: ['관계없음', '신입', '경력' ]
     },
     {
-      id: 3,
-      title: '지역',
-      tag: ['서울', '경기', '부산' ]
+      id: 'salary',
+      title: '연봉',
+      tag: ['일급', '시급', '2500만원 이하', '2500만 - 3000만', '3000만 - 3500만', '3500만 - 4000만', '4000만 - 4500만', '4500만 이상']
     },
     {
-      id: 4,
+      id: 'EdubgIcd',
       title: '학력',
-      tag: ['고등학교 졸업', '무관', '석사 이상' ]
+      tag: ['학력무관', '초졸이하', '중졸', '대졸(2~3년)', '대졸(4년)', '석사', '박사' ]
+    },
+    {
+      id: 'region',
+      title: '지역',
+      tag: ['서울', '부산', '대구', '인천', '광주', '대전', '울산', '세종',
+        '경기', '강원', '충북', '충남', '전북', '전남', '경북', '경남', '제주']
     }
   ]
-  API.get("")
+
 	useEffect(() => {
-		const fetchContents = async () => {
-			try {
-				setJobs(null);
-				setError(null);
-				API.get("/api/category/${match.params.category}").then((response) => {
-					console.log(response.status);
-					setJobs(response.data);
-				});
-			} catch (e) {
-				setError(e);
-			}
-		}
+    const fetchContents = async () => {
+      try {
+        setJobs(null);
+        setError(null);
+        API.get(`/category/${category_chg}`).then((response) => {
+          console.log(response.status);
+          setJobs(response.data);
+        });
+      } catch (e) {
+        setError(e);
+      }
+    }
 		fetchContents();
 	}, []);
-
+ 
 
 
   return (
@@ -101,7 +109,7 @@ const CategoryPage = ({match}) =>{
           >
             <Title>카테고리</Title>
             {/* {console.log(match.params.category)} */}
-            <Category categoryList = {CATEGORY} />
+            <Category categoryList = {CATEGORY} category_chg={category_chg}/>
           </Box>
           <Box
             overflow="scroll"
