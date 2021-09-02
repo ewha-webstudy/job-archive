@@ -17,3 +17,12 @@
   cursor: pointer;
   border: none;
 }
+
+.disable {
+  width: 25%;
+  height: 100%;
+  letter-spacing: 0.5px;
+  background-color: white;
+  color: rgb(209, 208, 208);
+  border: none;
+}

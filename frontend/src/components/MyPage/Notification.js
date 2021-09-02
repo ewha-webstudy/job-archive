@@ -46,11 +46,12 @@ const Notification = () => {
   // 알림 ON/OFF 설정 함수
   const onChange = () => {
     setToggled(!toggled);
+    setDay(0);
   };
 
   // 디데이 선택 버튼
   const OnClick = (e, menu) => {
-    setDay(menu.id);
+    toggled && setDay(menu.id);
   };
 
   const onSubmit = (e) => {
@@ -60,9 +61,9 @@ const Notification = () => {
     console.log("Dday: ", Dday);
 
     // 알림은 ON인데 디데이를 선택하지 않은 경우
-    // if (toggled && Dday.notifDay === 0) {
-    //   alert("알림 D-Day를 선택하세요.");
-    // }
+    if (toggled && Dday.notifDay === 0) {
+      alert("알림 D-Day를 선택하세요.");
+    }
 
     // API.post("/api/mypage/notification", Dday)
     //   .then((res) => {
@@ -81,6 +82,18 @@ const Notification = () => {
     { id: 1, name: "1일 전" },
   ];
 
+  const setClassName = (menu, day) => {
+    if (toggled) {
+      if (menu.id === day) {
+        return "customBtn activeBtn";
+      } else {
+        return "customBtn";
+      }
+    } else {
+      return "disable";
+    }
+  };
+
   return (
     <NotificationBlock>
       <InputWrapper>
@@ -98,9 +111,7 @@ const Notification = () => {
               key={i}
               id={menu.id}
               onClick={(e) => OnClick(e, menu)}
-              className={
-                menu.id === day ? "customButton activeBtn" : "customBtn"
-              }
+              className={setClassName(menu, day)}
             >
               {menu.name}
             </NotificationButton>
@@ -148,10 +159,6 @@ const ButtonGroup = styled.div`
 `;
 
 const NotificationButton = styled.button`
-  &:hover {
-    cursor: pointer;
-    color: #ffa500;
-  }
   & + & {
     border-left: 1px solid lightgrey;
   }
