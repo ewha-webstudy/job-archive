@@ -50,33 +50,33 @@ exports.search = async(req, res) => {
   let cardList = []
   try{
     if(!ifTags(tags) && searchBar.length === 0){
-      jobList = await Job.findAll({ attributes: ['wantedAuthNo'], order: [ ['regDt',  'DESC'] ], where: { category: category } })
+      jobList = await Job.findAll({ attributes: ['wantedAuthNo'], order: [ ['regDt',  'DESC'] ], where: { category: {[Op.substring]: category} } })
     }
     if(!ifTags(tags) && searchBar.length !== 0){
       console.log("search: ", searchBar);
       const searchCondition = searchbarCondition(searchBar)[and]
       jobList = await Job.findAll({ attributes: ['wantedAuthNo'], order: [ ['regDt',  'DESC'] ], 
         where: {
-          [and]: [{ category: category }, searchCondition]
+          [and]: [{ category: {[Op.substring]: category} }, searchCondition]
         }
       })
     }
     if(ifTags(tags) && searchBar.length === 0){
-      const {techStack, enterTp, salary, region, edubgIcd} = tagSearch(tags)
+      const {techStack, enterTpCd, avgSal, region, minEdubgIcd} = tagSearch(tags)
       jobList = await Job.findAll({ attributes: ['wantedAuthNo'], order: [ ['regDt',  'DESC'] ], 
         where: {
-          [and]: [{category: category}, techStack, enterTp, salary, region, edubgIcd],
+          [and]: [{ category: {[Op.substring]: category} }, techStack, enterTpCd, avgSal, region, minEdubgIcd],
         } 
       });
     }
     
     if(ifTags(tags) && searchBar.length !== 0){
       console.log("search: ", searchBar)
-      const {techStack, enterTp, salary, region, edubgIcd} = tagSearch(tags)
+      const {techStack, enterTpCd, avgSal, region, minEdubgIcd} = tagSearch(tags)
       const searchCondition = searchbarCondition(searchBar)[and]
       jobList = await Job.findAll({ attributes: ['wantedAuthNo'], order: [ ['regDt',  'DESC'] ], 
         where: { 
-          [and]: [{category: category}, techStack, enterTp, salary, region, edubgIcd, searchCondition]
+          [and]: [{ category: {[Op.substring]: category} }, techStack, enterTpCd, avgSal, region, minEdubgIcd, searchCondition]
         } 
       })
     }
@@ -189,12 +189,12 @@ function tagCondition(key, values){
 
 function tagSearch(tags){
   const techStack = tagCondition("techStack", tags.techStack);
-  const enterTp = tagCondition("enterTp", tags.enterTp);
-  const salary = tagCondition("salary", tags.salary);
+  const enterTpCd = tagCondition("enterTpCd", tags.enterTpCd);
+  const avgSal = tagCondition("avgSal", tags.avgSal);
   const region = tagCondition("region", tags.region);
-  const edubgIcd = tagCondition("edubgIcd", tags.edubgIcd);
+  const minEdubgIcd = tagCondition("minEdubgIcd", tags.minEdubgIcd);
 
-  return {techStack, enterTp, salary, region, edubgIcd}
+  return {techStack, enterTpCd, avgSal, region, minEdubgIcd}
 }
 
 const toCard = async(wantedAuthNo) => {
@@ -223,12 +223,13 @@ const toDetail = async(wantedAuthNo) => {
     homePg: job.homePg,
     receiptCloseDt: job.receiptCloseDt,
     jobCont: job.jobCont,
+    category: job.category,
     wantedInfoUrl: job.wantedInfoUrl,
     empTpNm: job.empTpNm,
     enterTpCd: job.enterTpCd,
     minEdubgIcd: job.minEdubgIcd,
     pfCond: job.pfCond,
-    salTpNm: job.salTpNm,
+    salTpCd: job.salTpCd,
     sal: job.sal,
     workdayWorkhrCont: job.workdayWorkhrCont,
     likeNo: job.likeNo

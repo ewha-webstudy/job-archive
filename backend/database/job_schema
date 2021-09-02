@@ -14,7 +14,7 @@ CREATE TABLE `db`.`job` (
   `category` VARCHAR(200) NULL,
   `techStack` VARCHAR(200) NULL,
   `enterTpCd` VARCHAR(45) NOT NULL,
-  `minEdubglcd` VARCHAR(45) NOT NULL,
+  `minEdubgIcd` VARCHAR(45) NOT NULL,
   `pfCond` VARCHAR(500) NULL,
   `empTpNm` VARCHAR(100) NOT NULL,
   `workdayWorkhrCont` VARCHAR(1000) NOT NULL,
