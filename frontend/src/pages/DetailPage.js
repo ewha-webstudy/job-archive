@@ -107,7 +107,7 @@ const DetailInfoPage = ({match}) => {
 			try {
 				setContent(null);
 				setError(null);
-				API.get(`/category/${datakey}`).then((response) => {
+				API.get(`api/category/${datakey}`).then((response) => {
 					console.log(response.status);
 					setContent(response.data);
 				});

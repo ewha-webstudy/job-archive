@@ -20,7 +20,7 @@ const Category= ({categoryList, category_chg})=> {
 		},
 		{
 			id: 2,
-			category: 'enterTp',
+			category: 'enterTpCd',
 			set: new Set()
 		},
 		{
@@ -30,12 +30,12 @@ const Category= ({categoryList, category_chg})=> {
 		},
 		{
 			id: 4,
-			category: 'salary',
+			category: 'avgSal',
 			set: new Set()
 		},
 		{
 			id: 5,
-			category: 'edubgIcd',
+			category: 'minEdubgIcd',
 			set: new Set()
 		}
 	]);
@@ -46,16 +46,18 @@ const Category= ({categoryList, category_chg})=> {
 		}
 
 		return(
-			API.patch(`/category/${category_chg}`, {
+			API.post(`api/category/${category_chg}`, {
 				tags: {
 					techStack: apiSendTag('techStack'),
-					enterTp: apiSendTag('enterTp'),
-					salary: apiSendTag('salary'),
+					enterTpCd: apiSendTag('enterTpCd'),
+					avgSal: apiSendTag('avgSal'),
 					region: apiSendTag('region'),
-					edubgIcd: apiSendTag('edubgIcd'),
-				}			
+					minEdubgIcd: apiSendTag('minEdubgIcd'),
+				},
+				searchBar: ""
 			}).then(res => {
 				console.log(res.status);
+				setJobs(res.data);
 			  })
 			  .catch(error => {
 				if (error.response.status === 404) {

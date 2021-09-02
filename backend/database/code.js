@@ -523,7 +523,7 @@ async function putInDB() {
                     category: category[detailArray[i]['wantedDtl']['wantedAuthNo']],
                     techStack: tagStack[detailArray[i].wantedDtl.wantedAuthNo],
                     enterTpCd: detailArray[i].wantedDtl.wantedInfo.enterTpCd,
-                    minEdubglcd: detailArray[i].wantedDtl.wantedInfo.minEdubgIcd,
+                    minEdubgIcd: detailArray[i].wantedDtl.wantedInfo.minEdubgIcd,
                     pfCond: acceptNull(detailArray[i].wantedDtl.wantedInfo.pfCond),
                     empTpNm: detailArray[i].wantedDtl.wantedInfo.empTpNm,
                     workdayWorkhrCont: detailArray[i].wantedDtl.wantedInfo.workdayWorkhrCont,
