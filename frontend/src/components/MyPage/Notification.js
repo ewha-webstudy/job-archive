@@ -28,10 +28,10 @@ const Notification = () => {
   // API body
   const Dday = {
     ifNotif: toggled,
-    notifDay: 0,
+    notifDay: day,
   };
 
-  // 로그인 여부 확인 (수정 중) & 기존 데이터 불러오기
+  // 로그인 여부 확인 & 기존 데이터 불러오기 (수정 중)
   useEffect(() => {
     API.get("https://f77b7f2f-3f98-4d10-acf8-31ea4b2ba99f.mock.pstmn.io/noti")
       .then((res) => {
@@ -46,23 +46,23 @@ const Notification = () => {
   // 알림 ON/OFF 설정 함수
   const onChange = () => {
     setToggled(!toggled);
-    Dday.ifNotif = toggled.toString();
   };
 
   // 디데이 선택 버튼
-  const onClick = (e, i) => {
+  const OnClick = (e, i) => {
     setDay(i);
-    Dday.notifDay = parseInt(e.target.id);
   };
 
   const onSubmit = (e) => {
     e.preventDefault();
+
+    Dday.ifNotif = toggled.toString();
     console.log("Dday: ", Dday);
 
     // 알림은 ON인데 디데이를 선택하지 않은 경우
-    if (toggled && Dday.notifDay === 0) {
-      alert("알림 D-Day를 선택하세요.");
-    }
+    // if (toggled && Dday.notifDay === 0) {
+    //   alert("알림 D-Day를 선택하세요.");
+    // }
 
     // API.post("/api/mypage/notification", Dday)
     //   .then((res) => {
@@ -97,7 +97,7 @@ const Notification = () => {
             <NotificationButton
               key={i}
               id={menu.id}
-              onClick={(e) => onClick(e, i)}
+              onClick={(e) => OnClick(e, i)}
               className={i === day ? "customButton activeBtn" : "customBtn"}
             >
               {menu.name}
