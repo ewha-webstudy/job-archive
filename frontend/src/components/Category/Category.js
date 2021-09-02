@@ -40,8 +40,6 @@ const Category= ({categoryList, category_chg})=> {
 		}
 	]);
 
-	
-
 	function apiPostTag(){
 		function apiSendTag(props){
 			return Array.from(checkedItems.find(element => element.category === props).set);
