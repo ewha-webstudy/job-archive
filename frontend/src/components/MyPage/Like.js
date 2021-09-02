@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
 import API from "../../utils/api";
-import MyPageContainer from "../../containers/MyPageContainer";
+import LikeContainer from "../../containers/MyPage/LikeContainer";
 
 /* 수정 중 */
 const Like = ({ islogin }) => {
@@ -26,7 +26,7 @@ const Like = ({ islogin }) => {
 
   return (
     <SaveListBlock>
-      <MyPageContainer />
+      <LikeContainer />
     </SaveListBlock>
   );
 };

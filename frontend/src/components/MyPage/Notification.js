@@ -18,7 +18,7 @@ const theme = {
 };
 
 // 수정 중!!
-const Notification = () => {
+const Notification = ({ islogin }) => {
   // 알림 설정 토글 버튼
   const [toggled, setToggled] = useState(false);
 
@@ -32,16 +32,23 @@ const Notification = () => {
   };
 
   // 로그인 여부 확인 & 기존 데이터 불러오기 (수정 중)
-  useEffect(() => {
-    API.get("https://f77b7f2f-3f98-4d10-acf8-31ea4b2ba99f.mock.pstmn.io/noti")
-      .then((res) => {
-        Dday.notifDay = res.data.notifDay;
-        setToggled(res.data.ifNotif);
-      })
-      .catch((err) => {
-        console.log("ERR: ", err);
-      });
-  }, []);
+  useEffect(
+    (islogin) => {
+      if (!islogin) {
+        alert("로그인 후 이용 가능합니다.");
+      } else {
+        API.get("/api/mypage/notification")
+          .then((res) => {
+            Dday.notifDay = res.data.notifDay;
+            setToggled(res.data.ifNotif);
+          })
+          .catch((err) => {
+            console.log("ERR: ", err);
+          });
+      }
+    },
+    [islogin]
+  );
 
   // 알림 ON/OFF 설정 함수
   const onChange = () => {
@@ -65,13 +72,13 @@ const Notification = () => {
       alert("알림 D-Day를 선택하세요.");
     }
 
-    // API.post("/api/mypage/notification", Dday)
-    //   .then((res) => {
-    //     console.log("RES: ", res);
-    //   })
-    //   .catch((err) => {
-    //     console.log("ERR: ", err);
-    //   });
+    API.post("/api/mypage/notification", Dday)
+      .then((res) => {
+        console.log("RES: ", res);
+      })
+      .catch((err) => {
+        console.log("ERR: ", err);
+      });
   };
 
   // 버튼 요소

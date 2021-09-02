@@ -96,7 +96,7 @@ const ex = [
 const MyPageCard = ({ jobs, islogin }) => {
   return (
     <Container>
-      {ex.map((jobs, index) => (
+      {jobs.map((jobs, index) => (
         <CardWrapper>
           <JobCard
             key={index}
