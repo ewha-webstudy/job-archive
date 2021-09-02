@@ -40,52 +40,44 @@ const Category= ({categoryList, category_chg})=> {
 		}
 	]);
 
+	
+
+	function apiPostTag(){
+		function apiSendTag(props){
+			return Array.from(checkedItems.find(element => element.category === props).set);
+		}
+
+		return(
+			API.patch(`/category/${category_chg}`, {
+				tags: {
+					techStack: apiSendTag('techStack'),
+					enterTp: apiSendTag('enterTp'),
+					salary: apiSendTag('salary'),
+					region: apiSendTag('region'),
+					edubgIcd: apiSendTag('edubgIcd'),
+				}			
+			}).then(res => {
+				console.log(res.status);
+			  })
+			  .catch(error => {
+				if (error.response.status === 404) {
+				  console.error(error);
+				}
+			  })
+		);
+	}
+
 	const checkedItemHandler = async(tag, cat, isChecked) => {
 		const k = checkedItems.find(element => element.category === cat);
 		if(isChecked){
 			k.set.add(tag);
 			setCheckedItems(checkedItems);
-			await API.post(`/category/${category_chg}`, {
-				tags: {
-					techStack: checkedItems.find(element => element.category === 'techStack').set,
-					enterTp: checkedItems.find(element => element.category === 'enterTp').set,
-					salary: checkedItems.find(element => element.category === 'salary').set,
-					region: checkedItems.find(element => element.category === 'region').set,
-					edubgIcd: checkedItems.find(element => element.category === 'edubgIcd').set,
-				},
-				searchBar: ''
-			})
-			.then(res => {
-				console.log(res.status);
-			  })
-			  .catch(error => {
-				if (error.response.status === 404) {
-				  console.error(error);
-				}
-			  });
+			await apiPostTag();
 		}		
 		else if (!isChecked && k.set.has(tag)){
 			k.set.delete(tag);
 			setCheckedItems(checkedItems);
-			await API.post(`/category/${category_chg}`, {
-				tags: {
-					techStack: checkedItems.find(element => element.category === 'techStack').set,
-					enterTp: checkedItems.find(element => element.category === 'enterTp').set,
-					salary: checkedItems.find(element => element.category === 'salary').set,
-					region: checkedItems.find(element => element.category === 'region').set,
-					edubgIcd: checkedItems.find(element => element.category === 'edubgIcd').set,
-				},
-				searchBar: ''
-			})
-			.then(res => {
-				console.log(res.status);
-			  })
-			  .catch(error => {
-				if (error.response.status === 404) {
-				  console.error(error);
-				}
-			  });
-
+			await apiPostTag();
 		}
 	}
 
