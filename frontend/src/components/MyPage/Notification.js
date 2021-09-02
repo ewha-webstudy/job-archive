@@ -32,23 +32,20 @@ const Notification = ({ islogin }) => {
   };
 
   // 로그인 여부 확인 & 기존 데이터 불러오기 (수정 중)
-  useEffect(
-    (islogin) => {
-      if (!islogin) {
-        alert("로그인 후 이용 가능합니다.");
-      } else {
-        API.get("/api/mypage/notification")
-          .then((res) => {
-            Dday.notifDay = res.data.notifDay;
-            setToggled(res.data.ifNotif);
-          })
-          .catch((err) => {
-            console.log("ERR: ", err);
-          });
-      }
-    },
-    [islogin]
-  );
+  useEffect(() => {
+    if (!islogin) {
+      alert("로그인 후 이용 가능합니다.");
+    } else {
+      API.get("/api/mypage/notification")
+        .then((res) => {
+          Dday.notifDay = res.data.notifDay;
+          setToggled(res.data.ifNotif);
+        })
+        .catch((err) => {
+          console.log("ERR: ", err);
+        });
+    }
+  }, []);
 
   // 알림 ON/OFF 설정 함수
   const onChange = () => {

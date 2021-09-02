@@ -22,7 +22,7 @@ const Like = ({ islogin }) => {
           console.log("ERR: ", err);
         });
     }
-  }, [islogin, likes]);
+  }, []);
 
   return (
     <SaveListBlock>

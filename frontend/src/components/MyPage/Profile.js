@@ -19,7 +19,6 @@ const Profile = ({ islogin }) => {
   useEffect(() => {
     if (!islogin) {
       alert("로그인 후 이용 가능합니다.");
-      history.push("/member/auth");
     } else {
       API.get("api/mypage/profile")
         .then((res) => {
@@ -31,7 +30,7 @@ const Profile = ({ islogin }) => {
           console.log("ERR: ", err);
         });
     }
-  }, [islogin]);
+  }, []);
 
   // 입력한 값으로 변경
   const handleChange = (e) => {
