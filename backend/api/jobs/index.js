@@ -99,7 +99,7 @@ module.exports = router;
  *                enterTp: [],
  *                salary: [],
  *                region: [],
- *                edubgIcd: []
+ *                minEdubgIcd: []
  *              }, 
  *              searchBar: "네이버"
  *            }

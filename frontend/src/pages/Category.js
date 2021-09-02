@@ -53,17 +53,17 @@ const CategoryPage = ({match}) =>{
       tag: techStack(category_chg)
     },
     {
-      id: 'enterTp',
+      id: 'enterTpCd',
       title: '경력',
       tag: ['관계없음', '신입', '경력' ]
     },
     {
-      id: 'salary',
+      id: 'avgSal',
       title: '연봉',
       tag: ['일급', '시급', '2500만원 이하', '2500만 - 3000만', '3000만 - 3500만', '3500만 - 4000만', '4000만 - 4500만', '4500만 이상']
     },
     {
-      id: 'EdubgIcd',
+      id: 'minEdubgIcd',
       title: '학력',
       tag: ['학력무관', '초졸이하', '중졸', '대졸(2~3년)', '대졸(4년)', '석사', '박사' ]
     },
@@ -74,21 +74,31 @@ const CategoryPage = ({match}) =>{
         '경기', '강원', '충북', '충남', '전북', '전남', '경북', '경남', '제주']
     }
   ]
+  const data = {
+    tags: {
+      techStack: [],
+      enterTpCd: [],
+      avgSal: [],
+      region: [],
+      minEdubgIcd: []
+    },
+    searchBar: ""
+  };
 
 	useEffect(() => {
-    const fetchContents = async () => {
-      try {
-        setJobs(null);
-        setError(null);
-        API.get(`/category/${category_chg}`).then((response) => {
+    // const fetchContents = async () => {
+      // try {
+        // setJobs(null);
+        // setError(null);
+        API.post(`api/category/${category_chg}`, data).then((response) => {
           console.log(response.status);
           setJobs(response.data);
         });
-      } catch (e) {
-        setError(e);
-      }
-    }
-		fetchContents();
+      // } catch (e) {
+        // setError(e);
+      // }
+    // })
+		// fetchContents();
 	}, []);
  
 

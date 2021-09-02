@@ -62,7 +62,7 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING(45),
       allowNull: false
     },
-    minEdubglcd: {
+    minEdubgIcd: {
       type: DataTypes.STRING(45),
       allowNull: false
     },

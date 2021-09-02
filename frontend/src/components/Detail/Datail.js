@@ -81,7 +81,7 @@ function DetailBox({ item }) {
 						</dd>
 						<dt>급여</dt>
 						<dd>
-							{item.salTpNm} {item.sal}
+							{item.salTpCd} {item.sal}
 						</dd>
 						<dt>지역</dt>
 						<dd>{item.corpAddr}					</dd>

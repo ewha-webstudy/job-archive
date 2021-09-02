@@ -14,10 +14,10 @@ function SearchBar(props) {
   const data = {
     tags: {
       techStack: [],
-      enterTp: [],
-      salary: [],
+      enterTpCd: [],
+      avgSal: [],
       region: [],
-      edubgIcd: []
+      minEdubgIcd: []
     },
     searchBar: searchTxt
   };
