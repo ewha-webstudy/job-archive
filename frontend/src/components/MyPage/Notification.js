@@ -1,7 +1,8 @@
 import { CheckBox, Grommet } from "grommet";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
 import API from "../../utils/api";
+import "../../style/noti.css";
 
 const theme = {
   global: {
@@ -17,30 +18,51 @@ const theme = {
 };
 
 // 수정 중!!
-const Notification = () => {
+const Notification = ({ islogin }) => {
   // 알림 설정 토글 버튼
   const [toggled, setToggled] = useState(false);
+
+  // 디데이 선택 버튼
+  const [day, setDay] = useState();
 
   // API body
   const Dday = {
     ifNotif: toggled,
-    notifDay: 0,
+    notifDay: day,
   };
+
+  // 로그인 여부 확인 & 기존 데이터 불러오기 (수정 중)
+  useEffect(() => {
+    if (!islogin) {
+      alert("로그인 후 이용 가능합니다.");
+    } else {
+      API.get("/api/mypage/notification")
+        .then((res) => {
+          Dday.notifDay = res.data.notifDay;
+          setToggled(res.data.ifNotif);
+          setDay(res.data.notifDay);
+        })
+        .catch((err) => {
+          console.log("ERR: ", err);
+        });
+    }
+  }, []);
 
   // 알림 ON/OFF 설정 함수
   const onChange = () => {
     setToggled(!toggled);
-    Dday.ifNotif = toggled.toString();
+    setDay(0);
   };
 
   // 디데이 선택 버튼
-  const onClick = (e) => {
-    toggled && (Dday.notifDay = parseInt(e.target.id));
+  const OnClick = (e, menu) => {
+    toggled && setDay(menu.id);
   };
 
-  // 디데이 선택 버튼을 누를 때마다 요청 전송
   const onSubmit = (e) => {
     e.preventDefault();
+
+    Dday.ifNotif = toggled.toString();
     console.log("Dday: ", Dday);
 
     // 알림은 ON인데 디데이를 선택하지 않은 경우
@@ -58,27 +80,44 @@ const Notification = () => {
   };
 
   // 버튼 요소
-  const menu = [
+  const element = [
     { id: 14, name: "2주 전" },
     { id: 7, name: "1주 전" },
     { id: 3, name: "3일 전" },
     { id: 1, name: "1일 전" },
   ];
 
+  const setClassName = (menu, day) => {
+    if (toggled) {
+      if (menu.id === day) {
+        return "customBtn activeBtn";
+      } else {
+        return "customBtn";
+      }
+    } else {
+      return "disable";
+    }
+  };
+
   return (
     <NotificationBlock>
       <InputWrapper>
         <h4>알림</h4>
         <Grommet theme={theme}>
-          <CheckBox toggled={toggled} onChange={onChange} toggle />
+          <CheckBox onChange={onChange} toggle checked={toggled} />
         </Grommet>
       </InputWrapper>
 
       <InputWrapper>
         <h4>알림 D-Day</h4>
         <ButtonGroup>
-          {menu.map((menu) => (
-            <NotificationButton key={menu.id} id={menu.id} onClick={onClick}>
+          {element.map((menu, i) => (
+            <NotificationButton
+              key={i}
+              id={menu.id}
+              onClick={(e) => OnClick(e, menu)}
+              className={setClassName(menu, day)}
+            >
               {menu.name}
             </NotificationButton>
           ))}
@@ -125,18 +164,9 @@ const ButtonGroup = styled.div`
 `;
 
 const NotificationButton = styled.button`
-  &:hover {
-    cursor: pointer;
-    color: #ffa500;
-    font-weight: 600;
-  }
   & + & {
     border-left: 1px solid lightgrey;
   }
-  width: 25%;
-  height: 100%;
-  border: none;
-  background: none;
 `;
 
 const SubmitButton = styled.button`

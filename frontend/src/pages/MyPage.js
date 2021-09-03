@@ -1,7 +1,7 @@
 import MyPageTemplate from "../components/MyPage/MyPageTemplate";
 import Sidebar from "../components/MyPage/Sidebar";
-import Profile from "../components/MyPage/Profile";
-import Notification from "../components/MyPage/Notification";
+import ProfileContainer from "../containers/MyPage/ProfileContainer";
+import NotiContainer from "../containers/MyPage/NotiContainer";
 import Like from "../components/MyPage/Like";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
@@ -10,8 +10,8 @@ const MyPage = () => {
     <Router>
       <MyPageTemplate>
         <Sidebar />
-        <Route exact path="/mypage/profile" component={Profile} />
-        <Route exact path="/mypage/notification" component={Notification} />
+        <Route exact path="/mypage/profile" component={ProfileContainer} />
+        <Route exact path="/mypage/notification" component={NotiContainer} />
         <Route exact path="/mypage/like" component={Like} />
       </MyPageTemplate>
     </Router>

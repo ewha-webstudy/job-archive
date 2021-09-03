@@ -13,7 +13,7 @@ const theme = {
 };
 
 //회원가입, 회원정보수정에 사용되는 Form
-const ProfileForm = ({ value, onChange, onClick }) => {
+const ProfileForm = ({ value, onChange, onClick, disabled }) => {
   //출생연도 선택 시 보이는 연도 리스트
   const yearOptions = [...Array(80)].map((v, i) => `${i + 1942}`);
 
@@ -61,6 +61,7 @@ const ProfileForm = ({ value, onChange, onClick }) => {
                   name="name"
                   value={value.name}
                   onChange={onChange}
+                  disabled={disabled}
                 />
               </Box>
             </Grommet>
@@ -115,6 +116,7 @@ const ProfileForm = ({ value, onChange, onClick }) => {
                   name="id"
                   value={value.id}
                   onChange={onChange}
+                  disabled={disabled}
                 />
               </Box>
             </Grommet>

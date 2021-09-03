@@ -42,16 +42,6 @@ const sidebarMenu = [
   { id: "like", title: "저장 목록 관리" },
 ];
 
-const SidebarItem = ({ menu, isActive }) => {
-  return isActive === true ? (
-    <SidebarButton key={menu.id} className="sidebar-item active">
-      {menu.title}
-    </SidebarButton>
-  ) : (
-    <SidebarButton>{menu.title}</SidebarButton>
-  );
-};
-
 const theme = {
   global: {
     colors: {
@@ -62,15 +52,17 @@ const theme = {
 };
 
 const Sidebar = () => {
+  // 현재 위치를 저장
   const pathName = useLocation().pathname;
 
+  // 사이드바 메뉴에 URL 연결
   const SidebarMenu = () => {
     return (
       <>
         {sidebarMenu.map((menu) => {
           return (
             <NavLink key={menu.id} to={"/mypage/" + menu.id}>
-              <SidebarItem key={menu.id} menu={menu} />
+              <SidebarButton key={menu.id}>{menu.title}</SidebarButton>
             </NavLink>
           );
         })}
@@ -79,6 +71,7 @@ const Sidebar = () => {
     );
   };
 
+  // 회원가입 페이지일 때
   const RegisterMenu = () => {
     return (
       <NavLink to={"/member/create"}>
@@ -88,6 +81,7 @@ const Sidebar = () => {
   };
 
   return (
+    // 현재 위치가 "/member/create"이라면 회원가입을, 그렇지 않으면 사이드바 메뉴를 보여줌
     <SidebarBlock>
       {pathName === "/member/create" ? <RegisterMenu /> : <SidebarMenu />}
     </SidebarBlock>

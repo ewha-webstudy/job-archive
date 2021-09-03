@@ -1,11 +1,10 @@
 import styled from "styled-components";
 
-const LoginTemplate = ({ form, children }) => {
+const LoginTemplate = ({ form }) => {
   return (
     <Container>
       <LoginBox>
         <FormWrapper>{form}</FormWrapper>
-        <LoginWrapper>{children}</LoginWrapper>
       </LoginBox>
     </Container>
   );
@@ -27,10 +26,6 @@ const LoginBox = styled.div`
 
 const FormWrapper = styled.section`
   padding: 1rem;
-`;
-
-const LoginWrapper = styled.section`
-  min-height: 5rem;
 `;
 
 export default LoginTemplate;
