@@ -40,6 +40,7 @@ const Notification = ({ islogin }) => {
         .then((res) => {
           Dday.notifDay = res.data.notifDay;
           setToggled(res.data.ifNotif);
+          setDay(res.data.notifDay);
         })
         .catch((err) => {
           console.log("ERR: ", err);
