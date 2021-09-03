@@ -4,50 +4,50 @@ import React, { useState } from "react";
 
 import API from "../../utils/api";
 import classes from "./Detail.module.css";
+import GetDday from "../Card/GetDday";
 
 
+const DetailBox = ({ item }) => {
+	function closedate(date){
+		const arr = date.split("-");
+		console.log(arr);
+		return remaindTime(arr);
+	}
 
-function DetailBox({ item }) {
-	// function closedate(date){
-	// 	const arr = date.split("-");
-	// 	console.log(arr);
-	// 	return remaindTime(arr);
-	// }
+	function remaindTime({arr}) {
+		var now = new Date(); //현재시간을 구한다. 
+		var open = new Date(arr[0], arr[1], arr[2], 0, 0, 0);
 
-	// function remaindTime({arr}) {
-	// 	var now = new Date(); //현재시간을 구한다. 
-	// 	var open = new Date(arr[0], arr[1], arr[2], 0, 0, 0);
+		var nt = now.getTime(); // 현재의 시간만 가져온다
+		var ot = open.getTime(); // 오픈시간만 가져온다
 
-	// 	var nt = now.getTime(); // 현재의 시간만 가져온다
-	// 	var ot = open.getTime(); // 오픈시간만 가져온다
+		if (nt < ot) { //현재시간이 오픈시간보다 이르면 오픈시간까지의 남은 시간을 구한다.   
+			let sec = parseInt(ot - nt) / 1000;
+			let hour = parseInt(sec / 60 / 60);
+			sec = (sec - (hour * 60 * 60));
+			let min = parseInt(sec / 60);
+			sec = parseInt(sec - (min * 60));
 
-	// 	if (nt < ot) { //현재시간이 오픈시간보다 이르면 오픈시간까지의 남은 시간을 구한다.   
-	// 		let sec = parseInt(ot - nt) / 1000;
-	// 		let hour = parseInt(sec / 60 / 60);
-	// 		sec = (sec - (hour * 60 * 60));
-	// 		let min = parseInt(sec / 60);
-	// 		sec = parseInt(sec - (min * 60));
-
-	// 		if (hour < 10) { hour = "0" + hour; }
-	// 		if (min < 10) { min = "0" + min; }
-	// 		if (sec < 10) { sec = "0" + sec; }
-	// 		return(
-	// 			<div>
-	// 				{hour} : {min} : {sec}
-	// 			</div>
-	// 		);
-	// 	} else { //현재시간이 종료시간보다 크면
-	// 		// $("#d-day-hour").html('00');
-	// 		// $("#d-day-min").html('00');
-	// 		// $("#d-day-sec").html('00');'
-	// 		return(
-	// 			<div>
-	// 				00: 00 : 00
-	// 			</div>
-	// 		);
-	// 	}
-	// }
-	// setInterval(remaindTime, 1000);
+			if (hour < 10) { hour = "0" + hour; }
+			if (min < 10) { min = "0" + min; }
+			if (sec < 10) { sec = "0" + sec; }
+			return(
+				<div>
+					{hour} : {min} : {sec}
+				</div>
+			);
+		} else { //현재시간이 종료시간보다 크면
+			// $("#d-day-hour").html('00');
+			// $("#d-day-min").html('00');
+			// $("#d-day-sec").html('00');'
+			return(
+				<div>
+					00: 00 : 00
+				</div>
+			);
+		}
+	}
+	setInterval(remaindTime, 1000);
 
 	return (
 		<section className={classes.detailBox}>
@@ -94,7 +94,9 @@ function DetailBox({ item }) {
 			</div>
 			<div className={classes.apply_box}>
 				<a className={classes.apply_button} href="${item.wantedInfoUrl}">홈페이지 지원</a>
-				{/* <div className={classes.apply_ddayleft}> {closedate(item.receiptCloseDt)}</div> */}
+				<div className={classes.apply_ddayleft}>
+					{GetDday(item.receiptCloseDt)}
+				</div>
 			</div>
 			{/* 채용공고 */}
 			<h2 className={classes.h2}>직무내용</h2>

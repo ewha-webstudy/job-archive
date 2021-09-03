@@ -5,13 +5,12 @@ import React, {useState, useEffect} from "react";
 
 import "../style/category.css";
 import NavBar from "../components/NavBar/NavBar";
-import CardBoard from "../components/Card/CardBoard";
-import Filter from "../components/Filter/Filter";
 import SearchBar from "../components/SearchBar/SearchBar";
 import Category from "../components/Category/Category";
 import DetailBox from "../components/Detail/Datail";
 import API from "../utils/api";
 import Layout from "../components/Category/CategoryLayout";
+
 
 const Title = styled.span`
   background-color: #ffaf00;
@@ -120,13 +119,27 @@ const DetailInfoPage = ({match}) => {
 
 	return (
 		<div>
-				<Layout>
+				<Grommet style={{marginTop: 70}}>
+				<Grid
+					background="light-2"
+					rows={["auto", "flex"]}
+					columns={["auto", "flex"]}
+					height="full-screen"
+					gap="small"
+					pad="medium"
+					responsive
+					areas={[
+						{ name: "search", start: [0, 0], end: [1, 0] },
+						// { name: "nav", start: [0, 1], end: [0, 1] },
+						{ name: "main", start: [0, 1], end: [1, 1] },
+					]}
+				>
 					{/* searchBar */}
 					<Box gridArea="search" height="xxsmall" direction="row-reverse">
 						<SearchBar />
 					</Box>
 					{/* Category */}
-					<Box
+					{/* <Box
 						gridArea="nav"
 						background="light-2"
 						width="medium"
@@ -135,7 +148,7 @@ const DetailInfoPage = ({match}) => {
 					>
 						<Title>카테고리</Title>
 						<Category categoryList={DUMMY_DATA_CATEGORY} />
-					</Box>
+					</Box> */}
 					{/* detailPage */}
 					<Box
 						overflow="scroll"
@@ -147,7 +160,8 @@ const DetailInfoPage = ({match}) => {
 						<DetailBox item={ DUMMY_DATA_DETAIL[0]}
 						/>
 					</Box>
-					</Layout>
+					</Grid>
+					</Grommet>
 		</div>
 	);
 }
