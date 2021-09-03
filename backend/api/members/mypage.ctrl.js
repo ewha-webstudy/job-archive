@@ -145,10 +145,10 @@ exports.getDday = async (req, res) => {
                 notifDay: 0
             }
         }
-        else if (memeber.alert !== 0){
+        else if (member.alert !== 0){
             dDay = {
                 ifNotif: true,
-                notifDay: memeber.alert
+                notifDay: member.alert
             }
         }
         res.status(201).send(dDay);
@@ -166,11 +166,11 @@ exports.notifyDday = async (req, res) => {
     console.log("this is notifyDday");
     let likeList = []
     try{
-        if (ifNotif === false){
+        if (ifNotif === "false"){
             const member = await Membership.update({ alert: 0 }, { where: { userid: loggedID }})
             await Like.update({alertDate: "9999-01-01"}, {where: { userid: loggedID }})
         }
-        else if (ifNotif === true){
+        else if (ifNotif === "true"){
             const member = await Membership.update({ alert: notifDay }, { where: { userid: loggedID }})
             likeList = await Like.findAll({ attributes: ['wantedAuthNo'], where: { userid: loggedID } })
             for(const like of likeList){
@@ -184,7 +184,6 @@ exports.notifyDday = async (req, res) => {
                     await Like.update({ alertDate: moment(alertMoment).format('YYYY-MM-DD') }, { where: {[and]: [{ userid: loggedID }, { wantedAuthNo: like.wantedAuthNo }]} })
                 }
             }
-           
         }
         else{
             res.status(400).send();

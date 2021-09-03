@@ -33,19 +33,19 @@ const Notification = ({ islogin }) => {
 
   // 로그인 여부 확인 & 기존 데이터 불러오기 (수정 중)
   useEffect(() => {
-    // if (!islogin) {
-    //   alert("로그인 후 이용 가능합니다.");
-    // } else {
-    API.get("https://f77b7f2f-3f98-4d10-acf8-31ea4b2ba99f.mock.pstmn.io/noti")
-      .then((res) => {
-        Dday.notifDay = res.data.notifDay;
-        setToggled(res.data.ifNotif);
-        setDay(res.data.notifDay);
-      })
-      .catch((err) => {
-        console.log("ERR: ", err);
-      });
-    // }
+    if (!islogin) {
+      alert("로그인 후 이용 가능합니다.");
+    } else {
+      API.get("/api/mypage/notification")
+        .then((res) => {
+          Dday.notifDay = res.data.notifDay;
+          setToggled(res.data.ifNotif);
+          setDay(res.data.notifDay);
+        })
+        .catch((err) => {
+          console.log("ERR: ", err);
+        });
+    }
   }, []);
 
   // 알림 ON/OFF 설정 함수
