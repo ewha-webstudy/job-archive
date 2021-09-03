@@ -93,24 +93,27 @@ const ex = [
 ];
 
 //데이터를 받아서 카드로 보여줌
-const MyPageCard = ({ jobs, islogin }) => {
+const MyPageCard = ({ likes, islogin }) => {
   return (
-    <Container>
-      {jobs.map((jobs, index) => (
-        <CardWrapper>
-          <JobCard
-            key={index}
-            id={jobs.wantedAuthNo}
-            name={jobs.company}
-            end={jobs.receiptCloseDt}
-            position={jobs.wantedTitle}
-            logo={jobs.logo}
-            likeNo={jobs.likeNo}
-            islogin={islogin}
-          />
-        </CardWrapper>
-      ))}
-    </Container>
+    <>
+      <Container>
+        {likes &&
+          likes.map((likes, index) => (
+            <CardWrapper key={index}>
+              <JobCard
+                key={index}
+                id={likes.wantedAuthNo}
+                name={likes.company}
+                end={likes.receiptCloseDt}
+                position={likes.wantedTitle}
+                logo={likes.logo}
+                likeNo={likes.likeNo}
+                islogin={islogin}
+              />
+            </CardWrapper>
+          ))}
+      </Container>
+    </>
   );
 };
 

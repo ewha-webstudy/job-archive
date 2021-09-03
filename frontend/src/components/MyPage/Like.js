@@ -1,31 +1,11 @@
-import { useState, useEffect } from "react";
 import styled from "styled-components";
-import API from "../../utils/api";
-import MyPageCard from "../Card/MyPageCard";
+import LikeContainer from "../../containers/MyPage/LikeContainer";
 
+/* 수정 중 */
 const Like = ({ islogin }) => {
-  const [likes, setLikes] = useState([]);
-
-  useEffect(() => {
-    API.get("/api/mypage/like")
-      .then((res) => {
-        console.log(res.data);
-        setLikes(res.data); //likes에 받아온 데이터를 저장
-      })
-      .catch((err) => {
-        console.log("ERR: ", err);
-        // if (err.response.status === 401) {
-        //   alert("Token expired");
-        // }
-        // if (err.response.status === 404) {
-        //   alert("DB 처리 중 에러가 발생했습니다.");
-        // }
-      });
-  }, []);
-
   return (
     <SaveListBlock>
-      <MyPageCard jobs={likes} islogin={islogin} />
+      <LikeContainer />
     </SaveListBlock>
   );
 };
@@ -59,4 +39,5 @@ const SaveListBlock = styled.div`
   margin-top: 4.5rem;
   margin-right: 2rem;
 `;
+
 export default Like;
