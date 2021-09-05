@@ -1,7 +1,7 @@
 import JobCard from "./JobCard";
 import styled from "styled-components";
 
-// 데이터를 받아서 카드로 보여줌
+// 데이터를 받아서 카드로 표시
 const MyPageCard = ({ likes, islogin }) => {
   return (
     <Container>
