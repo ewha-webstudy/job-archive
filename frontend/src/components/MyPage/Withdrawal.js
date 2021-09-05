@@ -1,6 +1,6 @@
 import { Box, Button, Grommet, TextInput } from "grommet";
 import { Hide, View } from "grommet-icons";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import API from "../../utils/api";
@@ -14,9 +14,9 @@ const theme = {
   },
 };
 
-//비밀번호 인풋 함수
+// 비밀번호 인풋 함수
 const Password = () => {
-  //비밀번호를 입력하고 탈퇴
+  // 비밀번호를 입력하고 탈퇴
   const [psword, setPsword] = useState("");
   const [reveal, setReveal] = useState(false);
 
@@ -41,20 +41,14 @@ const Password = () => {
 const Withdrawal = () => {
   const history = useHistory();
 
-  //탈퇴 버튼을 누르면 실행되는 함수
+  // 탈퇴 버튼을 누르면 실행되는 함수
   const onClick = (e) => {
     e.preventDefault();
 
-    API.delete("/api/member/delete")
-      .then((res) => {
-        alert("정상적으로 탈퇴 처리되었습니다.");
-        console.log("RES: ", res);
-        history.push("/");
-      })
-      .catch((err) => {
-        console.log("ERR: ", err);
-        //console.log(err.response);
-      });
+    API.delete("/api/member/delete").then((res) => {
+      alert("정상적으로 탈퇴 처리되었습니다.");
+      history.push("/");
+    });
   };
 
   return (

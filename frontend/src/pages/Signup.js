@@ -5,12 +5,10 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 
 const SignupPage = () => {
   return (
-    <Router>
-      <MyPageTemplate>
-        <Sidebar />
-        <Route exact path="/member/create" component={Signup} />
-      </MyPageTemplate>
-    </Router>
+    <MyPageTemplate>
+      <Sidebar />
+      <Route exact path="/member/create" component={Signup} />
+    </MyPageTemplate>
   );
 };
 

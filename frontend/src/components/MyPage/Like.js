@@ -1,8 +1,7 @@
 import styled from "styled-components";
 import LikeContainer from "../../containers/MyPage/LikeContainer";
 
-/* 수정 중 */
-const Like = ({ islogin }) => {
+const Like = () => {
   return (
     <SaveListBlock>
       <LikeContainer />
