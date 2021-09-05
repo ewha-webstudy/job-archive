@@ -1,7 +1,10 @@
 "use strict";
 
 require("dotenv").config();
-const { Like } = require('../../models'); 
+const { Like } = require('../../models');
+const { Membership } = require('../../models');
+const { Job } = require('../../models');
+const moment = require('moment');
 const {UniqueConstraintError} = require('sequelize');
 
 
@@ -16,9 +19,11 @@ exports.Like = async (req, res) => {
     if (!jobID) //400: wantedAuthNo 미입력
         return res.status(400).send();
     try {
+        const alertDate = await addAlert(loggedID, jobID);
         await Like.create({
             userid: loggedID,
             wantedAuthNo: jobID,
+            alertDate: moment(alertDate, 'YYYY-MM-DD')
         })
         .then((result) => {
             if(result){
@@ -69,3 +74,23 @@ exports.UnLike = async (req, res) => {
       res.status(500).send(); //500
     }
 };
+
+const addAlert = async(userid, jobid) => {
+    let alertDate = ""
+    const member = await Membership.findByPk(userid)
+    if(member.alert === 0){
+        alertDate = "9999-01-01";
+    }
+    else{
+        const job = await Job.findByPk(jobid);
+        if(job.receiptCloseDt === "9999-01-01"){
+            alertDate = "9999-01-01";
+        }
+        else{
+            const receiptCloseDt = moment(job.receiptCloseDt, 'YYYY-MM-DD');
+            const alertMoment = receiptCloseDt.subtract(member.alert, 'days');
+            alertDate = alertMoment;
+        }
+    }
+    return alertDate;
+}
