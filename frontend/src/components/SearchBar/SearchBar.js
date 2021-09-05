@@ -51,7 +51,7 @@ function SearchBar(props) {
           className="searchbar__form"
           placeholder="다양한 개발 직군과 채용정보를 검색해보세요!"
         />
-        <Link to={`/category/${props.btnValue}`}>
+        <Link to={`/category/${props.btnValue}/${searchTxt}`}>
           <button className="searchbar__btn" type="submit" onClick={onSubmit}>
             <BsSearch color="white" />
           </button>
