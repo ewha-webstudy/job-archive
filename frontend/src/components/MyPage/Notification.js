@@ -1,3 +1,4 @@
+import { useHistory } from "react-router-dom";
 import { CheckBox, Grommet } from "grommet";
 import { useState, useEffect } from "react";
 import styled from "styled-components";
@@ -17,8 +18,9 @@ const theme = {
   },
 };
 
-// 수정 중!!
 const Notification = ({ islogin }) => {
+  const history = useHistory();
+
   // 알림 설정 토글 버튼
   const [toggled, setToggled] = useState(false);
 
@@ -31,20 +33,17 @@ const Notification = ({ islogin }) => {
     notifDay: day,
   };
 
-  // 로그인 여부 확인 & 기존 데이터 불러오기 (수정 중)
+  // 로그인 여부 확인 & 기존 데이터 불러오기
   useEffect(() => {
     if (!islogin) {
       alert("로그인 후 이용 가능합니다.");
+      history.push("/member/auth");
     } else {
-      API.get("/api/mypage/notification")
-        .then((res) => {
-          Dday.notifDay = res.data.notifDay;
-          setToggled(res.data.ifNotif);
-          setDay(res.data.notifDay);
-        })
-        .catch((err) => {
-          console.log("ERR: ", err);
-        });
+      API.get("/api/mypage/notification").then((res) => {
+        Dday.notifDay = res.data.notifDay;
+        setToggled(res.data.ifNotif);
+        setDay(res.data.notifDay);
+      });
     }
   }, []);
 
@@ -63,20 +62,15 @@ const Notification = ({ islogin }) => {
     e.preventDefault();
 
     Dday.ifNotif = toggled.toString();
-    console.log("Dday: ", Dday);
 
     // 알림은 ON인데 디데이를 선택하지 않은 경우
     if (toggled && Dday.notifDay === 0) {
       alert("알림 D-Day를 선택하세요.");
     }
 
-    API.post("/api/mypage/notification", Dday)
-      .then((res) => {
-        console.log("RES: ", res);
-      })
-      .catch((err) => {
-        console.log("ERR: ", err);
-      });
+    API.post("/api/mypage/notification", Dday).then((res) => {
+      alert("저장되었습니다!");
+    });
   };
 
   // 버튼 요소

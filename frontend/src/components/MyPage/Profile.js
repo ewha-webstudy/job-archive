@@ -3,7 +3,6 @@ import { useHistory } from "react-router-dom";
 import ProfileForm from "./ProfileForm";
 import API from "../../utils/api";
 
-/* 수정 중 */
 const Profile = ({ islogin }) => {
   const history = useHistory();
   const [member, setMember] = useState({
@@ -15,20 +14,15 @@ const Profile = ({ islogin }) => {
     confirmPsword: "",
   });
 
-  // 로그인 여부 확인
+  // 로그인 여부 확인 & 기존 데이터 불러오기
   useEffect(() => {
     if (!islogin) {
       alert("로그인 후 이용 가능합니다.");
+      history.push("/member/auth");
     } else {
-      API.get("api/mypage/profile")
-        .then((res) => {
-          console.log(res.data);
-          setMember(res.data);
-          console.log(member);
-        })
-        .catch((err) => {
-          console.log("ERR: ", err);
-        });
+      API.get("/api/mypage/profile").then((res) => {
+        setMember(res.data);
+      });
     }
   }, []);
 
@@ -40,15 +34,12 @@ const Profile = ({ islogin }) => {
   // 저장 버튼을 누르면 서버로 전송
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("member:", member);
 
     API.post("/api/mypage/profile", member)
       .then((res) => {
         alert("저장되었습니다!");
-        console.log("RES: ", res);
       })
       .catch((err) => {
-        console.log("ERR: ", err);
         if (err.response.status === 401) {
           alert("Toekn expired");
         }

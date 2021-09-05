@@ -12,35 +12,16 @@ const theme = {
   },
 };
 
-//회원가입, 회원정보수정에 사용되는 Form
+// 회원가입, 회원정보수정에 사용되는 Form
 const ProfileForm = ({ value, onChange, onClick, disabled }) => {
-  //출생연도 선택 시 보이는 연도 리스트
+  // 출생연도 선택 시 보이는 연도 리스트
   const yearOptions = [...Array(80)].map((v, i) => `${i + 1942}`);
 
-  //이메일 작성 시 사용할 수 있는 형식 지정
-  const emailMask = [
-    {
-      regexp: /^[\w\-_.]+$/,
-      placeholder: "job",
-    },
-    { fixed: "@" },
-    {
-      regexp: /^[\w]+$/,
-      placeholder: "archive",
-    },
-    { fixed: "." },
-    {
-      regexp: /^[\w]+$/,
-      placeholder: "com",
-    },
-  ];
-
-  //비밀번호를 보이게/안 보이게 설정
+  // 비밀번호를 보이게/안 보이게 설정
   const [revealPsword, setRevealPsword] = useState(false);
   const [revealConfirmPsword, setRevealConfirmPsword] = useState(false);
 
   return (
-    //수정 예정
     <form>
       <ProfileBlock>
         <ModifyBox>
@@ -89,10 +70,10 @@ const ProfileForm = ({ value, onChange, onClick, disabled }) => {
                 <MaskedInput
                   plain
                   icon={<MailOption />}
-                  mask={emailMask}
                   name="email"
                   value={value.email}
                   onChange={onChange}
+                  placeholder="job@archive.com"
                 />
               </Box>
             </Grommet>
@@ -224,14 +205,6 @@ const InputWrapper = styled.div`
   input:focus {
     outline: none;
   }
-`;
-
-export const ButtonWrapper = styled.div`
-  float: right;
-  width: 50rem;
-  height: 10rem;
-  display: flex;
-  margin-right: 2rem;
 `;
 
 const SubmitButton = styled.button`
