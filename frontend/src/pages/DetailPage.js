@@ -7,7 +7,7 @@ import "../style/category.css";
 import NavBar from "../components/NavBar/NavBar";
 import CardBoard from "../components/Card/CardBoard";
 import Filter from "../components/Filter/Filter";
-import SearchBar from "../components/SearchBar/SearchBar";
+import DetailSearch from "../components/Detail/DetailSearch";
 import Category from "../components/Category/Category";
 import DetailBox from "../components/Detail/Detail";
 import API from "../utils/api";
@@ -123,7 +123,7 @@ const DetailInfoPage = ({match}) => {
 				<Layout>
 					{/* searchBar */}
 					<Box gridArea="search" height="xxsmall" direction="row-reverse">
-						<SearchBar />
+      						<DetailSearch category={content.category} />
 					</Box>
 					{/* Category */}
 					<Box
