@@ -9,7 +9,7 @@ import CardBoard from "../components/Card/CardBoard";
 import Filter from "../components/Filter/Filter";
 import SearchBar from "../components/SearchBar/SearchBar";
 import Category from "../components/Category/Category";
-import DetailBox from "../components/Detail/Datail";
+import DetailBox from "../components/Detail/Detail";
 import API from "../utils/api";
 import Layout from "../components/Category/CategoryLayout";
 
@@ -103,10 +103,10 @@ const DetailInfoPage = ({match}) => {
 	const datakey = match.params.id;
 
 	useEffect(() => {
-		const fetchContents = async () => {
+		// const fetchContents = async () => {
 			try {
-				setContent(null);
-				setError(null);
+				// setContent(null);
+				// setError(null);
 				API.get(`api/jobs/${datakey}`).then((response) => {
 					console.log(response.status);
 					setContent(response.data);
@@ -114,8 +114,8 @@ const DetailInfoPage = ({match}) => {
 			} catch (e) {
 				setError(e);
 			}
-		}
-		fetchContents();
+		// }
+		// fetchContents();
 	}, []);
 
 	return (
@@ -144,7 +144,7 @@ const DetailInfoPage = ({match}) => {
 						background="light-2"
 						style={{marginTop: 75}}
 					>
-						<DetailBox item={ DUMMY_DATA_DETAIL[0]}
+						<DetailBox item={ content }
 						/>
 					</Box>
 					</Layout>

@@ -1,7 +1,7 @@
 import { Grommet, Title, DataTable, Box, Text, Meter } from "grommet";
 import classNames from "classnames";
 import React, { useState } from "react";
-
+import GetDday from "../Card/GetDday";
 import API from "../../utils/api";
 import classes from "./Detail.module.css";
 
@@ -48,7 +48,10 @@ function DetailBox({ item }) {
 	// 	}
 	// }
 	// setInterval(remaindTime, 1000);
-
+	const openInNewTab = (url) => {
+    const newWindow = window.open(url, '_black', 'noopener,noreferrer')
+		if (newWindow) newWindow.opener = null
+  };
 	return (
 		<section className={classes.detailBox}>
 			<div className={classes.title__company}>{item.company}</div>
@@ -75,13 +78,14 @@ function DetailBox({ item }) {
 						<dd>
 							<ul class="addList">
 								<li>
-									<strong class="col_1">정규직</strong>   <span class="tahoma"></span>
+									<strong class="col_1">{item.empTpNm}</strong>   <span class="tahoma"></span>
 								</li>
 							</ul>
 						</dd>
 						<dt>급여</dt>
 						<dd>
-							{item.salTpCd} {item.sal}
+							{item.sal}
+							{/* {item.salTpCd} {item.sal} */}
 						</dd>
 						<dt>지역</dt>
 						<dd>{item.corpAddr}					</dd>
@@ -93,13 +97,15 @@ function DetailBox({ item }) {
 				</div>
 			</div>
 			<div className={classes.apply_box}>
-				<a className={classes.apply_button} href="${item.wantedInfoUrl}">홈페이지 지원</a>
+				<a className={classes.apply_button} onClick={() => openInNewTab(item.wantedInfoUrl)}>홈페이지 지원</a>
+				{/* <a className={classes.apply_button} href="{item.wantedInfoUrl}">홈페이지 지원</a> */}
 				{/* <div className={classes.apply_ddayleft}> {closedate(item.receiptCloseDt)}</div> */}
 			</div>
 			{/* 채용공고 */}
 			<h2 className={classes.h2}>직무내용</h2>
 			<div className={classes.apply_content}>
-				<p>
+				{item.jobCont}
+				{/* <p>
 
 					가. 주요업무<br />
 					- 영업비밀 관리체계 심화컨설팅 및 영업비밀 유출분쟁 법률자문 등<br />
@@ -114,7 +120,7 @@ function DetailBox({ item }) {
 					* 세부내용은 첨부된 채용 공고문 등 참고<br />
 					<br />
 					
-					</p>
+					</p> */}
 			</div>
 			{/* 접수기간 및 방법 */}
 			<h2 className={classes.h2}> 접수기간 및 방법 </h2>
@@ -122,35 +128,35 @@ function DetailBox({ item }) {
 			<div className={classNames({ [classes.clearfix]: true, [classes.apply_dday_box]: true })}>
 				<div className={classes.apply_ddayleft_box}>
 					<h3>남은기간</h3>
-					<div className={classes.apply_ddayleft}>12일 2:19:40</div>
+					<div className={classes.apply_ddayleft}>{GetDday(item.receiptCloseDt)}</div>
 				</div>
 				<dl className={classNames({[classes.tbList]: true, [classes.apply_dday__content]: true})}>
-					<dt>시작일: </dt>
-					<dd>2020.30.55</dd>
+					{/* <dt>시작일: </dt>
+					<dd>2020.30.55</dd> */}
 					<dt>마감일: </dt>
-					<dd>2021.32.32</dd>
+					<dd>{item.receiptCloseDt}</dd>
 
 				</dl>
-				<button className={classes.apply_button}>홈페이지 지원</button>
+				{/* <button className={classes.apply_button}>홈페이지 지원</button> */}
 			</div>
 			{/* 기업정보 */}
 			<h2 className={classes.h2}>기업정보</h2>
 			<div className={classNames({ [classes.clearfix]: true, [classes.tbBox]: true, [classes.company_box]: true})}>
 				
-				<h3 className={classes.h3}>(주) 우아한 형제들</h3>
+				<h3 className={classes.h3}>{item.company}</h3>
 				<div className={classes.tb__title}>
 					<dl className={classes.tbList}>
 						<dt>업종</dt>
 						<dd>
-							<strong class="col_1">그 외</strong>
+							<strong class="col_1">{item.indTpCdNm}</strong>
 						</dd>
-						<dt>기업 구분</dt>
+						{/* <dt>기업 구분</dt>
 						<dd>
 							<strong class="col_1">중견기업</strong>
-						</dd>
+						</dd> */}
 						<dt>대표자</dt>
 						<dd>
-							<strong class="col_1">김병우</strong>
+							<strong class="col_1">{item.reperNm}</strong>
 						</dd>
 					</dl>
 				</div>
@@ -158,15 +164,15 @@ function DetailBox({ item }) {
 					<dl className={classes.tbList}>
 						<dt>주소</dt>
 						<dd>
-						<strong class="col_1">서울 송파구 올림픽로</strong>
+						<strong class="col_1">{item.corpAddr}</strong>
 						</dd>
-						<dt>설립일</dt>
+						{/* <dt>설립일</dt>
 						<dd>
 							<span>2015년 6월 22일(업력 6년)</span>
-						</dd>
+						</dd> */}
 						<dt>홈페이지</dt>
 							<dd>
-								<span>career.wooway.com</span>
+								<span>{item.homePg}</span>
 							</dd>
 
 					</dl>
