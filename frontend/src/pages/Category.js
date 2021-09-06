@@ -10,6 +10,7 @@ import "../style/category.css";
 import Category from "../components/Category/Category";
 import API from "../utils/api";
 import Layout from "../components/Category/CategoryLayout";
+import { CategoryCardContainer } from "../containers/CardContainer";
 
 const Title = styled.span`
   background-color: #ffaf00;
@@ -85,6 +86,7 @@ const CategoryPage = ({match}) =>{
     searchBar: ""
   };
 
+
 	useEffect(() => {
     // const fetchContents = async () => {
       // try {
@@ -100,7 +102,6 @@ const CategoryPage = ({match}) =>{
     // })
 		// fetchContents();
 	}, []);
- 
 
 
   return (
@@ -118,7 +119,7 @@ const CategoryPage = ({match}) =>{
             style={{marginTop: 75}}
           >
             <Title>카테고리</Title>
-            {/* {console.log(match.params.category)} */}
+            {console.log(match.params.category)} 
             <Category categoryList = {CATEGORY} category_chg={category_chg}/>
           </Box>
           <Box
@@ -128,8 +129,8 @@ const CategoryPage = ({match}) =>{
             background="light-2"
             style={{marginTop: 75}}
           >
-            <CardBoard jobs={jobs}/>
-            {/* {console.log({jobs})} */}
+            <CategoryCardContainer category_chg = {category_chg}/>
+          {console.log({jobs})}
           </Box>
       </Layout>
     </div>

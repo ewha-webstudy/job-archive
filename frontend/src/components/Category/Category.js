@@ -72,12 +72,12 @@ const Category= ({categoryList, category_chg})=> {
 		if(isChecked){
 			k.set.add(tag);
 			setCheckedItems(checkedItems);
-			await apiPostTag();
+			// await apiPostTag();
 		}		
 		else if (!isChecked && k.set.has(tag)){
 			k.set.delete(tag);
 			setCheckedItems(checkedItems);
-			await apiPostTag();
+			// await apiPostTag();
 		}
 	}
 
