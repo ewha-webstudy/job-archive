@@ -26,17 +26,15 @@ const Signup = () => {
     API.post("/api/member/create", member)
       .then((res) => {
         alert("환영합니다!");
-        console.log("RES: ", res);
         history.push("/member/auth");
       })
       .catch((err) => {
-        console.log("ERR: ", err);
-        // if (err.response.status === 400) {
-        //   alert("아이디를 입력해 주세요.");
-        // }
-        // if (err.response.status === 412) {
-        //   alert("비밀번호 확인이 일치하지 않습니다.");
-        // }
+        if (err.response.status === 400) {
+          alert("아이디를 입력해 주세요.");
+        }
+        if (err.response.status === 412) {
+          alert("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
+        }
       });
   };
 

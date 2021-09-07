@@ -7,14 +7,12 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 
 const MyPage = () => {
   return (
-    <Router>
-      <MyPageTemplate>
-        <Sidebar />
-        <Route exact path="/mypage/profile" component={ProfileContainer} />
-        <Route exact path="/mypage/notification" component={NotiContainer} />
-        <Route exact path="/mypage/like" component={Like} />
-      </MyPageTemplate>
-    </Router>
+    <MyPageTemplate>
+      <Sidebar />
+      <Route exact path="/mypage/profile" component={ProfileContainer} />
+      <Route exact path="/mypage/notification" component={NotiContainer} />
+      <Route exact path="/mypage/like" component={Like} />
+    </MyPageTemplate>
   );
 };
 

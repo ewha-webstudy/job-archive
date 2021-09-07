@@ -15,8 +15,6 @@ const Login = ({ onLogin }) => {
 
     await API.post("/api/member/auth", user, { withCredentials: true })
       .then((res) => {
-        console.log("res: ", res);
-
         // localStorage에 토큰 저장
         localStorage.setItem("token", res.data.token);
 
@@ -28,13 +26,12 @@ const Login = ({ onLogin }) => {
         history.push("/");
       })
       .catch((err) => {
-        console.log("err: ", err);
-        // if (err.response.status === 400) {
-        //   alert("존재하지 않는 아이디입니다.");
-        // }
-        // if (err.response.status === 412) {
-        //   alert("비밀번호를 다시 확인해 주세요.");
-        // }
+        if (err.response.status === 400) {
+          alert("존재하지 않는 아이디입니다.");
+        }
+        if (err.response.status === 412) {
+          alert("비밀번호를 다시 확인해 주세요.");
+        }
       });
   };
 
