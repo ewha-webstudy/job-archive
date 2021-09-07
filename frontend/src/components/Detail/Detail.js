@@ -1,7 +1,7 @@
 import { Grommet, Title, DataTable, Box, Text, Meter } from "grommet";
 import classNames from "classnames";
 import React, { useState } from "react";
-
+import GetDday from "../Card/GetDday";
 import API from "../../utils/api";
 import classes from "./Detail.module.css";
 import GetDday from "../Card/GetDday";
@@ -28,6 +28,7 @@ const DetailBox = ({ item }) => {
 			let min = parseInt(sec / 60);
 			sec = parseInt(sec - (min * 60));
 
+<<<<<<< HEAD:frontend/src/components/Detail/Datail.js
 			if (hour < 10) { hour = "0" + hour; }
 			if (min < 10) { min = "0" + min; }
 			if (sec < 10) { sec = "0" + sec; }
@@ -49,6 +50,39 @@ const DetailBox = ({ item }) => {
 	}
 	setInterval(remaindTime, 1000);
 
+=======
+	// 	if (nt < ot) { //현재시간이 오픈시간보다 이르면 오픈시간까지의 남은 시간을 구한다.   
+	// 		let sec = parseInt(ot - nt) / 1000;
+	// 		let hour = parseInt(sec / 60 / 60);
+	// 		sec = (sec - (hour * 60 * 60));
+	// 		let min = parseInt(sec / 60);
+	// 		sec = parseInt(sec - (min * 60));
+
+	// 		if (hour < 10) { hour = "0" + hour; }
+	// 		if (min < 10) { min = "0" + min; }
+	// 		if (sec < 10) { sec = "0" + sec; }
+	// 		return(
+	// 			<div>
+	// 				{hour} : {min} : {sec}
+	// 			</div>
+	// 		);
+	// 	} else { //현재시간이 종료시간보다 크면
+	// 		// $("#d-day-hour").html('00');
+	// 		// $("#d-day-min").html('00');
+	// 		// $("#d-day-sec").html('00');'
+	// 		return(
+	// 			<div>
+	// 				00: 00 : 00
+	// 			</div>
+	// 		);
+	// 	}
+	// }
+	// setInterval(remaindTime, 1000);
+	const openInNewTab = (url) => {
+    const newWindow = window.open(url, '_black', 'noopener,noreferrer')
+		if (newWindow) newWindow.opener = null
+  };
+>>>>>>> da325bd159a2b7391fd4975304e3907f0568bf33:frontend/src/components/Detail/Detail.js
 	return (
 		<section className={classes.detailBox}>
 			<div className={classes.title__company}>{item.company}</div>
@@ -75,13 +109,14 @@ const DetailBox = ({ item }) => {
 						<dd>
 							<ul class="addList">
 								<li>
-									<strong class="col_1">정규직</strong>   <span class="tahoma"></span>
+									<strong class="col_1">{item.empTpNm}</strong>   <span class="tahoma"></span>
 								</li>
 							</ul>
 						</dd>
 						<dt>급여</dt>
 						<dd>
-							{item.salTpCd} {item.sal}
+							{item.sal}
+							{/* {item.salTpCd} {item.sal} */}
 						</dd>
 						<dt>지역</dt>
 						<dd>{item.corpAddr}					</dd>
@@ -93,15 +128,22 @@ const DetailBox = ({ item }) => {
 				</div>
 			</div>
 			<div className={classes.apply_box}>
+<<<<<<< HEAD:frontend/src/components/Detail/Datail.js
 				<a className={classes.apply_button} href="${item.wantedInfoUrl}">홈페이지 지원</a>
 				<div className={classes.apply_ddayleft}>
 					{GetDday(item.receiptCloseDt)}
 				</div>
+=======
+				<a className={classes.apply_button} onClick={() => openInNewTab(item.wantedInfoUrl)}>홈페이지 지원</a>
+				{/* <a className={classes.apply_button} href="{item.wantedInfoUrl}">홈페이지 지원</a> */}
+				{/* <div className={classes.apply_ddayleft}> {closedate(item.receiptCloseDt)}</div> */}
+>>>>>>> da325bd159a2b7391fd4975304e3907f0568bf33:frontend/src/components/Detail/Detail.js
 			</div>
 			{/* 채용공고 */}
 			<h2 className={classes.h2}>직무내용</h2>
 			<div className={classes.apply_content}>
-				<p>
+				{item.jobCont}
+				{/* <p>
 
 					가. 주요업무<br />
 					- 영업비밀 관리체계 심화컨설팅 및 영업비밀 유출분쟁 법률자문 등<br />
@@ -116,7 +158,7 @@ const DetailBox = ({ item }) => {
 					* 세부내용은 첨부된 채용 공고문 등 참고<br />
 					<br />
 					
-					</p>
+					</p> */}
 			</div>
 			{/* 접수기간 및 방법 */}
 			<h2 className={classes.h2}> 접수기간 및 방법 </h2>
@@ -124,35 +166,35 @@ const DetailBox = ({ item }) => {
 			<div className={classNames({ [classes.clearfix]: true, [classes.apply_dday_box]: true })}>
 				<div className={classes.apply_ddayleft_box}>
 					<h3>남은기간</h3>
-					<div className={classes.apply_ddayleft}>12일 2:19:40</div>
+					<div className={classes.apply_ddayleft}>{GetDday(item.receiptCloseDt)}</div>
 				</div>
 				<dl className={classNames({[classes.tbList]: true, [classes.apply_dday__content]: true})}>
-					<dt>시작일: </dt>
-					<dd>2020.30.55</dd>
+					{/* <dt>시작일: </dt>
+					<dd>2020.30.55</dd> */}
 					<dt>마감일: </dt>
-					<dd>2021.32.32</dd>
+					<dd>{item.receiptCloseDt}</dd>
 
 				</dl>
-				<button className={classes.apply_button}>홈페이지 지원</button>
+				{/* <button className={classes.apply_button}>홈페이지 지원</button> */}
 			</div>
 			{/* 기업정보 */}
 			<h2 className={classes.h2}>기업정보</h2>
 			<div className={classNames({ [classes.clearfix]: true, [classes.tbBox]: true, [classes.company_box]: true})}>
 				
-				<h3 className={classes.h3}>(주) 우아한 형제들</h3>
+				<h3 className={classes.h3}>{item.company}</h3>
 				<div className={classes.tb__title}>
 					<dl className={classes.tbList}>
 						<dt>업종</dt>
 						<dd>
-							<strong class="col_1">그 외</strong>
+							<strong class="col_1">{item.indTpCdNm}</strong>
 						</dd>
-						<dt>기업 구분</dt>
+						{/* <dt>기업 구분</dt>
 						<dd>
 							<strong class="col_1">중견기업</strong>
-						</dd>
+						</dd> */}
 						<dt>대표자</dt>
 						<dd>
-							<strong class="col_1">김병우</strong>
+							<strong class="col_1">{item.reperNm}</strong>
 						</dd>
 					</dl>
 				</div>
@@ -160,15 +202,15 @@ const DetailBox = ({ item }) => {
 					<dl className={classes.tbList}>
 						<dt>주소</dt>
 						<dd>
-						<strong class="col_1">서울 송파구 올림픽로</strong>
+						<strong class="col_1">{item.corpAddr}</strong>
 						</dd>
-						<dt>설립일</dt>
+						{/* <dt>설립일</dt>
 						<dd>
 							<span>2015년 6월 22일(업력 6년)</span>
-						</dd>
+						</dd> */}
 						<dt>홈페이지</dt>
 							<dd>
-								<span>career.wooway.com</span>
+								<span>{item.homePg}</span>
 							</dd>
 
 					</dl>
