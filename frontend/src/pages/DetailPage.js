@@ -9,7 +9,7 @@ import CardBoard from "../components/Card/CardBoard";
 import Filter from "../components/Filter/Filter";
 import DetailSearch from "../components/Detail/DetailSearch";
 import Category from "../components/Category/Category";
-import DetailBox from "../components/Detail/Datail";
+import DetailBox from "../components/Detail/DetailBox"
 import API from "../utils/api";
 import Layout from "../components/Category/CategoryLayout";
 
@@ -159,6 +159,7 @@ const DetailInfoPage = ({match}) => {
 						background="light-2"
 						style={{marginTop: 75}}
 					>
+						{/* api 연결시 dummy_data_detail을 content로 연결 */}
 						<DetailBox item={ DUMMY_DATA_DETAIL[0]}
 						/>
 					</Box>

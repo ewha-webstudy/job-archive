@@ -36,28 +36,23 @@ export function CategoryCardContainer(category_chg) {
   const [jobs, setJobs] = useState([]);
 
 	useEffect(() => {
-    // const fetchContents = async () => {
-      // try {
-        // setJobs(null);
-        // setError(null);
         API.post(`api/category/${category_chg}`, data).then((response) => {
           console.log(response.status);
           setJobs(response.data);
         });
-      // } catch (e) {
-        // setError(e);
-      // }
-    // })
-		// fetchContents();
 	}, []);
  
+  const tagNum = useSelector(state => ({
+		tagNum: state.tagchecker.tagNum
+	}));
+
   const { islogin } = useSelector(state => ({
     islogin: state.logger.islogin
   }));
-
+  
   return (<div>
     <Categorycard islogin={islogin} jobs={jobs}/>
-      {console.log({data})}
+      {console.log(tagNum)}
   </div>);
 }
 

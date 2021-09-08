@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from "react";
+import { useSelector } from "react-redux";
 import NavBar from "../components/NavBar/NavBar";
 import CardBoard from "../components/Card/CardBoard";
 // import Filter from "../components/Filter/Filter";
@@ -11,6 +12,7 @@ import Category from "../components/Category/Category";
 import API from "../utils/api";
 import Layout from "../components/Category/CategoryLayout";
 import { CategoryCardContainer } from "../containers/CardContainer";
+import {tagNum} from "../modules/tagchecker";
 
 const Title = styled.span`
   background-color: #ffaf00;
@@ -29,9 +31,11 @@ const Title = styled.span`
 const CategoryPage = ({match}) =>{
   const [jobs , setJobs] = useState([]);
   const [error, setError] = useState(null);
-
+	const tagNum = useSelector(state => ({
+		tagNum: state.tagchecker.tagNum
+	}));
   const category_chg = match.params.category;
-
+  const searchBar = match.params.search;
   const techStack = (category_chg) =>{
     if (category_chg === 'frontend')
     {
@@ -61,7 +65,7 @@ const CategoryPage = ({match}) =>{
     {
       id: 'avgSal',
       title: '연봉',
-      tag: ['일급', '시급', '2500만원 이하', '2500만 - 3000만', '3000만 - 3500만', '3500만 - 4000만', '4000만 - 4500만', '4500만 이상']
+      tag: ['일급', '시급', '2500만원 이하', '2500만 - 3000만', '3000만 - 3500만', '3500만 - 4000만', '4000만 - 4500만', '4500만 이상'],
     },
     {
       id: 'minEdubgIcd',
@@ -88,19 +92,10 @@ const CategoryPage = ({match}) =>{
 
 
 	useEffect(() => {
-    // const fetchContents = async () => {
-      // try {
-        // setJobs(null);
-        // setError(null);
         API.post(`api/category/${category_chg}`, data).then((response) => {
           console.log(response.status);
           setJobs(response.data);
         });
-      // } catch (e) {
-        // setError(e);
-      // }
-    // })
-		// fetchContents();
 	}, []);
 
 
@@ -119,8 +114,7 @@ const CategoryPage = ({match}) =>{
             style={{marginTop: 75}}
           >
             <Title>카테고리</Title>
-            {console.log(match.params.category)} 
-            <Category categoryList = {CATEGORY} category_chg={category_chg}/>
+            <Category categoryList = {CATEGORY} category_chg={category_chg} tagNum = {tagNum} searchBar= {searchBar}/>
           </Box>
           <Box
             overflow="scroll"
@@ -129,8 +123,7 @@ const CategoryPage = ({match}) =>{
             background="light-2"
             style={{marginTop: 75}}
           >
-            <CategoryCardContainer category_chg = {category_chg}/>
-          {console.log({jobs})}
+            <CategoryCardContainer category_chg = {category_chg} tagNum = {tagNum} searchBar= {searchBar}/>
           </Box>
       </Layout>
     </div>

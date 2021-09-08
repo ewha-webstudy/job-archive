@@ -1,15 +1,16 @@
-import React, { Component, useState, useEffect } from "react";
+import React, { Component, useState, useEffect, useSelector} from "react";
 import { Grommet, Box, Grid } from "grommet";
 import { Heading } from "grommet";
+import { useDispatch } from "react-redux";
 
 import classes from './Category.module.css';
 import { Sidebar } from "grommet";
 import CategoryItem from "./CategoryItem";
 import API from "../../utils/api";
+import {addTag, removeTag} from "../../modules/tagchecker";
 
 
-
-const Category= ({categoryList, category_chg})=> {
+const Category= ({categoryList, category_chg, searchBar})=> {
 	const [jobs , setJobs] = useState([]);
   const [error, setError] = useState(null);
 	const [checkedItems, setCheckedItems] = useState([
@@ -40,6 +41,12 @@ const Category= ({categoryList, category_chg})=> {
 		}
 	]);
 
+	const dispatch = useDispatch();
+
+  // 토큰 전달
+  const _addTag = () => dispatch(addTag());
+	const _removeTag = () => dispatch(removeTag());
+
 	function apiPostTag(){
 		function apiSendTag(props){
 			return Array.from(checkedItems.find(element => element.category === props).set);
@@ -54,7 +61,7 @@ const Category= ({categoryList, category_chg})=> {
 					region: apiSendTag('region'),
 					minEdubgIcd: apiSendTag('minEdubgIcd'),
 				},
-				searchBar: ""
+				searchBar: `${searchBar}`
 			}).then(res => {
 				console.log(res.status);
 				setJobs(res.data);
@@ -66,24 +73,30 @@ const Category= ({categoryList, category_chg})=> {
 			  })
 		);
 	}
-
 	const checkedItemHandler = async(tag, cat, isChecked) => {
+		if (cat === 'avgSal') {
+			tag = categoryList[2].tag.indexOf(tag);
+			console.log(tag);
+		}
 		const k = checkedItems.find(element => element.category === cat);
 		if(isChecked){
 			k.set.add(tag);
 			setCheckedItems(checkedItems);
-			// await apiPostTag();
+			_addTag();
+			await apiPostTag();
 		}		
 		else if (!isChecked && k.set.has(tag)){
 			k.set.delete(tag);
 			setCheckedItems(checkedItems);
-			// await apiPostTag();
+			_removeTag();
+			await apiPostTag();
 		}
 	}
 
 	return (
 		<ul className={classes.categoryWrapper}>
-			
+				{console.log("searchbar = " + searchBar)}
+
 			{categoryList.map(item =>
 				<CategoryItem
 					key={item.id}

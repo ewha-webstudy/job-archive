@@ -3,54 +3,30 @@ import classNames from "classnames";
 import React, { useState } from "react";
 import GetDday from "../Card/GetDday";
 import API from "../../utils/api";
-import classes from "./Detail.module.css";
-import GetDday from "../Card/GetDday";
-
+import classes from "./DetailBox.module.css";
 
 const DetailBox = ({ item }) => {
-	function closedate(date){
-		const arr = date.split("-");
-		console.log(arr);
-		return remaindTime(arr);
-	}
 
-	function remaindTime({arr}) {
-		var now = new Date(); //현재시간을 구한다. 
-		var open = new Date(arr[0], arr[1], arr[2], 0, 0, 0);
+	// function closedate(date) {
+	// 	const arr = date.split("-");
+	// 	console.log(arr);
+	// 	return remaindTime(arr);
+	// }
 
-		var nt = now.getTime(); // 현재의 시간만 가져온다
-		var ot = open.getTime(); // 오픈시간만 가져온다
+	// function remaindTime({arr}) {
+	// 	var now = new Date(); //현재시간을 구한다. 
+	// 	var open = new Date(arr[0], arr[1], arr[2], 0, 0, 0);
 
-		if (nt < ot) { //현재시간이 오픈시간보다 이르면 오픈시간까지의 남은 시간을 구한다.   
-			let sec = parseInt(ot - nt) / 1000;
-			let hour = parseInt(sec / 60 / 60);
-			sec = (sec - (hour * 60 * 60));
-			let min = parseInt(sec / 60);
-			sec = parseInt(sec - (min * 60));
+	// 	var nt = now.getTime(); // 현재의 시간만 가져온다
+	// 	var ot = open.getTime(); // 오픈시간만 가져온다
 
-<<<<<<< HEAD:frontend/src/components/Detail/Datail.js
-			if (hour < 10) { hour = "0" + hour; }
-			if (min < 10) { min = "0" + min; }
-			if (sec < 10) { sec = "0" + sec; }
-			return(
-				<div>
-					{hour} : {min} : {sec}
-				</div>
-			);
-		} else { //현재시간이 종료시간보다 크면
-			// $("#d-day-hour").html('00');
-			// $("#d-day-min").html('00');
-			// $("#d-day-sec").html('00');'
-			return(
-				<div>
-					00: 00 : 00
-				</div>
-			);
-		}
-	}
-	setInterval(remaindTime, 1000);
+	// 	if (nt < ot) { //현재시간이 오픈시간보다 이르면 오픈시간까지의 남은 시간을 구한다.   
+	// 		let sec = parseInt(ot - nt) / 1000;
+	// 		let hour = parseInt(sec / 60 / 60);
+	// 		sec = (sec - (hour * 60 * 60));
+	// 		let min = parseInt(sec / 60);
+	// 		sec = parseInt(sec - (min * 60));
 
-=======
 	// 	if (nt < ot) { //현재시간이 오픈시간보다 이르면 오픈시간까지의 남은 시간을 구한다.   
 	// 		let sec = parseInt(ot - nt) / 1000;
 	// 		let hour = parseInt(sec / 60 / 60);
@@ -78,11 +54,13 @@ const DetailBox = ({ item }) => {
 	// 	}
 	// }
 	// setInterval(remaindTime, 1000);
+
+
 	const openInNewTab = (url) => {
-    const newWindow = window.open(url, '_black', 'noopener,noreferrer')
+		const newWindow = window.open(url, '_black', 'noopener,noreferrer')
 		if (newWindow) newWindow.opener = null
-  };
->>>>>>> da325bd159a2b7391fd4975304e3907f0568bf33:frontend/src/components/Detail/Detail.js
+	};
+
 	return (
 		<section className={classes.detailBox}>
 			<div className={classes.title__company}>{item.company}</div>
@@ -128,37 +106,15 @@ const DetailBox = ({ item }) => {
 				</div>
 			</div>
 			<div className={classes.apply_box}>
-<<<<<<< HEAD:frontend/src/components/Detail/Datail.js
-				<a className={classes.apply_button} href="${item.wantedInfoUrl}">홈페이지 지원</a>
-				<div className={classes.apply_ddayleft}>
-					{GetDday(item.receiptCloseDt)}
-				</div>
-=======
 				<a className={classes.apply_button} onClick={() => openInNewTab(item.wantedInfoUrl)}>홈페이지 지원</a>
 				{/* <a className={classes.apply_button} href="{item.wantedInfoUrl}">홈페이지 지원</a> */}
 				{/* <div className={classes.apply_ddayleft}> {closedate(item.receiptCloseDt)}</div> */}
->>>>>>> da325bd159a2b7391fd4975304e3907f0568bf33:frontend/src/components/Detail/Detail.js
 			</div>
 			{/* 채용공고 */}
 			<h2 className={classes.h2}>직무내용</h2>
 			<div className={classes.apply_content}>
 				{item.jobCont}
-				{/* <p>
-
-					가. 주요업무<br />
-					- 영업비밀 관리체계 심화컨설팅 및 영업비밀 유출분쟁 법률자문 등<br />
-					- 부정경쟁방지법 판결문 구축·분석 및 영업비밀 교육 수행 등<br />
-					<br />
-					나. 채용형태 : 계약일로부터∼1년(1년 단위 연장 및 재계약 가능)<br />
-					<br />
-					다. 응시자격 및 우대사항<br />
-					- 응시자격 : 학사(4년제 정규대학 졸업) 이상의 경력이 인정되며 변리사 자격증(등록변리사) 소지자<br />
-					- 우대사항 : 공공기관 근무 경력자 및 지식재산 관련 업무 경력자<br />
-					<br />
-					* 세부내용은 첨부된 채용 공고문 등 참고<br />
-					<br />
-					
-					</p> */}
+				
 			</div>
 			{/* 접수기간 및 방법 */}
 			<h2 className={classes.h2}> 접수기간 및 방법 </h2>
@@ -168,7 +124,7 @@ const DetailBox = ({ item }) => {
 					<h3>남은기간</h3>
 					<div className={classes.apply_ddayleft}>{GetDday(item.receiptCloseDt)}</div>
 				</div>
-				<dl className={classNames({[classes.tbList]: true, [classes.apply_dday__content]: true})}>
+				<dl className={classNames({ [classes.tbList]: true, [classes.apply_dday__content]: true })}>
 					{/* <dt>시작일: </dt>
 					<dd>2020.30.55</dd> */}
 					<dt>마감일: </dt>
@@ -179,8 +135,8 @@ const DetailBox = ({ item }) => {
 			</div>
 			{/* 기업정보 */}
 			<h2 className={classes.h2}>기업정보</h2>
-			<div className={classNames({ [classes.clearfix]: true, [classes.tbBox]: true, [classes.company_box]: true})}>
-				
+			<div className={classNames({ [classes.clearfix]: true, [classes.tbBox]: true, [classes.company_box]: true })}>
+
 				<h3 className={classes.h3}>{item.company}</h3>
 				<div className={classes.tb__title}>
 					<dl className={classes.tbList}>
@@ -202,16 +158,16 @@ const DetailBox = ({ item }) => {
 					<dl className={classes.tbList}>
 						<dt>주소</dt>
 						<dd>
-						<strong class="col_1">{item.corpAddr}</strong>
+							<strong class="col_1">{item.corpAddr}</strong>
 						</dd>
 						{/* <dt>설립일</dt>
 						<dd>
 							<span>2015년 6월 22일(업력 6년)</span>
 						</dd> */}
 						<dt>홈페이지</dt>
-							<dd>
-								<span>{item.homePg}</span>
-							</dd>
+						<dd>
+							<span>{item.homePg}</span>
+						</dd>
 
 					</dl>
 				</div>
