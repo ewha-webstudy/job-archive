@@ -9,7 +9,7 @@ const GetDday = end => {
 
   let result;
 
-  console.log("dday:", day);
+  // console.log("dday:", day);
 
   if (day > 0) {
     result = <>D-{day}</>;
