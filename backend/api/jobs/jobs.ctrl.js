@@ -1,4 +1,5 @@
 const { Job } = require('../../models');
+const { Like } = require('../../models');
 const sequelize = require("sequelize");
 const { or, and, like } = sequelize.Op;
 const { Op, where } = require("sequelize")
@@ -7,6 +8,11 @@ const { Op, where } = require("sequelize")
 exports.main = async(req, res) => {
   // main 페이지 (card 9개 최신 공고)
   // res.data: card 목록
+  let loggedID = "", likeList;
+  if(res.locals.userid){
+    loggedID = res.locals.userid;
+    likeList = await Like.findAll({ attributes:['wantedAuthNo'], where: { userid:loggedID } });
+  }
   console.log("this is main")
   let jobList = []
   let cardList = []
@@ -14,7 +20,9 @@ exports.main = async(req, res) => {
     jobList = await Job.findAll({ attributes: ['wantedAuthNo'], limit: 9, order: [ ['regDt',  'DESC'] ] })
     if (!jobList) return res.status(404).send();
     for(const job of jobList){
-      cardList.push(await toCard(job.wantedAuthNo));
+      const card = await toCard(job.wantedAuthNo);
+      const likeCard = await checkLike(card, likeList);
+      cardList.push(likeCard);
     }
     res.send(cardList)
   } catch(e){
@@ -42,6 +50,12 @@ exports.detail = async(req, res) => {
 /* POST /api/category/:category */
 exports.search = async(req, res) => {
   // tag 서치, text 서치 결과
+  let loggedID = "", likeList;
+  if(res.locals.userid){
+    loggedID = res.locals.userid;
+    likeList = await Like.findAll({ attributes:['wantedAuthNo'], where: { userid:loggedID } });
+  }
+  
   const { category } = req.params;
   if (!category) return res.status(400).send();
   const { tags, searchBar } = req.body;
@@ -82,7 +96,9 @@ exports.search = async(req, res) => {
     }
     if (!jobList) return res.status(404).send();
     for(const job of jobList){
-      cardList.push(await toCard(job.wantedAuthNo));
+      const card = await toCard(job.wantedAuthNo);
+      const likeCard = await checkLike(card, likeList);
+      cardList.push(likeCard);
     }
     res.send(cardList);
   } catch(e) {
@@ -197,6 +213,15 @@ function tagSearch(tags){
   return {techStack, enterTpCd, avgSal, region, minEdubgIcd}
 }
 
+const checkLike = async(card, likeList) => {
+  for(const like of likeList){
+    if(like.wantedAuthNo === card.wantedAuthNo){
+      card.isLiked = true;
+    }
+  }
+  return card;
+}
+
 const toCard = async(wantedAuthNo) => {
   const { job } = await getData(wantedAuthNo);
   return {
@@ -206,7 +231,8 @@ const toCard = async(wantedAuthNo) => {
     logo: job.logo,
     receiptCloseDt: job.receiptCloseDt,
     jobCont: job.jobCont,
-    likeNo: job.likeNo
+    likeNo: job.likeNo,
+    isLiked: false,
   }
 }
 

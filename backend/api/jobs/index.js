@@ -1,13 +1,14 @@
 const express = require('express');
 const path = require('path');
+const router = express.Router();
+const {verifyToken} = require("./authorization");
+
 const jobsCtrl = require('./jobs.ctrl');
 
-const router = express.Router();
+router.get('/main', verifyToken, jobsCtrl.main);
+router.get('/jobs/:id', jobsCtrl.detail);
 
-router.get('/main', jobsCtrl.main)
-router.get('/jobs/:id', jobsCtrl.detail)
-
-router.post('/category/:category', jobsCtrl.search)
+router.post('/category/:category', verifyToken, jobsCtrl.search)
 router.post('/likeIncrease', jobsCtrl.likeIncrease)
 router.post('/likeDecrease', jobsCtrl.likeDecrease)
 

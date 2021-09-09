@@ -21,6 +21,7 @@ export default function logger(state = initialState, action) {
       };
 
     case LOG_OUT:
+      localStorage.clear();
       return {
         ...state,
         islogin: false,
