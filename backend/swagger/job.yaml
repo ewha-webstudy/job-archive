@@ -1,0 +1,123 @@
+# /swagger/product.yml
+
+components: 
+  schemas: 
+    jobCard:
+      type: object
+      properties:
+        wantedAuthNo: 
+          type: string 
+          description: 채용공고 id
+        wantedTitle:
+          type: string 
+          description: 채용공고 제목
+        company: 
+          type: string 
+          description: 기업명
+        logo:
+          type: string
+          description: 기업로고 url
+        receiptCloseDt: 
+          type: string 
+          description: 모집 마감일
+        # dDay:
+        #   type: integer
+        #   description: 마감일까지의 디데이
+        jobCont:
+          type: string
+          description: 직무 내용
+        likeNo:
+          type: integer
+          description: 좋아요 개수
+      example:
+        wantedAuthNo: K120612108130052
+        wantedTitle: AI 솔루션 개발자 모집(웹프로그램 개발자 1명 , AI 개발자 1명, C/S 개발자 1명)
+        company: 주식회사브이씨아이
+        logo: ""
+        receiptCloseDt: "9999-01-01"
+        jobCont: "[직무내용] ㆍ웹프로그램 개발자 1명(JSP, JAVA, postgresql DB) ㆍ응용프로그램 개발자 2명 - AI 개발자 1명 : C++, win32, 카메라 제어(RTSP, OpenCV, 알고리즘 개발) - C/S 개발자 1명 : C++ DLL, C#(WPF) 클라이언트 개발(RTSP, OpenCV, FFMPEG) [우대사항] ○ OpenCV, FFMPEG 이용 가능자 ○ 네트워크 프로그래밍 ○ 실력보다 성실성 중요 [그 외 사항] ○ 연봉은 2800만원 면접 후 협의 가능합니다. ○ 월 복지금 실비지급 ** 지원자는 이력서와 자기소개서를 이메일( vcicorp@vcicorp.co.kr), 팩스는 (02-853-8332)로 지원하시기 바랍니다."
+        likeNo: 0
+
+    jobDetail:
+      type: object
+      properties:
+        wantedAuthNo: 
+          type: string 
+          description: 채용공고 id
+        wantedTitle:
+          type: string 
+          description: 채용공고 제목
+        company: 
+          type: string 
+          description: 기업명
+        logo:
+          type: string
+          description: 기업로고 url
+        reperNm:
+          type: string
+          description: 대표자명
+        indTpCdNm:
+          type: string
+          description: 업종
+        corpAddr:
+          type: string
+          description: 회사주소
+        homePg:
+          type: string
+          description: 회사홈페이지
+        receiptCloseDt: 
+          type: string 
+          description: 모집 마감일
+        # dDay:
+        #   type: integer
+        #   description: 마감일까지의 디데이
+        jobCont:
+          type: string
+          description: 직무 내용
+        wantedInfoUrl:
+          type: string
+          description: 워크넷 채용공고 url
+        empTpNm:
+          type: string
+          description: 고용형태
+        enterTpCd:
+          type: string
+          description: 경력        
+        minEdubgIcd:
+          type: string
+          description: 최소 학력
+        pfCond:
+          type: string
+          description: 우대조건
+        salTpNm:
+          type: string
+          description: 임금조건
+        sal:
+          type: string
+          description: 급여
+        workdayWorkhrCont:
+          type: string
+          description: 근무시간/형태
+        likeNo:
+          type: integer
+          description: 좋아요 개수
+      example:
+        wantedAuthNo: K120612108130052
+        wantedTitle: AI 솔루션 개발자 모집(웹프로그램 개발자 1명 , AI 개발자 1명, C/S 개발자 1명)
+        company: 주식회사브이씨아이
+        logo: ""
+        reperNm: ""
+        indTpCdNm: ""
+        corpAddr: 08511 서울특별시 금천구 벚꽃로 254, 11층 1111호
+        homePg: www.vcicorp.co.kr
+        receiptCloseDt: "9999-01-01"
+        jobCont: "[직무내용] ㆍ웹프로그램 개발자 1명(JSP, JAVA, postgresql DB) ㆍ응용프로그램 개발자 2명 - AI 개발자 1명 : C++, win32, 카메라 제어(RTSP, OpenCV, 알고리즘 개발) - C/S 개발자 1명 : C++ DLL, C#(WPF) 클라이언트 개발(RTSP, OpenCV, FFMPEG) [우대사항] ○ OpenCV, FFMPEG 이용 가능자 ○ 네트워크 프로그래밍 ○ 실력보다 성실성 중요 [그 외 사항] ○ 연봉은 2800만원 면접 후 협의 가능합니다. ○ 월 복지금 실비지급 ** 지원자는 이력서와 자기소개서를 이메일( vcicorp@vcicorp.co.kr), 팩스는 (02-853-8332)로 지원하시기 바랍니다."
+        wantedInfoUrl: http://www.work.go.kr/empDetailRedirect.do?wantedAuthNo=K120612108130052
+        empTpNm: "기간의 정함이 없는 근로계약/ 파견근로 비희망"
+        enterTpCd: N      
+        minEdubgIcd: 04
+        pfCond: ""
+        salTpNm: 연봉
+        sal: 2800만원 ~ 2800만원
+        workdayWorkhrCont: "평일 : 09:30~18:30, 주 5일 근무, 평균근무시간 : 40"
+        likeNo: 0

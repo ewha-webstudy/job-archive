@@ -1,0 +1,67 @@
+components: 
+  schemas: 
+    expiredToken: 
+      type: object 
+      required: 
+        status 
+        success 
+        message 
+      properties: 
+        status: 
+          type: integer 
+        success: 
+          type: boolean 
+        message: 
+          type: string 
+    noParams: 
+      type: object 
+      required: 
+        status 
+        success 
+        message 
+      properties: 
+        status: 
+          type: integer 
+        success: 
+          type: boolean 
+        message: 
+          type: string 
+    wrongDBIndex: 
+      type: object 
+      required: 
+        status 
+        success 
+        message 
+      properties: 
+        status: 
+          type: integer 
+        success: 
+          type: boolean 
+        message: 
+          type: string 
+    noValues: 
+      type: object 
+      required: 
+        status 
+        success 
+        message 
+      properties: 
+        status: 
+          type: integer 
+        success: 
+          type: boolean 
+        message: 
+          type: string 
+    errorDB: 
+      type: object 
+      required: 
+        status 
+        success 
+        message 
+      properties: 
+        status: 
+          type: integer 
+        success: 
+          type: boolean 
+        message: 
+          type: string
