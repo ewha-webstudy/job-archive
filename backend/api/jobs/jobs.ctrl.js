@@ -214,6 +214,7 @@ function tagSearch(tags){
 }
 
 const checkLike = async(card, likeList) => {
+  if (!likeList) return card;
   for(const like of likeList){
     if(like.wantedAuthNo === card.wantedAuthNo){
       card.isLiked = true;
