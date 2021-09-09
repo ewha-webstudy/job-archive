@@ -3,7 +3,6 @@ import { persistReducer } from "redux-persist";
 
 import storage from "redux-persist/lib/storage";
 import logger from "./logger";
-import tagchecker from "./tagchecker";
 
 const persistConfig = {
   key: "root",
@@ -12,8 +11,7 @@ const persistConfig = {
 };
 
 const rootReducer = combineReducers({
-  logger,
-  tagchecker
+  logger
 });
 
 export default persistReducer(persistConfig, rootReducer);
