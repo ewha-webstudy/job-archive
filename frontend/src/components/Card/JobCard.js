@@ -8,8 +8,8 @@ import GetDday from "./GetDday";
 import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 
-function JobCard({ name, id, end, position, logo, likeNo, islogin }) {
-  const [isliked, setLiked] = useState(false);
+function JobCard({ name, id, end, position, logo, likeNo, islogin, isLiked }) {
+  const [isliked, setLiked] = useState(isLiked);
   const [numLikes, setnumLikes] = useState(likeNo);
 
   const { ref, inView } = useInView({
