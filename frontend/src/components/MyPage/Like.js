@@ -9,6 +9,17 @@ const Like = () => {
   );
 };
 
+const EmptyWrapper = styled.div`
+  width: 100%;
+  height: 100%;
+  color: orange;
+  font-size: 1.5rem;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
 const SaveListBlock = styled.div`
   overflow: auto;
 
