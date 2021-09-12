@@ -17,23 +17,23 @@ function LikeContainer() {
 
   // 로그인 여부 확인
   useEffect(() => {
-    // if (!islogin) {
-    //   alert("로그인 후 이용 가능합니다.");
-    //   history.push("/member/auth");
-    // } else {
-    API.get("https://f77b7f2f-3f98-4d10-acf8-31ea4b2ba99f.mock.pstmn.io/like")
-      .then((res) => {
-        setLikes(res.data);
-      })
-      .catch((err) => {
-        if (err.response.status === 401) {
-          alert("Toekn expired");
-        }
-        if (err.response.status === 404) {
-          alert("DB 처리 중 에러 발생");
-        }
-      });
-    // }
+    if (!islogin) {
+      alert("로그인 후 이용 가능합니다.");
+      history.push("/member/auth");
+    } else {
+      API.get("/api/mypage/like")
+        .then((res) => {
+          setLikes(res.data);
+        })
+        .catch((err) => {
+          if (err.response.status === 401) {
+            alert("Toekn expired");
+          }
+          if (err.response.status === 404) {
+            alert("DB 처리 중 에러 발생");
+          }
+        });
+    }
   }, []);
 
   if (likes.length === 0) {
