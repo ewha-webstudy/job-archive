@@ -1,0 +1,205 @@
+/* RESET */
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/* COMMON */
+.clearfix::after{
+	content: "";
+	clear: both;
+	display: block;
+}
+.h2{
+	padding: 10px 0 3px 3px;
+	font-size: 18px;
+	font-weight: 700;
+	color: black;
+	border-bottom: lightgray 1px solid;
+}
+.h3{
+	font-size: 16px;
+	font-weight: 600;
+	padding: 5px 0;
+}
+.h4{
+	font-size: 14px;
+	font-weight: bold;
+}
+/* TITLE */
+.detailBox{
+	width: auto;
+	margin: 10px ;
+	padding: 20px 15px;
+	background-color: white;
+	box-sizing: border-box;
+}
+.title__company{
+	padding: 10px 10px 0 10px;
+
+}
+.title {
+	font-size: 30px;
+	font-weight: bold;
+	width: 100%;
+	padding: 10px 10px;
+	/* margin-bottom: 20px; */
+	width: 100%;
+	box-sizing: border-box;
+	border-bottom: lightgray 2px solid;
+	margin-bottom: 20px;
+	line-height: 35px;
+}
+/* 태그사항 */
+.tbBox{
+	padding: 10px 20px;
+
+}
+.tb__title{
+	float: left;
+	width: 50%;
+}
+.tbList{
+}
+.h4{
+	font-size: 14px;
+	font-weight: bold;
+}
+.tbList dt{
+	clear:left;
+    float:left;
+    display:block;
+    margin:0 0 1px;
+    width: 60px;
+	font-size: 14px;
+}
+.tbList dd{
+	padding:0 0 0 60px;
+    margin:0 0 1px;
+	font-size: 14px;
+
+}
+.tbList dd::after{
+	content: "";display: table;clear: both;
+
+}
+/* 접수기간 및 방법 */
+.apply_box{
+	text-align: center;
+	margin: 10px 0;
+}
+.apply_button{
+	display: inline-block;
+	width: 300px;
+	height: 70px;
+	background-color: #ffaf00;
+	border-radius: 15px;
+	border: 1px solid white;
+	font-size: 28px;
+	font-weight: 600;
+	color: white;
+	text-decoration: none;
+	line-height: 70px;
+}
+.apply_ddayleft{
+	position: relative;
+	display: inline-block;
+	margin-left: 20px;
+	font-size: 40px;
+	color: #ffaf00;
+	font-weight: 600;
+	vertical-align: middle;
+}
+
+/* 채용공고 */
+.apply_content{
+	padding: 10px 20px;
+}
+.apply_content p{
+	font-size: 15px;
+}
+
+/* 접수기간 및 방법 */
+.apply_dday_box{
+	display: flex;
+	justify-content: space-around;
+	padding: 10px 0;
+}
+.apply_ddayleft_box{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-between;
+}
+.apply_dday_box .apply_ddayleft{
+	display: block;
+	font-size: 30px;
+}
+.apply_dday__content {
+	height: inherit;
+	margin: auto 0;
+	box-sizing: border-box;
+}
+.apply_dday__content dt{
+	font-size: 14px;
+}
+.apply_dday_box .apply_button{
+	width: 220px;
+	height: 60px;
+	font-size: 24px;
+	padding: 0 30px;
+	line-height: 60px;
+	margin-left: 60px;
+	box-sizing: border-box;
+}
+/* 기업정보 */
+.company_box{
+	padding: 10px 20px;
+}
+.company_box .h3{
+	padding: 3px 0;
+}

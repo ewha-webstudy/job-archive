@@ -17,6 +17,7 @@ const MyPageCard = ({ likes, islogin }) => {
               logo={likes.logo}
               likeNo={likes.likeNo}
               islogin={islogin}
+              isLiked={likes.isLiked}
             />
           </CardWrapper>
         ))}
