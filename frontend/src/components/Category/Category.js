@@ -13,6 +13,9 @@ import {addTag, removeTag} from "../../modules/tagchecker";
 const Category= ({categoryList, category_chg, searchBar, setData})=> {
 	// const [jobs , setJobs] = useState([]);
   const [error, setError] = useState(null);
+	if (searchBar === undefined)
+	searchBar = "";
+
 	const [checkedItems, setCheckedItems] = useState([
 		{
 			id: 1,

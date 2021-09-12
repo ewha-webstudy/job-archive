@@ -182,12 +182,12 @@ const CategoryPage = ({match}) =>{
 	  ];
 
 
-	// useEffect(() => {
-  //       API.post(`api/category/${category_chg}`, data).then((response) => {
-  //         console.log(response.status);
-  //         setJobs(response.data);
-  //       });
-	// }, []);
+	useEffect(() => {
+        API.post(`api/category/${category_chg}`, data).then((response) => {
+          console.log(response.status);
+          setJobs(response.data);
+        });
+	}, []);
 
   
 
