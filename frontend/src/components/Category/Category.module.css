@@ -41,6 +41,7 @@ body {
 	font-size: 100%;
 	font: inherit;
 	display: block;	
+	width: 100%;
 }
 /*
 blockquote, q {
@@ -87,3 +88,6 @@ table {
     margin: 0 .4rem;
   }
   
+.checkbox{
+	background-color: aqua;
+}

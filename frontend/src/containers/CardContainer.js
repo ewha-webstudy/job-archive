@@ -20,27 +20,27 @@ export function MainCardContainer() {
 }
 
 
-export function CategoryCardContainer(category_chg) {
+export function CategoryCardContainer (props) {
 
-  const data = {
-    tags: {
-      techStack: [],
-      enterTpCd: [],
-      avgSal: [],
-      region: [],
-      minEdubgIcd: []
-    },
-    searchBar: ""
-  };
+  // const data = {
+  //   tags: {
+  //     techStack: [],
+  //     enterTpCd: [],
+  //     avgSal: [],
+  //     region: [],
+  //     minEdubgIcd: []
+  //   },
+  //   searchBar: ""
+  // };
 
-  const [jobs, setJobs] = useState([]);
+  // const [jobs, setJobs] = useState([]);
 
-	useEffect(() => {
-        API.post(`api/category/${category_chg}`, data).then((response) => {
-          console.log(response.status);
-          setJobs(response.data);
-        });
-	}, []);
+	// useEffect(() => {
+  //       API.post(`api/category/${category_chg}`, data).then((response) => {
+  //         console.log(response.status);
+  //         setJobs(response.data);
+  //       });
+	// }, []);
  
   const tagNum = useSelector(state => ({
 		tagNum: state.tagchecker.tagNum
@@ -49,10 +49,15 @@ export function CategoryCardContainer(category_chg) {
   const { islogin } = useSelector(state => ({
     islogin: state.logger.islogin
   }));
-  
+  // console.log({jobs});
+
   return (<div>
-    <Categorycard islogin={islogin} jobs={jobs}/>
-      {console.log(tagNum)}
+    <Categorycard islogin={islogin} jobs={props.jobs}/>
+    {console.log("jobs = ")}
+    {console.log(props.jobs)}
+
+      
+      
   </div>);
 }
 

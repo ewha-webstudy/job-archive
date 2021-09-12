@@ -90,14 +90,106 @@ const CategoryPage = ({match}) =>{
     searchBar: ""
   };
 
+  const ex = [
+		{
+		  wantedAuthNo: "K120612108130052",
+		  company: "네이버",
+		  receiptCloseDt: "9999-01-01",
+		  likeNo: 3,
+		  wantedTitle:
+			"AI 솔루션 개발자 모집 (웹프로그래밍 개발자 1명, AI 개발자 1명)",
+		  logo: "https://image.rocketpunch.com/company/5466/naver_logo.png?s=400x400&t=inside",
+		},
+		{
+		  wantedAuthNo: 1,
+		  company: "네이버",
+		  receiptCloseDt: "9999-01-01",
+		  likeNo: 3,
+		  wantedTitle:
+			"AI 솔루션 개발자 모집 (웹프로그래밍 개발자 1명, AI 개발자 1명)",
+		  logo: "https://image.rocketpunch.com/company/5466/naver_logo.png?s=400x400&t=inside",
+		},
+	  
+		{
+		  wantedAuthNo: 1,
+		  company: "네이버",
+		  receiptCloseDt: "2021-11-30",
+		  likeNo: 3,
+		  wantedTitle:
+			"AI 솔루션 개발자 모집 (웹프로그래밍 개발자 1명, AI 개발자 1명)",
+		  logo: "https://image.rocketpunch.com/company/5466/naver_logo.png?s=400x400&t=inside",
+		},
+	  
+		{
+		  wantedAuthNo: 1,
+		  company: "네이버",
+		  receiptCloseDt: "2021-10-30",
+		  likeNo: 3,
+		  wantedTitle:
+			"AI 솔루션 개발자 모집 (웹프로그래밍 개발자 1명, AI 개발자 1명)",
+		  logo: "https://image.rocketpunch.com/company/5466/naver_logo.png?s=400x400&t=inside",
+		},
+	  
+		{
+		  wantedAuthNo: 1,
+		  company: "네이버",
+		  receiptCloseDt: "2021-08-30",
+		  likeNo: 3,
+		  wantedTitle:
+			"AI 솔루션 개발자 모집 (웹프로그래밍 개발자 1명, AI 개발자 1명)",
+		  logo: "https://image.rocketpunch.com/company/5466/naver_logo.png?s=400x400&t=inside",
+		},
+	  
+		{
+		  wantedAuthNo: 1,
+		  company: "네이버",
+		  receiptCloseDt: "2021-09-01",
+		  likeNo: 3,
+		  wantedTitle:
+			"AI 솔루션 개발자 모집 (웹프로그래밍 개발자 1명, AI 개발자 1명)",
+		  logo: "https://image.rocketpunch.com/company/5466/naver_logo.png?s=400x400&t=inside",
+		},
+	  
+		{
+		  wantedAuthNo: 1,
+		  company: "네이버",
+		  receiptCloseDt: "2021-09-01",
+		  likeNo: 3,
+		  wantedTitle:
+			"AI 솔루션 개발자 모집 (웹프로그래밍 개발자 1명, AI 개발자 1명)",
+		  logo: "https://image.rocketpunch.com/company/5466/naver_logo.png?s=400x400&t=inside",
+		},
+	  
+		{
+		  wantedAuthNo: 1,
+		  company: "네이버",
+		  receiptCloseDt: "2021-09-01",
+		  likeNo: 3,
+		  wantedTitle:
+			"AI 솔루션 개발자 모집 (웹프로그래밍 개발자 1명, AI 개발자 1명)",
+		  logo: "https://image.rocketpunch.com/company/5466/naver_logo.png?s=400x400&t=inside",
+		},
+	  
+		{
+		  wantedAuthNo: 1,
+		  company: "네이버",
+		  receiptCloseDt: "2021-09-01",
+		  likeNo: 3,
+		  wantedTitle:
+			"AI 솔루션 개발자 모집 (웹프로그래밍 개발자 1명, AI 개발자 1명)",
+		  logo: "https://image.rocketpunch.com/company/5466/naver_logo.png?s=400x400&t=inside",
+		},
+	  ];
 
-	useEffect(() => {
-        API.post(`api/category/${category_chg}`, data).then((response) => {
-          console.log(response.status);
-          setJobs(response.data);
-        });
-	}, []);
 
+	// useEffect(() => {
+  //       API.post(`api/category/${category_chg}`, data).then((response) => {
+  //         console.log(response.status);
+  //         setJobs(response.data);
+  //       });
+	// }, []);
+
+  
 
   return (
     <div>
@@ -114,7 +206,8 @@ const CategoryPage = ({match}) =>{
             style={{marginTop: 75}}
           >
             <Title>카테고리</Title>
-            <Category categoryList = {CATEGORY} category_chg={category_chg} tagNum = {tagNum} searchBar= {searchBar}/>
+            <Category categoryList = {CATEGORY} category_chg={category_chg} tagNum = {tagNum} searchBar= {searchBar} setData = {setJobs}/>
+  {console.log(jobs)}
           </Box>
           <Box
             overflow="scroll"
@@ -123,7 +216,7 @@ const CategoryPage = ({match}) =>{
             background="light-2"
             style={{marginTop: 75}}
           >
-            <CategoryCardContainer category_chg = {category_chg} tagNum = {tagNum} searchBar= {searchBar}/>
+            <CategoryCardContainer category_chg = {category_chg} tagNum = {tagNum} searchBar= {searchBar} jobs={jobs}/>
           </Box>
       </Layout>
     </div>

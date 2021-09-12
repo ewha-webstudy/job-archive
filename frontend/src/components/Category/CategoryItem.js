@@ -1,5 +1,5 @@
 import React, { Component, useState } from "react";
-import { Grommet, Box, Grid } from "grommet";
+import { Grommet, Box, Grid, CheckBox } from "grommet";
 import { Heading } from "grommet";
 
 import classes from './Category.module.css';
@@ -27,16 +27,15 @@ const CategoryTag = ({key, tag, category, checkedItemHandler}) =>{
 	// console.log(category);
 	const checkHandler = ({target}) =>{
 		setChecked(!bChecked);
-		// console.log(tag);
+		// console.log(tag);s
 		// console.log(target.checked);
 		checkedItemHandler(tag, category, target.checked);
 	}
 
 	return(
-		<label className={classes.tag} >
-						<input type="checkbox" checked={bChecked} onChange={(e)=>{checkHandler(e);}}/>
-						{tag}
-					</label>
+		// <label className={classes.tag} >
+						<CheckBox label={tag} type="checkbox" checked={bChecked} onChange={(e)=>{checkHandler(e);}}/>
+					// </label>
 	);
 
 }
