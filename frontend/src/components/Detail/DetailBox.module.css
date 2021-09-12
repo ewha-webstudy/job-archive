@@ -175,6 +175,11 @@ table {
 	align-items: center;
 	justify-content: space-between;
 }
+.apply_ddayleft_box h3{
+	box-sizing: border-box;
+	margin-left: 20px;
+}
+
 .apply_dday_box .apply_ddayleft{
 	display: block;
 	font-size: 30px;

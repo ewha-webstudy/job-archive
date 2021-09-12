@@ -94,7 +94,6 @@ const DetailBox = ({ item }) => {
 						<dt>급여</dt>
 						<dd>
 							{item.sal}
-							{/* {item.salTpCd} {item.sal} */}
 						</dd>
 						<dt>지역</dt>
 						<dd>{item.corpAddr}					</dd>
@@ -107,8 +106,6 @@ const DetailBox = ({ item }) => {
 			</div>
 			<div className={classes.apply_box}>
 				<a className={classes.apply_button} onClick={() => openInNewTab(item.wantedInfoUrl)}>홈페이지 지원</a>
-				{/* <a className={classes.apply_button} href="{item.wantedInfoUrl}">홈페이지 지원</a> */}
-				{/* <div className={classes.apply_ddayleft}> {closedate(item.receiptCloseDt)}</div> */}
 			</div>
 			{/* 채용공고 */}
 			<h2 className={classes.h2}>직무내용</h2>
@@ -125,13 +122,11 @@ const DetailBox = ({ item }) => {
 					<div className={classes.apply_ddayleft}>{GetDday(item.receiptCloseDt)}</div>
 				</div>
 				<dl className={classNames({ [classes.tbList]: true, [classes.apply_dday__content]: true })}>
-					{/* <dt>시작일: </dt>
-					<dd>2020.30.55</dd> */}
 					<dt>마감일: </dt>
 					<dd>{item.receiptCloseDt}</dd>
 
 				</dl>
-				{/* <button className={classes.apply_button}>홈페이지 지원</button> */}
+				<a className={classes.apply_button} onClick={() => openInNewTab(item.wantedInfoUrl)}>홈페이지 지원</a>
 			</div>
 			{/* 기업정보 */}
 			<h2 className={classes.h2}>기업정보</h2>
@@ -144,10 +139,6 @@ const DetailBox = ({ item }) => {
 						<dd>
 							<strong class="col_1">{item.indTpCdNm}</strong>
 						</dd>
-						{/* <dt>기업 구분</dt>
-						<dd>
-							<strong class="col_1">중견기업</strong>
-						</dd> */}
 						<dt>대표자</dt>
 						<dd>
 							<strong class="col_1">{item.reperNm}</strong>
@@ -160,10 +151,6 @@ const DetailBox = ({ item }) => {
 						<dd>
 							<strong class="col_1">{item.corpAddr}</strong>
 						</dd>
-						{/* <dt>설립일</dt>
-						<dd>
-							<span>2015년 6월 22일(업력 6년)</span>
-						</dd> */}
 						<dt>홈페이지</dt>
 						<dd>
 							<span>{item.homePg}</span>
