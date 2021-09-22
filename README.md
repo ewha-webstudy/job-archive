@@ -49,7 +49,9 @@ $ npm i && npm start
 
 ## DB & API Specification
 #### DB
+https://marmalade-newsboy-581.notion.site/DB-Spec-6a83b5406dc94ce3ae6a1b71bcfbd65b
 #### API
+https://marmalade-newsboy-581.notion.site/API-Spec-9b26946665df4d0b99e6a5ceeb155392
 
 ## Contributers
 |FRONTEND|장효신([**@hyosin-Jang**](https://github.com/hyosin-Jang))|김주현([**@corinthionia**](https://github.com/corinthionia))|변규리([**@byungyurii**](https://github.com/byungyurii))|
