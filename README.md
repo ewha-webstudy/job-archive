@@ -60,4 +60,4 @@ https://marmalade-newsboy-581.notion.site/API-Spec-9b26946665df4d0b99e6a5ceeb155
 
 |BACKEND|김하연([**@haayun**](https://github.com/haayun))|공지나([**@kongjn**](https://github.com/kongjn))|조서영([**@stellajo99**](https://github.com/stellajo99))|이희원([**@Tina-223**](https://github.com/Tina-223))|
 | :----------------------: | :----------------------: | :----------------------: | :----------------------: | :----------------------: |
-|DETAIL| 채용공고 관련 REST API 구현 | 사용자 관련 REST API 구현 | 데이터베이스 | 데이터베이스 스키마, 오픈 API를 활용하여 데이터베이스 구축 |
+|DETAIL| 채용공고 관련 REST API 구현 | 사용자 관련 REST API 구현 | 데이터베이스 스키마, 오픈 API를 활용하여 데이터베이스 구축 | 데이터베이스 스키마, 오픈 API를 활용하여 데이터베이스 구축 |
